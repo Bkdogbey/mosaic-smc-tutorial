@@ -1,0 +1,184 @@
+# MOSAIC Tutorial — Attendee Setup
+
+**IEEE SMC 2026 · Bellevue, WA · 90-minute hands-on tutorial**
+
+Please do this **before you arrive**. It takes about five minutes on conference
+Wi-Fi and under a minute on a good connection.
+
+## Requirements
+
+- Python **3.10 or newer** (`python3 --version`). `pyproject.toml` still claims
+  3.8 — do not believe it; we test on 3.10.
+- Git
+- A laptop with a real display — the game opens a window, so a remote/SSH-only
+  machine or Colab will not work for the GUI
+- No API key is required. The AI advisor falls back to a built-in stub.
+
+## 1 · Clone and isolate
+
+**macOS / Linux**
+
+```bash
+git clone https://github.com/iHuman-Lab/mosaic.git
+cd mosaic
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+**Windows PowerShell**
+
+```powershell
+git clone https://github.com/iHuman-Lab/mosaic.git
+cd mosaic
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+✓ **Checkpoint** — your prompt now starts with `(.venv)`. If it does not, the
+next step installs into the wrong Python.
+
+> Ubuntu: if you see `ensurepip is not available`, run
+> `sudo apt install python3-venv`, delete `.venv`, and repeat.
+
+## 2 · Install the package
+
+```bash
+pip install -e .
+```
+
+```text
+Successfully installed ... minigrid-3.1.0 mosaic-0.1.0 numpy-2.2.6
+  pygame-2.6.1 pygame-ce-2.5.8 pygame_gui-0.6.14 ...
+```
+
+✓ **Checkpoint** — note that it installed **both** `pygame` and `pygame-ce`, and
+`pygame` landed last. That is the bug the next step fixes.
+
+## 3 · Fix the two packaging gaps
+
+```bash
+pip uninstall -y pygame
+pip install --force-reinstall "pygame-ce>=2.5.2"
+```
+
+`--force-reinstall` is **required**. Uninstalling `pygame` deletes files from the
+shared `pygame` namespace that `pygame-ce` also owns; a plain
+`pip install pygame-ce` then reports "Requirement already satisfied" and repairs
+nothing.
+
+You will see `ERROR: mosaic 0.1.0 requires pygame, which is not installed.` —
+**expected and harmless.** That is `pyproject.toml` naming the wrong package;
+`pygame-ce` satisfies it in practice.
+
+One more undeclared dependency — the advisor's prompt builder needs it, so the
+`Alt` key does nothing without it:
+
+```bash
+pip install tabulate
+```
+
+✓ **Checkpoint**
+
+```bash
+python -c "from mosaic.gui.main import SAREnvGUI; print('GUI OK')"
+```
+
+```text
+pygame-ce 2.5.8 (SDL 2.32.10, Python 3.10.20)
+GUI OK
+```
+
+### Why any of this is necessary
+
+MOSAIC's interface is built on `pygame_gui`, which requires **pygame-ce** (the
+community edition). `pyproject.toml` declares plain `pygame`. Both install into
+the same `pygame` namespace, and the loser gets shadowed. The symptom is an
+import error at startup:
+
+```
+ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'
+```
+
+This is a known packaging issue and will be resolved in the PyPI release.
+
+## 4 · Verify
+
+```bash
+python -c "
+from mosaic.sar.env import build_sar_env
+from mosaic.sar.placers import VictimPlacer
+env = build_sar_env(screen_size=600, num_rows=2, num_cols=2, room_size=8,
+                    victim_placer=VictimPlacer(num_real_victims=2))
+env.reset(seed=0)
+print('MOSAIC OK —', env.get_mission_status())
+"
+```
+
+Expected output:
+
+```
+MOSAIC OK — {'status': 'continue', 'saved_victims': 0, 'remaining_victims': 8}
+```
+
+Eight, not two: `num_real_victims` is **per room**, and a 2×2 building has four
+rooms.
+
+Lines reading `Timeout during mission generation: connect_all failed` or
+`Sampling rejected: unreachable object at ...` may appear. Both are the level
+generator retrying — warnings, not errors.
+
+## 5 · Play
+
+```bash
+python labs/play.py
+```
+
+| Key | Action |
+| --- | --- |
+| `↑` | Move forward |
+| `←` `→` | Turn left / right |
+| `Space` | Open a door |
+| `Tab` or `Page Up` | Rescue (pick up) |
+| `Left Shift` or `Page Down` | Drop the key you are carrying |
+| `Alt` | Ask the AI advisor |
+| `Backspace` | Restart the mission |
+| `F11` | Toggle fullscreen |
+| `Esc` | Quit |
+
+The published docs also list `W` for forward — it is not actually mapped. Use the
+arrow keys.
+
+## Troubleshooting
+
+| Symptom | Cause and fix |
+| --- | --- |
+| `ImportError: cannot import name 'DIRECTION_LTR'` | You skipped step 3. |
+| `AttributeError: module 'pygame' has no attribute 'surface'` | You ran step 3 without `--force-reinstall`. Rerun it with the flag. |
+| `ERROR: mosaic 0.1.0 requires pygame` | Harmless warning from step 3, not an error. Carry on. |
+| `ensurepip is not available` | `sudo apt install python3-venv`, delete `.venv`, remake it. |
+| `ModuleNotFoundError: No module named 'mosaic'` | The virtual environment is not active, or `pip install -e .` did not finish. |
+| Window appears and closes immediately | You built the environment but did not call `env.reset()` before launching the GUI. |
+| `Timeout during mission generation` / `Sampling rejected` | Harmless warnings; the generator retries automatically. |
+| Hangs forever with no window, after changing settings | You set `locked_room_prob=1.0`. Every room locked leaves no solvable layout and the generator retries forever. Use `0.9` or less. |
+| `AttributeError: 'FullviewCamera' object has no attribute 'reset'` | Known bug. Use `AgentFOVCamera`, `AgentConeCamera`, or the default `EdgeFollowCamera`. |
+| Nothing renders, or `pygame.error: No available video device` | You are on a headless or remote machine. Use a local laptop. |
+| `Alt` does nothing, or `Missing optional dependency 'tabulate'` | `pip install tabulate`. It is undeclared but required by the advisor's prompt builder. |
+| Font warnings from `pygame_gui` | Harmless. |
+
+If you are still stuck when you arrive, come to the front — we have helpers and a
+pre-built environment on a spare machine.
+
+## Optional — a real LLM advisor
+
+Only needed if you want to use OpenAI or Gemini during the session. Everything in
+the tutorial works without it.
+
+```bash
+pip install llama_index
+export OPENAI_API_KEY="sk-..."     # or GOOGLE_API_KEY
+```
+
+## Links
+
+- Repository — <https://github.com/iHuman-Lab/mosaic>
+- Documentation — <https://ihuman-lab.github.io/mosaic/>

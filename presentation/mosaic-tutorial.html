@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="mosaic-tutorial_files/libs/clipboard/clipboard.min.js"></script>
+<script src="mosaic-tutorial_files/libs/quarto-html/tabby.min.js"></script>
+<script src="mosaic-tutorial_files/libs/quarto-html/popper.min.js"></script>
+<script src="mosaic-tutorial_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="mosaic-tutorial_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="mosaic-tutorial_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="mosaic-tutorial_files/libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Bennett Kwaku Dogbey">
+  <meta name="dcterms.date" content="2026-10-04">
+  <title>MOSAIC A Modular Testbed for Human–AI Collaboration</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-4628f15d78dd8b1787c20248d7929cd1.css">
+  <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-color="#252525" data-background-image="assets/background.jpg" data-background-opacity="0.3" class="quarto-title-block center">
+  <h1 class="title">MOSAIC<br>A Modular Testbed for<br><span class="accent">Human–AI Collaboration</span></h1>
+  <p class="subtitle">Hands-on tutorial · IEEE SMC 2026, Bellevue WA</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Bennett Kwaku Dogbey 
+</div>
+        <p class="quarto-title-affiliation">
+            iHuman Lab · Oklahoma State University
+          </p>
+    </div>
+</div>
+
+  <p class="date">October 4, 2026</p>
+</section>
+<section id="start-your-install-now" class="slide level2">
+<h2>Start Your <span class="accent">Install</span> Now</h2>
+<div class="hook">
+<p>Do this first — it runs in the background while we talk.</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
+<span id="cb1-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
+<span id="cb1-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv <span class="kw">&amp;&amp;</span> <span class="bu">source</span> .venv/bin/activate   <span class="co"># Windows: .venv\Scripts\activate</span></span>
+<span id="cb1-4"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
+<span id="cb1-5"><a href=""></a><span class="ex">pip</span> uninstall <span class="at">-y</span> pygame</span>
+<span id="cb1-6"><a href=""></a><span class="ex">pip</span> install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
+<span id="cb1-7"><a href=""></a><span class="ex">pip</span> install tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="punchline">
+<p>Those last two lines are <span class="accent">not optional</span> — Part 2 explains why.</p>
+</div>
+<p>Three parts today: <span class="accent">what it is</span> · <span class="accent">getting it running</span> · <span class="accent">playing with it</span>.</p>
+</section>
+<section class="slide level2">
+
+<!-- ============ PART 1 ============ -->
+<div class="divider">
+<p><span class="divider-title">Part One</span></p>
+<p><span class="divider-subtitle">What MOSAIC is</span></p>
+<div class="you-are-here">
+<p><span class="stop here">What it is</span> <span class="stop">Install</span> <span class="stop">Use it</span></p>
+</div>
+</div>
+</section>
+<section id="what-is-mosaic" class="slide level2">
+<h2>What is <span class="accent">MOSAIC</span>?</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="hook">
+<p>A modular testbed for human–AI collaboration.</p>
+</div>
+<p>A grid-based <strong>search-and-rescue</strong> simulation, built on <a href="https://github.com/Farama-Foundation/Minigrid">MiniGrid</a>, where a human operator, an AI advisor, or both together must rescue survivors from a burning building before time runs out.</p>
+<p>Named for the art of building one coherent picture from many small tiles — which is both what the platform does and what the world literally looks like.</p>
+<div class="punchline">
+<p>Many pieces, <span class="accent">one picture</span>.</p>
+</div>
+</div><div class="column" style="width:45%;">
+<p><img data-src="assets/game-view.png"></p>
+</div></div>
+</section>
+<section id="the-pieces" class="slide level2">
+<h2>The <span class="accent">Pieces</span></h2>
+<div class="arch">
+<div class="arch-row">
+<div class="arch-block">
+<p><span class="arch-title">Human Operator</span></p>
+<p>Keyboard in, eyes on the screen — seven actions, one key each</p>
+</div>
+<div class="arch-block">
+<p><span class="arch-title">AI Advisor</span></p>
+<p>Anything with a <code>query()</code> method — GPT, Gemini, a scripted rule, or the built-in stub</p>
+</div>
+</div>
+<div class="arch-link">
+<p>▼ key presses · advice requests · ▲ what they see · what it says</p>
+</div>
+<div class="arch-row">
+<div class="arch-block">
+<p><span class="arch-title">Interface</span></p>
+<p>Game view · mission status panel · chat panel · peripheral feedback at the screen edge</p>
+</div>
+</div>
+<div class="arch-link">
+<p>▼ action · ▲ observation and reward</p>
+</div>
+<div class="arch-row">
+<div class="arch-block">
+<p><span class="arch-title">Environment</span></p>
+<p>The building, the survivors, the hazards, the scoring — every one of them a constructor argument</p>
+</div>
+</div>
+<div class="arch-row">
+<div class="arch-block secondary">
+<p><span class="arch-title">Sensing &amp; Logging</span></p>
+<p>One record per frame, eye tracking on the same clock</p>
+</div>
+<div class="arch-block secondary">
+<p><span class="arch-title">Analytics</span></p>
+<p>Frame-exact replay · areas of interest · workload surveys</p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-it-exists" class="slide level2">
+<h2>Why It <span class="accent">Exists</span></h2>
+<div class="cards cols-2 fill short">
+<div class="card">
+<p><span class="card-title">Hard Enough</span></p>
+<p>The participant must genuinely <em>need</em> help. A task you can solve alone measures nothing about teaming.</p>
+<div class="card-meta">
+<p>Time budget · decaying survivors · lava · locked doors · decoys</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Instrumented</span></p>
+<p>Every action, every glance, every piece of advice — timestamped and on one clock.</p>
+<div class="card-meta">
+<p>One record per frame, over Lab Streaming Layer</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Reproducible</span></p>
+<p>Another lab should be able to run your exact condition, not their approximation of it.</p>
+<div class="card-meta">
+<p>Seeded worlds · conditions in YAML · replay from the log</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Reconfigurable</span></p>
+<p>Your manipulation should be a parameter, not a fork of the codebase.</p>
+<div class="card-meta">
+<p>World · view · scoring · logging · advisor — all injected</p>
+</div>
+</div>
+</div>
+<div class="punchline">
+<p>Most testbeds get two of these. MOSAIC is our attempt at <span class="accent">all four</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<!-- ============ PART 2 ============ -->
+<div class="divider">
+<p><span class="divider-title">Part Two</span></p>
+<p><span class="divider-subtitle">Getting it running</span></p>
+<div class="you-are-here">
+<p><span class="stop">What it is</span> <span class="stop here">Install</span> <span class="stop">Use it</span></p>
+</div>
+</div>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before You <span class="accent">Start</span></h2>
+<div class="cards cols-2 fill short">
+<div class="card">
+<p><span class="card-title">Python 3.10+</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">python3</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We test on 3.10. <code>pyproject.toml</code> still claims 3.8 — do not believe it.</p>
+<div class="card-meta">
+<p>Check this now — it is the one thing you cannot fix in the room</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Git</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Any recent version. You only need it to clone once.</p>
+<div class="card-meta">
+<p>No GitHub account required</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">A Real Display</span></p>
+<p>The game opens a window. SSH sessions, headless servers and Colab <strong>will not work</strong> for the GUI.</p>
+<div class="card-meta">
+<p>The environment itself runs headless fine — just not the interface</p>
+</div>
+</div>
+<div class="card secondary">
+<p><span class="card-title">No API Key</span></p>
+<p>Everything today works without one. The advisor falls back to a built-in stub.</p>
+<div class="card-meta">
+<p>Bring a key only if you want to see a real LLM answer</p>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1-clone-and-isolate" class="slide level2">
+<h2>Step 1 · <span class="accent">Clone</span> and Isolate</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">macOS / Linux</a></li><li><a href="#tabset-1-2">Windows PowerShell</a></li><li><a href="#tabset-1-3">Windows CMD</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
+<span id="cb4-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
+<span id="cb4-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb4-4"><a href=""></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href=""></a>git clone https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>iHuman-Lab<span class="op">/</span>mosaic<span class="op">.</span><span class="fu">git</span></span>
+<span id="cb5-2"><a href=""></a><span class="fu">cd</span> mosaic</span>
+<span id="cb5-3"><a href=""></a>python <span class="op">-</span>m venv <span class="op">.</span><span class="fu">venv</span></span>
+<span id="cb5-4"><a href=""></a><span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href=""></a>git clone https://github.com/iHuman-Lab/mosaic.git</span>
+<span id="cb6-2"><a href=""></a>cd mosaic</span>
+<span id="cb6-3"><a href=""></a>python -m venv .venv</span>
+<span id="cb6-4"><a href=""></a>.venv\Scripts\activate.bat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="checkpoint">
+<p><strong>Checkpoint</strong> — your prompt now starts with <code>(.venv)</code>. If it does not, the next step installs into the wrong Python.</p>
+</div>
+<div class="note">
+<p>Ubuntu users: if you see <code>ensurepip is not available</code>, run <code>sudo apt install python3-venv</code> and repeat.</p>
+</div>
+</section>
+<section id="step-2-install-the-package" class="slide level2">
+<h2>Step 2 · <span class="accent">Install</span> the Package</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href=""></a>Successfully installed ... minigrid-3.1.0 mosaic-0.1.0 numpy-2.2.6</span>
+<span id="cb8-2"><a href=""></a>  pygame-2.6.1 pygame-ce-2.5.8 pygame_gui-0.6.14 ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="checkpoint">
+<p><strong>Checkpoint</strong> — look closely at that list. It installed <strong>both</strong> <code>pygame</code> and <code>pygame-ce</code>, and <code>pygame</code> landed last.</p>
+</div>
+<div class="punchline">
+<p>That is the bug. The next slide is the <span class="accent">whole reason</span> this section exists.</p>
+</div>
+</section>
+<section id="step-3-the-one-trap" class="slide level2">
+<h2>Step 3 · The <span class="accent">One Trap</span></h2>
+<p>Try to launch the interface now and you get this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href=""></a>  File ".../pygame_gui/core/interfaces/font_dictionary_interface.py", line 3</span>
+<span id="cb9-2"><a href=""></a>    from pygame import DIRECTION_LTR</span>
+<span id="cb9-3"><a href=""></a>ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>pygame_gui</code> needs <strong>pygame-ce</strong>; <code>pyproject.toml</code> asks for plain <strong>pygame</strong>. Both install into the same <code>pygame</code> namespace, and the loser gets shadowed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="ex">pip</span> uninstall <span class="at">-y</span> pygame</span>
+<span id="cb10-2"><a href=""></a><span class="ex">pip</span> install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="punchline">
+<p><code>--force-reinstall</code> is <span class="accent">required</span> — uninstalling <code>pygame</code> guts the shared namespace, and plain <code>pip install</code> just says “already satisfied”.</p>
+</div>
+</section>
+<section id="step-3-what-you-should-see" class="slide level2">
+<h2>Step 3 · What You Should <span class="accent">See</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href=""></a>Successfully installed pygame-ce-2.5.8</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="note">
+<p>You will also see <code>ERROR: mosaic 0.1.0 requires pygame, which is not installed.</code> — <strong>expected and harmless.</strong> That is <code>pyproject.toml</code> asking for the wrong package; pygame-ce satisfies it in practice.</p>
+</div>
+<p>One more undeclared dependency — the advisor’s prompt builder needs it, so <code>Alt</code> does nothing without it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="ex">pip</span> install tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="checkpoint">
+<p><strong>Checkpoint</strong> — this now prints <code>GUI OK</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"from mosaic.gui.main import SAREnvGUI; print('GUI OK')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href=""></a>pygame-ce 2.5.8 (SDL 2.32.10, Python 3.10.20)</span>
+<span id="cb14-2"><a href=""></a>GUI OK</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="punchline">
+<p>Both are known packaging issues — you are getting the workarounds <span class="accent">ahead of the PyPI release</span>.</p>
+</div>
+</section>
+<section id="verify-30-seconds" class="slide level2">
+<h2>Verify · <span class="accent">30 Seconds</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"</span></span>
+<span id="cb15-2"><a href=""></a><span class="st">from mosaic.sar.env import build_sar_env</span></span>
+<span id="cb15-3"><a href=""></a><span class="st">from mosaic.sar.placers import VictimPlacer</span></span>
+<span id="cb15-4"><a href=""></a><span class="st">env = build_sar_env(screen_size=600, num_rows=2, num_cols=2, room_size=8,</span></span>
+<span id="cb15-5"><a href=""></a><span class="st">                    victim_placer=VictimPlacer(num_real_victims=2))</span></span>
+<span id="cb15-6"><a href=""></a><span class="st">env.reset(seed=0)</span></span>
+<span id="cb15-7"><a href=""></a><span class="st">print('MOSAIC OK —', env.get_mission_status())</span></span>
+<span id="cb15-8"><a href=""></a><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb16-1"><a href=""></a>MOSAIC OK — {'status': 'continue', 'saved_victims': 0, 'remaining_victims': 8}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="punchline">
+<p>Eight, not two — <code>num_real_victims</code> is <span class="accent">per room</span>, and a 2×2 building has four.</p>
+</div>
+<div class="note">
+<p>A line reading <code>Timeout during mission generation: connect_all failed</code> may appear. It is the level generator retrying — a warning, not an error.</p>
+</div>
+</section>
+<section id="if-the-install-broke" class="slide level2">
+<h2>If the <span class="accent">Install</span> Broke</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cannot import name 'DIRECTION_LTR'</code></td>
+<td>You skipped Step 3</td>
+</tr>
+<tr class="even">
+<td><code>module 'pygame' has no attribute 'surface'</code></td>
+<td>You ran Step 3 without <code>--force-reinstall</code></td>
+</tr>
+<tr class="odd">
+<td><code>mosaic 0.1.0 requires pygame</code></td>
+<td>Harmless warning, not an error — carry on</td>
+</tr>
+<tr class="even">
+<td><code>ensurepip is not available</code></td>
+<td><code>sudo apt install python3-venv</code>, then remake the venv</td>
+</tr>
+<tr class="odd">
+<td><code>No module named 'mosaic'</code></td>
+<td>Outside the venv, or <code>pip install -e .</code> did not finish</td>
+</tr>
+</tbody>
+</table>
+<div class="punchline">
+<p>Still stuck? <span class="accent">Raise a hand</span> — we have helpers in the room and a spare laptop up front.</p>
+</div>
+</section>
+<section id="if-the-game-broke" class="slide level2">
+<h2>If the <span class="accent">Game</span> Broke</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Window opens then closes instantly</td>
+<td>You forgot <code>env.reset()</code> before launching the GUI</td>
+</tr>
+<tr class="even">
+<td>Nothing renders on a remote box</td>
+<td>You need a real display — use a local machine</td>
+</tr>
+<tr class="odd">
+<td><code>Alt</code> does nothing / <code>Missing optional dependency 'tabulate'</code></td>
+<td><code>pip install tabulate</code></td>
+</tr>
+<tr class="even">
+<td>Hangs forever, no window</td>
+<td><code>locked_room_prob=1.0</code> — back it off to <code>0.9</code></td>
+</tr>
+<tr class="odd">
+<td><code>'FullviewCamera' object has no attribute 'reset'</code></td>
+<td>Known bug — use <code>AgentFOVCamera</code> or <code>AgentConeCamera</code></td>
+</tr>
+<tr class="even">
+<td><code>Timeout during mission generation</code></td>
+<td>Harmless — the generator retries</td>
+</tr>
+<tr class="odd">
+<td><code>Sampling rejected: unreachable object</code></td>
+<td>Harmless — it is placing objects somewhere else</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+
+<!-- ============ PART 3 ============ -->
+<div class="divider">
+<p><span class="divider-title">Part Three</span></p>
+<p><span class="divider-subtitle">Playing with it</span></p>
+<div class="you-are-here">
+<p><span class="stop">What it is</span> <span class="stop">Install</span> <span class="stop here">Use it</span></p>
+</div>
+</div>
+</section>
+<section id="the-rules-in-60-seconds" class="slide level2">
+<h2>The Rules in <span class="accent">60 Seconds</span></h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>The building</strong> — <code>num_rows</code> × <code>num_cols</code> rooms, each <code>room_size</code> tiles square. Some doors are locked and need a matching coloured key, and you can carry <strong>one key at a time</strong>.</p>
+<p><strong>The pressure</strong> — a step budget <em>and</em> a wall clock. Survivors lose health while you can see them. Lava is instant mission failure.</p>
+</div><div class="column" style="width:52%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Event</th>
+<th>Reward</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rescue a live survivor</td>
+<td><strong>+1.0</strong></td>
+</tr>
+<tr class="even">
+<td>Pick up a decoy</td>
+<td><strong>−1.0</strong></td>
+</tr>
+<tr class="odd">
+<td>Pick up a survivor who died</td>
+<td><strong>−2.0</strong></td>
+</tr>
+<tr class="even">
+<td>Complete the mission</td>
+<td><strong>+1.0</strong> bonus</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="punchline">
+<p>Pressure is what makes advice <span class="accent">worth taking</span> — and worth measuring.</p>
+</div>
+</section>
+<section id="survivors-and-decoys" class="slide level2">
+<h2>Survivors and <span class="accent">Decoys</span></h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<p><img data-src="assets/victims.png"></p>
+</div><div class="column" style="width:48%;">
+<p><strong>Top row — real survivors.</strong> Arms centred on the stem.</p>
+<p><strong>Bottom row — decoys.</strong> Stem offset from the centre.</p>
+<p>Four orientations each, randomly assigned.</p>
+</div></div>
+<div class="punchline">
+<p>A classic <span class="accent">visual discrimination</span> task hiding inside a rescue mission — which is what makes false alarms measurable.</p>
+</div>
+</section>
+<section id="whats-on-screen" class="slide level2">
+<h2>What’s on <span class="accent">Screen</span></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/gui-screenshot.png" class="quarto-figure quarto-figure-center" height="470"></p>
+</figure>
+</div>
+<div class="caption-row">
+<p><span class="cap"><strong>Game view</strong> · the camera’s crop of the world</span> <span class="cap"><strong>Info panel</strong> · mission status</span> <span class="cap"><strong>Chat panel</strong> · the advisor</span> <span class="cap"><strong>Screen edge</strong> · peripheral feedback</span></p>
+</div>
+</section>
+<section id="controls" class="slide level2">
+<h2>Controls</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>↑</code></td>
+<td>Move forward</td>
+</tr>
+<tr class="even">
+<td><code>←</code> <code>→</code></td>
+<td>Turn left / right</td>
+</tr>
+<tr class="odd">
+<td><code>Space</code></td>
+<td>Open a door</td>
+</tr>
+<tr class="even">
+<td><code>Tab</code> or <code>Page Up</code></td>
+<td>Rescue (pick up)</td>
+</tr>
+<tr class="odd">
+<td><code>Left Shift</code> or <code>Page Down</code></td>
+<td>Drop the key you’re carrying</td>
+</tr>
+<tr class="even">
+<td><code>Alt</code></td>
+<td>Ask the AI advisor</td>
+</tr>
+<tr class="odd">
+<td><code>Backspace</code> · <code>F11</code> · <code>Esc</code></td>
+<td>Restart · Fullscreen · Quit</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p>The docs also list <code>W</code> for forward — it is not actually mapped. Use the arrow keys. <code>Alt</code> needs <code>tabulate</code> installed (Part 2, step 3).</p>
+</div>
+</section>
+<section id="play-a-mission" class="slide level2">
+<h2>Play a <span class="accent">Mission</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">from</span> mosaic.gui.main <span class="im">import</span> SAREnvGUI</span>
+<span id="cb17-2"><a href=""></a><span class="im">from</span> mosaic.sar.env <span class="im">import</span> build_sar_env</span>
+<span id="cb17-3"><a href=""></a><span class="im">from</span> mosaic.sar.placers <span class="im">import</span> LavaPlacer, LockedRoomPlacer, VictimPlacer</span>
+<span id="cb17-4"><a href=""></a></span>
+<span id="cb17-5"><a href=""></a>env <span class="op">=</span> build_sar_env(</span>
+<span id="cb17-6"><a href=""></a>    screen_size<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb17-7"><a href=""></a>    num_rows<span class="op">=</span><span class="dv">2</span>, num_cols<span class="op">=</span><span class="dv">2</span>,                            <span class="co"># building is 2x2 rooms</span></span>
+<span id="cb17-8"><a href=""></a>    room_size<span class="op">=</span><span class="dv">8</span>,                                       <span class="co"># tiles per room</span></span>
+<span id="cb17-9"><a href=""></a>    victim_placer<span class="op">=</span>VictimPlacer(num_real_victims<span class="op">=</span><span class="dv">2</span>),    <span class="co"># PER ROOM -&gt; 8 total</span></span>
+<span id="cb17-10"><a href=""></a>    lava_placer<span class="op">=</span>LavaPlacer(lava_per_room<span class="op">=</span><span class="dv">2</span>),</span>
+<span id="cb17-11"><a href=""></a>    locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
+<span id="cb17-12"><a href=""></a>)</span>
+<span id="cb17-13"><a href=""></a>env.reset()                                            <span class="co"># never skip this</span></span>
+<span id="cb17-14"><a href=""></a>SAREnvGUI(env, config<span class="op">=</span>{<span class="st">"fullscreen"</span>: <span class="va">False</span>, <span class="st">"max_time"</span>: <span class="dv">3</span>}).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href=""></a><span class="ex">python</span> labs/play.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="punchline">
+<p>Every argument above is a <span class="accent">knob</span>. The next four slides turn them.</p>
+</div>
+</section>
+<section id="knob-1-the-building" class="slide level2">
+<h2>Knob 1 — The <span class="accent">Building</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a>env <span class="op">=</span> build_sar_env(</span>
+<span id="cb19-2"><a href=""></a>    screen_size<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb19-3"><a href=""></a>    num_rows<span class="op">=</span><span class="dv">3</span>, num_cols<span class="op">=</span><span class="dv">3</span>,     <span class="co"># was 2x2</span></span>
+<span id="cb19-4"><a href=""></a>    room_size<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb19-5"><a href=""></a>    victim_placer<span class="op">=</span>VictimPlacer(num_real_victims<span class="op">=</span><span class="dv">2</span>),</span>
+<span id="cb19-6"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Rooms</th>
+<th>Survivors</th>
+<th>Step budget</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>2×2</code></td>
+<td>4</td>
+<td>8</td>
+<td>2,048</td>
+</tr>
+<tr class="even">
+<td><code>3×3</code></td>
+<td>9</td>
+<td>18</td>
+<td>10,368</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p>Occasionally you will see 17 instead of 18 — the generator rejects a victim it cannot find a reachable spot for, and the step budget scales with the count.</p>
+</div>
+<div class="punchline">
+<p>Notice how much longer a single mission takes — and how much more you would <span class="accent">welcome a hint</span>.</p>
+</div>
+</section>
+<section id="knob-2-the-hazards" class="slide level2">
+<h2>Knob 2 — The <span class="accent">Hazards</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>lava_placer<span class="op">=</span>LavaPlacer(lava_per_room<span class="op">=</span><span class="dv">6</span>),              <span class="co"># was 2</span></span>
+<span id="cb20-2"><a href=""></a>locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.9</span>),   <span class="co"># was 0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>More lava</strong> — the fastest route and the safe route stop being the same route. Watch your own planning change.</p>
+<p><strong>Nearly every room locked</strong> — with one key at a time, a rescue task becomes a key-management task.</p>
+<div class="note">
+<p>Stop at <code>0.9</code>. At <code>1.0</code> every room is locked, the level has no solvable layout, and the generator retries <strong>forever</strong> — the window never opens. Known bug.</p>
+</div>
+<div class="punchline">
+<p>Two numbers, two <span class="accent">completely different</span> cognitive demands.</p>
+</div>
+</section>
+<section id="knob-3-what-they-can-see" class="slide level2">
+<h2>Knob 3 — What They Can <span class="accent">See</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="assets/cam-room.png" height="230"></p>
+<p><strong><code>AgentFOVCamera</code></strong><br>
+Current room only</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="assets/cam-cone.png" height="230"></p>
+<p><strong><code>AgentConeCamera</code></strong><br>
+Forward cone only — search-heavy</p>
+</div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="im">from</span> mosaic.core.camera <span class="im">import</span> AgentConeCamera</span>
+<span id="cb21-2"><a href=""></a>env <span class="op">=</span> build_sar_env(..., camera_strategy<span class="op">=</span>AgentConeCamera())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="note">
+<p>The default is <code>EdgeFollowCamera</code>, which scrolls only when the agent nears the edge. <strong><code>FullviewCamera</code> and <code>AgentCenteredCamera</code> raise <code>AttributeError</code> today</strong> — a known bug, they are missing a <code>reset()</code>.</p>
+</div>
+</section>
+<section id="knob-4-what-mistakes-cost" class="slide level2">
+<h2>Knob 4 — What Mistakes <span class="accent">Cost</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="im">from</span> mosaic.sar.actions <span class="im">import</span> RescueAction, RescueRewards</span>
+<span id="cb22-2"><a href=""></a></span>
+<span id="cb22-3"><a href=""></a>scoring <span class="op">=</span> RescueAction(rewards<span class="op">=</span>RescueRewards(</span>
+<span id="cb22-4"><a href=""></a>    real_victim_alive<span class="op">=+</span><span class="fl">1.0</span>,    <span class="co"># hit</span></span>
+<span id="cb22-5"><a href=""></a>    fake_victim<span class="op">=-</span><span class="fl">3.0</span>,          <span class="co"># false alarm — was -1.0</span></span>
+<span id="cb22-6"><a href=""></a>    real_victim_dead<span class="op">=-</span><span class="fl">2.0</span>,     <span class="co"># arrived too late</span></span>
+<span id="cb22-7"><a href=""></a>))</span>
+<span id="cb22-8"><a href=""></a></span>
+<span id="cb22-9"><a href=""></a>env <span class="op">=</span> build_sar_env(..., action<span class="op">=</span>scoring)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="punchline">
+<p>Shifting the false-alarm penalty shifts the participant’s <span class="accent">decision criterion</span> — a payoff-matrix manipulation in one number.</p>
+</div>
+</section>
+<section id="the-same-world-twice" class="slide level2">
+<h2>The Same World <span class="accent">Twice</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="im">import</span> random</span>
+<span id="cb23-2"><a href=""></a></span>
+<span id="cb23-3"><a href=""></a>random.seed(<span class="dv">42</span>)          <span class="co"># &lt;-- both lines are needed</span></span>
+<span id="cb23-4"><a href=""></a>env.reset(seed<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="hook">
+<p>Why two seeds?</p>
+</div>
+<p><code>env.reset(seed=...)</code> seeds the room-and-door skeleton. The placers — survivors, lava, keys — still draw from Python’s global <code>random</code>, so without <code>random.seed()</code> you get a <strong>different world every run</strong>.</p>
+<div class="punchline">
+<p>Seed both and the building is identical every time. Known bug, <span class="accent">workaround today</span> — compare maps with your neighbour.</p>
+</div>
+</section>
+<section id="try-this-now" class="slide level2">
+<h2>Try This <span class="accent">Now</span></h2>
+<div class="cards cols-2 fill">
+<div class="card">
+<p><span class="card-title">Scale It Up</span></p>
+<p>Set <code>num_rows=3, num_cols=3</code> in <code>labs/play.py</code> and play again. Time yourself.</p>
+<div class="card-meta">
+<p>Knob 1 · how badly do you want a hint now?</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Turn Up the Risk</span></p>
+<p><code>LavaPlacer(lava_per_room=6)</code>. Watch your route planning change in real time.</p>
+<div class="card-meta">
+<p>Knob 2 · risk versus speed</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Narrow the View</span></p>
+<p><code>camera_strategy=AgentConeCamera()</code>. A planning task becomes a search task.</p>
+<div class="card-meta">
+<p>Knob 3 · this is the big one</p>
+</div>
+</div>
+<div class="card secondary">
+<p><span class="card-title">Race Your Neighbour</span></p>
+<p>Both seed to <code>42</code>, both play the identical building. Compare what you each did.</p>
+<div class="card-meta">
+<p>Reproducibility · <code>random.seed(42)</code> + <code>env.reset(seed=42)</code></p>
+</div>
+</div>
+</div>
+</section>
+<section id="where-to-go-next" class="slide level2">
+<h2>Where to Go <span class="accent">Next</span></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="hook">
+<p>The most useful thing you can do today is tell us where it broke.</p>
+</div>
+<ul>
+<li><strong>Open an issue</strong> — install friction especially. Everything in Part 2 exists because someone hit it.</li>
+<li><strong>Bring your paradigm</strong> — if your manipulation doesn’t fit the knobs, that’s a design bug on our side.</li>
+<li><strong>Contribute a placer or an advisor</strong> — the smallest useful pull request is about thirty lines.</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><strong>Repository</strong> <code>github.com/iHuman-Lab/mosaic</code></p>
+<p><strong>Documentation</strong> <code>ihuman-lab.github.io/mosaic</code></p>
+<p><strong>Today’s scripts</strong> <code>labs/play.py</code> · <code>labs/tweak.py</code> · <code>labs/advisor.py</code></p>
+</div></div>
+</section>
+<section id="section" class="slide level2" data-background-image="assets/background.jpg" data-background-opacity="0.25">
+<h2></h2>
+<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:80vh; text-align:center;">
+<p><img data-src="assets/logo.png" style="max-height:110px; border-radius:0 !important; box-shadow:none !important;"></p>
+<div style="font-family:'Rubik',sans-serif; font-size:2.8rem; font-weight:900; color:#ffffff; margin-top:0.8rem;">
+<p>Thanks!</p>
+</div>
+<div style="font-size:1.5rem; color:#EC672C; margin-top:1.2rem; font-weight:700;">
+<p>Questions?</p>
+</div>
+<div style="font-size:1.5rem; color:rgba(255,255,255,0.35); margin-top:1rem; letter-spacing:2px;">
+<p>bennett.dogbey@okstate.edu</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<!-- ============ APPENDIX ============ -->
+<div class="divider">
+<p><span class="divider-title">Appendix</span></p>
+<p><span class="divider-subtitle">Backup slides — beyond the basics</span></p>
+</div>
+</section>
+<section id="who-we-are" class="slide level2">
+<h2>Who <span class="accent">We Are</span></h2>
+<div class="team">
+<div class="member">
+<p><img data-src="assets/team/hemanth.jpg"></p>
+<p><span class="member-name">Hemanth Manjunatha</span> <span class="member-role">Principal Investigator</span></p>
+<p>Brain–machine interfaces and human–robot interaction — <em>what is happening in the operator’s head.</em></p>
+</div>
+<div class="member">
+<p><img data-src="assets/team/elahe.jpg"></p>
+<p><span class="member-name">Elahe Oveisi</span> <span class="member-role">PhD Student · MOSAIC author</span></p>
+<p>Human factors in autonomous systems and aviation safety — <em>when people take the advice.</em></p>
+</div>
+<div class="member">
+<p><img data-src="assets/team/bennett.jpg"></p>
+<p><span class="member-name">Bennett Kwaku Dogbey</span> <span class="member-role">PhD Student · Presenting</span></p>
+<p>Safe autonomy and formal verification — <em>when they should.</em></p>
+</div>
+</div>
+<div class="member-link">
+<p>Meet the rest of the lab: <a href="https://ihuman-lab.github.io/lab-website/">ihuman-lab.github.io/lab-website</a></p>
+</div>
+</section>
+<section id="three-design-choices-that-make-it-yours" class="slide level2">
+<h2>Three Design Choices That Make It <span class="accent">Yours</span></h2>
+<div class="cards cols-3 fill short">
+<div class="card">
+<p><span class="card-title">Dependency Injection</span></p>
+<p>Components are built first, then passed in — never subclassed, never looked up.</p>
+<p><code>build_sar_env(victim_placer=MyPlacer())</code></p>
+<div class="card-meta">
+<p>A new world is a new object, not a new environment</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Strategy Pattern</span></p>
+<p>Interchangeable behaviours behind one interface — five cameras, one argument.</p>
+<p><code>env.switch_camera(AgentConeCamera())</code></p>
+<div class="card-meta">
+<p>Change what participants see, even mid-session</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Factory Functions</span></p>
+<p>One call builds a fully wired object from parts you already made.</p>
+<p><code>build_sar_env(...)</code> · <code>build_llm_client(...)</code></p>
+<div class="card-meta">
+<p>A condition is a function call you can put in a config</p>
+</div>
+</div>
+</div>
+<div class="punchline">
+<p>Your manipulation is a <span class="accent">constructor argument</span>. That is the whole design.</p>
+</div>
+</section>
+<section id="the-building-blocks-in-code" class="slide level2">
+<h2>The Building Blocks, <span class="accent">in Code</span></h2>
+<div class="layer">
+<div class="layer-label">
+<p><strong><code>mosaic/</code></strong><br>
+the contract<br>
+<code>pip install -e .</code></p>
+</div>
+<div class="cards cols-4">
+<div class="card">
+<p><span class="card-title">core/</span></p>
+<p><code>SARLevelGen</code> on MiniGrid · five <code>CameraStrategy</code> classes · the <code>Placer</code> base</p>
+</div>
+<div class="card">
+<p><span class="card-title">sar/</span></p>
+<p><code>PickupVictimEnv</code> · <code>build_sar_env()</code> · survivors and decoys · <code>RescueAction</code> · <code>GameObservation</code></p>
+</div>
+<div class="card">
+<p><span class="card-title">gui/</span></p>
+<p><code>SAREnvGUI</code> · <code>InfoPanel</code> · <code>ChatPanel</code> · <code>EdgeVignette</code> · <code>User</code> input</p>
+</div>
+<div class="card">
+<p><span class="card-title">llm/</span></p>
+<p><code>LLMClient</code> · <code>DummyLLMClient</code> · prompt builder · pathfinding · reply parser</p>
+</div>
+</div>
+</div>
+<div class="layer secondary">
+<div class="layer-label">
+<p><strong><code>experiment/</code></strong><br>
+one lab’s wiring<br>
+not packaged</p>
+</div>
+<div class="cards cols-3">
+<div class="card secondary">
+<p><span class="card-title">Providers</span></p>
+<p><code>llm.py</code> — OpenAI and Gemini through llama_index</p>
+</div>
+<div class="card secondary">
+<p><span class="card-title">Study tuning</span></p>
+<p><code>placers.py</code> — health and decay by lava risk · <code>pacing.py</code> — the step budget</p>
+</div>
+<div class="card secondary">
+<p><span class="card-title">Instrumented run</span></p>
+<p><code>game.py</code> → LSL · <code>sensors/</code> Tobii · <code>replay.py</code> · YAML configs</p>
+</div>
+</div>
+</div>
+<div class="punchline">
+<p>Contract lives in <code>mosaic/</code>, wiring lives in <code>experiment/</code>. Your study becomes a <span class="accent">second <code>experiment/</code></span> — not a fork.</p>
+</div>
+</section>
+<section id="what-gets-logged" class="slide level2">
+<h2>What Gets <span class="accent">Logged</span></h2>
+<p>Every step returns an enriched observation:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a>[<span class="st">'agent_dir'</span>, <span class="st">'agent_x'</span>, <span class="st">'agent_y'</span>, <span class="st">'cam_top_x'</span>, <span class="st">'cam_top_y'</span>,</span>
+<span id="cb24-2"><a href=""></a> <span class="st">'cam_view_h'</span>, <span class="st">'cam_view_w'</span>, <span class="st">'carrying'</span>, <span class="st">'direction'</span>, <span class="st">'grid'</span>,</span>
+<span id="cb24-3"><a href=""></a> <span class="st">'image'</span>, <span class="st">'max_steps'</span>, <span class="st">'mission'</span>, <span class="st">'mission_status'</span>, <span class="st">'num_cols'</span>,</span>
+<span id="cb24-4"><a href=""></a> <span class="st">'num_rows'</span>, <span class="st">'remaining_victims'</span>, <span class="st">'room_size'</span>, <span class="st">'saved_victims'</span>,</span>
+<span id="cb24-5"><a href=""></a> <span class="st">'step_count'</span>, <span class="st">'victim_health'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>grid</code> is a full integer-encoded snapshot of the world — walls, lava, survivors, decoys, doors with colour and lock state, keys.</p>
+<div class="note">
+<p>The four <code>cam_*</code> fields come from the default <code>EdgeFollowCamera</code>. Swap to <code>AgentConeCamera</code> or <code>AgentFOVCamera</code> and they are absent — worth knowing before you write the analysis.</p>
+</div>
+<div class="punchline">
+<p>Which is why a session can be <span class="accent">replayed exactly</span>, without re-running the environment.</p>
+</div>
+</section>
+<section id="the-advisor-contract" class="slide level2">
+<h2>The Advisor <span class="accent">Contract</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="kw">class</span> LLMClient(ABC):</span>
+<span id="cb25-2"><a href=""></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb25-3"><a href=""></a>    <span class="kw">def</span> query(<span class="va">self</span>, prompt: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb25-4"><a href=""></a>        <span class="co">"""Send text, get text back."""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That is the whole interface. It knows nothing about SAR, prompts, the GUI, or your conditions.</p>
+<div class="punchline">
+<p>Anything with a <code>query</code> method is a <span class="accent">teammate</span> — GPT, Gemini, a rule, a human confederate behind a socket.</p>
+</div>
+</section>
+<section id="an-advisor-with-a-reliability-dial" class="slide level2">
+<h2>An Advisor With a <span class="accent">Reliability Dial</span></h2>
+<p>Advice is correct with probability <code>p_correct</code> — and every call records whether it was.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="im">import</span> random</span>
+<span id="cb26-2"><a href=""></a><span class="im">from</span> mosaic.llm.client <span class="im">import</span> LLMClient</span>
+<span id="cb26-3"><a href=""></a></span>
+<span id="cb26-4"><a href=""></a><span class="kw">class</span> ScriptedAdvisor(LLMClient):</span>
+<span id="cb26-5"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_correct<span class="op">=</span><span class="fl">1.0</span>, seed<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb26-6"><a href=""></a>        <span class="va">self</span>.p_correct, <span class="va">self</span>.rng, <span class="va">self</span>.log <span class="op">=</span> p_correct, random.Random(seed), []</span>
+<span id="cb26-7"><a href=""></a></span>
+<span id="cb26-8"><a href=""></a>    <span class="kw">def</span> query(<span class="va">self</span>, prompt: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb26-9"><a href=""></a>        correct <span class="op">=</span> <span class="va">self</span>.rng.random() <span class="op">&lt;</span> <span class="va">self</span>.p_correct</span>
+<span id="cb26-10"><a href=""></a>        heading <span class="op">=</span> <span class="va">self</span>.rng.choice([<span class="st">"north"</span>, <span class="st">"south"</span>, <span class="st">"east"</span>, <span class="st">"west"</span>])</span>
+<span id="cb26-11"><a href=""></a>        advice <span class="op">=</span> (<span class="ss">f"Head </span><span class="sc">{</span>heading<span class="sc">}</span><span class="ss"> — there's a survivor in the next room."</span></span>
+<span id="cb26-12"><a href=""></a>                  <span class="cf">if</span> correct <span class="cf">else</span></span>
+<span id="cb26-13"><a href=""></a>                  <span class="ss">f"Nothing </span><span class="sc">{</span>heading<span class="sc">}</span><span class="ss"> of you. Hold position and search here."</span>)</span>
+<span id="cb26-14"><a href=""></a>        <span class="va">self</span>.log.append({<span class="st">"correct"</span>: correct, <span class="st">"advice"</span>: advice})</span>
+<span id="cb26-15"><a href=""></a>        <span class="cf">return</span> advice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="plug-it-in" class="slide level2">
+<h2>Plug It <span class="accent">In</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a>advisor <span class="op">=</span> ScriptedAdvisor(p_correct<span class="op">=</span><span class="fl">0.7</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb27-2"><a href=""></a></span>
+<span id="cb27-3"><a href=""></a>SAREnvGUI(env, config<span class="op">=</span>{<span class="st">"fullscreen"</span>: <span class="va">False</span>}, llm_client<span class="op">=</span>advisor).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Press <code>Alt</code> in the game. Advice appears in the chat panel, and <code>advisor.log</code> holds the ground truth for every piece of it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="ex">python</span> labs/advisor.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="punchline">
+<p>You now have advice reliability as an <span class="accent">independent variable</span>, with per-trial ground truth for the analysis.</p>
+</div>
+</section>
+<section id="what-that-buys-you" class="slide level2">
+<h2>What That <span class="accent">Buys You</span></h2>
+<div class="cards cols-2 fill">
+<div class="card">
+<p><span class="card-title">Reliance</span></p>
+<p>Did they follow advice they should have ignored — and ignore advice they should have followed? <code>advisor.log</code> tells you which was which.</p>
+<div class="card-meta">
+<p>Compliance, over- and under-reliance</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Trust Repair</span></p>
+<p>Drop <code>p_correct</code> mid-session, then raise it again. Watch reliance recover — or not.</p>
+<div class="card-meta">
+<p>Reliance over time, after a failure</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Latency</span></p>
+<p>Add a <code>time.sleep</code> in <code>query</code>. Slow advice is a manipulation, not a bug.</p>
+<div class="card-meta">
+<p>Advice uptake against delay</p>
+</div>
+</div>
+<div class="card secondary">
+<p><span class="card-title">Adaptive Guidance</span></p>
+<p>Make <code>p_correct</code> a function of the participant’s own performance so far.</p>
+<div class="card-meta">
+<p>Calibration under adaptation</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-full-protocol" class="slide level2">
+<h2>The Full <span class="accent">Protocol</span></h2>
+<div class="flow-diagram horizontal fill short">
+<div class="flow-step secondary">
+<p><span class="step-num">Before</span></p>
+<p><strong>1 · Eye-tracker calibration</strong><br>
+Tobii — skipped automatically if there is no tracker</p>
+<p><strong>2 · Visual search</strong><br>
+Baseline attention</p>
+<p><strong>3 · Multi-object tracking</strong><br>
+Baseline tracking capacity</p>
+</div>
+<div class="flow-step">
+<p><span class="step-num">During</span></p>
+<p><strong>4 · Tutorial</strong><br>
+Single-room practice, same controls</p>
+<p><strong>5 · Main SAR mission</strong><br>
+With the AI advisor, streamed over LSL frame by frame</p>
+</div>
+<div class="flow-step secondary">
+<p><span class="step-num">After</span></p>
+<p><strong>6 · SART</strong><br>
+Situation awareness</p>
+<p><strong>7 · NASA-TLX</strong><br>
+Perceived workload</p>
+</div>
+</div>
+<div class="punchline">
+<p>One runner drives all seven phases — baselines, the mission, and the surveys <span class="accent">land in one session</span>.</p>
+</div>
+</section>
+<section id="synchronized-instrumentation" class="slide level2">
+<h2>Synchronized <span class="accent">Instrumentation</span></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Every frame of the main mission is streamed over <strong>Lab Streaming Layer</strong> as one record:</p>
+<ul>
+<li>Full grid state, agent pose, camera bounds</li>
+<li>Action taken and reward received</li>
+<li>Advice text, with request and response timestamps</li>
+<li>Gaze coordinates from the Tobii bridge</li>
+<li>Participant ID, trial number, condition order</li>
+</ul>
+<div class="punchline">
+<p>One clock. One file. <span class="accent">Areas-of-interest analysis afterwards</span>, against the exact frame the participant saw.</p>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="co"># replay any session, frame by frame</span></span>
+<span id="cb29-2"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> experiment.replay <span class="dt">\</span></span>
+<span id="cb29-3"><a href=""></a>  <span class="at">--file</span> session_p07.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No eye tracker in your lab? The protocol detects that and skips it.</p>
+</div></div>
+</section>
+<section id="where-mosaic-is-headed" class="slide level2">
+<h2>Where MOSAIC Is <span class="accent">Headed</span></h2>
+<div class="cards cols-2 fill">
+<div class="card">
+<p><span class="card-title">PyPI Release</span> <span class="badge">Next</span></p>
+<p><code>pip install mosaic</code> with no clone and no dependency workaround — Part 2 of this tutorial gets three slides shorter.</p>
+<div class="card-meta">
+<p>Fixes the pygame-ce trap</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">Gymnasium Registration</span> <span class="badge">Next</span></p>
+<p><code>gym.make("MOSAIC-SAR-v0")</code> for the RL side of the room. The environment is already Gymnasium-compatible.</p>
+<div class="card-meta">
+<p>Train agents on the same task people play</p>
+</div>
+</div>
+<div class="card">
+<p><span class="card-title">JOSS Submission</span> <span class="badge">Next</span></p>
+<p>A citable software paper, with the API and docs to match.</p>
+<div class="card-meta">
+<p>Something to cite in your methods section</p>
+</div>
+</div>
+<div class="card secondary">
+<p><span class="card-title">Beyond SAR</span> <span class="badge secondary">Later</span></p>
+<p>The same modular pieces — environment, interface, advisor, sensing — in other collaborative domains.</p>
+<div class="card-meta">
+<p>Same blocks, a new task</p>
+</div>
+</div>
+</div>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="assets/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>MOSAIC Tutorial · iHuman Lab · Oklahoma State University</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="mosaic-tutorial_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="mosaic-tutorial_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
