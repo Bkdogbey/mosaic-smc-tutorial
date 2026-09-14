@@ -1255,114 +1255,34 @@ $heading-font: "Rubik", sans-serif !default;
     line-height: 1.25;
 }
 
-/* What MOSAIC is: a relationship map rather than a module tour. */
-.mosaic-map {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 125px minmax(0, 1.15fr) 125px minmax(0, 1fr);
-    grid-template-rows: 210px 78px;
-    gap: 0.45rem;
-    align-items: center;
-    margin-top: 0.6rem;
-}
-
-.mosaic-node {
-    min-height: 145px;
-    padding: 0.8rem 0.8rem;
-    border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 10px;
-    background: rgba(255,255,255,0.045);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.mosaic-node p {
-    margin: 0;
-    color: rgba(255,255,255,0.68);
-    font-size: 0.65em;
-    line-height: 1.35;
-}
-
-.mosaic-node-title {
-    display: block;
-    margin-bottom: 0.35rem;
-    color: #ffffff;
-    font-size: 1.15em;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
-}
-
-.mosaic-core {
-    min-height: 185px;
-    border: 2px solid $primary-color;
-    background: linear-gradient(145deg, rgba(236,103,44,0.25), rgba(236,103,44,0.07));
-    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-}
-
-.mosaic-core-title {
-    display: block;
-    margin-bottom: 0.35rem;
-    color: $primary-color;
-    font-size: 1.5em;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-.mosaic-link p {
-    margin: 0;
-    text-align: center;
-    line-height: 1.55;
-}
-
-.link-forward,
-.link-back {
-    display: block;
-    font-size: 0.55em;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    white-space: nowrap;
-}
-
-.link-forward { color: $primary-color; }
-.link-back { color: rgba(255,255,255,0.58); }
-
-.mosaic-record {
-    grid-column: 2 / 5;
-    grid-row: 2;
-    align-self: stretch;
+/* What MOSAIC is: render the system relationships as a true flow diagram. */
+.overview-diagram {
+    width: 100%;
+    min-height: 315px;
+    margin: 0.3rem auto 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.7rem;
-    padding: 0.3rem 0.9rem;
-    border-top: 1px solid rgba(236,103,44,0.55);
-    background: linear-gradient(90deg, transparent, rgba(236,103,44,0.10), transparent);
+}
+
+.overview-diagram .mermaid,
+.overview-diagram .cell,
+.overview-diagram .cell-output-display {
+    width: 100%;
     text-align: center;
 }
 
-.mosaic-record p {
-    margin: 0;
-    color: rgba(255,255,255,0.67);
-    font-size: 0.59em;
-    line-height: 1.3;
-}
-
-.record-title {
-    color: $primary-color;
-    font-size: 1.02em;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.overview-diagram svg {
+    width: 100% !important;
+    max-width: 1040px !important;
+    max-height: 315px !important;
 }
 
 .overview-foundation p {
     display: flex;
     justify-content: center;
     gap: 0.55rem;
-    margin: 0.4rem 0 0;
+    margin: 0.35rem 0 0;
 }
 
 .foundation-item {
@@ -1404,101 +1324,36 @@ $heading-font: "Rubik", sans-serif !default;
     letter-spacing: 1.6px;
 }
 
-/* Collaboration: direct action on the top path; optional advice below it. */
-.collab-map {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1.15fr) 105px minmax(0, 1fr);
-    grid-template-rows: 145px 42px 140px;
-    gap: 0.25rem 0.35rem;
-    align-items: stretch;
-    margin-top: 0.8rem;
-}
-
-.collab-node {
-    padding: 0.65rem 0.8rem;
-    border: 1px solid rgba(255,255,255,0.14);
-    border-top: 4px solid $primary-color;
-    border-radius: 7px;
-    background: rgba(255,255,255,0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.collab-node p {
-    margin: 0;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.63em;
-    line-height: 1.38;
-}
-
-.collab-number {
-    color: rgba(236,103,44,0.62);
-    font-size: 0.8em;
-    font-weight: 900;
-    letter-spacing: 1px;
-}
-
-.collab-title {
-    display: block;
-    margin: 0.1rem 0 0.24rem;
-    color: #ffffff;
-    font-size: 1.18em;
-    font-weight: 800;
-}
-
-.observe-node { grid-column: 1; grid-row: 1; }
-.observe-arrow { grid-column: 2; grid-row: 1; }
-.decide-node { grid-column: 3; grid-row: 1; }
-.direct-arrow { grid-column: 4; grid-row: 1; }
-.act-node { grid-column: 5; grid-row: 1; }
-.collab-branch { grid-column: 3; grid-row: 2; }
-.ask-node { grid-column: 2 / 4; grid-row: 3; }
-.advice-arrow { grid-column: 4; grid-row: 3; }
-.evaluate-node { grid-column: 5; grid-row: 3; }
-.rejoin-arrow { grid-column: 5; grid-row: 2; }
-
-.collab-arrow,
-.collab-branch {
+/* Collaboration: Mermaid makes the optional advice branch and return loop explicit. */
+.collaboration-diagram {
+    width: 100%;
+    min-height: 345px;
+    margin: 0.15rem auto 0;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.collaboration-diagram .mermaid,
+.collaboration-diagram .cell,
+.collaboration-diagram .cell-output-display {
+    width: 100%;
     text-align: center;
 }
 
-.collab-arrow p,
-.collab-branch p {
-    margin: 0;
-    color: $primary-color;
-    font-size: 1.15em;
-    font-weight: 900;
-    line-height: 1.1;
+.collaboration-diagram svg {
+    width: 100% !important;
+    max-width: 880px !important;
+    max-height: 345px !important;
 }
 
-.arrow-label,
-.branch-label {
-    display: block;
-    color: rgba(255,255,255,0.48);
-    font-size: 0.42em;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-.ask-node,
-.evaluate-node {
-    border-top-color: rgba(189,189,189,0.75);
-    background: rgba(117,117,117,0.10);
-}
-
-.ask-node .collab-number,
-.evaluate-node .collab-number {
-    color: rgba(189,189,189,0.8);
+.overview-diagram .mermaid,
+.collaboration-diagram .mermaid {
+    background: transparent !important;
 }
 
 .cycle-band {
-    margin-top: 0.45rem;
+    margin-top: 0.25rem;
     padding: 0.38rem 0.9rem;
     background: rgba(236,103,44,0.09);
     border-left: 4px solid $primary-color;
@@ -1521,15 +1376,6 @@ $heading-font: "Rubik", sans-serif !default;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-}
-
-.cycle-record {
-    margin-left: 0.35rem;
-    padding-left: 0.7rem;
-    border-left: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.5);
-    font-size: 0.9em;
-    font-weight: 700;
 }
 
 /* Research questions: editorial prompts rather than another generic card grid. */
