@@ -299,7 +299,9 @@ Next, we will install MOSAIC, launch a mission, and [change the experiment ourse
 ::: {.divider}
 [Part Two]{.divider-title}
 
-[Getting it running]{.divider-subtitle}
+[Install and verify]{.divider-subtitle}
+
+[Check → Isolate → Install → Verify]{.divider-path}
 
 ::: {.you-are-here}
 [What it is]{.stop} [Install]{.stop .here} [Use it]{.stop}
@@ -308,46 +310,22 @@ Next, we will install MOSAIC, launch a mission, and [change the experiment ourse
 
 ---
 
-## Install in [Seven Lines]{.accent}
+## Before You [Start]{.accent}
 
 ::: {.hook}
-If you copy one slide today, copy this one.
+Four checks before we touch the terminal.
 :::
-
-```bash
-git clone https://github.com/iHuman-Lab/mosaic.git
-cd mosaic
-python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -e .
-pip uninstall -y pygame
-pip install --force-reinstall "pygame-ce>=2.5.2"
-pip install tabulate
-```
-
-::: {.punchline}
-Those last three lines are [not optional]{.accent} — the next few slides explain why.
-:::
-
-The rest of Part Two walks the same seven lines slowly, with a checkpoint after each one.
-
----
-
-## Before You [Start]{.accent}
 
 :::: {.cards .cols-2 .fill .short}
 
 ::: {.card}
-[Python 3.10+]{.card-title}
+[Python 3.10 or 3.11]{.card-title}
 
 ```bash
 python3 --version
 ```
 
-We test on 3.10. `pyproject.toml` still claims 3.8 — do not believe it.
-
-::: {.card-meta}
-Check this now — it is the one thing you cannot fix in the room
-:::
+Use the same supported version throughout the tutorial.
 :::
 
 ::: {.card}
@@ -357,38 +335,38 @@ Check this now — it is the one thing you cannot fix in the room
 git --version
 ```
 
-Any recent version. You only need it to clone once.
-
-::: {.card-meta}
-No GitHub account required
-:::
+A recent version is enough; no GitHub account is required.
 :::
 
 ::: {.card}
-[A Real Display]{.card-title}
+[Local graphical session]{.card-title}
 
-The game opens a window. SSH sessions, headless servers and Colab **will not work** for the GUI.
+The GUI needs a machine with a working display.
 
 ::: {.card-meta}
-The environment itself runs headless fine — just not the interface
+The environment itself can run headless; today's interface cannot.
 :::
 :::
 
 ::: {.card .secondary}
-[No API Key]{.card-title}
+[No API key required]{.card-title}
 
-Everything today works without one. The advisor falls back to a built-in stub.
+The built-in dummy advisor lets every participant complete the tutorial offline.
 
 ::: {.card-meta}
-Bring a key only if you want to see a real LLM answer
+A provider key is only needed for an optional live-model demonstration.
 :::
 :::
 
 ::::
 
+::: {.punchline}
+Our shared checkpoint: the core environment and GUI both [import successfully]{.accent}.
+:::
+
 ---
 
-## Step 1 · [Clone]{.accent} and Isolate
+## Step 1 · Get the [Code]{.accent} and Isolate It
 
 ::: {.panel-tabset}
 
@@ -422,148 +400,83 @@ python -m venv .venv
 :::
 
 ::: {.checkpoint}
-**Checkpoint** — your prompt now starts with `(.venv)`. If it does not, the next step installs into the wrong Python.
+**Checkpoint**
+
+```bash
+python --version
+```
+
+Your prompt should begin with `(.venv)`, and Python should report version 3.10 or 3.11.
 :::
 
 ::: {.note}
-Ubuntu users: if you see `ensurepip is not available`, run `sudo apt install python3-venv` and repeat.
+Ubuntu only: if `ensurepip is not available`, install `python3-venv`, remove the incomplete `.venv`, and create it again.
 :::
 
 ---
 
-## Step 2 · [Install]{.accent} the Package
+## Step 2 · Install [MOSAIC]{.accent}
+
+::: {.hook}
+Run these commands inside the active virtual environment.
+:::
 
 ```bash
-pip install -e .
-```
-
-```text
-Successfully installed ... minigrid-3.1.0 mosaic-0.1.0 numpy-2.2.6
-  pygame-2.6.1 pygame-ce-2.5.8 pygame_gui-0.6.14 ...
+python -m pip install --upgrade pip
+python -m pip install -e .
+python -m pip uninstall -y pygame
+python -m pip install --force-reinstall "pygame-ce>=2.5.2"
+python -m pip install tabulate
 ```
 
 ::: {.checkpoint}
-**Checkpoint** — look closely at that list. It installed **both** `pygame` and `pygame-ce`, and `pygame` landed last.
+The final installation should include `mosaic`, `minigrid`, `pygame-ce`, `pygame_gui`, and `tabulate`.
 :::
-
-::: {.punchline}
-That is the bug. The next slide is the [whole reason]{.accent} this section exists.
-:::
-
----
-
-## Step 3 · The [One Trap]{.accent}
-
-Try to launch the interface now and you get this:
-
-```text
-  File ".../pygame_gui/core/interfaces/font_dictionary_interface.py", line 3
-    from pygame import DIRECTION_LTR
-ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'
-```
-
-`pygame_gui` needs **pygame-ce**; `pyproject.toml` asks for plain **pygame**. Both install into the same `pygame` namespace, and the loser gets shadowed.
-
-```bash
-pip uninstall -y pygame
-pip install --force-reinstall "pygame-ce>=2.5.2"
-```
-
-::: {.punchline}
-`--force-reinstall` is [required]{.accent} — uninstalling `pygame` guts the shared namespace, and plain `pip install` just says "already satisfied".
-:::
-
----
-
-## Step 3 · What You Should [See]{.accent}
-
-```text
-Successfully installed pygame-ce-2.5.8
-```
 
 ::: {.note}
-You will also see `ERROR: mosaic 0.1.0 requires pygame, which is not installed.` — **expected and harmless.** That is `pyproject.toml` asking for the wrong package; pygame-ce satisfies it in practice.
+**Temporary development workaround.** The current package metadata installs plain `pygame`, while `pygame_gui` uses `pygame-ce`. Reinstalling `pygame-ce` last gives the GUI the implementation it expects. Pip may still report that MOSAIC declares `pygame`; the readiness check on the next slide verifies the runtime.
 :::
 
-One more undeclared dependency — the advisor's prompt builder needs it, so `Alt` does nothing without it:
+::: {.notes}
+Before the conference release, prefer fixing MOSAIC's package metadata to depend on pygame-ce and to declare tabulate. Once that is merged, reduce this slide to the first two commands.
+:::
+
+---
+
+## Step 3 · Verify the [Installation]{.accent}
+
+::: {.hook}
+Check the runtime before building the first mission.
+:::
 
 ```bash
-pip install tabulate
+python -c "import pygame; print('Pygame:', pygame.version.ver)"
+```
+
+Expected:
+
+```text
+pygame-ce 2.5.x
+Pygame: 2.5.x
+```
+
+Then verify both MOSAIC entry points:
+
+```bash
+python -c "from mosaic.sar.env import build_sar_env; from mosaic.gui.main import SAREnvGUI; print('MOSAIC ready')"
 ```
 
 ::: {.checkpoint}
-**Checkpoint** — this now prints `GUI OK`:
-
-```bash
-python -c "from mosaic.gui.main import SAREnvGUI; print('GUI OK')"
-```
-
 ```text
-pygame-ce 2.5.8 (SDL 2.32.10, Python 3.10.20)
-GUI OK
+MOSAIC ready
 ```
+
+If you see this message, the environment and GUI imports are working.
 :::
 
 ::: {.punchline}
-Both are known packaging issues — you are getting the workarounds [ahead of the PyPI release]{.accent}.
+Installation is complete. Next, we will [build and launch a mission]{.accent}.
 :::
-
----
-
-## Verify · [30 Seconds]{.accent}
-
-```bash
-python -c "
-from mosaic.sar.env import build_sar_env
-from mosaic.sar.placers import VictimPlacer
-env = build_sar_env(screen_size=600, num_rows=2, num_cols=2, room_size=8,
-                    victim_placer=VictimPlacer(num_real_victims=2))
-env.reset(seed=0)
-print('MOSAIC OK —', env.get_mission_status())
-"
-```
-
-```text
-MOSAIC OK — {'status': 'continue', 'saved_victims': 0, 'remaining_victims': 8}
-```
-
-::: {.punchline}
-Eight, not two — `num_real_victims` is [per room]{.accent}, and a 2×2 building has four.
-:::
-
-::: {.note}
-A line reading `Timeout during mission generation: connect_all failed` may appear. It is the level generator retrying — a warning, not an error.
-:::
-
----
-
-## If the [Install]{.accent} Broke
-
-| Symptom | Fix |
-|---|---|
-| `cannot import name 'DIRECTION_LTR'` | You skipped Step 3 |
-| `module 'pygame' has no attribute 'surface'` | You ran Step 3 without `--force-reinstall` |
-| `mosaic 0.1.0 requires pygame` | Harmless warning, not an error — carry on |
-| `ensurepip is not available` | `sudo apt install python3-venv`, then remake the venv |
-| `No module named 'mosaic'` | Outside the venv, or `pip install -e .` did not finish |
-
-::: {.punchline}
-Still stuck? [Raise a hand]{.accent} — we have helpers in the room and a spare laptop up front.
-:::
-
----
-
-## If the [Game]{.accent} Broke
-
-| Symptom | Fix |
-|---|---|
-| Window opens then closes instantly | You forgot `env.reset()` before launching the GUI |
-| Nothing renders on a remote box | You need a real display — use a local machine |
-| `Alt` does nothing / `Missing optional dependency 'tabulate'` | `pip install tabulate` |
-| Hangs forever, no window | `locked_room_prob=1.0` — back it off to `0.9` |
-| `'FullviewCamera' object has no attribute 'reset'` | Known bug — use `AgentFOVCamera` or `AgentConeCamera` |
-| `Timeout during mission generation` | Harmless — the generator retries |
-| `Sampling rejected: unreachable object` | Harmless — it is placing objects somewhere else |
 
 ---
 
@@ -911,6 +824,57 @@ bennett.dogbey@okstate.edu
 [Appendix]{.divider-title}
 
 [Backup slides — beyond the basics]{.divider-subtitle}
+:::
+
+---
+
+## Installation [Troubleshooting]{.accent}
+
+| Symptom | Recovery |
+|---|---|
+| `cannot import name 'DIRECTION_LTR'` | Reinstall `pygame-ce` using `--force-reinstall` |
+| `module 'pygame' has no attribute 'surface'` | Plain `pygame` removed shared files; force-reinstall `pygame-ce` |
+| `ensurepip is not available` | Install `python3-venv`, delete `.venv`, and create it again |
+| `No module named 'mosaic'` | Activate `.venv` and rerun `python -m pip install -e .` |
+| GUI opens on no display | Run locally rather than through a headless or SSH-only session |
+| `No module named 'tabulate'` | Run `python -m pip install tabulate` |
+
+::: {.punchline}
+Recover the failed checkpoint, verify `MOSAIC ready`, and then rejoin the tutorial.
+:::
+
+---
+
+## Why the Pygame [Workaround]{.accent}?
+
+::: {.hook}
+Two distributions currently install into the same Python namespace.
+:::
+
+:::: {.cards .cols-3 .fill .short}
+
+::: {.card}
+[MOSAIC metadata]{.card-title}
+
+The current `pyproject.toml` declares plain `pygame`.
+:::
+
+::: {.card}
+[GUI dependency]{.card-title}
+
+`pygame_gui` expects features supplied by `pygame-ce`.
+:::
+
+::: {.card .secondary}
+[Runtime workaround]{.card-title}
+
+Remove plain `pygame`, then force-reinstall `pygame-ce` so its files win.
+:::
+
+::::
+
+::: {.punchline}
+The release-quality fix is upstream: declare `pygame-ce` and `tabulate` directly in MOSAIC's package metadata.
 :::
 
 ---
