@@ -259,7 +259,7 @@ Follow, modify, or reject the advice.
 :::
 
 ::: {.collab-arrow .rejoin-arrow}
-↗
+↑
 :::
 
 ::::
