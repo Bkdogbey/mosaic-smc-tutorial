@@ -1136,3 +1136,454 @@ $heading-font: "Rubik", sans-serif !default;
     background: transparent !important;
     border-bottom: 3px solid $primary-color !important;
 }
+
+
+/* ── Part One redesign ─────────────────────────────────────────────────────
+   These components give each introductory slide a distinct visual grammar:
+   research needs orbit a study core, MOSAIC is a system map, collaboration is
+   an optional-advice decision loop, and research questions use an editorial
+   grid instead of repeating the generic card layout. */
+
+/* Why MOSAIC: four requirements arranged around one coordinated study. */
+.need-map {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 210px minmax(0, 1fr);
+    gap: 1.1rem;
+    align-items: stretch;
+    min-height: 370px;
+    margin-top: 0.7rem;
+}
+
+.need-column {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.need-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.7rem 0.9rem 0.7rem 1.1rem;
+    background: linear-gradient(110deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+    border-top: 1px solid rgba(255,255,255,0.13);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.need-column:first-child .need-item {
+    border-right: 4px solid rgba(236,103,44,0.72);
+    text-align: right;
+    padding-left: 0.9rem;
+    padding-right: 1.1rem;
+}
+
+.need-column:last-child .need-item {
+    border-left: 4px solid rgba(236,103,44,0.72);
+}
+
+.need-item p {
+    margin: 0;
+    font-size: 0.69em;
+    line-height: 1.42;
+    color: rgba(255,255,255,0.72);
+}
+
+.need-index {
+    display: block;
+    margin-bottom: 0.18rem;
+    color: rgba(236,103,44,0.65);
+    font-size: 0.68em;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.need-title {
+    display: block;
+    margin-bottom: 0.26rem;
+    color: #ffffff;
+    font-size: 1.05em;
+    font-weight: 700;
+}
+
+.need-core {
+    align-self: center;
+    justify-self: center;
+    width: 190px;
+    height: 190px;
+    border: 2px solid $primary-color;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, rgba(236,103,44,0.32), rgba(236,103,44,0.08) 58%, rgba(0,0,0,0.12));
+    box-shadow: 0 0 0 10px rgba(236,103,44,0.06), 0 18px 40px rgba(0,0,0,0.28);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.need-core p {
+    margin: 0;
+    line-height: 1.12;
+}
+
+.need-core-top {
+    display: block;
+    color: rgba(255,255,255,0.62);
+    font-size: 0.56em;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.need-core-title {
+    display: block;
+    color: #ffffff;
+    font-size: 1.55em;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.need-core-subtitle {
+    display: block;
+    max-width: 125px;
+    margin-top: 0.35rem;
+    color: $primary-color;
+    font-size: 0.5em;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+/* What MOSAIC is: a relationship map rather than a module tour. */
+.mosaic-map {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 125px minmax(0, 1.15fr) 125px minmax(0, 1fr);
+    grid-template-rows: 210px 78px;
+    gap: 0.45rem;
+    align-items: center;
+    margin-top: 0.6rem;
+}
+
+.mosaic-node {
+    min-height: 145px;
+    padding: 0.8rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.045);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.mosaic-node p {
+    margin: 0;
+    color: rgba(255,255,255,0.68);
+    font-size: 0.65em;
+    line-height: 1.35;
+}
+
+.mosaic-node-title {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #ffffff;
+    font-size: 1.15em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+}
+
+.mosaic-core {
+    min-height: 185px;
+    border: 2px solid $primary-color;
+    background: linear-gradient(145deg, rgba(236,103,44,0.25), rgba(236,103,44,0.07));
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.mosaic-core-title {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: $primary-color;
+    font-size: 1.5em;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.mosaic-link p {
+    margin: 0;
+    text-align: center;
+    line-height: 1.55;
+}
+
+.link-forward,
+.link-back {
+    display: block;
+    font-size: 0.55em;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.link-forward { color: $primary-color; }
+.link-back { color: rgba(255,255,255,0.58); }
+
+.mosaic-record {
+    grid-column: 2 / 5;
+    grid-row: 2;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.3rem 0.9rem;
+    border-top: 1px solid rgba(236,103,44,0.55);
+    background: linear-gradient(90deg, transparent, rgba(236,103,44,0.10), transparent);
+    text-align: center;
+}
+
+.mosaic-record p {
+    margin: 0;
+    color: rgba(255,255,255,0.67);
+    font-size: 0.59em;
+    line-height: 1.3;
+}
+
+.record-title {
+    color: $primary-color;
+    font-size: 1.02em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.overview-foundation p {
+    display: flex;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: 0.4rem 0 0;
+}
+
+.foundation-item {
+    padding: 0.23rem 0.62rem;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.72);
+    font-size: 0.55em;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* SAR scenario: keep the screenshot dominant and the conclusion compact. */
+.scenario-view {
+    margin-top: 0.25rem;
+}
+
+.scenario-goal {
+    max-width: 980px;
+    margin: 0.45rem auto 0;
+    padding: 0.38rem 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.14);
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+    text-align: center;
+}
+
+.scenario-goal p {
+    margin: 0;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.68em;
+    line-height: 1.35;
+}
+
+.scenario-label {
+    margin-right: 0.55rem;
+    color: $primary-color;
+    font-size: 0.84em;
+    font-weight: 900;
+    letter-spacing: 1.6px;
+}
+
+/* Collaboration: direct action on the top path; optional advice below it. */
+.collab-map {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1.15fr) 105px minmax(0, 1fr);
+    grid-template-rows: 145px 42px 140px;
+    gap: 0.25rem 0.35rem;
+    align-items: stretch;
+    margin-top: 0.8rem;
+}
+
+.collab-node {
+    padding: 0.65rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-top: 4px solid $primary-color;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.collab-node p {
+    margin: 0;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.63em;
+    line-height: 1.38;
+}
+
+.collab-number {
+    color: rgba(236,103,44,0.62);
+    font-size: 0.8em;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.collab-title {
+    display: block;
+    margin: 0.1rem 0 0.24rem;
+    color: #ffffff;
+    font-size: 1.18em;
+    font-weight: 800;
+}
+
+.observe-node { grid-column: 1; grid-row: 1; }
+.observe-arrow { grid-column: 2; grid-row: 1; }
+.decide-node { grid-column: 3; grid-row: 1; }
+.direct-arrow { grid-column: 4; grid-row: 1; }
+.act-node { grid-column: 5; grid-row: 1; }
+.collab-branch { grid-column: 3; grid-row: 2; }
+.ask-node { grid-column: 2 / 4; grid-row: 3; }
+.advice-arrow { grid-column: 4; grid-row: 3; }
+.evaluate-node { grid-column: 5; grid-row: 3; }
+.rejoin-arrow { grid-column: 5; grid-row: 2; }
+
+.collab-arrow,
+.collab-branch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.collab-arrow p,
+.collab-branch p {
+    margin: 0;
+    color: $primary-color;
+    font-size: 1.15em;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.arrow-label,
+.branch-label {
+    display: block;
+    color: rgba(255,255,255,0.48);
+    font-size: 0.42em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ask-node,
+.evaluate-node {
+    border-top-color: rgba(189,189,189,0.75);
+    background: rgba(117,117,117,0.10);
+}
+
+.ask-node .collab-number,
+.evaluate-node .collab-number {
+    color: rgba(189,189,189,0.8);
+}
+
+.cycle-band {
+    margin-top: 0.45rem;
+    padding: 0.38rem 0.9rem;
+    background: rgba(236,103,44,0.09);
+    border-left: 4px solid $primary-color;
+    border-radius: 5px;
+}
+
+.cycle-band p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: 0;
+    color: rgba(255,255,255,0.72);
+    font-size: 0.62em;
+    line-height: 1.35;
+}
+
+.cycle-title {
+    color: $primary-color;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.cycle-record {
+    margin-left: 0.35rem;
+    padding-left: 0.7rem;
+    border-left: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9em;
+    font-weight: 700;
+}
+
+/* Research questions: editorial prompts rather than another generic card grid. */
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.13);
+    border-left: 1px solid rgba(255,255,255,0.13);
+}
+
+.research-question {
+    min-height: 145px;
+    padding: 0.75rem 1rem;
+    border-right: 1px solid rgba(255,255,255,0.13);
+    border-bottom: 1px solid rgba(255,255,255,0.13);
+    background: linear-gradient(135deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.research-question p {
+    margin: 0;
+    color: rgba(255,255,255,0.76);
+    font-size: 0.7em;
+    line-height: 1.42;
+}
+
+.research-topic {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: $primary-color;
+    font-size: 1.05em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.research-extension {
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.research-extension p {
+    margin: 0;
+    color: rgba(255,255,255,0.62);
+    font-size: 0.62em;
+    line-height: 1.35;
+}
+
+.research-extension-label {
+    margin-right: 0.45rem;
+    color: #ffffff;
+    font-weight: 800;
+}
