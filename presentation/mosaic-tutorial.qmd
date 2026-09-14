@@ -160,7 +160,7 @@ A modular software testbed for controlled, interactive human–AI collaboration 
 :::
 
 ::: {.overview-diagram}
-\`\`\`{mermaid}
+```{mermaid}
 flowchart LR
     H["Human participant"] <-->|"actions and observations"| M["MOSAIC task and interface"]
     M -->|"task observation"| A["AI advisor"]
@@ -173,7 +173,7 @@ flowchart LR
     class M primary
     class H,A standard
     class D record
-\`\`\`
+```
 :::
 
 ::: {.overview-foundation}
@@ -226,7 +226,7 @@ The participant can act independently or ask for advice at any decision point.
 :::
 
 ::: {.collaboration-diagram}
-\`\`\`{mermaid}
+```{mermaid}
 flowchart TB
     O["Observe the task"] --> C{"Need advice?"}
     C -->|"No — act independently"| A["Choose the final action"]
@@ -241,7 +241,7 @@ flowchart TB
     class O,A action
     class C choice
     class Q,E ai
-\`\`\`
+```
 :::
 
 ::: {.cycle-band}
