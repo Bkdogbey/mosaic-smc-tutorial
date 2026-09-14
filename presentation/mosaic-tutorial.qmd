@@ -22,10 +22,55 @@ format:
     navigation-mode: linear
     controls: true
     progress: true
+mermaid:
+  theme: dark
 title-slide-attributes:
   data-background-image: assets/background.jpg
   data-background-opacity: "0.3"
   data-background-color: "#252525"
+---
+
+## Meet the [iHuman Lab]{.accent}
+
+::: {.hook}
+We design and study intelligent systems around the humans who use them.
+:::
+
+::: {.team}
+
+::: {.member}
+![](assets/team/hemanth.jpg)
+
+[Hemanth Manjunatha]{.member-name}
+[Principal Investigator]{.member-role}
+
+Human-centered autonomy, brain–machine interfaces, and human–robot interaction.
+:::
+
+::: {.member}
+![](assets/team/elahe.jpg)
+
+[Elahe Oveisi]{.member-name}
+[PhD Student · MOSAIC Lead]{.member-role}
+
+Human factors in autonomous systems, aviation safety, and the development of MOSAIC.
+:::
+
+::: {.member}
+![](assets/team/bennett.jpg)
+
+[Bennett Kwaku Dogbey]{.member-name}
+[PhD Student · Tutorial Presenter]{.member-role}
+
+Safe autonomy, formal methods, and uncertainty-aware decision-making.
+:::
+
+:::
+
+::: {.member-link}
+iHuman Lab · Oklahoma State University · [Meet the full team](https://ihuman-lab.github.io/lab-website/)
+:::
+
 ---
 
 <!-- ============ PART 1 ============ -->
@@ -114,53 +159,29 @@ MOSAIC brings these requirements together in [one research platform]{.accent}.
 A modular software testbed for controlled, interactive human–AI collaboration research.
 :::
 
-::::: {.mosaic-map}
+::: {.overview-diagram}
+\`\`\`{mermaid}
+flowchart LR
+    H["Human participant"] <-->|"actions and observations"| M["MOSAIC task and interface"]
+    M -->|"task observation"| A["AI advisor"]
+    A -->|"advice"| M
+    M -->|"actions, advice, and outcomes"| D["Experiment record"]
 
-::: {.mosaic-node .participant-node}
-[Human]{.mosaic-node-title}
-
-Observes, decides, and acts
+    classDef primary fill:#3b2c25,stroke:#EC672C,color:#ffffff,stroke-width:3px
+    classDef standard fill:#303030,stroke:#8a8a8a,color:#ffffff,stroke-width:2px
+    classDef record fill:#292929,stroke:#757575,color:#ffffff,stroke-width:2px
+    class M primary
+    class H,A standard
+    class D record
+\`\`\`
 :::
-
-::: {.mosaic-link .participant-link}
-[actions →]{.link-forward}
-
-[← observations]{.link-back}
-:::
-
-::: {.mosaic-node .mosaic-core}
-[MOSAIC]{.mosaic-core-title}
-
-Task environment  
-+ human interface
-:::
-
-::: {.mosaic-link .advisor-link}
-[task state →]{.link-forward}
-
-[← advice]{.link-back}
-:::
-
-::: {.mosaic-node .advisor-node}
-[AI Advisor]{.mosaic-node-title}
-
-Responds when requested
-:::
-
-::: {.mosaic-record}
-[Experiment record]{.record-title}
-
-Actions · advice · outcomes · optional sensor streams
-:::
-
-:::::
 
 ::: {.overview-foundation}
-[Gymnasium + MiniGrid]{.foundation-item} [Human-only, human–AI, or programmatic]{.foundation-item} [Components configured independently]{.foundation-item}
+[Gymnasium + MiniGrid]{.foundation-item} [Human-only, human–AI, or programmatic]{.foundation-item} [Optional sensor streams can share the experiment time base]{.foundation-item}
 :::
 
 ::: {.punchline}
-Many pieces, [one experimental system]{.accent}.
+MOSAIC connects the task, the participant, the advisor, and the evidence needed to study their interaction.
 :::
 
 ---
@@ -200,72 +221,31 @@ Where should I search? Whom should I rescue? [When should I rely on AI advice?]{
 
 ## How Human–AI [Collaboration]{.accent} Happens
 
-:::: {.collab-map}
-
-::: {.collab-node .observe-node}
-[1]{.collab-number}
-
-[Observe]{.collab-title}
-
-Read the task state.
+::: {.hook}
+The participant can act independently or ask for advice at any decision point.
 :::
 
-::: {.collab-arrow .observe-arrow}
-→
+::: {.collaboration-diagram}
+\`\`\`{mermaid}
+flowchart TB
+    O["Observe the task"] --> C{"Need advice?"}
+    C -->|"No — act independently"| A["Choose the final action"]
+    C -->|"Yes — request advice"| Q["Ask the AI advisor"]
+    Q --> E["Evaluate the advice"]
+    E --> A
+    A -->|"environment updates"| O
+
+    classDef action fill:#3b2c25,stroke:#EC672C,color:#ffffff,stroke-width:3px
+    classDef choice fill:#252525,stroke:#EC672C,color:#ffffff,stroke-width:3px
+    classDef ai fill:#303030,stroke:#9a9a9a,color:#ffffff,stroke-width:2px
+    class O,A action
+    class C choice
+    class Q,E ai
+\`\`\`
 :::
-
-::: {.collab-node .decide-node}
-[2]{.collab-number}
-
-[Decide]{.collab-title}
-
-Act independently or request advice.
-:::
-
-::: {.collab-arrow .direct-arrow}
-[act directly]{.arrow-label} →
-:::
-
-::: {.collab-node .act-node}
-[5]{.collab-number}
-
-[Act]{.collab-title}
-
-Choose the final action.
-:::
-
-::: {.collab-branch}
-[request advice]{.branch-label} ↓
-:::
-
-::: {.collab-node .ask-node}
-[3]{.collab-number}
-
-[Ask AI]{.collab-title}
-
-Send the available task observation.
-:::
-
-::: {.collab-arrow .advice-arrow}
-→
-:::
-
-::: {.collab-node .evaluate-node}
-[4]{.collab-number}
-
-[Evaluate]{.collab-title}
-
-Follow, modify, or reject the advice.
-:::
-
-::: {.collab-arrow .rejoin-arrow}
-↑
-:::
-
-::::
 
 ::: {.cycle-band}
-[Environment updates]{.cycle-title} The result changes the task, and the participant observes again. [Recorded throughout]{.cycle-record}
+[Recorded throughout]{.cycle-title} Task state · advice request · AI response · participant action · outcome
 :::
 
 ::: {.punchline}
@@ -931,45 +911,6 @@ bennett.dogbey@okstate.edu
 [Appendix]{.divider-title}
 
 [Backup slides — beyond the basics]{.divider-subtitle}
-:::
-
----
-
-## Who [We Are]{.accent}
-
-::: {.team}
-
-::: {.member}
-![](assets/team/hemanth.jpg)
-
-[Hemanth Manjunatha]{.member-name}
-[Principal Investigator]{.member-role}
-
-Brain–machine interfaces and human–robot interaction — *what is happening in the operator's head.*
-:::
-
-::: {.member}
-![](assets/team/elahe.jpg)
-
-[Elahe Oveisi]{.member-name}
-[PhD Student · MOSAIC author]{.member-role}
-
-Human factors in autonomous systems and aviation safety — *when people take the advice.*
-:::
-
-::: {.member}
-![](assets/team/bennett.jpg)
-
-[Bennett Kwaku Dogbey]{.member-name}
-[PhD Student · Presenting]{.member-role}
-
-Safe autonomy and formal verification — *when they should.*
-:::
-
-:::
-
-::: {.member-link}
-Meet the rest of the lab: [ihuman-lab.github.io/lab-website](https://ihuman-lab.github.io/lab-website/)
 :::
 
 ---
