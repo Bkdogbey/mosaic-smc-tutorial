@@ -1,119 +1,57 @@
-# MOSAIC Tutorial — IEEE SMC 2026
+# MOSAIC SMC tutorial
 
-A 90-minute hands-on tutorial introducing MOSAIC to HCI and human-factors
-researchers, built on the iHuman Lab Quarto reveal.js template.
+A 39-slide tutorial in the existing iHuman Lab design, with three major parts:
 
-The deck is three parts:
+1. Overview of the search-and-rescue task, capabilities and components.
+2. OS-specific installation through a verified environment and first game window.
+3. Game features, rescue practice, map and camera changes, offline advice and research setup.
 
-1. **What MOSAIC is** — a brief overview, the pieces, and why it exists (4 slides)
-2. **Getting it running** — install, verified step by step, with the traps (8 slides)
-3. **Playing with it** — the rules, the controls, a mission, and the knobs (12 slides)
+There are 36 slides in the main sequence and 3 reference appendix slides. The original lab theme, logo, footer, cover and 1280×720 slide dimensions remain.
 
-Everything else — the team, the design patterns, the observation schema, custom
-advisors, the experiment protocol, LSL, and the roadmap — lives in an appendix
-after the closing slide, for Q&A.
+## View
 
-## Contents
+From presentation:
 
-```
-presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (41 slides: 29 main + appendix)
-├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
-│                         #   architecture diagram, layer bands, you-are-here strip,
-│                         #   .checkpoint callouts, dark-theme panel-tabset)
-├── SETUP.md              # send this to attendees BEFORE the session
-├── RUNSHEET.md           # facilitator timings, cut list, expected failures
-├── assets/               # figures used in the deck
-└── labs/                 # the scripts attendees run
-    ├── play.py           # play a mission; has an EDIT ME block of knobs
-    ├── tweak.py          # all four injection points in one file
-    └── advisor.py        # an AI advisor with a reliability dial (appendix material)
-```
+~~~bash
+python -m http.server 8000
+~~~
 
-## Render
+Open http://localhost:8000/mosaic-tutorial.html in a browser. Keep the HTML, assets and mosaic-tutorial_files together. Quarto is not required to view the committed deck.
 
-```bash
-quarto render mosaic-tutorial.qmd     # build once
-quarto preview mosaic-tutorial.qmd    # live-reload while editing
-```
+F toggles fullscreen, S opens speaker notes and Esc shows the overview. The deck includes linked sections, OS tabs, code-copy buttons and restrained reveals. The theme may request the original online font; a sans-serif fallback remains available.
 
-Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
+## Files
 
-## Assets
-
-| File | Source |
+| File | Purpose |
 | --- | --- |
-| `gui-screenshot.png`, `game-view.png` | MOSAIC docs |
-| `cam-full.png`, `cam-room.png`, `cam-cone.png` | Generated from the camera strategies at `room_size=8`, 3×3 rooms |
-| `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
-| `logo.png`, `background.jpg` | iHuman Lab template |
-| `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
+| mosaic-tutorial.html | Ready-to-open interactive deck |
+| mosaic-tutorial.qmd | Editable Quarto source |
+| theme.scss | Original lab theme |
+| tutorial.css, tutorial.js | Tutorial layout and accessible OS tabs |
+| interaction.html | Script include used by Quarto |
+| SETUP.md, SETUP.html | Attendee installation, troubleshooting and exercises |
+| RUNSHEET.md | 90-minute facilitation guide |
+| REFERENCES.md, REFERENCES.html | Source mapping, image credits and behavior notes |
+| labs/play.py | Small game with editable settings |
+| labs/tweak.py | Camera and rescue-component example |
+| labs/advisor.py | Offline custom advisor |
+| labs/check_install.py | Environment, rendering and advisor check |
+| labs/record.py | Three-action JSONL trace |
 
-`cam-full.png` is currently **unused** by the deck: the camera slide now shows
-only the strategies that work, and `FullviewCamera` cannot be passed as
-`camera_strategy` at all (see issue 4 below). Keep the file — it goes back in
-when that bug is fixed.
+## Edit and render
 
-## Before presenting
+Edit mosaic-tutorial.qmd. It uses native HTML for tables, code-copy controls and OS tabs within Quarto slides. This keeps the committed HTML content and source aligned.
 
-1. Send `SETUP.md` to registrants at least a week out.
-2. Re-verify every command in Part 2 against the current `main`. The whole
-   pygame-ce section should be **deleted** once the PyPI release fixes the
-   dependency.
-3. Read `RUNSHEET.md`.
+~~~bash
+quarto render mosaic-tutorial.qmd
+~~~
 
-## Repo issues this tutorial exposed
+The interactive deck was reconstructed directly from the existing HTML shell after the earlier workspace became unavailable. This revision received structural checks; a fresh browser and projector rehearsal is still required. Earlier exercise-behavior checks used Linux/Python 3.12.14. Windows and macOS instructions need platform rehearsal.
 
-Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
-3.10.20. The deck currently teaches around all of these.
+## Software baseline
 
-1. **`pygame` vs `pygame-ce`.** `pyproject.toml` declares `pygame`; `pygame_gui`
-   requires `pygame-ce`. `pip install -e .` installs **both**, and `pygame` lands
-   last, so the GUI dies with
-   `ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'`.
-   Fix: depend on `pygame-ce>=2.5.2`.
-2. **The obvious workaround for issue 1 does not work.**
-   `pip uninstall -y pygame && pip install "pygame-ce>=2.5.2"` leaves pygame-ce
-   *broken* — uninstalling `pygame` removes shared files from the namespace, and
-   pip then reports "Requirement already satisfied" and repairs nothing. The
-   symptom is `AttributeError: module 'pygame' has no attribute 'surface'`.
-   `--force-reinstall` is required. Worth putting in the README until it is fixed.
-3. **`env.reset(seed=N)` does not reproduce a world.** The placers use the global
-   `random` module (`src/mosaic/sar/placers.py:1,42,102,103,130,131,153`) rather
-   than the environment's seeded `np_random`. Only the room-and-door skeleton is
-   seeded; victims, lava and keys are not. Calling `random.seed(N)` before
-   `env.reset(seed=N)` is a working workaround, but reproducibility is a headline
-   claim and should not need one. Fix: thread `self.np_random` through `Placer`.
-4. **`FullviewCamera` and `AgentCenteredCamera` have no `reset()`.**
-   `PickupVictimEnv.reset()` calls `self.camera.reset()` unconditionally, so
-   passing either as `camera_strategy` raises `AttributeError`. Fix: add a no-op
-   `reset()` to `CameraStrategy`.
-5. **`locked_room_prob=1.0` hangs forever.** `LockedRoomPlacer` computes
-   `n_locked = max(1, int(num_cols * num_rows * prob))`, so at `1.0` every room is
-   locked, no solvable layout exists, and the level generator retries without a
-   cap — the process never returns and no window opens. Reproduced on 2×2 at
-   seeds 1, 2 and 3; `0.9` is fine. Fix: cap `n_locked` below the room count, or
-   bound the retry loop and raise.
-6. **`tabulate` is required but undeclared.** `build_prompt()` →
-   `_build_table()` calls `DataFrame.to_markdown()`, which needs `tabulate`. It
-   appears in neither `pyproject.toml` nor `requirements.txt`, so on a clean
-   install **both** `sparse` and `detailed` prompts raise
-   `ImportError: Missing optional dependency 'tabulate'` — which means the `Alt`
-   key (ask the advisor) does nothing at all. Fix: add `tabulate` to dependencies.
-7. **`experiment_main.py` does not exist.** `README.md`, `REFERENCE.md`,
-   `docs/getting-started.md`, `docs/architecture.md` and `docs/experiment.md` all
-   point at `python -m experiment.experiment_main`; the file is
-   `src/experiment/experiment.py`.
-8. **README quick-start does not run.** It calls
-   `SAREnvGUI(env, fullscreen=False)`, but the constructor takes
-   `config: dict` — the working form is `SAREnvGUI(env, config={"fullscreen": False})`.
-   The clone URL is also still `github.com/yourusername/mosaic.git`.
-9. **`docs/game-concept.md` documents keys that are not mapped.** It lists `W` for
-   forward; `key_to_action` in `src/mosaic/gui/user.py` has no `W`. It also lists
-   the decoy penalty as `-0.5`; `RescueRewards.fake_victim` defaults to `-1.0`.
-10. **`requires-python = ">=3.8"`** is optimistic given the current dependency set;
-   the docs say 3.9+ and we only test 3.10.
-11. **The `cam_*` observation fields are camera-dependent.** `cam_top_x`,
-   `cam_top_y`, `cam_view_w` and `cam_view_h` are only written when the camera has
-   `_update_position` (i.e. `EdgeFollowCamera`). Analyses written against the
-   default camera break silently under `AgentConeCamera`.
+MOSAIC commit a409222534dcd234dd2925a5adab8da9db17e6b2. Follow SETUP.html for the pygame/pygame-ce repair. The main exercises need neither ixp nor a model API key.
+
+Run labs from presentation with the MOSAIC venv selected. Clone the software and tutorial into sibling folders as shown in the handout. Example recordings are ignored by Git.
+
+Sources include the MOSAIC code, REFERENCE.md, docs/ and gh-pages. Existing repository screenshots are reused; no newly captured assets are claimed in this reconstruction.

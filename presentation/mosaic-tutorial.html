@@ -191,6 +191,7 @@
       margin-right: 0; 
     }
   </style>
+<link rel="stylesheet" href="tutorial.css">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -213,948 +214,222 @@ Bennett Kwaku Dogbey
 
   <p class="date">October 4, 2026</p>
 </section>
-<section id="start-your-install-now" class="slide level2">
-<h2>Start Your <span class="accent">Install</span> Now</h2>
-<div class="hook">
-<p>Do this first — it runs in the background while we talk.</p>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
-<span id="cb1-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
-<span id="cb1-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv <span class="kw">&amp;&amp;</span> <span class="bu">source</span> .venv/bin/activate   <span class="co"># Windows: .venv\Scripts\activate</span></span>
-<span id="cb1-4"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
-<span id="cb1-5"><a href=""></a><span class="ex">pip</span> uninstall <span class="at">-y</span> pygame</span>
-<span id="cb1-6"><a href=""></a><span class="ex">pip</span> install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
-<span id="cb1-7"><a href=""></a><span class="ex">pip</span> install tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="punchline">
-<p>Those last two lines are <span class="accent">not optional</span> — Part 2 explains why.</p>
-</div>
-<p>Three parts today: <span class="accent">what it is</span> · <span class="accent">getting it running</span> · <span class="accent">playing with it</span>.</p>
+<section id="route" class="slide level2" data-background-color="#252525">
+<h2>Today's <span class="accent">tutorial</span></h2>
+<ol><li><a href="#/overview"><strong>Overview</strong></a>: the task, capabilities and major parts.</li><li><a href="#/installation"><strong>Installation</strong></a>: your laptop through the first game window.</li><li><a href="#/play-and-adapt"><strong>Play and adapt</strong></a>: learn the features and change a research condition.</li></ol><div class="checkpoint"><p>By the end, you will have a running game and an example you can modify.</p></div><p><a href="SETUP.html">Setup handout</a> · <a href="#/install-help">Installation help</a></p>
+<aside class="notes">Suggested duration: 90 minutes. Ask who has Python experience and who needs installation help. Pair attendees if necessary. F toggles fullscreen, S opens notes, Esc shows the overview. See RUNSHEET.md.</aside>
 </section>
-<section class="slide level2">
-
-<!-- ============ PART 1 ============ -->
-<div class="divider">
-<p><span class="divider-title">Part One</span></p>
-<p><span class="divider-subtitle">What MOSAIC is</span></p>
-<div class="you-are-here">
-<p><span class="stop here">What it is</span> <span class="stop">Install</span> <span class="stop">Use it</span></p>
-</div>
-</div>
+<section id="overview" class="slide level2" data-background-color="#252525">
+<h2>MOSAIC and the search-and-rescue task</h2>
+<div class="divider"><p class="divider-title">Part 1</p><p class="divider-subtitle">MOSAIC and the search-and-rescue task</p></div>
+<aside class="notes"></aside>
 </section>
-<section id="what-is-mosaic" class="slide level2">
+<section id="what-is-mosaic" class="slide level2" data-background-color="#252525">
 <h2>What is <span class="accent">MOSAIC</span>?</h2>
-<div class="columns">
-<div class="column" style="width:55%;">
-<div class="hook">
-<p>A modular testbed for human–AI collaboration.</p>
-</div>
-<p>A grid-based <strong>search-and-rescue</strong> simulation, built on <a href="https://github.com/Farama-Foundation/Minigrid">MiniGrid</a>, where a human operator, an AI advisor, or both together must rescue survivors from a burning building before time runs out.</p>
-<p>Named for the art of building one coherent picture from many small tiles — which is both what the platform does and what the world literally looks like.</p>
-<div class="punchline">
-<p>Many pieces, <span class="accent">one picture</span>.</p>
-</div>
-</div><div class="column" style="width:45%;">
-<p><img data-src="assets/game-view.png"></p>
-</div></div>
+<div class="columns"><div class="column" style="width:55%"><p><strong>A Modular System for Adaptive Human–AI Collaboration</strong></p><p>A research platform with a configurable, grid-based search-and-rescue task.</p><p>Participants search rooms, rescue victims and navigate hazards. An optional advisor provides text suggestions.</p><p>Built on <strong>MiniGrid</strong>, with a <strong>Gymnasium-style environment API</strong>.</p></div><div class="column" style="width:45%"><img src="assets/game-view.png" alt="MOSAIC search-and-rescue game view" class="tutorial-image"></div></div>
+<aside class="notes">SAR is the implemented testbed. Other domains are an extension direction. The advisor suggests actions; it does not automatically control this tutorial player. Sources: README.md, sar/env.py, gui/user.py. Image: existing MOSAIC documentation asset.</aside>
 </section>
-<section id="the-pieces" class="slide level2">
-<h2>The <span class="accent">Pieces</span></h2>
-<div class="arch">
-<div class="arch-row">
-<div class="arch-block">
-<p><span class="arch-title">Human Operator</span></p>
-<p>Keyboard in, eyes on the screen — seven actions, one key each</p>
-</div>
-<div class="arch-block">
-<p><span class="arch-title">AI Advisor</span></p>
-<p>Anything with a <code>query()</code> method — GPT, Gemini, a scripted rule, or the built-in stub</p>
-</div>
-</div>
-<div class="arch-link">
-<p>▼ key presses · advice requests · ▲ what they see · what it says</p>
-</div>
-<div class="arch-row">
-<div class="arch-block">
-<p><span class="arch-title">Interface</span></p>
-<p>Game view · mission status panel · chat panel · peripheral feedback at the screen edge</p>
-</div>
-</div>
-<div class="arch-link">
-<p>▼ action · ▲ observation and reward</p>
-</div>
-<div class="arch-row">
-<div class="arch-block">
-<p><span class="arch-title">Environment</span></p>
-<p>The building, the survivors, the hazards, the scoring — every one of them a constructor argument</p>
-</div>
-</div>
-<div class="arch-row">
-<div class="arch-block secondary">
-<p><span class="arch-title">Sensing &amp; Logging</span></p>
-<p>One record per frame, eye tracking on the same clock</p>
-</div>
-<div class="arch-block secondary">
-<p><span class="arch-title">Analytics</span></p>
-<p>Frame-exact replay · areas of interest · workload surveys</p>
-</div>
-</div>
-</div>
+<section id="participant-task" class="slide level2" data-background-color="#252525">
+<h2>The participant's <span class="accent">task</span></h2>
+<ul><li class="fragment"><strong>Search</strong> connected rooms and identify real victims.</li><li class="fragment"><strong>Rescue</strong> a victim by facing it and using pickup.</li><li class="fragment"><strong>Find keys</strong> for locked doors and avoid lava.</li><li class="fragment"><strong>Request advice</strong> when a client is connected, then decide what to do.</li></ul><div class="checkpoint"><p>Discussion: what could you measure about human decision-making here?</p></div>
+<aside class="notes">Invite examples such as search efficiency, decision errors and advice uptake. These are candidate measures, not validated measures of trust by themselves. Health does not automatically deplete in the basic lab. Sources: sar/actions.py, sar/placers.py, llm/client.py.</aside>
 </section>
-<section id="why-it-exists" class="slide level2">
-<h2>Why It <span class="accent">Exists</span></h2>
-<div class="cards cols-2 fill short">
-<div class="card">
-<p><span class="card-title">Hard Enough</span></p>
-<p>The participant must genuinely <em>need</em> help. A task you can solve alone measures nothing about teaming.</p>
-<div class="card-meta">
-<p>Time budget · decaying survivors · lava · locked doors · decoys</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Instrumented</span></p>
-<p>Every action, every glance, every piece of advice — timestamped and on one clock.</p>
-<div class="card-meta">
-<p>One record per frame, over Lab Streaming Layer</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Reproducible</span></p>
-<p>Another lab should be able to run your exact condition, not their approximation of it.</p>
-<div class="card-meta">
-<p>Seeded worlds · conditions in YAML · replay from the log</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Reconfigurable</span></p>
-<p>Your manipulation should be a parameter, not a fork of the codebase.</p>
-<div class="card-meta">
-<p>World · view · scoring · logging · advisor — all injected</p>
-</div>
-</div>
-</div>
-<div class="punchline">
-<p>Most testbeds get two of these. MOSAIC is our attempt at <span class="accent">all four</span>.</p>
-</div>
+<section id="usage-paths" class="slide level2" data-background-color="#252525">
+<h2>Ways to <span class="accent">use MOSAIC</span></h2>
+<table><thead><tr><th>Use</th><th>What runs</th><th>What you need</th></tr></thead><tbody><tr><td>Human play</td><td>Keyboard-controlled game and panels</td><td>Base package and a desktop</td></tr><tr><td>Assisted play</td><td>The game with text advice</td><td>An LLMClient; offline demo provided</td></tr><tr><td>Scripted agents</td><td>reset() and step(action) in Python</td><td>Base package; GUI optional</td></tr><tr><td>Research sessions</td><td>Trials, sensing and surveys</td><td>Additional study framework and configuration</td></tr></tbody></table><div class="note"><p>These are usage paths, not four buttons in a game menu.</p></div>
+<aside class="notes">The core tutorial uses human play, assisted play and a scripted trace. experiment/ depends on ixp, Ray and optional device/provider packages. Sources: pyproject.toml, experiment/experiment.py, docs/architecture.md.</aside>
 </section>
-<section class="slide level2">
-
-<!-- ============ PART 2 ============ -->
-<div class="divider">
-<p><span class="divider-title">Part Two</span></p>
-<p><span class="divider-subtitle">Getting it running</span></p>
-<div class="you-are-here">
-<p><span class="stop">What it is</span> <span class="stop here">Install</span> <span class="stop">Use it</span></p>
-</div>
-</div>
+<section id="major-parts" class="slide level2" data-background-color="#252525">
+<h2>The major <span class="accent">parts</span></h2>
+<table><thead><tr><th>Part</th><th>Its job</th><th>A possible change</th></tr></thead><tbody><tr><td>Environment</td><td>Rooms, objects, actions and rewards</td><td>Map or hazard density</td></tr><tr><td>Interface</td><td>Game view, status, controls and chat</td><td>Camera or feedback</td></tr><tr><td>Advisor</td><td>Prompts, replies and text suggestions</td><td>Advice provider</td></tr><tr><td>Study layer</td><td>Trials, recordings and sensors</td><td>Conditions and measurements</td></tr></tbody></table><p><strong>mosaic/</strong> provides reusable components. <strong>experiment/</strong> contains the lab’s study-specific wiring.</p>
+<aside class="notes">Relate each component to something the attendee can change. Constructor injection is common; env_cls also supports environment subclasses. Sources: REFERENCE.md, docs/architecture.md, sar/env.py, gui/main.py.</aside>
 </section>
-<section id="before-you-start" class="slide level2">
-<h2>Before You <span class="accent">Start</span></h2>
-<div class="cards cols-2 fill short">
-<div class="card">
-<p><span class="card-title">Python 3.10+</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">python3</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>We test on 3.10. <code>pyproject.toml</code> still claims 3.8 — do not believe it.</p>
-<div class="card-meta">
-<p>Check this now — it is the one thing you cannot fix in the room</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Git</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Any recent version. You only need it to clone once.</p>
-<div class="card-meta">
-<p>No GitHub account required</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">A Real Display</span></p>
-<p>The game opens a window. SSH sessions, headless servers and Colab <strong>will not work</strong> for the GUI.</p>
-<div class="card-meta">
-<p>The environment itself runs headless fine — just not the interface</p>
-</div>
-</div>
-<div class="card secondary">
-<p><span class="card-title">No API Key</span></p>
-<p>Everything today works without one. The advisor falls back to a built-in stub.</p>
-<div class="card-meta">
-<p>Bring a key only if you want to see a real LLM answer</p>
-</div>
-</div>
-</div>
+<section id="research-questions" class="slide level2" data-background-color="#252525">
+<h2>Research questions and <span class="accent">features</span></h2>
+<table><thead><tr><th>Example question</th><th>Feature to vary</th><th>Candidate measurement</th></tr></thead><tbody><tr><td>Does visibility change search?</td><td>Room versus forward-cone camera</td><td>Actions and coverage</td></tr><tr><td>How do obstacles affect route choice?</td><td>Lava and locked rooms</td><td>Route length and failures</td></tr><tr><td>Does advice change decisions?</td><td>Advisor and request timing</td><td>Requests and subsequent actions</td></tr><tr><td>How do decoys affect rescue decisions?</td><td>Custom victim placement and penalties</td><td>False pickups and rescues</td></tr></tbody></table><div class="note"><p>These are study ideas. Pilot the task and define your measures before collecting participant data.</p></div>
+<aside class="notes">Default VictimPlacer creates real victims only. Decoys need a custom placer. Define and independently check advice correctness. Sources: sar/placers.py, sar/objects.py, experiment/placers.py.</aside>
 </section>
-<section id="step-1-clone-and-isolate" class="slide level2">
-<h2>Step 1 · <span class="accent">Clone</span> and Isolate</h2>
-<div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">macOS / Linux</a></li><li><a href="#tabset-1-2">Windows PowerShell</a></li><li><a href="#tabset-1-3">Windows CMD</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
-<span id="cb4-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
-<span id="cb4-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
-<span id="cb4-4"><a href=""></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="tabset-1-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href=""></a>git clone https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>iHuman-Lab<span class="op">/</span>mosaic<span class="op">.</span><span class="fu">git</span></span>
-<span id="cb5-2"><a href=""></a><span class="fu">cd</span> mosaic</span>
-<span id="cb5-3"><a href=""></a>python <span class="op">-</span>m venv <span class="op">.</span><span class="fu">venv</span></span>
-<span id="cb5-4"><a href=""></a><span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="tabset-1-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href=""></a>git clone https://github.com/iHuman-Lab/mosaic.git</span>
-<span id="cb6-2"><a href=""></a>cd mosaic</span>
-<span id="cb6-3"><a href=""></a>python -m venv .venv</span>
-<span id="cb6-4"><a href=""></a>.venv\Scripts\activate.bat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="checkpoint">
-<p><strong>Checkpoint</strong> — your prompt now starts with <code>(.venv)</code>. If it does not, the next step installs into the wrong Python.</p>
-</div>
-<div class="note">
-<p>Ubuntu users: if you see <code>ensurepip is not available</code>, run <code>sudo apt install python3-venv</code> and repeat.</p>
-</div>
+<section id="installation" class="slide level2" data-background-color="#252525">
+<h2>Installation and the first game window</h2>
+<div class="divider"><p class="divider-title">Part 2</p><p class="divider-subtitle">Installation and the first game window</p></div>
+<aside class="notes"></aside>
 </section>
-<section id="step-2-install-the-package" class="slide level2">
-<h2>Step 2 · <span class="accent">Install</span> the Package</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href=""></a>Successfully installed ... minigrid-3.1.0 mosaic-0.1.0 numpy-2.2.6</span>
-<span id="cb8-2"><a href=""></a>  pygame-2.6.1 pygame-ce-2.5.8 pygame_gui-0.6.14 ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="checkpoint">
-<p><strong>Checkpoint</strong> — look closely at that list. It installed <strong>both</strong> <code>pygame</code> and <code>pygame-ce</code>, and <code>pygame</code> landed last.</p>
-</div>
-<div class="punchline">
-<p>That is the bug. The next slide is the <span class="accent">whole reason</span> this section exists.</p>
-</div>
+<section id="before-installation" class="slide level2" data-background-color="#252525">
+<h2>Before <span class="accent">installation</span></h2>
+<ul><li>A Windows, macOS or Linux laptop with a desktop display.</li><li><strong>Python 3.12</strong> and <strong>Git</strong> for this tutorial.</li><li>A terminal and text editor, such as VS Code.</li><li>Internet access for the initial downloads.</li></ul><p><strong>No API key, GPU or eye tracker is needed for the exercises.</strong></p><div class="checkpoint"><p>Open the <a href="SETUP.html">setup handout</a>. It collects the commands and fixes in one place.</p></div>
+<aside class="notes">Previous verification used Linux with Python 3.12.14. Windows/macOS instructions require rehearsal on those systems. The base install is separate from the optional experiment infrastructure. Sources: pyproject.toml and SETUP.md.</aside>
 </section>
-<section id="step-3-the-one-trap" class="slide level2">
-<h2>Step 3 · The <span class="accent">One Trap</span></h2>
-<p>Try to launch the interface now and you get this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href=""></a>  File ".../pygame_gui/core/interfaces/font_dictionary_interface.py", line 3</span>
-<span id="cb9-2"><a href=""></a>    from pygame import DIRECTION_LTR</span>
-<span id="cb9-3"><a href=""></a>ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>pygame_gui</code> needs <strong>pygame-ce</strong>; <code>pyproject.toml</code> asks for plain <strong>pygame</strong>. Both install into the same <code>pygame</code> namespace, and the loser gets shadowed.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="ex">pip</span> uninstall <span class="at">-y</span> pygame</span>
-<span id="cb10-2"><a href=""></a><span class="ex">pip</span> install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="punchline">
-<p><code>--force-reinstall</code> is <span class="accent">required</span> — uninstalling <code>pygame</code> guts the shared namespace, and plain <code>pip install</code> just says “already satisfied”.</p>
-</div>
+<section id="prerequisites" class="slide level2" data-background-color="#252525">
+<h2>Step 1: Python and <span class="accent">Git</span></h2>
+<div class="tutorial-tabs"><div role="tablist" aria-label="Operating system"><button type="button" role="tab" id="os-1-0" aria-selected="true" tabindex="0" aria-controls="os-panel-1-0">Windows</button><button type="button" role="tab" id="os-1-1" aria-selected="false" tabindex="-1" aria-controls="os-panel-1-1">macOS</button><button type="button" role="tab" id="os-1-2" aria-selected="false" tabindex="-1" aria-controls="os-panel-1-2">Ubuntu 24.04</button></div><div role="tabpanel" id="os-panel-1-0" aria-labelledby="os-1-0"><p>Install <a href="https://www.python.org/downloads/release/python-31210/">Python 3.12</a> and <a href="https://git-scm.com/downloads/win">Git for Windows</a>. Include the Python launcher, then open a new PowerShell window.</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>py -3.12 --version
+git --version</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div></div><div role="tabpanel" id="os-panel-1-1" aria-labelledby="os-1-1" hidden><p>Install <a href="https://www.python.org/downloads/release/python-31210/">Python 3.12</a> and follow the <a href="https://git-scm.com/downloads/mac">Git installation options</a>. Reopen Terminal.</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python3.12 --version
+git --version</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div></div><div role="tabpanel" id="os-panel-1-2" aria-labelledby="os-1-2" hidden><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>sudo apt update
+sudo apt install python3 python3-venv python3-pip git
+python3 --version
+git --version</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div></div></div><div class="checkpoint"><p>Both tools must print a version. Older Ubuntu releases: see the handout.</p></div>
+<aside class="notes">Use an installer matching the machine architecture. Ubuntu 24.04 uses Python 3.12; older distributions need an appropriate separately installed interpreter. Do not replace the OS Python. Sources: Python release/venv documentation and Git installation documentation.</aside>
 </section>
-<section id="step-3-what-you-should-see" class="slide level2">
-<h2>Step 3 · What You Should <span class="accent">See</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href=""></a>Successfully installed pygame-ce-2.5.8</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="note">
-<p>You will also see <code>ERROR: mosaic 0.1.0 requires pygame, which is not installed.</code> — <strong>expected and harmless.</strong> That is <code>pyproject.toml</code> asking for the wrong package; pygame-ce satisfies it in practice.</p>
-</div>
-<p>One more undeclared dependency — the advisor’s prompt builder needs it, so <code>Alt</code> does nothing without it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="ex">pip</span> install tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="checkpoint">
-<p><strong>Checkpoint</strong> — this now prints <code>GUI OK</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"from mosaic.gui.main import SAREnvGUI; print('GUI OK')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href=""></a>pygame-ce 2.5.8 (SDL 2.32.10, Python 3.10.20)</span>
-<span id="cb14-2"><a href=""></a>GUI OK</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="punchline">
-<p>Both are known packaging issues — you are getting the workarounds <span class="accent">ahead of the PyPI release</span>.</p>
-</div>
+<section id="repositories" class="slide level2" data-background-color="#252525">
+<h2>Step 2: the two <span class="accent">repositories</span></h2>
+<p>In the folder where you keep your projects:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>git clone https://github.com/Bkdogbey/mosaic.git
+git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
+git -C mosaic-smc-tutorial switch tutorial/task-focused-redesign
+cd mosaic
+git checkout a409222534dcd234dd2925a5adab8da9db17e6b2</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p><strong>mosaic</strong> is the software. <strong>mosaic-smc-tutorial</strong> contains these slides and exercises.</p><div class="checkpoint"><p>Your current folder is mosaic. The two repositories sit beside each other.</p></div>
+<aside class="notes">The pinned source revision makes the tutorial reproducible while main changes. Detached HEAD is expected. Use a fresh workshop folder if an existing clone contains local changes. Public clones do not need a GitHub account.</aside>
 </section>
-<section id="verify-30-seconds" class="slide level2">
-<h2>Verify · <span class="accent">30 Seconds</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"</span></span>
-<span id="cb15-2"><a href=""></a><span class="st">from mosaic.sar.env import build_sar_env</span></span>
-<span id="cb15-3"><a href=""></a><span class="st">from mosaic.sar.placers import VictimPlacer</span></span>
-<span id="cb15-4"><a href=""></a><span class="st">env = build_sar_env(screen_size=600, num_rows=2, num_cols=2, room_size=8,</span></span>
-<span id="cb15-5"><a href=""></a><span class="st">                    victim_placer=VictimPlacer(num_real_victims=2))</span></span>
-<span id="cb15-6"><a href=""></a><span class="st">env.reset(seed=0)</span></span>
-<span id="cb15-7"><a href=""></a><span class="st">print('MOSAIC OK —', env.get_mission_status())</span></span>
-<span id="cb15-8"><a href=""></a><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb16-1"><a href=""></a>MOSAIC OK — {'status': 'continue', 'saved_victims': 0, 'remaining_victims': 8}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="punchline">
-<p>Eight, not two — <code>num_real_victims</code> is <span class="accent">per room</span>, and a 2×2 building has four.</p>
-</div>
-<div class="note">
-<p>A line reading <code>Timeout during mission generation: connect_all failed</code> may appear. It is the level generator retrying — a warning, not an error.</p>
-</div>
+<section id="venv-setup" class="slide level2" data-background-color="#252525">
+<h2>Step 3: an isolated <span class="accent">Python environment</span></h2>
+<p>Still inside <strong>mosaic</strong>:</p><div class="tutorial-tabs"><div role="tablist" aria-label="Operating system"><button type="button" role="tab" id="os-2-0" aria-selected="true" tabindex="0" aria-controls="os-panel-2-0">PowerShell</button><button type="button" role="tab" id="os-2-1" aria-selected="false" tabindex="-1" aria-controls="os-panel-2-1">Windows CMD</button><button type="button" role="tab" id="os-2-2" aria-selected="false" tabindex="-1" aria-controls="os-panel-2-2">macOS</button><button type="button" role="tab" id="os-2-3" aria-selected="false" tabindex="-1" aria-controls="os-panel-2-3">Ubuntu</button></div><div role="tabpanel" id="os-panel-2-0" aria-labelledby="os-2-0"><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div></div><div role="tabpanel" id="os-panel-2-1" aria-labelledby="os-2-1" hidden><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>py -3.12 -m venv .venv
+.venv\Scripts\activate.bat</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div></div><div role="tabpanel" id="os-panel-2-2" aria-labelledby="os-2-2" hidden><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python3.12 -m venv .venv
+source .venv/bin/activate</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div></div><div role="tabpanel" id="os-panel-2-3" aria-labelledby="os-2-3" hidden><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python3 -m venv .venv
+source .venv/bin/activate</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python -c &quot;import sys; print(sys.executable)&quot;</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><div class="checkpoint"><p>The path must contain mosaic and .venv. <a href="#/activation-help">Activation help</a>.</p></div>
+<aside class="notes">A venv is a separate package set for this project. The interpreter path is a stronger check than the prompt prefix. Use python -m pip throughout. Source: Python venv documentation.</aside>
 </section>
-<section id="if-the-install-broke" class="slide level2">
-<h2>If the <span class="accent">Install</span> Broke</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Symptom</th>
-<th>Fix</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>cannot import name 'DIRECTION_LTR'</code></td>
-<td>You skipped Step 3</td>
-</tr>
-<tr class="even">
-<td><code>module 'pygame' has no attribute 'surface'</code></td>
-<td>You ran Step 3 without <code>--force-reinstall</code></td>
-</tr>
-<tr class="odd">
-<td><code>mosaic 0.1.0 requires pygame</code></td>
-<td>Harmless warning, not an error — carry on</td>
-</tr>
-<tr class="even">
-<td><code>ensurepip is not available</code></td>
-<td><code>sudo apt install python3-venv</code>, then remake the venv</td>
-</tr>
-<tr class="odd">
-<td><code>No module named 'mosaic'</code></td>
-<td>Outside the venv, or <code>pip install -e .</code> did not finish</td>
-</tr>
-</tbody>
-</table>
-<div class="punchline">
-<p>Still stuck? <span class="accent">Raise a hand</span> — we have helpers in the room and a spare laptop up front.</p>
-</div>
+<section id="install-package" class="slide level2" data-background-color="#252525">
+<h2>Step 4: package <span class="accent">installation</span></h2>
+<p>Inside <strong>mosaic</strong>, with the environment selected:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python -m pip install --upgrade pip
+python -m pip install -e .
+python -m pip install tabulate</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p><code>-e .</code> installs the source in this folder as an editable package.</p><p><code>tabulate</code> supports the prompt builder in the advisor exercise.</p><div class="checkpoint"><p>Wait for installation to finish. Resolve any error before opening the game.</p></div>
+<aside class="notes">Use the base package path rather than also installing the broader requirements.txt. DummyLLMClient bypasses prompt building; the custom advisor uses it. Sources: pyproject.toml, llm/client.py, llm/process_prompts.py.</aside>
 </section>
-<section id="if-the-game-broke" class="slide level2">
-<h2>If the <span class="accent">Game</span> Broke</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Symptom</th>
-<th>Fix</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Window opens then closes instantly</td>
-<td>You forgot <code>env.reset()</code> before launching the GUI</td>
-</tr>
-<tr class="even">
-<td>Nothing renders on a remote box</td>
-<td>You need a real display — use a local machine</td>
-</tr>
-<tr class="odd">
-<td><code>Alt</code> does nothing / <code>Missing optional dependency 'tabulate'</code></td>
-<td><code>pip install tabulate</code></td>
-</tr>
-<tr class="even">
-<td>Hangs forever, no window</td>
-<td><code>locked_room_prob=1.0</code> — back it off to <code>0.9</code></td>
-</tr>
-<tr class="odd">
-<td><code>'FullviewCamera' object has no attribute 'reset'</code></td>
-<td>Known bug — use <code>AgentFOVCamera</code> or <code>AgentConeCamera</code></td>
-</tr>
-<tr class="even">
-<td><code>Timeout during mission generation</code></td>
-<td>Harmless — the generator retries</td>
-</tr>
-<tr class="odd">
-<td><code>Sampling rejected: unreachable object</code></td>
-<td>Harmless — it is placing objects somewhere else</td>
-</tr>
-</tbody>
-</table>
+<section id="graphics-fix" class="slide level2" data-background-color="#252525">
+<h2>Step 5: the graphics <span class="accent">dependency fix</span></h2>
+<p>For the MOSAIC revision used in this tutorial:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python -m pip uninstall -y pygame
+python -m pip install --force-reinstall pygame-ce==2.5.8</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p>MOSAIC declares pygame, while the GUI uses pygame-ce. They share the same import name.</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python -c &quot;from mosaic.gui.main import SAREnvGUI; print('GUI imports OK')&quot;</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><div class="checkpoint"><p>Expected: <strong>GUI imports OK</strong>. Keep --force-reinstall.</p></div>
+<aside class="notes">The specific pip warning that mosaic requires pygame remains as a metadata conflict after this workaround. Do not ignore unrelated errors. Uninstalling pygame removes shared files, so force reinstall is necessary. Sources: pyproject.toml and previous clean-install verification.</aside>
 </section>
-<section class="slide level2">
-
-<!-- ============ PART 3 ============ -->
-<div class="divider">
-<p><span class="divider-title">Part Three</span></p>
-<p><span class="divider-subtitle">Playing with it</span></p>
-<div class="you-are-here">
-<p><span class="stop">What it is</span> <span class="stop">Install</span> <span class="stop here">Use it</span></p>
-</div>
-</div>
+<section id="verify-installation" class="slide level2" data-background-color="#252525">
+<h2>Step 6: verify the <span class="accent">exercise setup</span></h2>
+<p>Keep the same terminal and active environment:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>cd ../mosaic-smc-tutorial/presentation
+python labs/check_install.py</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p>The checker imports the GUI, creates a world, takes an action, renders a frame and asks the offline advisor.</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>MOSAIC CHECK PASSED</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><div class="checkpoint"><p>Stop here until you see the final message. Your current folder is presentation.</p></div>
+<aside class="notes">Default requested victims: 2x2x2 = 8. Crowded placement or spawn clearing can reduce the actual count. The checker does not validate a physical desktop display. Sources: labs/check_install.py, sar/env.py, sar/placers.py.</aside>
 </section>
-<section id="the-rules-in-60-seconds" class="slide level2">
-<h2>The Rules in <span class="accent">60 Seconds</span></h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<p><strong>The building</strong> — <code>num_rows</code> × <code>num_cols</code> rooms, each <code>room_size</code> tiles square. Some doors are locked and need a matching coloured key, and you can carry <strong>one key at a time</strong>.</p>
-<p><strong>The pressure</strong> — a step budget <em>and</em> a wall clock. Survivors lose health while you can see them. Lava is instant mission failure.</p>
-</div><div class="column" style="width:52%;">
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Event</th>
-<th>Reward</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Rescue a live survivor</td>
-<td><strong>+1.0</strong></td>
-</tr>
-<tr class="even">
-<td>Pick up a decoy</td>
-<td><strong>−1.0</strong></td>
-</tr>
-<tr class="odd">
-<td>Pick up a survivor who died</td>
-<td><strong>−2.0</strong></td>
-</tr>
-<tr class="even">
-<td>Complete the mission</td>
-<td><strong>+1.0</strong> bonus</td>
-</tr>
-</tbody>
-</table>
-</div></div>
-<div class="punchline">
-<p>Pressure is what makes advice <span class="accent">worth taking</span> — and worth measuring.</p>
-</div>
+<section id="first-window" class="slide level2" data-background-color="#252525">
+<h2>Step 7: the first <span class="accent">game window</span></h2>
+<p>From <strong>mosaic-smc-tutorial/presentation</strong>:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python labs/play.py</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><ol><li>Click the game window to give it keyboard focus.</li><li>Press <strong>Left</strong> once. The agent should turn.</li><li>Use <strong>F11</strong> for fullscreen or <strong>Esc</strong> to close.</li></ol><div class="checkpoint"><p>You are ready when the window opens and the agent responds to a keypress.</p></div>
+<aside class="notes">Check that everyone can launch before teaching the task. Use SCREEN_SIZE=500 on smaller displays if needed. Source: gui/main.py, gui/user.py and labs/play.py.</aside>
 </section>
-<section id="survivors-and-decoys" class="slide level2">
-<h2>Survivors and <span class="accent">Decoys</span></h2>
-<div class="columns">
-<div class="column" style="width:52%;">
-<p><img data-src="assets/victims.png"></p>
-</div><div class="column" style="width:48%;">
-<p><strong>Top row — real survivors.</strong> Arms centred on the stem.</p>
-<p><strong>Bottom row — decoys.</strong> Stem offset from the centre.</p>
-<p>Four orientations each, randomly assigned.</p>
-</div></div>
-<div class="punchline">
-<p>A classic <span class="accent">visual discrimination</span> task hiding inside a rescue mission — which is what makes false alarms measurable.</p>
-</div>
+<section id="install-help" class="slide level2" data-background-color="#252525">
+<h2>Installation <span class="accent">help</span></h2>
+<table><thead><tr><th>Symptom</th><th>Next action</th></tr></thead><tbody><tr><td>Python or Git not found</td><td>Finish Step 1 and reopen the terminal</td></tr><tr><td>PowerShell blocks activation</td><td>Use the direct venv interpreter; see appendix</td></tr><tr><td>No module named mosaic</td><td>Check sys.executable and install with that Python</td></tr><tr><td>DIRECTION_LTR or missing pygame.surface</td><td>Repeat the graphics fix with --force-reinstall</td></tr><tr><td>No module named tabulate</td><td>python -m pip install tabulate</td></tr><tr><td>No video device</td><td>Use a desktop session with a display</td></tr></tbody></table><p><a href="SETUP.html#troubleshooting">Full troubleshooting and restart instructions</a></p>
+<aside class="notes">If generation repeats, Ctrl+C and restore default square-map settings with modest density and locking below 1. Pair with a prepared laptop if downloads cannot finish. Sources: SETUP.md and sar/placers.py.</aside>
 </section>
-<section id="whats-on-screen" class="slide level2">
-<h2>What’s on <span class="accent">Screen</span></h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="assets/gui-screenshot.png" class="quarto-figure quarto-figure-center" height="470"></p>
-</figure>
-</div>
-<div class="caption-row">
-<p><span class="cap"><strong>Game view</strong> · the camera’s crop of the world</span> <span class="cap"><strong>Info panel</strong> · mission status</span> <span class="cap"><strong>Chat panel</strong> · the advisor</span> <span class="cap"><strong>Screen edge</strong> · peripheral feedback</span></p>
-</div>
+<section id="play-and-adapt" class="slide level2" data-background-color="#252525">
+<h2>Explore the game and adapt a condition</h2>
+<div class="divider"><p class="divider-title">Part 3</p><p class="divider-subtitle">Explore the game and adapt a condition</p></div>
+<aside class="notes"></aside>
 </section>
-<section id="controls" class="slide level2">
-<h2>Controls</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Key</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>↑</code></td>
-<td>Move forward</td>
-</tr>
-<tr class="even">
-<td><code>←</code> <code>→</code></td>
-<td>Turn left / right</td>
-</tr>
-<tr class="odd">
-<td><code>Space</code></td>
-<td>Open a door</td>
-</tr>
-<tr class="even">
-<td><code>Tab</code> or <code>Page Up</code></td>
-<td>Rescue (pick up)</td>
-</tr>
-<tr class="odd">
-<td><code>Left Shift</code> or <code>Page Down</code></td>
-<td>Drop the key you’re carrying</td>
-</tr>
-<tr class="even">
-<td><code>Alt</code></td>
-<td>Ask the AI advisor</td>
-</tr>
-<tr class="odd">
-<td><code>Backspace</code> · <code>F11</code> · <code>Esc</code></td>
-<td>Restart · Fullscreen · Quit</td>
-</tr>
-</tbody>
-</table>
-<div class="note">
-<p>The docs also list <code>W</code> for forward — it is not actually mapped. Use the arrow keys. <code>Alt</code> needs <code>tabulate</code> installed (Part 2, step 3).</p>
-</div>
+<section id="game-window" class="slide level2" data-background-color="#252525">
+<h2>A tour of the <span class="accent">game window</span></h2>
+<div class="columns"><div class="column" style="width:55%"><img src="assets/gui-screenshot.png" alt="MOSAIC interface showing game viewport, mission panel and chat" class="tutorial-image"></div><div class="column" style="width:45%"><p><strong>Game view:</strong> your agent, rooms and objects.</p><p><strong>Mission panel:</strong> rescues, rewards, held key and time display.</p><p><strong>Chat panel:</strong> advisor replies.</p><p><strong>Compass:</strong> the direction you face.</p></div></div>
+<aside class="notes">Use the live game to point to each area. This is the repository documentation screenshot, not a newly captured image. The pinned InfoPanel has mission counts, metrics, compass and controls, not the object table mentioned by older docs. Source: gui/info.py, gui/chat.py, gui/main.py.</aside>
 </section>
-<section id="play-a-mission" class="slide level2">
-<h2>Play a <span class="accent">Mission</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">from</span> mosaic.gui.main <span class="im">import</span> SAREnvGUI</span>
-<span id="cb17-2"><a href=""></a><span class="im">from</span> mosaic.sar.env <span class="im">import</span> build_sar_env</span>
-<span id="cb17-3"><a href=""></a><span class="im">from</span> mosaic.sar.placers <span class="im">import</span> LavaPlacer, LockedRoomPlacer, VictimPlacer</span>
-<span id="cb17-4"><a href=""></a></span>
-<span id="cb17-5"><a href=""></a>env <span class="op">=</span> build_sar_env(</span>
-<span id="cb17-6"><a href=""></a>    screen_size<span class="op">=</span><span class="dv">800</span>,</span>
-<span id="cb17-7"><a href=""></a>    num_rows<span class="op">=</span><span class="dv">2</span>, num_cols<span class="op">=</span><span class="dv">2</span>,                            <span class="co"># building is 2x2 rooms</span></span>
-<span id="cb17-8"><a href=""></a>    room_size<span class="op">=</span><span class="dv">8</span>,                                       <span class="co"># tiles per room</span></span>
-<span id="cb17-9"><a href=""></a>    victim_placer<span class="op">=</span>VictimPlacer(num_real_victims<span class="op">=</span><span class="dv">2</span>),    <span class="co"># PER ROOM -&gt; 8 total</span></span>
-<span id="cb17-10"><a href=""></a>    lava_placer<span class="op">=</span>LavaPlacer(lava_per_room<span class="op">=</span><span class="dv">2</span>),</span>
-<span id="cb17-11"><a href=""></a>    locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
-<span id="cb17-12"><a href=""></a>)</span>
-<span id="cb17-13"><a href=""></a>env.reset()                                            <span class="co"># never skip this</span></span>
-<span id="cb17-14"><a href=""></a>SAREnvGUI(env, config<span class="op">=</span>{<span class="st">"fullscreen"</span>: <span class="va">False</span>, <span class="st">"max_time"</span>: <span class="dv">3</span>}).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href=""></a><span class="ex">python</span> labs/play.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="punchline">
-<p>Every argument above is a <span class="accent">knob</span>. The next four slides turn them.</p>
-</div>
+<section id="controls" class="slide level2" data-background-color="#252525">
+<h2>Movement and <span class="accent">interaction</span></h2>
+<table><thead><tr><th>Key</th><th>What happens</th></tr></thead><tbody><tr><td>Up</td><td>Move one tile forward</td></tr><tr><td>Left / Right</td><td>Turn in place</td></tr><tr><td>Space</td><td>Open or close the door in front</td></tr><tr><td>Tab / Page Up</td><td>Rescue a victim or pick up a key in front</td></tr><tr><td>Left Shift / Page Down</td><td>Drop a key into a free tile in front</td></tr></tbody></table><div class="checkpoint"><p>Try: turn left, turn right, move forward once. Turning changes your next move.</p></div>
+<aside class="notes">Actions target the tile in front. W is not mapped on this revision. Enter maps to the underlying done action but is not part of this exercise. Sources: gui/user.py and sar/actions.py.</aside>
 </section>
-<section id="knob-1-the-building" class="slide level2">
-<h2>Knob 1 — The <span class="accent">Building</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a>env <span class="op">=</span> build_sar_env(</span>
-<span id="cb19-2"><a href=""></a>    screen_size<span class="op">=</span><span class="dv">800</span>,</span>
-<span id="cb19-3"><a href=""></a>    num_rows<span class="op">=</span><span class="dv">3</span>, num_cols<span class="op">=</span><span class="dv">3</span>,     <span class="co"># was 2x2</span></span>
-<span id="cb19-4"><a href=""></a>    room_size<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb19-5"><a href=""></a>    victim_placer<span class="op">=</span>VictimPlacer(num_real_victims<span class="op">=</span><span class="dv">2</span>),</span>
-<span id="cb19-6"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>Rooms</th>
-<th>Survivors</th>
-<th>Step budget</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>2×2</code></td>
-<td>4</td>
-<td>8</td>
-<td>2,048</td>
-</tr>
-<tr class="even">
-<td><code>3×3</code></td>
-<td>9</td>
-<td>18</td>
-<td>10,368</td>
-</tr>
-</tbody>
-</table>
-<div class="note">
-<p>Occasionally you will see 17 instead of 18 — the generator rejects a victim it cannot find a reachable spot for, and the step budget scales with the count.</p>
-</div>
-<div class="punchline">
-<p>Notice how much longer a single mission takes — and how much more you would <span class="accent">welcome a hint</span>.</p>
-</div>
+<section id="victims" class="slide level2" data-background-color="#252525">
+<h2>Victims and <span class="accent">decoys</span></h2>
+<div class="columns"><div class="column" style="width:55%"><img src="assets/victims.png" alt="Top row: balanced real-victim shapes. Bottom row: offset decoy shapes." class="tutorial-image"></div><div class="column" style="width:45%"><p><strong>Top row:</strong> real victims with balanced arms.</p><p><strong>Bottom row:</strong> decoys with an offset shape.</p><p>Rotation changes orientation. Compare the shape carefully.</p><p>The basic lab places <strong>real victims only</strong>. A study placer can add decoys.</p></div></div>
+<aside class="notes">Use the actual glyphs. Describing them only as cross versus T is misleading because both rendered families are T-like. Sources: sar/objects.py, sar/placers.py, experiment/placers.py. Image: existing tutorial asset rendered from object coordinates.</aside>
 </section>
-<section id="knob-2-the-hazards" class="slide level2">
-<h2>Knob 2 — The <span class="accent">Hazards</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>lava_placer<span class="op">=</span>LavaPlacer(lava_per_room<span class="op">=</span><span class="dv">6</span>),              <span class="co"># was 2</span></span>
-<span id="cb20-2"><a href=""></a>locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.9</span>),   <span class="co"># was 0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>More lava</strong> — the fastest route and the safe route stop being the same route. Watch your own planning change.</p>
-<p><strong>Nearly every room locked</strong> — with one key at a time, a rescue task becomes a key-management task.</p>
-<div class="note">
-<p>Stop at <code>0.9</code>. At <code>1.0</code> every room is locked, the level has no solvable layout, and the generator retries <strong>forever</strong> — the window never opens. Known bug.</p>
-</div>
-<div class="punchline">
-<p>Two numbers, two <span class="accent">completely different</span> cognitive demands.</p>
-</div>
+<section id="doors" class="slide level2" data-background-color="#252525">
+<h2>Doors, keys and <span class="accent">lava</span></h2>
+<ol><li>Face a key and press <strong>Tab</strong>.</li><li>Find a door with the <strong>same color</strong>.</li><li>Face the door and press <strong>Space</strong> to unlock it.</li><li>Move through the doorway and avoid lava.</li></ol><p>Carry one key at a time. Drop it on an empty tile when you need another.</p><div class="checkpoint"><p>Mini-task: identify a locked door and the key you need before approaching it.</p></div>
+<aside class="notes">Demonstrate in the game. Lava terminates the episode and the basic GUI resets immediately. Face a victim and use pickup rather than walking onto it. Sources: gui/user.py, sar/actions.py, core/level.py and MiniGrid actions.</aside>
 </section>
-<section id="knob-3-what-they-can-see" class="slide level2">
-<h2>Knob 3 — What They Can <span class="accent">See</span></h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="assets/cam-room.png" height="230"></p>
-<p><strong><code>AgentFOVCamera</code></strong><br>
-Current room only</p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="assets/cam-cone.png" height="230"></p>
-<p><strong><code>AgentConeCamera</code></strong><br>
-Forward cone only — search-heavy</p>
-</div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="im">from</span> mosaic.core.camera <span class="im">import</span> AgentConeCamera</span>
-<span id="cb21-2"><a href=""></a>env <span class="op">=</span> build_sar_env(..., camera_strategy<span class="op">=</span>AgentConeCamera())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="note">
-<p>The default is <code>EdgeFollowCamera</code>, which scrolls only when the agent nears the edge. <strong><code>FullviewCamera</code> and <code>AgentCenteredCamera</code> raise <code>AttributeError</code> today</strong> — a known bug, they are missing a <code>reset()</code>.</p>
-</div>
+<section id="rewards" class="slide level2" data-background-color="#252525">
+<h2>Rewards and <span class="accent">mission progress</span></h2>
+<table><thead><tr><th>Event</th><th>Default reward</th></tr></thead><tbody><tr><td>Pick up a living real victim</td><td>+1</td></tr><tr><td>Pick up a decoy</td><td>−1</td></tr><tr><td>Pick up a dead real victim</td><td>−2</td></tr><tr><td>Remove the last real victim from the grid</td><td>+1 completion bonus</td></tr></tbody></table><p>The base lab does not deplete victim health automatically. Study code supplies health updates and timing.</p><div class="note"><p>The basic GUI displays a countdown but does not stop at zero. Define explicit stopping rules for research.</p></div>
+<aside class="notes">The mission verifier checks removal, including dead victims, rather than all victims saved alive. Custom rescue handling also bypasses the ordinary MiniGrid step increment. Do not treat built-in step_count as all human actions. Sources: sar/actions.py, sar/instructions.py, sar/env.py, gui/user.py, experiment/game.py.</aside>
 </section>
-<section id="knob-4-what-mistakes-cost" class="slide level2">
-<h2>Knob 4 — What Mistakes <span class="accent">Cost</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="im">from</span> mosaic.sar.actions <span class="im">import</span> RescueAction, RescueRewards</span>
-<span id="cb22-2"><a href=""></a></span>
-<span id="cb22-3"><a href=""></a>scoring <span class="op">=</span> RescueAction(rewards<span class="op">=</span>RescueRewards(</span>
-<span id="cb22-4"><a href=""></a>    real_victim_alive<span class="op">=+</span><span class="fl">1.0</span>,    <span class="co"># hit</span></span>
-<span id="cb22-5"><a href=""></a>    fake_victim<span class="op">=-</span><span class="fl">3.0</span>,          <span class="co"># false alarm — was -1.0</span></span>
-<span id="cb22-6"><a href=""></a>    real_victim_dead<span class="op">=-</span><span class="fl">2.0</span>,     <span class="co"># arrived too late</span></span>
-<span id="cb22-7"><a href=""></a>))</span>
-<span id="cb22-8"><a href=""></a></span>
-<span id="cb22-9"><a href=""></a>env <span class="op">=</span> build_sar_env(..., action<span class="op">=</span>scoring)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="punchline">
-<p>Shifting the false-alarm penalty shifts the participant’s <span class="accent">decision criterion</span> — a payoff-matrix manipulation in one number.</p>
-</div>
+<section id="exercise-rescue" class="slide level2" data-background-color="#252525">
+<h2>Exercise 1: a <span class="accent">rescue</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python labs/play.py</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><ol><li>Locate a real victim and plan a short route.</li><li>Stand beside it, face it and press <strong>Tab</strong>.</li><li>Check the rescue count and reward.</li></ol><div class="checkpoint"><p>Expected: the victim disappears and the saved count increases. Explain the action to your partner.</p></div>
+<aside class="notes">Allow about five minutes. Inspect an early rescue because the last one can trigger an immediate mission reset. Check facing, door state and hazards if someone is stuck. Source: sar/actions.py.</aside>
 </section>
-<section id="the-same-world-twice" class="slide level2">
-<h2>The Same World <span class="accent">Twice</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="im">import</span> random</span>
-<span id="cb23-2"><a href=""></a></span>
-<span id="cb23-3"><a href=""></a>random.seed(<span class="dv">42</span>)          <span class="co"># &lt;-- both lines are needed</span></span>
-<span id="cb23-4"><a href=""></a>env.reset(seed<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="hook">
-<p>Why two seeds?</p>
-</div>
-<p><code>env.reset(seed=...)</code> seeds the room-and-door skeleton. The placers — survivors, lava, keys — still draw from Python’s global <code>random</code>, so without <code>random.seed()</code> you get a <strong>different world every run</strong>.</p>
-<div class="punchline">
-<p>Seed both and the building is identical every time. Known bug, <span class="accent">workaround today</span> — compare maps with your neighbour.</p>
-</div>
+<section id="advice-controls" class="slide level2" data-background-color="#252525">
+<h2>Advice and <span class="accent">session controls</span></h2>
+<table><thead><tr><th>Key</th><th>Purpose</th></tr></thead><tbody><tr><td>Alt</td><td>Request an advisor reply</td></tr><tr><td>Backspace</td><td>Start another mission</td></tr><tr><td>F11</td><td>Toggle fullscreen</td></tr><tr><td>Esc</td><td>Close the game</td></tr></tbody></table><p>The fallback in play.py replies: <strong>“Currently, no commands are available.”</strong></p><div class="checkpoint"><p>Press Alt once and find the reply. The custom-advisor exercise replaces this fallback.</p></div>
+<aside class="notes">The GUI also requests advice at a positive action interval (default 50). Zero causes modulo-by-zero, not disabled advice. Input is ignored while the advisor thread is active. Backspace generates another map. Sources: gui/main.py, gui/user.py, llm/client.py.</aside>
 </section>
-<section id="try-this-now" class="slide level2">
-<h2>Try This <span class="accent">Now</span></h2>
-<div class="cards cols-2 fill">
-<div class="card">
-<p><span class="card-title">Scale It Up</span></p>
-<p>Set <code>num_rows=3, num_cols=3</code> in <code>labs/play.py</code> and play again. Time yourself.</p>
-<div class="card-meta">
-<p>Knob 1 · how badly do you want a hint now?</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Turn Up the Risk</span></p>
-<p><code>LavaPlacer(lava_per_room=6)</code>. Watch your route planning change in real time.</p>
-<div class="card-meta">
-<p>Knob 2 · risk versus speed</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Narrow the View</span></p>
-<p><code>camera_strategy=AgentConeCamera()</code>. A planning task becomes a search task.</p>
-<div class="card-meta">
-<p>Knob 3 · this is the big one</p>
-</div>
-</div>
-<div class="card secondary">
-<p><span class="card-title">Race Your Neighbour</span></p>
-<p>Both seed to <code>42</code>, both play the identical building. Compare what you each did.</p>
-<div class="card-meta">
-<p>Reproducibility · <code>random.seed(42)</code> + <code>env.reset(seed=42)</code></p>
-</div>
-</div>
-</div>
+<section id="settings" class="slide level2" data-background-color="#252525">
+<h2>Where your <span class="accent">settings belong</span></h2>
+<table><thead><tr><th>Goal</th><th>Edit or replace</th></tr></thead><tbody><tr><td>Building size and object counts</td><td>Settings in labs/play.py</td></tr><tr><td>Camera or rescue rewards</td><td>Components in labs/tweak.py</td></tr><tr><td>Advice text or provider</td><td>LLMClient in labs/advisor.py</td></tr><tr><td>Fullscreen, prompt style, countdown</td><td>GUI_CONFIG in play.py</td></tr><tr><td>Trials, sensors and surveys</td><td>Your runner; see src/experiment/</td></tr></tbody></table><p><strong>Edit one setting, save, close the game and rerun.</strong></p>
+<aside class="notes">These scripts read Python constants. Editing configs/experiment.yaml does not affect them because they do not load it. Sources: the labs and configs/experiment.yaml.</aside>
 </section>
-<section id="where-to-go-next" class="slide level2">
-<h2>Where to Go <span class="accent">Next</span></h2>
-<div class="columns">
-<div class="column" style="width:55%;">
-<div class="hook">
-<p>The most useful thing you can do today is tell us where it broke.</p>
-</div>
-<ul>
-<li><strong>Open an issue</strong> — install friction especially. Everything in Part 2 exists because someone hit it.</li>
-<li><strong>Bring your paradigm</strong> — if your manipulation doesn’t fit the knobs, that’s a design bug on our side.</li>
-<li><strong>Contribute a placer or an advisor</strong> — the smallest useful pull request is about thirty lines.</li>
-</ul>
-</div><div class="column" style="width:45%;">
-<p><strong>Repository</strong> <code>github.com/iHuman-Lab/mosaic</code></p>
-<p><strong>Documentation</strong> <code>ihuman-lab.github.io/mosaic</code></p>
-<p><strong>Today’s scripts</strong> <code>labs/play.py</code> · <code>labs/tweak.py</code> · <code>labs/advisor.py</code></p>
-</div></div>
+<section id="exercise-building" class="slide level2" data-background-color="#252525">
+<h2>Exercise 2: the <span class="accent">building</span></h2>
+<p>Open <strong>labs/play.py</strong>:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>NUM_ROWS = 2
+NUM_COLS = 2
+VICTIMS_PER_ROOM = 2
+LAVA_PER_ROOM = 2
+LAVA_ENABLED = True</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p>Change both room dimensions to <strong>3</strong>, save and rerun.</p><div class="checkpoint"><p>Predict the requested victim count, then compare it with the actual game count.</p></div>
+<aside class="notes">Requested count: 18, subject to placement capacity and spawn clearing. Restore 2x2 before the camera exercise. Use square maps on this revision due to inconsistent row/column use in placer loops. Set LAVA_ENABLED=False for no lava; a zero count invokes random placement. Sources: sar/placers.py and sar/env.py.</aside>
 </section>
-<section id="section" class="slide level2" data-background-image="assets/background.jpg" data-background-opacity="0.25">
-<h2></h2>
-<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:80vh; text-align:center;">
-<p><img data-src="assets/logo.png" style="max-height:110px; border-radius:0 !important; box-shadow:none !important;"></p>
-<div style="font-family:'Rubik',sans-serif; font-size:2.8rem; font-weight:900; color:#ffffff; margin-top:0.8rem;">
-<p>Thanks!</p>
-</div>
-<div style="font-size:1.5rem; color:#EC672C; margin-top:1.2rem; font-weight:700;">
-<p>Questions?</p>
-</div>
-<div style="font-size:1.5rem; color:rgba(255,255,255,0.35); margin-top:1rem; letter-spacing:2px;">
-<p>bennett.dogbey@okstate.edu</p>
-</div>
-</div>
+<section id="cameras" class="slide level2" data-background-color="#252525">
+<h2>Camera <span class="accent">views</span></h2>
+<div class="columns"><div class="column" style="width:55%"><p><strong>Room view</strong></p><img src="assets/cam-room.png" alt="MOSAIC room camera example" class="camera-image"><p>The current room remains visible.</p></div><div class="column" style="width:45%"><p><strong>Forward cone</strong></p><img src="assets/cam-cone.png" alt="MOSAIC forward-cone camera example" class="camera-image"><p>Visibility depends on where the agent faces.</p></div></div>
+<aside class="notes">These are existing repository camera-render examples. The runnable exercise compares the same seeded initialization sequence. EdgeFollowCamera is the default scrolling camera. FullviewCamera and AgentCenteredCamera lack reset on this revision. Source: core/camera.py.</aside>
 </section>
-<section class="slide level2">
-
-<!-- ============ APPENDIX ============ -->
-<div class="divider">
-<p><span class="divider-title">Appendix</span></p>
-<p><span class="divider-subtitle">Backup slides — beyond the basics</span></p>
-</div>
+<section id="exercise-visibility" class="slide level2" data-background-color="#252525">
+<h2>Exercise 3: <span class="accent">visibility</span></h2>
+<p>Run <strong>python labs/tweak.py</strong> with each setting:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>CAMERA = &quot;room&quot;
+# Then change to:
+CAMERA = &quot;cone&quot;</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p>Keep the map settings and seed unchanged. In each run, locate a victim and describe your search.</p><div class="checkpoint"><p>What disappears when you turn? What must you remember?</p></div>
+<aside class="notes">This is an informal comparison, not a controlled study. Repeating a map introduces learning; counterbalance order and use several maps in research. Restart the script for each condition. Sources: labs/play.py, labs/tweak.py.</aside>
 </section>
-<section id="who-we-are" class="slide level2">
-<h2>Who <span class="accent">We Are</span></h2>
-<div class="team">
-<div class="member">
-<p><img data-src="assets/team/hemanth.jpg"></p>
-<p><span class="member-name">Hemanth Manjunatha</span> <span class="member-role">Principal Investigator</span></p>
-<p>Brain–machine interfaces and human–robot interaction — <em>what is happening in the operator’s head.</em></p>
-</div>
-<div class="member">
-<p><img data-src="assets/team/elahe.jpg"></p>
-<p><span class="member-name">Elahe Oveisi</span> <span class="member-role">PhD Student · MOSAIC author</span></p>
-<p>Human factors in autonomous systems and aviation safety — <em>when people take the advice.</em></p>
-</div>
-<div class="member">
-<p><img data-src="assets/team/bennett.jpg"></p>
-<p><span class="member-name">Bennett Kwaku Dogbey</span> <span class="member-role">PhD Student · Presenting</span></p>
-<p>Safe autonomy and formal verification — <em>when they should.</em></p>
-</div>
-</div>
-<div class="member-link">
-<p>Meet the rest of the lab: <a href="https://ihuman-lab.github.io/lab-website/">ihuman-lab.github.io/lab-website</a></p>
-</div>
+<section id="custom-advisor" class="slide level2" data-background-color="#252525">
+<h2>A custom <span class="accent">advisor</span></h2>
+<p>The advisor inherits from LLMClient and returns text:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>class ControlsAdvisor(LLMClient):
+    def query(self, prompt: str) -&gt; str:
+        return &quot;Face a victim and press Tab to rescue.&quot;</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p>The GUI receives an instance:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>SAREnvGUI(env, config=GUI_CONFIG,
+          llm_client=ControlsAdvisor()).run()</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><div class="note"><p>This is a fixed reminder. It does not reason about routes.</p></div>
+<aside class="notes">The complete script imports the contract and builds the environment. Runtime checks require an LLMClient subclass. The old random “correct” label was not a valid ground-truth evaluation; this example removes that claim. Sources: llm/client.py and gui/user.py.</aside>
 </section>
-<section id="three-design-choices-that-make-it-yours" class="slide level2">
-<h2>Three Design Choices That Make It <span class="accent">Yours</span></h2>
-<div class="cards cols-3 fill short">
-<div class="card">
-<p><span class="card-title">Dependency Injection</span></p>
-<p>Components are built first, then passed in — never subclassed, never looked up.</p>
-<p><code>build_sar_env(victim_placer=MyPlacer())</code></p>
-<div class="card-meta">
-<p>A new world is a new object, not a new environment</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Strategy Pattern</span></p>
-<p>Interchangeable behaviours behind one interface — five cameras, one argument.</p>
-<p><code>env.switch_camera(AgentConeCamera())</code></p>
-<div class="card-meta">
-<p>Change what participants see, even mid-session</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Factory Functions</span></p>
-<p>One call builds a fully wired object from parts you already made.</p>
-<p><code>build_sar_env(...)</code> · <code>build_llm_client(...)</code></p>
-<div class="card-meta">
-<p>A condition is a function call you can put in a config</p>
-</div>
-</div>
-</div>
-<div class="punchline">
-<p>Your manipulation is a <span class="accent">constructor argument</span>. That is the whole design.</p>
-</div>
+<section id="exercise-advice" class="slide level2" data-background-color="#252525">
+<h2>Exercise 4: your <span class="accent">advice text</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python labs/advisor.py</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><ol><li>Move or turn once, then press <strong>Alt</strong>.</li><li>Read the reminder in the chat panel.</li><li>Edit the returned sentence, save and rerun.</li></ol><div class="checkpoint"><p>Expected: your edited sentence appears after the request. No API key is needed.</p></div>
+<aside class="notes">Explain observation, prompt builder, client, response processor and chat in order. External model providers are optional adapters introduced in the handout. Source: labs/advisor.py and llm/client.py.</aside>
 </section>
-<section id="the-building-blocks-in-code" class="slide level2">
-<h2>The Building Blocks, <span class="accent">in Code</span></h2>
-<div class="layer">
-<div class="layer-label">
-<p><strong><code>mosaic/</code></strong><br>
-the contract<br>
-<code>pip install -e .</code></p>
-</div>
-<div class="cards cols-4">
-<div class="card">
-<p><span class="card-title">core/</span></p>
-<p><code>SARLevelGen</code> on MiniGrid · five <code>CameraStrategy</code> classes · the <code>Placer</code> base</p>
-</div>
-<div class="card">
-<p><span class="card-title">sar/</span></p>
-<p><code>PickupVictimEnv</code> · <code>build_sar_env()</code> · survivors and decoys · <code>RescueAction</code> · <code>GameObservation</code></p>
-</div>
-<div class="card">
-<p><span class="card-title">gui/</span></p>
-<p><code>SAREnvGUI</code> · <code>InfoPanel</code> · <code>ChatPanel</code> · <code>EdgeVignette</code> · <code>User</code> input</p>
-</div>
-<div class="card">
-<p><span class="card-title">llm/</span></p>
-<p><code>LLMClient</code> · <code>DummyLLMClient</code> · prompt builder · pathfinding · reply parser</p>
-</div>
-</div>
-</div>
-<div class="layer secondary">
-<div class="layer-label">
-<p><strong><code>experiment/</code></strong><br>
-one lab’s wiring<br>
-not packaged</p>
-</div>
-<div class="cards cols-3">
-<div class="card secondary">
-<p><span class="card-title">Providers</span></p>
-<p><code>llm.py</code> — OpenAI and Gemini through llama_index</p>
-</div>
-<div class="card secondary">
-<p><span class="card-title">Study tuning</span></p>
-<p><code>placers.py</code> — health and decay by lava risk · <code>pacing.py</code> — the step budget</p>
-</div>
-<div class="card secondary">
-<p><span class="card-title">Instrumented run</span></p>
-<p><code>game.py</code> → LSL · <code>sensors/</code> Tobii · <code>replay.py</code> · YAML configs</p>
-</div>
-</div>
-</div>
-<div class="punchline">
-<p>Contract lives in <code>mosaic/</code>, wiring lives in <code>experiment/</code>. Your study becomes a <span class="accent">second <code>experiment/</code></span> — not a fork.</p>
-</div>
+<section id="recording" class="slide level2" data-background-color="#252525">
+<h2>Observations and <span class="accent">recording</span></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>obs, reward, terminated, truncated, info = env.step(action)</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p>The observation includes position, the encoded grid and mission counts. Rescue events appear in info["events"].</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>python labs/record.py</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><div class="checkpoint"><p>Open <strong>recordings/demo.jsonl</strong>. It contains one record per scripted action.</p></div>
+<aside class="notes">This records three turns, not a human participant session. Record GUI actions and timestamps before automatic resets for real sessions. The full grid includes unseen information. obs["image"] is MiniGrid encoding, not a GUI RGB screenshot; env.render() supplies RGB. Sources: sar/observations.py and experiment/game.py.</aside>
 </section>
-<section id="what-gets-logged" class="slide level2">
-<h2>What Gets <span class="accent">Logged</span></h2>
-<p>Every step returns an enriched observation:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a>[<span class="st">'agent_dir'</span>, <span class="st">'agent_x'</span>, <span class="st">'agent_y'</span>, <span class="st">'cam_top_x'</span>, <span class="st">'cam_top_y'</span>,</span>
-<span id="cb24-2"><a href=""></a> <span class="st">'cam_view_h'</span>, <span class="st">'cam_view_w'</span>, <span class="st">'carrying'</span>, <span class="st">'direction'</span>, <span class="st">'grid'</span>,</span>
-<span id="cb24-3"><a href=""></a> <span class="st">'image'</span>, <span class="st">'max_steps'</span>, <span class="st">'mission'</span>, <span class="st">'mission_status'</span>, <span class="st">'num_cols'</span>,</span>
-<span id="cb24-4"><a href=""></a> <span class="st">'num_rows'</span>, <span class="st">'remaining_victims'</span>, <span class="st">'room_size'</span>, <span class="st">'saved_victims'</span>,</span>
-<span id="cb24-5"><a href=""></a> <span class="st">'step_count'</span>, <span class="st">'victim_health'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>grid</code> is a full integer-encoded snapshot of the world — walls, lava, survivors, decoys, doors with colour and lock state, keys.</p>
-<div class="note">
-<p>The four <code>cam_*</code> fields come from the default <code>EdgeFollowCamera</code>. Swap to <code>AgentConeCamera</code> or <code>AgentFOVCamera</code> and they are absent — worth knowing before you write the analysis.</p>
-</div>
-<div class="punchline">
-<p>Which is why a session can be <span class="accent">replayed exactly</span>, without re-running the environment.</p>
-</div>
+<section id="study-setup" class="slide level2" data-background-color="#252525">
+<h2>Your own <span class="accent">study setup</span></h2>
+<table><thead><tr><th>Design choice</th><th>Example</th></tr></thead><tbody><tr><td>Question</td><td>Does restricted visibility increase search effort?</td></tr><tr><td>Conditions</td><td>Room camera and forward cone</td></tr><tr><td>Held constant</td><td>Layout settings, instructions and rescue rules</td></tr><tr><td>Outcomes</td><td>Actions, rescues, errors and timestamps</td></tr><tr><td>Session design</td><td>Practice, several maps and counterbalanced order</td></tr></tbody></table><div class="checkpoint"><p>Write one question, the feature to change and the outcome to record.</p></div>
+<aside class="notes">Allow a pair discussion. Seed both random and reset, and save the source revision, config and actual initial state. Decide whether the advisor sees the whole grid or only participant-visible information. Sources: source-derived study guidance, sar/observations.py.</aside>
 </section>
-<section id="the-advisor-contract" class="slide level2">
-<h2>The Advisor <span class="accent">Contract</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="kw">class</span> LLMClient(ABC):</span>
-<span id="cb25-2"><a href=""></a>    <span class="at">@abstractmethod</span></span>
-<span id="cb25-3"><a href=""></a>    <span class="kw">def</span> query(<span class="va">self</span>, prompt: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb25-4"><a href=""></a>        <span class="co">"""Send text, get text back."""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>That is the whole interface. It knows nothing about SAR, prompts, the GUI, or your conditions.</p>
-<div class="punchline">
-<p>Anything with a <code>query</code> method is a <span class="accent">teammate</span> — GPT, Gemini, a rule, a human confederate behind a socket.</p>
-</div>
+<section id="study-framework" class="slide level2" data-background-color="#252525">
+<h2>The optional <span class="accent">study framework</span></h2>
+<p>The lab’s src/experiment/ code provides examples of:</p><ul><li>Study-specific victim placement, health updates and pacing.</li><li>Trial orchestration, visual-search tasks and questionnaires.</li><li>LSL streaming, sensor integration and recorded-state replay.</li></ul><p>It requires <strong>additional dependencies and configuration</strong>, including the lab’s ixp framework.</p><p><a href="SETUP.html#optional-study-extensions">Extension guide</a> · <a href="https://ihuman-lab.github.io/mosaic/experiment/">Documentation</a></p>
+<aside class="notes">The runner is experiment/experiment.py, not experiment_main.py. Imports for ixp, Ray and device packages occur at module scope. Replay takes a positional JSONL filename and reconstructs an encoded state view, not the exact GUI. Sources: experiment/experiment.py, game.py, replay.py.</aside>
 </section>
-<section id="an-advisor-with-a-reliability-dial" class="slide level2">
-<h2>An Advisor With a <span class="accent">Reliability Dial</span></h2>
-<p>Advice is correct with probability <code>p_correct</code> — and every call records whether it was.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="im">import</span> random</span>
-<span id="cb26-2"><a href=""></a><span class="im">from</span> mosaic.llm.client <span class="im">import</span> LLMClient</span>
-<span id="cb26-3"><a href=""></a></span>
-<span id="cb26-4"><a href=""></a><span class="kw">class</span> ScriptedAdvisor(LLMClient):</span>
-<span id="cb26-5"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, p_correct<span class="op">=</span><span class="fl">1.0</span>, seed<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb26-6"><a href=""></a>        <span class="va">self</span>.p_correct, <span class="va">self</span>.rng, <span class="va">self</span>.log <span class="op">=</span> p_correct, random.Random(seed), []</span>
-<span id="cb26-7"><a href=""></a></span>
-<span id="cb26-8"><a href=""></a>    <span class="kw">def</span> query(<span class="va">self</span>, prompt: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb26-9"><a href=""></a>        correct <span class="op">=</span> <span class="va">self</span>.rng.random() <span class="op">&lt;</span> <span class="va">self</span>.p_correct</span>
-<span id="cb26-10"><a href=""></a>        heading <span class="op">=</span> <span class="va">self</span>.rng.choice([<span class="st">"north"</span>, <span class="st">"south"</span>, <span class="st">"east"</span>, <span class="st">"west"</span>])</span>
-<span id="cb26-11"><a href=""></a>        advice <span class="op">=</span> (<span class="ss">f"Head </span><span class="sc">{</span>heading<span class="sc">}</span><span class="ss"> — there's a survivor in the next room."</span></span>
-<span id="cb26-12"><a href=""></a>                  <span class="cf">if</span> correct <span class="cf">else</span></span>
-<span id="cb26-13"><a href=""></a>                  <span class="ss">f"Nothing </span><span class="sc">{</span>heading<span class="sc">}</span><span class="ss"> of you. Hold position and search here."</span>)</span>
-<span id="cb26-14"><a href=""></a>        <span class="va">self</span>.log.append({<span class="st">"correct"</span>: correct, <span class="st">"advice"</span>: advice})</span>
-<span id="cb26-15"><a href=""></a>        <span class="cf">return</span> advice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="closing" class="slide level2" data-background-color="#252525">
+<h2>What you can <span class="accent">take forward</span></h2>
+<ul><li>A working installation and a playable rescue task.</li><li>Editable map, camera and offline-advisor examples.</li><li>A research question with a condition and data to collect.</li></ul><p><a href="https://github.com/Bkdogbey/mosaic-smc-tutorial/tree/tutorial/task-focused-redesign">Slides and exercises</a> · <a href="https://github.com/Bkdogbey/mosaic">MOSAIC source</a> · <a href="https://ihuman-lab.github.io/mosaic/">Documentation</a></p><p><strong>Discussion:</strong> what would you change for your task?</p>
+<aside class="notes">End the main tutorial here. Use the appendix for questions. Bug reports should include OS, Python, source revision, command and full error text.</aside>
 </section>
-<section id="plug-it-in" class="slide level2">
-<h2>Plug It <span class="accent">In</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a>advisor <span class="op">=</span> ScriptedAdvisor(p_correct<span class="op">=</span><span class="fl">0.7</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb27-2"><a href=""></a></span>
-<span id="cb27-3"><a href=""></a>SAREnvGUI(env, config<span class="op">=</span>{<span class="st">"fullscreen"</span>: <span class="va">False</span>}, llm_client<span class="op">=</span>advisor).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Press <code>Alt</code> in the game. Advice appears in the chat panel, and <code>advisor.log</code> holds the ground truth for every piece of it.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="ex">python</span> labs/advisor.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="punchline">
-<p>You now have advice reliability as an <span class="accent">independent variable</span>, with per-trial ground truth for the analysis.</p>
-</div>
+<section id="activation-help" class="slide level2" data-background-color="#252525">
+<h2>Appendix: <span class="accent">activation help</span></h2>
+<p>If PowerShell blocks activation, use the venv interpreter directly. From mosaic:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>.\.venv\Scripts\python.exe -m pip install -e .</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p>After changing to mosaic-smc-tutorial/presentation:</p><div class="code-copy-outer-scaffold"><div class="sourceCode"><pre class="code-with-copy"><code>..\..\mosaic\.venv\Scripts\python.exe labs/check_install.py
+..\..\mosaic\.venv\Scripts\python.exe labs/play.py</code></pre></div><button class="code-copy-button" title="Copy to Clipboard" aria-label="Copy command"><i class="bi"></i></button></div><p>Use that interpreter for the graphics repair and tabulate too.</p><p><a href="#/venv-setup">Back to environment setup</a> · <a href="SETUP.html">Full commands</a></p>
+<aside class="notes">This does not change execution policy. CMD activation is another route. Source: Python venv documentation.</aside>
 </section>
-<section id="what-that-buys-you" class="slide level2">
-<h2>What That <span class="accent">Buys You</span></h2>
-<div class="cards cols-2 fill">
-<div class="card">
-<p><span class="card-title">Reliance</span></p>
-<p>Did they follow advice they should have ignored — and ignore advice they should have followed? <code>advisor.log</code> tells you which was which.</p>
-<div class="card-meta">
-<p>Compliance, over- and under-reliance</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Trust Repair</span></p>
-<p>Drop <code>p_correct</code> mid-session, then raise it again. Watch reliance recover — or not.</p>
-<div class="card-meta">
-<p>Reliance over time, after a failure</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Latency</span></p>
-<p>Add a <code>time.sleep</code> in <code>query</code>. Slow advice is a manipulation, not a bug.</p>
-<div class="card-meta">
-<p>Advice uptake against delay</p>
-</div>
-</div>
-<div class="card secondary">
-<p><span class="card-title">Adaptive Guidance</span></p>
-<p>Make <code>p_correct</code> a function of the participant’s own performance so far.</p>
-<div class="card-meta">
-<p>Calibration under adaptation</p>
-</div>
-</div>
-</div>
+<section id="configuration-boundaries" class="slide level2" data-background-color="#252525">
+<h2>Appendix: <span class="accent">configuration boundaries</span></h2>
+<table><thead><tr><th>Goal</th><th>Implementation on this revision</th></tr></thead><tbody><tr><td>No lava</td><td>LavaPlacer(enabled=False)</td></tr><tr><td>More locked rooms</td><td>Increase locked_room_prob, keeping it below 1</td></tr><tr><td>No locked rooms</td><td>Requires a custom placer; zero still locks one</td></tr><tr><td>Different penalties</td><td>RescueAction with RescueRewards</td></tr><tr><td>Decoys and health updates</td><td>Custom study placer and update logic</td></tr><tr><td>Repeat an initial map</td><td>Seed both RNG paths and restart the script</td></tr></tbody></table>
+<aside class="notes">Keep square maps and modest densities. A positive advice interval is required. Source: sar/placers.py, actions.py, gui/main.py.</aside>
 </section>
-<section id="the-full-protocol" class="slide level2">
-<h2>The Full <span class="accent">Protocol</span></h2>
-<div class="flow-diagram horizontal fill short">
-<div class="flow-step secondary">
-<p><span class="step-num">Before</span></p>
-<p><strong>1 · Eye-tracker calibration</strong><br>
-Tobii — skipped automatically if there is no tracker</p>
-<p><strong>2 · Visual search</strong><br>
-Baseline attention</p>
-<p><strong>3 · Multi-object tracking</strong><br>
-Baseline tracking capacity</p>
-</div>
-<div class="flow-step">
-<p><span class="step-num">During</span></p>
-<p><strong>4 · Tutorial</strong><br>
-Single-room practice, same controls</p>
-<p><strong>5 · Main SAR mission</strong><br>
-With the AI advisor, streamed over LSL frame by frame</p>
-</div>
-<div class="flow-step secondary">
-<p><span class="step-num">After</span></p>
-<p><strong>6 · SART</strong><br>
-Situation awareness</p>
-<p><strong>7 · NASA-TLX</strong><br>
-Perceived workload</p>
-</div>
-</div>
-<div class="punchline">
-<p>One runner drives all seven phases — baselines, the mission, and the surveys <span class="accent">land in one session</span>.</p>
-</div>
-</section>
-<section id="synchronized-instrumentation" class="slide level2">
-<h2>Synchronized <span class="accent">Instrumentation</span></h2>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p>Every frame of the main mission is streamed over <strong>Lab Streaming Layer</strong> as one record:</p>
-<ul>
-<li>Full grid state, agent pose, camera bounds</li>
-<li>Action taken and reward received</li>
-<li>Advice text, with request and response timestamps</li>
-<li>Gaze coordinates from the Tobii bridge</li>
-<li>Participant ID, trial number, condition order</li>
-</ul>
-<div class="punchline">
-<p>One clock. One file. <span class="accent">Areas-of-interest analysis afterwards</span>, against the exact frame the participant saw.</p>
-</div>
-</div><div class="column" style="width:45%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="co"># replay any session, frame by frame</span></span>
-<span id="cb29-2"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> experiment.replay <span class="dt">\</span></span>
-<span id="cb29-3"><a href=""></a>  <span class="at">--file</span> session_p07.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>No eye tracker in your lab? The protocol detects that and skips it.</p>
-</div></div>
-</section>
-<section id="where-mosaic-is-headed" class="slide level2">
-<h2>Where MOSAIC Is <span class="accent">Headed</span></h2>
-<div class="cards cols-2 fill">
-<div class="card">
-<p><span class="card-title">PyPI Release</span> <span class="badge">Next</span></p>
-<p><code>pip install mosaic</code> with no clone and no dependency workaround — Part 2 of this tutorial gets three slides shorter.</p>
-<div class="card-meta">
-<p>Fixes the pygame-ce trap</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Gymnasium Registration</span> <span class="badge">Next</span></p>
-<p><code>gym.make("MOSAIC-SAR-v0")</code> for the RL side of the room. The environment is already Gymnasium-compatible.</p>
-<div class="card-meta">
-<p>Train agents on the same task people play</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">JOSS Submission</span> <span class="badge">Next</span></p>
-<p>A citable software paper, with the API and docs to match.</p>
-<div class="card-meta">
-<p>Something to cite in your methods section</p>
-</div>
-</div>
-<div class="card secondary">
-<p><span class="card-title">Beyond SAR</span> <span class="badge secondary">Later</span></p>
-<p>The same modular pieces — environment, interface, advisor, sensing — in other collaborative domains.</p>
-<div class="card-meta">
-<p>Same blocks, a new task</p>
-</div>
-</div>
-</div>
-
+<section id="sources" class="slide level2" data-background-color="#252525">
+<h2>Appendix: <span class="accent">source guide</span></h2>
+<table><thead><tr><th>Question</th><th>Starting point</th></tr></thead><tbody><tr><td>What is MOSAIC?</td><td>README.md, REFERENCE.md, docs/index.md</td></tr><tr><td>What runs?</td><td>pyproject.toml, sar/env.py, gui/main.py</td></tr><tr><td>Which controls and rules?</td><td>gui/user.py, sar/actions.py, sar/objects.py</td></tr><tr><td>How can I extend it?</td><td>core/camera.py, llm/client.py, src/experiment/</td></tr><tr><td>Where are the website sources?</td><td>docs/ and the rendered gh-pages branch</td></tr></tbody></table><p><a href="REFERENCES.html">Detailed source and version notes</a> · <a href="#/route">Return to tutorial</a></p>
+<aside class="notes">Code snapshot a409222534dcd234dd2925a5adab8da9db17e6b2. Reviewed gh-pages snapshot 67ea20400710de7edcd296ddce39821b00173f7c. Some website examples lag the code; executable signatures and behavior guide the tutorial.</aside>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -1365,7 +640,7 @@ Perceived workload</p>
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
-          RevealMath,
+
           RevealNotes,
           RevealSearch,
           RevealZoom
@@ -1542,4 +817,5 @@ Perceived workload</p>
       </script>
     
 
+<script src="tutorial.js"></script>
 </body></html>

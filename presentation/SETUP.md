@@ -1,184 +1,314 @@
-# MOSAIC Tutorial — Attendee Setup
+# MOSAIC tutorial setup and exercises
 
-**IEEE SMC 2026 · Bellevue, WA · 90-minute hands-on tutorial**
+Use a laptop with a desktop display, terminal and text editor. The exercises need no API key, GPU or sensor hardware. Complete installation before the session if possible.
 
-Please do this **before you arrive**. It takes about five minutes on conference
-Wi-Fi and under a minute on a good connection.
+This guide targets **Python 3.12** and MOSAIC commit **a409222534dcd234dd2925a5adab8da9db17e6b2**. Earlier checks of the exercise behavior used Linux with Python 3.12.14. Rehearse on Windows and macOS before conference delivery.
 
-## Requirements
+## 1. Python and Git
 
-- Python **3.10 or newer** (`python3 --version`). `pyproject.toml` still claims
-  3.8 — do not believe it; we test on 3.10.
-- Git
-- A laptop with a real display — the game opens a window, so a remote/SSH-only
-  machine or Colab will not work for the GUI
-- No API key is required. The AI advisor falls back to a built-in stub.
+### Windows
 
-## 1 · Clone and isolate
+Install [Python 3.12](https://www.python.org/downloads/release/python-31210/) and [Git for Windows](https://git-scm.com/downloads/win). Include the Python launcher and PATH option if offered. Reopen PowerShell.
 
-**macOS / Linux**
+~~~powershell
+py -3.12 --version
+git --version
+~~~
 
-```bash
-git clone https://github.com/iHuman-Lab/mosaic.git
+If typing python opens the Microsoft Store, use py -3.12 until the environment is active. If py is missing, add the launcher through the installer.
+
+### macOS
+
+Install [Python 3.12](https://www.python.org/downloads/release/python-31210/) and follow the [Git installation options](https://git-scm.com/downloads/mac). Apple's Command Line Tools are one route: run xcode-select --install, complete installation, and reopen Terminal.
+
+~~~bash
+python3.12 --version
+git --version
+~~~
+
+### Ubuntu 24.04
+
+~~~bash
+sudo apt update
+sudo apt install python3 python3-venv python3-pip git
+python3 --version
+git --version
+~~~
+
+Ubuntu 24.04 uses Python 3.12. On an older release, use a separately installed Python 3.12 interpreter with matching venv support, or a prepared Ubuntu 24.04 machine. Do not replace the system Python. Other distributions need their own package-manager commands.
+
+**Checkpoint:** Python and Git both print version numbers.
+
+## 2. Download both repositories
+
+Run in a folder where you keep projects. Use a fresh workshop folder if an existing clone has local changes.
+
+~~~bash
+git clone https://github.com/Bkdogbey/mosaic.git
+git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
+git -C mosaic-smc-tutorial switch tutorial/task-focused-redesign
 cd mosaic
+git checkout a409222534dcd234dd2925a5adab8da9db17e6b2
+~~~
+
+Detached HEAD is expected: the workshop selects a fixed software revision. Public clones do not need a GitHub account.
+
+The folders must be siblings for the relative paths below:
+- mosaic contains the software and its .venv environment.
+- mosaic-smc-tutorial/presentation contains the slides and labs.
+
+If using GitHub's Download ZIP instead, select the correct revision/branch and rename the extracted folders to these names.
+
+## 3. Create and select a virtual environment
+
+Run inside **mosaic**.
+
+### Windows PowerShell
+
+~~~powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+~~~
+
+### Windows Command Prompt
+
+~~~bat
+py -3.12 -m venv .venv
+.venv\Scripts\activate.bat
+~~~
+
+### macOS
+
+~~~bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+~~~
+
+### Ubuntu 24.04
+
+~~~bash
 python3 -m venv .venv
 source .venv/bin/activate
-```
+~~~
 
-**Windows PowerShell**
+Check the selected interpreter:
 
-```powershell
-git clone https://github.com/iHuman-Lab/mosaic.git
-cd mosaic
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-```
+~~~bash
+python -c "import sys; print(sys.executable)"
+~~~
 
-✓ **Checkpoint** — your prompt now starts with `(.venv)`. If it does not, the
-next step installs into the wrong Python.
+**Checkpoint:** the path contains mosaic and .venv. Use python -m pip so installation targets this interpreter.
 
-> Ubuntu: if you see `ensurepip is not available`, run
-> `sudo apt install python3-venv`, delete `.venv`, and repeat.
+### PowerShell activation is blocked
 
-## 2 · Install the package
+Activation is optional. Use the venv Python directly for every command. This route covers installation, repair and first launch without changing execution policy:
 
-```bash
-pip install -e .
-```
+~~~powershell
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m pip install tabulate
+.\.venv\Scripts\python.exe -m pip uninstall -y pygame
+.\.venv\Scripts\python.exe -m pip install --force-reinstall pygame-ce==2.5.8
+.\.venv\Scripts\python.exe -c "from mosaic.gui.main import SAREnvGUI; print('GUI imports OK')"
+cd ../mosaic-smc-tutorial/presentation
+..\..\mosaic\.venv\Scripts\python.exe labs/check_install.py
+..\..\mosaic\.venv\Scripts\python.exe labs/play.py
+~~~
 
-```text
-Successfully installed ... minigrid-3.1.0 mosaic-0.1.0 numpy-2.2.6
-  pygame-2.6.1 pygame-ce-2.5.8 pygame_gui-0.6.14 ...
-```
+Alternatively, use CMD activation.
 
-✓ **Checkpoint** — note that it installed **both** `pygame` and `pygame-ce`, and
-`pygame` landed last. That is the bug the next step fixes.
+## 4. Install the base package
 
-## 3 · Fix the two packaging gaps
+Inside **mosaic**, with the venv selected:
 
-```bash
-pip uninstall -y pygame
-pip install --force-reinstall "pygame-ce>=2.5.2"
-```
+~~~bash
+python -m pip install --upgrade pip
+python -m pip install -e .
+python -m pip install tabulate
+~~~
 
-`--force-reinstall` is **required**. Uninstalling `pygame` deletes files from the
-shared `pygame` namespace that `pygame-ce` also owns; a plain
-`pip install pygame-ce` then reports "Requirement already satisfied" and repairs
-nothing.
+The editable install points to this source folder. tabulate supports the custom advisor's prompt builder. The base install does not include the full study framework.
 
-You will see `ERROR: mosaic 0.1.0 requires pygame, which is not installed.` —
-**expected and harmless.** That is `pyproject.toml` naming the wrong package;
-`pygame-ce` satisfies it in practice.
+### Graphics dependency repair
 
-One more undeclared dependency — the advisor's prompt builder needs it, so the
-`Alt` key does nothing without it:
+For this pinned revision:
 
-```bash
-pip install tabulate
-```
+~~~bash
+python -m pip uninstall -y pygame
+python -m pip install --force-reinstall pygame-ce==2.5.8
+~~~
 
-✓ **Checkpoint**
+MOSAIC declares pygame, while MiniGrid and pygame_gui use pygame-ce. Both occupy the pygame import namespace. Removing pygame can delete shared files, so **keep --force-reinstall**.
 
-```bash
-python -c "from mosaic.gui.main import SAREnvGUI; print('GUI OK')"
-```
+The specific warning that mosaic requires pygame remains as a package-metadata conflict after this repair. Other dependency or installation failures need investigation. Installing MOSAIC dependencies again may restore plain pygame and require the repair again.
 
-```text
-pygame-ce 2.5.8 (SDL 2.32.10, Python 3.10.20)
-GUI OK
-```
+~~~bash
+python -c "from mosaic.gui.main import SAREnvGUI; print('GUI imports OK')"
+~~~
 
-### Why any of this is necessary
+**Checkpoint:** GUI imports OK appears.
 
-MOSAIC's interface is built on `pygame_gui`, which requires **pygame-ce** (the
-community edition). `pyproject.toml` declares plain `pygame`. Both install into
-the same `pygame` namespace, and the loser gets shadowed. The symptom is an
-import error at startup:
+## 5. Verify the exercises
 
-```
-ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'
-```
+Keep the same terminal and environment:
 
-This is a known packaging issue and will be resolved in the PyPI release.
+~~~bash
+cd ../mosaic-smc-tutorial/presentation
+python labs/check_install.py
+~~~
 
-## 4 · Verify
+The checker prints versions, constructs a world, takes an action, renders an RGB frame and exercises the offline advisor. Expected final line:
 
-```bash
-python -c "
-from mosaic.sar.env import build_sar_env
-from mosaic.sar.placers import VictimPlacer
-env = build_sar_env(screen_size=600, num_rows=2, num_cols=2, room_size=8,
-                    victim_placer=VictimPlacer(num_real_victims=2))
-env.reset(seed=0)
-print('MOSAIC OK —', env.get_mission_status())
-"
-```
+~~~text
+MOSAIC CHECK PASSED
+~~~
 
-Expected output:
+Default requested victims: 2 × 2 × 2 = 8. The actual count can be lower in crowded configurations or after spawn-cell clearing. Inspect the actual mission output.
 
-```
-MOSAIC OK — {'status': 'continue', 'saved_victims': 0, 'remaining_victims': 8}
-```
+## 6. Play
 
-Eight, not two: `num_real_victims` is **per room**, and a 2×2 building has four
-rooms.
+From **mosaic-smc-tutorial/presentation**:
 
-Lines reading `Timeout during mission generation: connect_all failed` or
-`Sampling rejected: unreachable object at ...` may appear. Both are the level
-generator retrying — warnings, not errors.
-
-## 5 · Play
-
-```bash
+~~~bash
 python labs/play.py
-```
+~~~
+
+Click the window, press Left and confirm the agent turns. F11 toggles fullscreen; Esc closes.
 
 | Key | Action |
 | --- | --- |
-| `↑` | Move forward |
-| `←` `→` | Turn left / right |
-| `Space` | Open a door |
-| `Tab` or `Page Up` | Rescue (pick up) |
-| `Left Shift` or `Page Down` | Drop the key you are carrying |
-| `Alt` | Ask the AI advisor |
-| `Backspace` | Restart the mission |
-| `F11` | Toggle fullscreen |
-| `Esc` | Quit |
+| Up | Move forward |
+| Left / Right | Turn in place |
+| Space | Open or close the door in front; unlock using a matching key |
+| Tab / Page Up | Rescue a victim or pick up a key in front |
+| Left Shift / Page Down | Drop a key on a free tile in front |
+| Alt | Request advice |
+| Backspace | Generate another mission |
+| F11 | Toggle fullscreen |
+| Esc | Quit |
 
-The published docs also list `W` for forward — it is not actually mapped. Use the
-arrow keys.
+W is not mapped. Face objects before interacting. The default client in play.py returns “Currently, no commands are available.”
+
+The basic GUI resets immediately after termination, including a lava collision. Its countdown is displayed but not enforced. Health depletion and experimental timing need additional study logic.
+
+## Returning in a new terminal
+
+From the common parent folder, select the existing environment. Do not reinstall.
+
+**Windows PowerShell**
+
+~~~powershell
+.\mosaic\.venv\Scripts\Activate.ps1
+cd mosaic-smc-tutorial/presentation
+python labs/play.py
+~~~
+
+**macOS / Linux**
+
+~~~bash
+source mosaic/.venv/bin/activate
+cd mosaic-smc-tutorial/presentation
+python labs/play.py
+~~~
+
+For blocked PowerShell activation, enter presentation and use ..\..\mosaic\.venv\Scripts\python.exe instead of python.
+
+## Exercises
+
+### Rescue a victim
+
+Run play.py. Plan a route, stand beside a real victim, face it and press Tab. Observe the saved count. Use an early rescue because the final one can immediately reset the map.
+
+### Change the building
+
+Edit NUM_ROWS and NUM_COLS in labs/play.py from 2 to 3, save, close and rerun. Predict the requested count, then compare it with the game. Restore 2×2 afterward.
+
+Keep maps square on this revision. Use modest densities. Set LAVA_ENABLED=False to remove lava; a zero LAVA_PER_ROOM invokes random placement. Keep LOCKED_ROOM_PROB below 1.0; even zero locks one room in the current placer.
+
+### Compare cameras
+
+Run python labs/tweak.py with CAMERA="room", then CAMERA="cone". Restart each script with identical map settings and seed. Describe what disappears as you turn.
+
+The script seeds both Python random and the environment, then the GUI performs another reset at launch. Fresh script launches repeat that initialization sequence. Backspace advances to another map. Save the actual initial state for research, not just a seed.
+
+### Replace the advice text
+
+Run python labs/advisor.py, move or turn once, then press Alt. Edit the returned sentence in ControlsAdvisor.query(), save and rerun.
+
+This client supplies a fixed controls reminder. It does not assess route correctness or implement a calibrated reliability condition.
+
+### Inspect a scripted trace
+
+~~~bash
+python labs/record.py
+~~~
+
+Open recordings/demo.jsonl. It contains three scripted turns with observations, actions, rewards, termination flags and events. Rerunning overwrites this demo file.
+
+For human sessions, record actual GUI actions and timestamps before automatic resets. The full grid includes information outside the player's view. The observation image is MiniGrid encoding; env.render() supplies RGB.
 
 ## Troubleshooting
 
-| Symptom | Cause and fix |
+| Symptom | Action |
 | --- | --- |
-| `ImportError: cannot import name 'DIRECTION_LTR'` | You skipped step 3. |
-| `AttributeError: module 'pygame' has no attribute 'surface'` | You ran step 3 without `--force-reinstall`. Rerun it with the flag. |
-| `ERROR: mosaic 0.1.0 requires pygame` | Harmless warning from step 3, not an error. Carry on. |
-| `ensurepip is not available` | `sudo apt install python3-venv`, delete `.venv`, remake it. |
-| `ModuleNotFoundError: No module named 'mosaic'` | The virtual environment is not active, or `pip install -e .` did not finish. |
-| Window appears and closes immediately | You built the environment but did not call `env.reset()` before launching the GUI. |
-| `Timeout during mission generation` / `Sampling rejected` | Harmless warnings; the generator retries automatically. |
-| Hangs forever with no window, after changing settings | You set `locked_room_prob=1.0`. Every room locked leaves no solvable layout and the generator retries forever. Use `0.9` or less. |
-| `AttributeError: 'FullviewCamera' object has no attribute 'reset'` | Known bug. Use `AgentFOVCamera`, `AgentConeCamera`, or the default `EdgeFollowCamera`. |
-| Nothing renders, or `pygame.error: No available video device` | You are on a headless or remote machine. Use a local laptop. |
-| `Alt` does nothing, or `Missing optional dependency 'tabulate'` | `pip install tabulate`. It is undeclared but required by the advisor's prompt builder. |
-| Font warnings from `pygame_gui` | Harmless. |
+| Python or Git not found | Finish installation, reopen the terminal, use py -3.12 on Windows |
+| ensurepip unavailable | Install matching venv support and recreate the incomplete environment |
+| PowerShell blocks scripts | Use the direct venv interpreter or CMD activation |
+| externally-managed-environment | Select the project venv rather than system Python |
+| No module named mosaic | Check sys.executable and install from the MOSAIC folder with that interpreter |
+| Cannot open labs/play.py | Change to mosaic-smc-tutorial/presentation |
+| DIRECTION_LTR or missing pygame.surface | Repeat graphics repair with --force-reinstall |
+| Missing tabulate | Install with the selected venv's python -m pip |
+| No available video device | Use a desktop display; native Windows Python is the simplest Windows route |
+| Window too large | Set SCREEN_SIZE=500 or use F11 |
+| Alt gives a neutral reply | Expected in play.py; use advisor.py for a custom reply |
+| Input pauses during advice | This GUI ignores keys while the advisor thread runs |
+| Countdown expires but game continues | Base GUI behavior; implement the study stopping rule |
+| Repeated generation messages | Ctrl+C and restore the small default map, modest densities and locking below 1 |
+| FullviewCamera has no reset | Use EdgeFollowCamera, AgentFOVCamera or AgentConeCamera |
+| ZeroDivisionError after a keypress | Keep llm_nudge_interval positive |
+| Font warnings with a working window | Lazy font loading alone does not indicate installation failure |
+| Network or package download failure | Check the first failed command and permitted network access; pair with a prepared laptop if needed |
 
-If you are still stuck when you arrive, come to the front — we have helpers and a
-pre-built environment on a spare machine.
+For a report, include OS, Python version, interpreter path, MOSAIC commit, command and complete error. Do not include API keys.
 
-## Optional — a real LLM advisor
+## Optional study extensions
 
-Only needed if you want to use OpenAI or Gemini during the session. Everything in
-the tutorial works without it.
+### Configuration ownership
 
-```bash
-pip install llama_index
-export OPENAI_API_KEY="sk-..."     # or GOOGLE_API_KEY
-```
+The labs use Python constants, not configs/experiment.yaml. Environment settings, GUI settings and participant/session settings have different owners.
+
+### Decoys, health and outcomes
+
+Default VictimPlacer adds real victims with neutral initial health. The study-specific LavaRiskVictimPlacer in src/experiment/placers.py adds decoys and health tuning. src/experiment/game.py wires health updates and timing. Setting initial health alone does not make it decay.
+
+RescueAction with RescueRewards changes penalty magnitudes. A decoy penalty requires decoys in the world. The current verifier checks removal of all real victims, including dead ones; define a living-rescue outcome separately if needed. Custom rescue handling also bypasses the normal MiniGrid step increment.
+
+### External model providers
+
+LLMClient is the reusable contract. src/experiment/llm.py contains LlamaIndex provider adapters. They require compatible provider packages, credentials and a model. The tutorial itself makes no external model calls.
+
+For research, define what the prompt can see and log requests and responses. Evaluate correctness against an independent task oracle or annotations. A random label is not ground truth.
+
+### Full study runner
+
+The actual file is src/experiment/experiment.py, not experiment_main.py. It imports ixp, Ray and device-related packages. Arrange access to the lab framework and configure task blocks, sensors and imports first. Installing the experiment extra adds LlamaIndex but does not resolve every study dependency.
+
+Run modules from the MOSAIC root because configuration paths are repository-relative. Expose src with PYTHONPATH=src on macOS/Linux or $env:PYTHONPATH = "src" in PowerShell.
+
+### Replay
+
+After recording the scripted trace, from presentation:
+
+~~~bash
+python ../../mosaic/src/experiment/replay.py recordings/demo.jsonl
+~~~
+
+The argument is a positional JSONL filename, not --file. Space pauses, Left/Right step while paused and Esc quits. Replay reconstructs an encoded map view, not the original GUI pixel for pixel.
 
 ## Links
 
-- Repository — <https://github.com/iHuman-Lab/mosaic>
-- Documentation — <https://ihuman-lab.github.io/mosaic/>
+- [Tutorial branch](https://github.com/Bkdogbey/mosaic-smc-tutorial/tree/tutorial/task-focused-redesign)
+- [Pinned MOSAIC source](https://github.com/Bkdogbey/mosaic/tree/a409222534dcd234dd2925a5adab8da9db17e6b2)
+- [MOSAIC documentation](https://ihuman-lab.github.io/mosaic/)
+- [Python virtual environments](https://docs.python.org/3/library/venv.html)
