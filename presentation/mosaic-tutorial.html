@@ -99,7 +99,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-4628f15d78dd8b1787c20248d7929cd1.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-09402fe21dcbce45bcd9d5c87d78123c.css">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -213,23 +213,6 @@ Bennett Kwaku Dogbey
 
   <p class="date">October 4, 2026</p>
 </section>
-<section id="start-your-install-now" class="slide level2">
-<h2>Start Your <span class="accent">Install</span> Now</h2>
-<div class="hook">
-<p>Do this first — it runs in the background while we talk.</p>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
-<span id="cb1-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
-<span id="cb1-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv <span class="kw">&amp;&amp;</span> <span class="bu">source</span> .venv/bin/activate   <span class="co"># Windows: .venv\Scripts\activate</span></span>
-<span id="cb1-4"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
-<span id="cb1-5"><a href=""></a><span class="ex">pip</span> uninstall <span class="at">-y</span> pygame</span>
-<span id="cb1-6"><a href=""></a><span class="ex">pip</span> install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
-<span id="cb1-7"><a href=""></a><span class="ex">pip</span> install tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="punchline">
-<p>Those last two lines are <span class="accent">not optional</span> — Part 2 explains why.</p>
-</div>
-<p>Three parts today: <span class="accent">what it is</span> · <span class="accent">getting it running</span> · <span class="accent">playing with it</span>.</p>
-</section>
 <section class="slide level2">
 
 <!-- ============ PART 1 ============ -->
@@ -242,98 +225,150 @@ Bennett Kwaku Dogbey
 </div>
 </section>
 <section id="what-is-mosaic" class="slide level2">
-<h2>What is <span class="accent">MOSAIC</span>?</h2>
+<h2>What Is <span class="accent">MOSAIC</span>?</h2>
 <div class="columns">
-<div class="column" style="width:55%;">
+<div class="column" style="width:60%;">
 <div class="hook">
-<p>A modular testbed for human–AI collaboration.</p>
+<p>A modular platform for human–AI collaboration research.</p>
 </div>
-<p>A grid-based <strong>search-and-rescue</strong> simulation, built on <a href="https://github.com/Farama-Foundation/Minigrid">MiniGrid</a>, where a human operator, an AI advisor, or both together must rescue survivors from a burning building before time runs out.</p>
-<p>Named for the art of building one coherent picture from many small tiles — which is both what the platform does and what the world literally looks like.</p>
+<p>Configurable interactive environments, AI assistance, human interfaces, and synchronized data collection — built on <a href="https://github.com/Farama-Foundation/Minigrid">MiniGrid</a>.</p>
+<p>Its first testbed is a <strong>search-and-rescue</strong> game: rescue survivors from a burning building before time runs out.</p>
 <div class="punchline">
 <p>Many pieces, <span class="accent">one picture</span>.</p>
 </div>
-</div><div class="column" style="width:45%;">
+</div><div class="column" style="width:40%;">
 <p><img data-src="assets/game-view.png"></p>
 </div></div>
 </section>
-<section id="the-pieces" class="slide level2">
-<h2>The <span class="accent">Pieces</span></h2>
-<div class="arch">
-<div class="arch-row">
-<div class="arch-block">
-<p><span class="arch-title">Human Operator</span></p>
-<p>Keyboard in, eyes on the screen — seven actions, one key each</p>
+<section id="why-was-mosaic-created" class="slide level2">
+<h2>Why Was MOSAIC <span class="accent">Created</span>?</h2>
+<div class="hook">
+<p>What does a human–AI teaming study actually need?</p>
 </div>
-<div class="arch-block">
-<p><span class="arch-title">AI Advisor</span></p>
-<p>Anything with a <code>query()</code> method — GPT, Gemini, a scripted rule, or the built-in stub</p>
+<ul>
+<li><strong>Decisions have to matter.</strong> A task you can solve alone measures nothing about teaming.</li>
+<li><strong>Conditions have to be repeatable.</strong> Another lab should run your exact condition, not their approximation of it.</li>
+<li><strong>Everything shares one clock.</strong> Human actions, AI advice, performance and sensor data are only comparable when timestamped together.</li>
+<li><strong>Reconfiguring, not rebuilding.</strong> Your manipulation should be a setting, not a fork of the codebase.</li>
+</ul>
+<div class="punchline">
+<p>Most testbeds manage two of these. MOSAIC is our attempt at <span class="accent">all four at once</span>.</p>
+</div>
+</section>
+<section id="the-search-and-rescue-scenario" class="slide level2">
+<h2>The <span class="accent">Search-and-Rescue</span> Scenario</h2>
+<div class="annotated">
+<p><img data-src="assets/gui-screenshot.png" height="470"></p>
+<div class="anno fragment" style="--x:34%; --y:11%; --w:6%; --h:8%;">
+<p>You — one operator, a building of rooms</p>
+</div>
+<div class="anno fragment below" style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px;">
+<p>Victims — and lookalike decoys</p>
+</div>
+<div class="anno fragment" style="--x:26%; --y:60%; --w:21%; --h:21%;">
+<p>Lava — instant mission failure</p>
+</div>
+<div class="anno fragment" style="--x:60%; --y:59%; --w:8%; --h:12%; --lx:-90px; --ly:-34px;">
+<p>Locked door — bring a key</p>
+</div>
+<div class="anno fragment below" style="--x:67%; --y:0%; --w:32%; --h:26%;">
+<p>Time and victim health both run down</p>
+</div>
+<div class="anno fragment mid" style="--x:67%; --y:50%; --w:32%; --h:48%;">
+<p>The AI teammate</p>
 </div>
 </div>
-<div class="arch-link">
-<p>▼ key presses · advice requests · ▲ what they see · what it says</p>
+<div class="punchline">
+<p>Navigate, search, discriminate, and finish before the clock or the survivors <span class="accent">run out</span>.</p>
 </div>
-<div class="arch-row">
-<div class="arch-block">
-<p><span class="arch-title">Interface</span></p>
-<p>Game view · mission status panel · chat panel · peripheral feedback at the screen edge</p>
+</section>
+<section id="how-humanai-collaboration-happens" class="slide level2">
+<h2>How Human–AI <span class="accent">Collaboration</span> Happens</h2>
+<div class="flow-diagram horizontal fill short">
+<div class="flow-step">
+<p><span class="step-num">1</span></p>
+<p><strong>Observe</strong></p>
+<p>The participant reads the room — what they can see, and what the mission still needs.</p>
+</div>
+<div class="flow-step">
+<p><span class="step-num">2</span></p>
+<p><strong>Decide</strong></p>
+<p>Act alone, or ask the AI teammate for advice.</p>
+</div>
+<div class="flow-step">
+<p><span class="step-num">3</span></p>
+<p><strong>Advise</strong></p>
+<p>The AI examines the current game state and answers in the chat panel.</p>
+</div>
+<div class="flow-step">
+<p><span class="step-num">4</span></p>
+<p><strong>Respond</strong></p>
+<p>They accept it, ignore it, or do something else entirely.</p>
+</div>
+<div class="flow-step secondary">
+<p><span class="step-num">5</span></p>
+<p><strong>Record</strong></p>
+<p>Action, advice, outcome and sensor data — all on one clock.</p>
 </div>
 </div>
-<div class="arch-link">
-<p>▼ action · ▲ observation and reward</p>
+<div class="punchline">
+<p>Almost everything worth measuring lives in the gap between <span class="accent">step 3 and step 4</span>.</p>
 </div>
+</section>
+<section id="the-main-parts-of-mosaic" class="slide level2">
+<h2>The Main <span class="accent">Parts</span> of MOSAIC</h2>
+<div class="arch fill short">
 <div class="arch-row">
 <div class="arch-block">
 <p><span class="arch-title">Environment</span></p>
-<p>The building, the survivors, the hazards, the scoring — every one of them a constructor argument</p>
+<p>Rooms, victims, hazards, doors, rewards — and the rules of the mission</p>
+</div>
+<div class="arch-block">
+<p><span class="arch-title">Human Interface</span></p>
+<p>The game view, the controls, mission information, and the AI chat panel</p>
 </div>
 </div>
 <div class="arch-row">
-<div class="arch-block secondary">
-<p><span class="arch-title">Sensing &amp; Logging</span></p>
-<p>One record per frame, eye tracking on the same clock</p>
+<div class="arch-block">
+<p><span class="arch-title">AI Advisor</span></p>
+<p>Scripted, LLM-based, or any other advisor a researcher defines</p>
 </div>
 <div class="arch-block secondary">
-<p><span class="arch-title">Analytics</span></p>
-<p>Frame-exact replay · areas of interest · workload surveys</p>
-</div>
-</div>
-</div>
-</section>
-<section id="why-it-exists" class="slide level2">
-<h2>Why It <span class="accent">Exists</span></h2>
-<div class="cards cols-2 fill short">
-<div class="card">
-<p><span class="card-title">Hard Enough</span></p>
-<p>The participant must genuinely <em>need</em> help. A task you can solve alone measures nothing about teaming.</p>
-<div class="card-meta">
-<p>Time budget · decaying survivors · lava · locked doors · decoys</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Instrumented</span></p>
-<p>Every action, every glance, every piece of advice — timestamped and on one clock.</p>
-<div class="card-meta">
-<p>One record per frame, over Lab Streaming Layer</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Reproducible</span></p>
-<p>Another lab should be able to run your exact condition, not their approximation of it.</p>
-<div class="card-meta">
-<p>Seeded worlds · conditions in YAML · replay from the log</p>
-</div>
-</div>
-<div class="card">
-<p><span class="card-title">Reconfigurable</span></p>
-<p>Your manipulation should be a parameter, not a fork of the codebase.</p>
-<div class="card-meta">
-<p>World · view · scoring · logging · advisor — all injected</p>
+<p><span class="arch-title">Experiment System</span></p>
+<p>Configuration, sensors, logging, surveys, and replay</p>
 </div>
 </div>
 </div>
 <div class="punchline">
-<p>Most testbeds get two of these. MOSAIC is our attempt at <span class="accent">all four</span>.</p>
+<p>Four parts you can change <span class="accent">one at a time</span> — that is what modular buys you.</p>
+</div>
+</section>
+<section id="what-can-mosaic-be-used-for" class="slide level2">
+<h2>What Can MOSAIC Be <span class="accent">Used For</span>?</h2>
+<div class="cards cols-3 fill short">
+<div class="card">
+<p><span class="card-title">Interactive Mode</span></p>
+<p>A human plays the search-and-rescue game on their own.</p>
+</div>
+<div class="card">
+<p><span class="card-title">Human–AI Mode</span></p>
+<p>The participant plays alongside an AI teammate they can ask for advice.</p>
+</div>
+<div class="card">
+<p><span class="card-title">Experiment Mode</span></p>
+<p>The complete study protocol, with sensing and logging throughout.</p>
+</div>
+<div class="card">
+<p><span class="card-title">Programmatic Use</span></p>
+<p>Scripted AI agents and Gymnasium-compatible experimentation, no GUI required.</p>
+</div>
+<div class="card secondary" style="grid-column: span 2;">
+<p><span class="card-title">Replay and Analysis</span></p>
+<p>Review a recorded session frame by frame, against the exact world the participant saw.</p>
+</div>
+</div>
+<div class="punchline">
+<p>Now that we understand the platform, let’s <span class="accent">install it</span> and run our first mission.</p>
 </div>
 </section>
 <section class="slide level2">
@@ -346,6 +381,23 @@ Bennett Kwaku Dogbey
 <p><span class="stop">What it is</span> <span class="stop here">Install</span> <span class="stop">Use it</span></p>
 </div>
 </div>
+</section>
+<section id="install-in-seven-lines" class="slide level2">
+<h2>Install in <span class="accent">Seven Lines</span></h2>
+<div class="hook">
+<p>If you copy one slide today, copy this one.</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
+<span id="cb1-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
+<span id="cb1-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv <span class="kw">&amp;&amp;</span> <span class="bu">source</span> .venv/bin/activate   <span class="co"># Windows: .venv\Scripts\activate</span></span>
+<span id="cb1-4"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
+<span id="cb1-5"><a href=""></a><span class="ex">pip</span> uninstall <span class="at">-y</span> pygame</span>
+<span id="cb1-6"><a href=""></a><span class="ex">pip</span> install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
+<span id="cb1-7"><a href=""></a><span class="ex">pip</span> install tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="punchline">
+<p>Those last three lines are <span class="accent">not optional</span> — the next few slides explain why.</p>
+</div>
+<p>The rest of Part Two walks the same seven lines slowly, with a checkpoint after each one.</p>
 </section>
 <section id="before-you-start" class="slide level2">
 <h2>Before You <span class="accent">Start</span></h2>

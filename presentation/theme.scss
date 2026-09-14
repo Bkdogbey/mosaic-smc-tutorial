@@ -629,6 +629,20 @@ $heading-font: "Rubik", sans-serif !default;
     gap: 1rem;
 }
 
+/* Fill mode — ::: {.arch .fill} stretches the rows down the slide, for a diagram with
+   few enough blocks that it would otherwise sit in the top third. Add .short when a
+   punchline follows, so there is room for it. Mirrors .cards.fill / .cards.fill.short. */
+.arch.fill { min-height: 500px; }
+.arch.fill.short { min-height: 410px; }
+
+.arch.fill .arch-row { flex: 1; }
+
+.arch.fill .arch-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .arch-block {
     flex: 1;
     background: rgba(255,255,255,0.05);
@@ -777,6 +791,72 @@ $heading-font: "Rubik", sans-serif !default;
     font-size: 0.6em;
     color: rgba(255,255,255,0.65);
 }
+
+/* Annotated screenshot — ::: {.annotated} wraps one image plus ::: {.anno} regions.
+   Each .anno takes --x/--y/--w/--h as percentages of the image and outlines a region
+   with a label. Add .fragment to reveal them one at a time; .below/.left/.right/.mid
+   move the label off its default position above the region, and --lx/--ly nudge it
+   in pixels when two labels would otherwise collide.
+   width: fit-content is what makes the percentages track the image, not the slide. */
+.annotated {
+    position: relative;
+    width: fit-content;
+    margin: 0.4rem auto 0;
+}
+
+/* The wrapper paragraph Quarto puts around the image must collapse onto the image
+   exactly, or every percentage below is measured against the wrong box: reveal adds
+   `margin: 15px 0` to content images and an inline image also carries a descender
+   line-box. Block display plus zero line-height removes both. */
+.annotated > p {
+    margin: 0;
+    line-height: 0;
+    font-size: 0;
+}
+
+.annotated img {
+    display: block;
+    margin: 0 !important;
+    max-width: none;
+}
+
+.annotated p {
+    margin: 0;
+}
+
+.anno {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--w);
+    height: var(--h);
+    border: 3px solid $primary-color;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.anno p {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 6px);
+    transform: translate(calc(-50% + var(--lx, 0px)), var(--ly, 0px));
+    white-space: nowrap;
+    font-size: 0.5em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    background: $primary-color;
+    padding: 0.15em 0.6em;
+    border-radius: 4px;
+}
+
+.anno.below p { bottom: auto; top: calc(100% + 6px); }
+.anno.mid   p { bottom: auto; top: 50%; transform: translate(calc(-50% + var(--lx, 0px)), calc(-50% + var(--ly, 0px))); }
+.anno.left  p { left: auto; right: calc(100% + 8px); bottom: auto; top: 50%; transform: translate(var(--lx, 0px), calc(-50% + var(--ly, 0px))); }
+.anno.right p { left: calc(100% + 8px); bottom: auto; top: 50%; transform: translate(var(--lx, 0px), calc(-50% + var(--ly, 0px))); }
+
+.anno.secondary { border-color: rgba(189,189,189,0.8); }
+.anno.secondary p { background: $secondary-color; }
 
 /* Note — ::: {.note} for a smaller, muted supporting paragraph */
 .note p {

@@ -28,30 +28,6 @@ title-slide-attributes:
   data-background-color: "#252525"
 ---
 
-## Start Your [Install]{.accent} Now
-
-::: {.hook}
-Do this first — it runs in the background while we talk.
-:::
-
-```bash
-git clone https://github.com/iHuman-Lab/mosaic.git
-cd mosaic
-python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -e .
-pip uninstall -y pygame
-pip install --force-reinstall "pygame-ce>=2.5.2"
-pip install tabulate
-```
-
-::: {.punchline}
-Those last two lines are [not optional]{.accent} — Part 2 explains why.
-:::
-
-Three parts today: [what it is]{.accent} · [getting it running]{.accent} · [playing with it]{.accent}.
-
----
-
 <!-- ============ PART 1 ============ -->
 
 ::: {.divider}
@@ -66,143 +42,219 @@ Three parts today: [what it is]{.accent} · [getting it running]{.accent} · [pl
 
 ---
 
-## What is [MOSAIC]{.accent}?
+## What Is [MOSAIC]{.accent}?
 
 ::: {.columns}
-::: {.column width="55%"}
+::: {.column width="60%"}
 
 ::: {.hook}
-A modular testbed for human–AI collaboration.
+A modular platform for human–AI collaboration research.
 :::
 
-A grid-based **search-and-rescue** simulation, built on [MiniGrid](https://github.com/Farama-Foundation/Minigrid), where a human operator, an AI advisor, or both together must rescue survivors from a burning building before time runs out.
+Configurable interactive environments, AI assistance, human interfaces, and synchronized data collection — built on [MiniGrid](https://github.com/Farama-Foundation/Minigrid).
 
-Named for the art of building one coherent picture from many small tiles — which is both what the platform does and what the world literally looks like.
+Its first testbed is a **search-and-rescue** game: rescue survivors from a burning building before time runs out.
 
 ::: {.punchline}
 Many pieces, [one picture]{.accent}.
 :::
 
 :::
-::: {.column width="45%"}
+::: {.column width="40%"}
 ![](assets/game-view.png)
 :::
 :::
 
 ---
 
-## The [Pieces]{.accent}
+## Why Was MOSAIC [Created]{.accent}?
 
-:::: {.arch}
-
-::: {.arch-row}
-
-::: {.arch-block}
-[Human Operator]{.arch-title}
-
-Keyboard in, eyes on the screen — seven actions, one key each
+::: {.hook}
+What does a human–AI teaming study actually need?
 :::
 
-::: {.arch-block}
-[AI Advisor]{.arch-title}
+- **Decisions have to matter.** A task you can solve alone measures nothing about teaming.
+- **Conditions have to be repeatable.** Another lab should run your exact condition, not their approximation of it.
+- **Everything shares one clock.** Human actions, AI advice, performance and sensor data are only comparable when timestamped together.
+- **Reconfiguring, not rebuilding.** Your manipulation should be a setting, not a fork of the codebase.
 
-Anything with a `query()` method — GPT, Gemini, a scripted rule, or the built-in stub
+::: {.punchline}
+Most testbeds manage two of these. MOSAIC is our attempt at [all four at once]{.accent}.
 :::
-
-:::
-
-::: {.arch-link}
-▼ key presses · advice requests  ·  ▲ what they see · what it says
-:::
-
-::: {.arch-row}
-::: {.arch-block}
-[Interface]{.arch-title}
-
-Game view · mission status panel · chat panel · peripheral feedback at the screen edge
-:::
-:::
-
-::: {.arch-link}
-▼ action  ·  ▲ observation and reward
-:::
-
-::: {.arch-row}
-::: {.arch-block}
-[Environment]{.arch-title}
-
-The building, the survivors, the hazards, the scoring — every one of them a constructor argument
-:::
-:::
-
-::: {.arch-row}
-
-::: {.arch-block .secondary}
-[Sensing & Logging]{.arch-title}
-
-One record per frame, eye tracking on the same clock
-:::
-
-::: {.arch-block .secondary}
-[Analytics]{.arch-title}
-
-Frame-exact replay · areas of interest · workload surveys
-:::
-
-:::
-
-::::
 
 ---
 
-## Why It [Exists]{.accent}
+## The [Search-and-Rescue]{.accent} Scenario
 
-:::: {.cards .cols-2 .fill .short}
+::: {.annotated}
+![](assets/gui-screenshot.png){height="470"}
 
-::: {.card}
-[Hard Enough]{.card-title}
-
-The participant must genuinely *need* help. A task you can solve alone measures nothing about teaming.
-
-::: {.card-meta}
-Time budget · decaying survivors · lava · locked doors · decoys
-:::
+::: {.anno .fragment style="--x:34%; --y:11%; --w:6%; --h:8%;"}
+You — one operator, a building of rooms
 :::
 
-::: {.card}
-[Instrumented]{.card-title}
-
-Every action, every glance, every piece of advice — timestamped and on one clock.
-
-::: {.card-meta}
-One record per frame, over Lab Streaming Layer
-:::
+::: {.anno .fragment .below style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px;"}
+Victims — and lookalike decoys
 :::
 
-::: {.card}
-[Reproducible]{.card-title}
-
-Another lab should be able to run your exact condition, not their approximation of it.
-
-::: {.card-meta}
-Seeded worlds · conditions in YAML · replay from the log
-:::
+::: {.anno .fragment style="--x:26%; --y:60%; --w:21%; --h:21%;"}
+Lava — instant mission failure
 :::
 
-::: {.card}
-[Reconfigurable]{.card-title}
-
-Your manipulation should be a parameter, not a fork of the codebase.
-
-::: {.card-meta}
-World · view · scoring · logging · advisor — all injected
+::: {.anno .fragment style="--x:60%; --y:59%; --w:8%; --h:12%; --lx:-90px; --ly:-34px;"}
+Locked door — bring a key
 :::
+
+::: {.anno .fragment .below style="--x:67%; --y:0%; --w:32%; --h:26%;"}
+Time and victim health both run down
+:::
+
+::: {.anno .fragment .mid style="--x:67%; --y:50%; --w:32%; --h:48%;"}
+The AI teammate
+:::
+
+:::
+
+::: {.punchline}
+Navigate, search, discriminate, and finish before the clock or the survivors [run out]{.accent}.
+:::
+
+---
+
+## How Human–AI [Collaboration]{.accent} Happens
+
+:::: {.flow-diagram .horizontal .fill .short}
+
+::: {.flow-step}
+[1]{.step-num}
+
+**Observe**
+
+The participant reads the room — what they can see, and what the mission still needs.
+:::
+
+::: {.flow-step}
+[2]{.step-num}
+
+**Decide**
+
+Act alone, or ask the AI teammate for advice.
+:::
+
+::: {.flow-step}
+[3]{.step-num}
+
+**Advise**
+
+The AI examines the current game state and answers in the chat panel.
+:::
+
+::: {.flow-step}
+[4]{.step-num}
+
+**Respond**
+
+They accept it, ignore it, or do something else entirely.
+:::
+
+::: {.flow-step .secondary}
+[5]{.step-num}
+
+**Record**
+
+Action, advice, outcome and sensor data — all on one clock.
 :::
 
 ::::
 
 ::: {.punchline}
-Most testbeds get two of these. MOSAIC is our attempt at [all four]{.accent}.
+Almost everything worth measuring lives in the gap between [step 3 and step 4]{.accent}.
+:::
+
+---
+
+## The Main [Parts]{.accent} of MOSAIC
+
+:::: {.arch .fill .short}
+
+::: {.arch-row}
+
+::: {.arch-block}
+[Environment]{.arch-title}
+
+Rooms, victims, hazards, doors, rewards — and the rules of the mission
+:::
+
+::: {.arch-block}
+[Human Interface]{.arch-title}
+
+The game view, the controls, mission information, and the AI chat panel
+:::
+
+:::
+
+::: {.arch-row}
+
+::: {.arch-block}
+[AI Advisor]{.arch-title}
+
+Scripted, LLM-based, or any other advisor a researcher defines
+:::
+
+::: {.arch-block .secondary}
+[Experiment System]{.arch-title}
+
+Configuration, sensors, logging, surveys, and replay
+:::
+
+:::
+
+::::
+
+::: {.punchline}
+Four parts you can change [one at a time]{.accent} — that is what modular buys you.
+:::
+
+---
+
+## What Can MOSAIC Be [Used For]{.accent}?
+
+:::: {.cards .cols-3 .fill .short}
+
+::: {.card}
+[Interactive Mode]{.card-title}
+
+A human plays the search-and-rescue game on their own.
+:::
+
+::: {.card}
+[Human–AI Mode]{.card-title}
+
+The participant plays alongside an AI teammate they can ask for advice.
+:::
+
+::: {.card}
+[Experiment Mode]{.card-title}
+
+The complete study protocol, with sensing and logging throughout.
+:::
+
+::: {.card}
+[Programmatic Use]{.card-title}
+
+Scripted AI agents and Gymnasium-compatible experimentation, no GUI required.
+:::
+
+::: {.card .secondary style="grid-column: span 2;"}
+[Replay and Analysis]{.card-title}
+
+Review a recorded session frame by frame, against the exact world the participant saw.
+:::
+
+::::
+
+::: {.punchline}
+Now that we understand the platform, let's [install it]{.accent} and run our first mission.
 :::
 
 ---
@@ -218,6 +270,30 @@ Most testbeds get two of these. MOSAIC is our attempt at [all four]{.accent}.
 [What it is]{.stop} [Install]{.stop .here} [Use it]{.stop}
 :::
 :::
+
+---
+
+## Install in [Seven Lines]{.accent}
+
+::: {.hook}
+If you copy one slide today, copy this one.
+:::
+
+```bash
+git clone https://github.com/iHuman-Lab/mosaic.git
+cd mosaic
+python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -e .
+pip uninstall -y pygame
+pip install --force-reinstall "pygame-ce>=2.5.2"
+pip install tabulate
+```
+
+::: {.punchline}
+Those last three lines are [not optional]{.accent} — the next few slides explain why.
+:::
+
+The rest of Part Two walks the same seven lines slowly, with a checkpoint after each one.
 
 ---
 
