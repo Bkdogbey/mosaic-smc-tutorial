@@ -7,8 +7,8 @@ Wi-Fi and under a minute on a good connection.
 
 ## Requirements
 
-- Python **3.10 or newer** (`python3 --version`). `pyproject.toml` still claims
-  3.8 — do not believe it; we test on 3.10.
+- Python **3.10 or 3.11** (`python3 --version`). These are the supported
+  tutorial versions.
 - Git
 - A laptop with a real display — the game opens a window, so a remote/SSH-only
   machine or Colab will not work for the GUI
@@ -43,7 +43,8 @@ next step installs into the wrong Python.
 ## 2 · Install the package
 
 ```bash
-pip install -e .
+python -m pip install --upgrade pip
+python -m pip install -e .
 ```
 
 ```text
@@ -57,8 +58,8 @@ Successfully installed ... minigrid-3.1.0 mosaic-0.1.0 numpy-2.2.6
 ## 3 · Fix the two packaging gaps
 
 ```bash
-pip uninstall -y pygame
-pip install --force-reinstall "pygame-ce>=2.5.2"
+python -m pip uninstall -y pygame
+python -m pip install --force-reinstall "pygame-ce>=2.5.2"
 ```
 
 `--force-reinstall` is **required**. Uninstalling `pygame` deletes files from the
@@ -74,7 +75,7 @@ One more undeclared dependency — the advisor's prompt builder needs it, so the
 `Alt` key does nothing without it:
 
 ```bash
-pip install tabulate
+python -m pip install tabulate
 ```
 
 ✓ **Checkpoint**
@@ -127,11 +128,17 @@ Lines reading `Timeout during mission generation: connect_all failed` or
 `Sampling rejected: unreachable object at ...` may appear. Both are the level
 generator retrying — warnings, not errors.
 
-## 5 · Play
+## 5 · Your first mission
+
+Part Three of the tutorial builds `first_mission.py` line by line, then runs:
 
 ```bash
-python labs/play.py
+python first_mission.py
 ```
+
+A finished reference copy lives in the tutorial repository at
+`presentation/labs/first_mission.py`. The file uses the reusable MOSAIC package
+only and does not require the study-specific `experiment` package.
 
 | Key | Action |
 | --- | --- |
@@ -157,7 +164,7 @@ arrow keys.
 | `ERROR: mosaic 0.1.0 requires pygame` | Harmless warning from step 3, not an error. Carry on. |
 | `ensurepip is not available` | `sudo apt install python3-venv`, delete `.venv`, remake it. |
 | `ModuleNotFoundError: No module named 'mosaic'` | The virtual environment is not active, or `pip install -e .` did not finish. |
-| Window appears and closes immediately | You built the environment but did not call `env.reset()` before launching the GUI. |
+| Window appears and closes immediately | Run the file from a terminal and read the traceback. The tutorial example ends with `gui.run()`, which performs the first reset. |
 | `Timeout during mission generation` / `Sampling rejected` | Harmless warnings; the generator retries automatically. |
 | Hangs forever with no window, after changing settings | You set `locked_room_prob=1.0`. Every room locked leaves no solvable layout and the generator retries forever. Use `0.9` or less. |
 | `AttributeError: 'FullviewCamera' object has no attribute 'reset'` | Known bug. Use `AgentFOVCamera`, `AgentConeCamera`, or the default `EdgeFollowCamera`. |
@@ -174,7 +181,7 @@ Only needed if you want to use OpenAI or Gemini during the session. Everything i
 the tutorial works without it.
 
 ```bash
-pip install llama_index
+python -m pip install llama_index
 export OPENAI_API_KEY="sk-..."     # or GOOGLE_API_KEY
 ```
 

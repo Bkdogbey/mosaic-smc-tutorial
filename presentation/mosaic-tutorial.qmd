@@ -22,8 +22,6 @@ format:
     navigation-mode: linear
     controls: true
     progress: true
-mermaid:
-  theme: dark
 title-slide-attributes:
   data-background-image: assets/background.jpg
   data-background-opacity: "0.3"
@@ -160,20 +158,47 @@ A modular software testbed for controlled, interactive human–AI collaboration 
 :::
 
 ::: {.overview-diagram}
-```{mermaid}
-flowchart LR
-    H["Human participant"] <-->|"actions and observations"| M["MOSAIC task and interface"]
-    M -->|"task observation"| A["AI advisor"]
-    A -->|"advice"| M
-    M -->|"actions, advice, and outcomes"| D["Experiment record"]
+::: {.system-row}
 
-    classDef primary fill:#3b2c25,stroke:#EC672C,color:#ffffff,stroke-width:3px
-    classDef standard fill:#303030,stroke:#8a8a8a,color:#ffffff,stroke-width:2px
-    classDef record fill:#292929,stroke:#757575,color:#ffffff,stroke-width:2px
-    class M primary
-    class H,A standard
-    class D record
-```
+::: {.system-node}
+[Human participant]{.system-title}
+
+Sees the task and chooses each action.
+:::
+
+::: {.system-link .two-way}
+[actions]{.link-top}
+
+[observations]{.link-bottom}
+:::
+
+::: {.system-node .system-core}
+[MOSAIC]{.system-title}
+
+Task environment, interface, and experiment control.
+:::
+
+::: {.system-link .two-way}
+[task state]{.link-top}
+
+[advice]{.link-bottom}
+:::
+
+::: {.system-node}
+[AI advisor]{.system-title}
+
+Receives an observation and returns guidance.
+:::
+
+:::
+
+::: {.record-drop}
+[recorded together]{.record-drop-label}
+:::
+
+::: {.system-record}
+[Experiment record]{.system-title} Participant actions, advice requests, AI responses, task states, and outcomes share one timeline.
+:::
 :::
 
 ::: {.overview-foundation}
@@ -188,30 +213,30 @@ MOSAIC connects the task, the participant, the advisor, and the evidence needed 
 
 ## The First Testbed: [Search and Rescue]{.accent}
 
-::: {.annotated .scenario-view}
-![](assets/gui-screenshot.png){height="420"}
+:::: {.columns .scenario-columns}
 
-::: {.anno .fragment style="--x:34%; --y:11%; --w:6%; --h:8%;"}
-Human operator
+::: {.column width="58%"}
+![](assets/cam-full.png){height="430" fig-align="center"}
 :::
 
-::: {.anno .fragment .below style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px; --lx:58px;"}
-Victims and lookalike decoys
+::: {.column width="42%"}
+
+::: {.scenario-brief}
+[Mission]{.scenario-label}
+
+Search a multiroom building and rescue the real victims.
+
+[Sources of difficulty]{.scenario-label}
+
+- Locked rooms require the correct key
+- Lava constrains safe routes
+- Study configurations can add decoys and health pressure
+- Time and step limits create urgency
 :::
 
-::: {.anno .fragment style="--x:26%; --y:59%; --w:42%; --h:22%; --lx:-45px;"}
-Hazards and locked rooms
 :::
 
-::: {.anno .fragment .mid style="--x:67%; --y:50%; --w:32%; --h:48%;"}
-Optional AI advice
-:::
-
-:::
-
-::: {.scenario-goal}
-[MISSION]{.scenario-label} Rescue the real victims while managing hazards, uncertainty, and limited resources.
-:::
+::::
 
 ::: {.punchline}
 Where should I search? Whom should I rescue? [When should I rely on AI advice?]{.accent}
@@ -226,22 +251,65 @@ The participant can act independently or ask for advice at any decision point.
 :::
 
 ::: {.collaboration-diagram}
-```{mermaid}
-flowchart TB
-    O["Observe the task"] --> C{"Need advice?"}
-    C -->|"No — act independently"| A["Choose the final action"]
-    C -->|"Yes — request advice"| Q["Ask the AI advisor"]
-    Q --> E["Evaluate the advice"]
-    E --> A
-    A -->|"environment updates"| O
+::: {.decision-main}
 
-    classDef action fill:#3b2c25,stroke:#EC672C,color:#ffffff,stroke-width:3px
-    classDef choice fill:#252525,stroke:#EC672C,color:#ffffff,stroke-width:3px
-    classDef ai fill:#303030,stroke:#9a9a9a,color:#ffffff,stroke-width:2px
-    class O,A action
-    class C choice
-    class Q,E ai
-```
+::: {.decision-node}
+[1]{.decision-number} [Observe]{.decision-title}
+
+Inspect the current room and mission state.
+:::
+
+::: {.decision-arrow}
+:::
+
+::: {.decision-node .decision-point}
+[2]{.decision-number} [Decide]{.decision-title}
+
+Act alone or request advice.
+:::
+
+::: {.decision-arrow}
+:::
+
+::: {.decision-node}
+[3]{.decision-number} [Act]{.decision-title}
+
+The participant always chooses the final action.
+:::
+
+::: {.decision-arrow}
+:::
+
+::: {.decision-node}
+[4]{.decision-number} [Outcome]{.decision-title}
+
+The environment updates and the cycle repeats.
+:::
+
+:::
+
+::: {.advice-route}
+
+::: {.advice-label}
+Optional advice path
+:::
+
+::: {.advice-step}
+Request guidance
+:::
+
+::: {.advice-arrow}
+:::
+
+::: {.advice-step}
+Evaluate the response
+:::
+
+::: {.advice-return}
+returns to the participant
+:::
+
+:::
 :::
 
 ::: {.cycle-band}
@@ -249,7 +317,7 @@ flowchart TB
 :::
 
 ::: {.punchline}
-The central question is whether — and how — AI advice [changes human decisions]{.accent}.
+The central question is when and how AI advice [changes human decisions]{.accent}.
 :::
 
 ---
@@ -485,7 +553,9 @@ Installation is complete. Next, we will [build and launch a mission]{.accent}.
 ::: {.divider}
 [Part Three]{.divider-title}
 
-[Playing with it]{.divider-subtitle}
+[The game and your first mission]{.divider-subtitle}
+
+[See the task → Build it → Run it → Change it]{.divider-path}
 
 ::: {.you-are-here}
 [What it is]{.stop} [Install]{.stop} [Use it]{.stop .here}
@@ -494,305 +564,341 @@ Installation is complete. Next, we will [build and launch a mission]{.accent}.
 
 ---
 
-## The Rules in [60 Seconds]{.accent}
+## The Search and Rescue [Game]{.accent}
 
-::: {.columns}
-::: {.column width="48%"}
+:::: {.columns .game-intro}
 
-**The building** — `num_rows` × `num_cols` rooms, each `room_size` tiles square. Some doors are locked and need a matching coloured key, and you can carry **one key at a time**.
+::: {.column width="66%"}
+![](assets/gui-screenshot.png){height="430" fig-align="center"}
+:::
 
-**The pressure** — a step budget *and* a wall clock. Survivors lose health while you can see them. Lava is instant mission failure.
+::: {.column width="34%"}
+
+::: {.mission-summary}
+[Goal]{.scenario-label}
+
+Find and rescue every real victim.
+
+[Pressure]{.scenario-label}
+
+Manage locked rooms, keys, hazards, and limited time.
+
+[Choice]{.scenario-label}
+
+Act independently or ask the advisor for guidance.
+:::
 
 :::
-::: {.column width="52%"}
 
-| Event | Reward |
-|---|---|
-| Rescue a live survivor | **+1.0** |
-| Pick up a decoy | **−1.0** |
-| Pick up a survivor who died | **−2.0** |
-| Complete the mission | **+1.0** bonus |
-
-:::
-:::
+::::
 
 ::: {.punchline}
-Pressure is what makes advice [worth taking]{.accent} — and worth measuring.
+The task turns advice into a decision that can affect [time, safety, and mission success]{.accent}.
 :::
 
 ---
 
-## Survivors and [Decoys]{.accent}
+## Task [Features]{.accent}
 
-::: {.columns}
-::: {.column width="52%"}
-![](assets/victims.png)
-:::
-::: {.column width="48%"}
+:::: {.columns .feature-columns}
 
-**Top row — real survivors.** Arms centred on the stem.
+::: {.column width="42%"}
+![](assets/victims.png){height="310" fig-align="center"}
 
-**Bottom row — decoys.** Stem offset from the centre.
+::: {.victim-key}
+[Real victim]{.real-key} centered shape
 
-Four orientations each, randomly assigned.
-
+[Decoy]{.decoy-key} offset shape in study configurations
 :::
 :::
+
+::: {.column width="58%"}
+
+::: {.feature-list}
+
+::: {.feature-row}
+[Building]{.feature-name} Multiroom layouts with doors and color matched keys
+:::
+
+::: {.feature-row}
+[Risk]{.feature-name} Lava constrains movement and route planning
+:::
+
+::: {.feature-row}
+[Uncertainty]{.feature-name} Study components can add decoys and victim health loss
+:::
+
+::: {.feature-row}
+[Observation]{.feature-name} Camera strategies control how much of the world the participant sees
+:::
+
+::: {.feature-row}
+[Feedback]{.feature-name} Status, reward, time, advice, and event vignettes appear in the GUI
+:::
+
+:::
+
+:::
+
+::::
 
 ::: {.punchline}
-A classic [visual discrimination]{.accent} task hiding inside a rescue mission — which is what makes false alarms measurable.
+The reusable core supplies the task mechanics. A study can add its own [calibration and experimental conditions]{.accent}.
 :::
 
 ---
 
-## What's on [Screen]{.accent}
+## Interface and [Controls]{.accent}
 
-![](assets/gui-screenshot.png){height="470" fig-align="center"}
+:::: {.columns .control-columns}
 
-::: {.caption-row}
-[**Game view** · the camera's crop of the world]{.cap} [**Info panel** · mission status]{.cap} [**Chat panel** · the advisor]{.cap} [**Screen edge** · peripheral feedback]{.cap}
-:::
-
----
-
-## Controls
+::: {.column width="51%"}
 
 | Key | Action |
 |---|---|
 | `↑` | Move forward |
-| `←` `→` | Turn left / right |
+| `←` `→` | Turn left or right |
 | `Space` | Open a door |
-| `Tab` or `Page Up` | Rescue (pick up) |
-| `Left Shift` or `Page Down` | Drop the key you're carrying |
+| `Tab` | Rescue or pick up |
+| `Left Shift` | Drop the carried key |
 | `Alt` | Ask the AI advisor |
-| `Backspace` · `F11` · `Esc` | Restart · Fullscreen · Quit |
+
+:::
+
+::: {.column width="49%"}
+
+::: {.screen-guide}
+[Game view]{.screen-name} Current task observation
+
+[Mission panel]{.screen-name} Victims, steps, reward, and time remaining
+
+[Chat panel]{.screen-name} Advisor response or error message
+
+[Edge vignette]{.screen-name} Immediate visual feedback after a task event
+
+[Backspace · F11 · Esc]{.screen-name} Restart, fullscreen, and quit
+:::
+
+:::
+
+::::
 
 ::: {.note}
-The docs also list `W` for forward — it is not actually mapped. Use the arrow keys. `Alt` needs `tabulate` installed (Part 2, step 3).
+The default dummy advisor works without an API key, so the `Alt` control can be tested offline.
 :::
 
 ---
 
-## Play a [Mission]{.accent}
+## The First Mission [File]{.accent}
+
+::: {.hook}
+Create `first_mission.py` in the MOSAIC repository folder.
+:::
 
 ```python
 from mosaic.gui.main import SAREnvGUI
 from mosaic.sar.env import build_sar_env
-from mosaic.sar.placers import LavaPlacer, LockedRoomPlacer, VictimPlacer
-
-env = build_sar_env(
-    screen_size=800,
-    num_rows=2, num_cols=2,                            # building is 2x2 rooms
-    room_size=8,                                       # tiles per room
-    victim_placer=VictimPlacer(num_real_victims=2),    # PER ROOM -> 8 total
-    lava_placer=LavaPlacer(lava_per_room=2),
-    locked_room_placer=LockedRoomPlacer(locked_room_prob=0.5),
+from mosaic.sar.placers import (
+    LavaPlacer,
+    LockedRoomPlacer,
+    VictimPlacer,
 )
-env.reset()                                            # never skip this
-SAREnvGUI(env, config={"fullscreen": False, "max_time": 3}).run()
 ```
+
+::: {.code-explain}
+[Environment]{.code-label} `build_sar_env` creates the Gymnasium task.
+
+[Components]{.code-label} The placer objects configure victims, lava, and locked rooms.
+
+[Interface]{.code-label} `SAREnvGUI` connects the participant to the task.
+:::
+
+---
+
+## Mission [Configuration]{.accent}
+
+```python
+env = build_sar_env(
+    screen_size=720,
+    num_rows=2,
+    num_cols=2,
+    room_size=8,
+    victim_placer=VictimPlacer(num_real_victims=1),
+    lava_placer=LavaPlacer(lava_per_room=1),
+    locked_room_placer=LockedRoomPlacer(
+        locked_room_prob=0.25
+    ),
+)
+```
+
+::: {.parameter-line}
+[4 rooms]{.parameter-value} [1 victim per room]{.parameter-value} [1 lava tile per room]{.parameter-value} [about 1 locked room]{.parameter-value}
+:::
+
+::: {.note}
+Each placer receives its own settings. Replacing a placer changes one aspect of the task without rewriting the environment.
+:::
+
+---
+
+## GUI [Launch]{.accent}
+
+Add these final lines to `first_mission.py`:
+
+```python
+gui = SAREnvGUI(
+    env,
+    config={"fullscreen": False, "max_time": 3},
+)
+gui.run()
+```
+
+Run the file from the active virtual environment:
 
 ```bash
-python labs/play.py
+python first_mission.py
 ```
 
-::: {.punchline}
-Every argument above is a [knob]{.accent}. The next four slides turn them.
+::: {.checkpoint}
+The MOSAIC window should open with the game on the left and the mission and chat panels on the right.
 :::
-
----
-
-## Knob 1 — The [Building]{.accent}
-
-```python
-env = build_sar_env(
-    screen_size=800,
-    num_rows=3, num_cols=3,     # was 2x2
-    room_size=8,
-    victim_placer=VictimPlacer(num_real_victims=2),
-)
-```
-
-| | Rooms | Survivors | Step budget |
-|---|---|---|---|
-| `2×2` | 4 | 8 | 2,048 |
-| `3×3` | 9 | 18 | 10,368 |
 
 ::: {.note}
-Occasionally you will see 17 instead of 18 — the generator rejects a victim it cannot find a reachable spot for, and the step budget scales with the count.
-:::
-
-::: {.punchline}
-Notice how much longer a single mission takes — and how much more you would [welcome a hint]{.accent}.
+`gui.run()` performs the first environment reset. No separate `env.reset()` call is required for this example.
 :::
 
 ---
 
-## Knob 2 — The [Hazards]{.accent}
+## First Run [Checkpoint]{.accent}
 
-```python
-lava_placer=LavaPlacer(lava_per_room=6),              # was 2
-locked_room_placer=LockedRoomPlacer(locked_room_prob=0.9),   # was 0.5
-```
+::: {.workshop-check}
 
-**More lava** — the fastest route and the safe route stop being the same route. Watch your own planning change.
+::: {.workshop-step}
+[1]{.workshop-number}
 
-**Nearly every room locked** — with one key at a time, a rescue task becomes a key-management task.
+[Move]{.workshop-title}
 
-::: {.note}
-Stop at `0.9`. At `1.0` every room is locked, the level has no solvable layout, and the generator retries **forever** — the window never opens. Known bug.
+Use the arrow keys to enter another room.
 :::
 
-::: {.punchline}
-Two numbers, two [completely different]{.accent} cognitive demands.
+::: {.workshop-step}
+[2]{.workshop-number}
+
+[Interact]{.workshop-title}
+
+Open a door or collect the key that matches it.
 :::
 
----
+::: {.workshop-step}
+[3]{.workshop-number}
 
-## Knob 3 — What They Can [See]{.accent}
+[Rescue]{.workshop-title}
 
-::: {.columns}
-::: {.column width="50%"}
-![](assets/cam-room.png){height="230"}
-
-**`AgentFOVCamera`**\
-Current room only
-:::
-::: {.column width="50%"}
-![](assets/cam-cone.png){height="230"}
-
-**`AgentConeCamera`**\
-Forward cone only — search-heavy
-:::
+Face a victim and press `Tab`.
 :::
 
-```python
-from mosaic.core.camera import AgentConeCamera
-env = build_sar_env(..., camera_strategy=AgentConeCamera())
-```
+::: {.workshop-step}
+[4]{.workshop-number}
 
-::: {.note}
-The default is `EdgeFollowCamera`, which scrolls only when the agent nears the edge. **`FullviewCamera` and `AgentCenteredCamera` raise `AttributeError` today** — a known bug, they are missing a `reset()`.
+[Ask]{.workshop-title}
+
+Press `Alt` and watch the chat panel.
+:::
+
+:::
+
+::: {.checkpoint}
+Before moving on, confirm that movement changes the game view and a rescue changes the mission panel.
 :::
 
 ---
 
-## Knob 4 — What Mistakes [Cost]{.accent}
-
-```python
-from mosaic.sar.actions import RescueAction, RescueRewards
-
-scoring = RescueAction(rewards=RescueRewards(
-    real_victim_alive=+1.0,    # hit
-    fake_victim=-3.0,          # false alarm — was -1.0
-    real_victim_dead=-2.0,     # arrived too late
-))
-
-env = build_sar_env(..., action=scoring)
-```
-
-::: {.punchline}
-Shifting the false-alarm penalty shifts the participant's [decision criterion]{.accent} — a payoff-matrix manipulation in one number.
-:::
-
----
-
-## The Same World [Twice]{.accent}
-
-```python
-import random
-
-random.seed(42)          # <-- both lines are needed
-env.reset(seed=42)
-```
+## One Parameter, One [Manipulation]{.accent}
 
 ::: {.hook}
-Why two seeds?
+Change one setting, rerun the file, and compare the experience.
 :::
 
-`env.reset(seed=...)` seeds the room-and-door skeleton. The placers — survivors, lava, keys — still draw from Python's global `random`, so without `random.seed()` you get a **different world every run**.
+| Research manipulation | Code change | Expected task effect |
+|---|---|---|
+| Larger search space | `num_rows=3, num_cols=3` | More rooms to search |
+| Greater route risk | `LavaPlacer(lava_per_room=3)` | Fewer safe paths |
+| More access cost | `locked_room_prob=0.50` | More key and door decisions |
+| More targets | `num_real_victims=2` | More rescues in each room |
 
-::: {.punchline}
-Seed both and the building is identical every time. Known bug, [workaround today]{.accent} — compare maps with your neighbour.
+::: {.exercise-band}
+[Workshop task]{.exercise-label} Choose one row. Change only that setting, save the file, and run `python first_mission.py` again.
+:::
+
+::: {.note}
+Avoid `locked_room_prob=1.0` in the current generator. A fully locked layout may not be solvable.
 :::
 
 ---
 
-## Try This [Now]{.accent}
+## From Mission to [Study]{.accent}
 
-:::: {.cards .cols-2 .fill}
+::: {.study-path}
 
-::: {.card}
-[Scale It Up]{.card-title}
+::: {.study-stage}
+[Reusable task]{.study-title}
 
-Set `num_rows=3, num_cols=3` in `labs/play.py` and play again. Time yourself.
-
-::: {.card-meta}
-Knob 1 · how badly do you want a hint now?
-:::
+Rooms, victims, hazards, actions, observations, and rewards
 :::
 
-::: {.card}
-[Turn Up the Risk]{.card-title}
+::: {.study-stage .study-active}
+[Study configuration]{.study-title}
 
-`LavaPlacer(lava_per_room=6)`. Watch your route planning change in real time.
-
-::: {.card-meta}
-Knob 2 · risk versus speed
-:::
+Difficulty, timing, scoring, camera, and advisor behavior
 :::
 
-::: {.card}
-[Narrow the View]{.card-title}
+::: {.study-stage}
+[Experiment protocol]{.study-title}
 
-`camera_strategy=AgentConeCamera()`. A planning task becomes a search task.
-
-::: {.card-meta}
-Knob 3 · this is the big one
-:::
+Conditions, participant instructions, logging, sensing, and replay
 :::
 
-::: {.card .secondary}
-[Race Your Neighbour]{.card-title}
-
-Both seed to `42`, both play the identical building. Compare what you each did.
-
-::: {.card-meta}
-Reproducibility · `random.seed(42)` + `env.reset(seed=42)`
-:::
 :::
 
-::::
+::: {.punchline}
+The first mission uses neutral defaults. Research code supplies the [calibration required by a specific study]{.accent}.
+:::
 
 ---
 
 ## Where to Go [Next]{.accent}
 
-::: {.columns}
-::: {.column width="55%"}
+:::: {.columns .next-columns}
+
+::: {.column width="56%"}
 
 ::: {.hook}
-The most useful thing you can do today is tell us where it broke.
+Use the first mission as a small, working baseline.
 :::
 
-- **Open an issue** — install friction especially. Everything in Part 2 exists because someone hit it.
-- **Bring your paradigm** — if your manipulation doesn't fit the knobs, that's a design bug on our side.
-- **Contribute a placer or an advisor** — the smallest useful pull request is about thirty lines.
+- Add a camera strategy to change what the participant can see
+- Provide an `LLMClient` implementation for live advice
+- Add study components under `experiment/`
+- Use the test suite before collecting participant data
 
 :::
-::: {.column width="45%"}
 
-**Repository**
-`github.com/iHuman-Lab/mosaic`
+::: {.column width="44%"}
 
-**Documentation**
-`ihuman-lab.github.io/mosaic`
+::: {.resource-list}
+[Source code]{.resource-label}
+<https://github.com/iHuman-Lab/mosaic>
 
-**Today's scripts**
-`labs/play.py` · `labs/tweak.py` · `labs/advisor.py`
+[Tutorial deck]{.resource-label}
+<https://github.com/Bkdogbey/mosaic-smc-tutorial>
+
+[Project documentation]{.resource-label}
+<https://ihuman-lab.github.io/mosaic/>
+:::
 
 :::
-:::
+
+::::
 
 ---
 

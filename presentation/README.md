@@ -6,12 +6,13 @@ researchers, built on the iHuman Lab Quarto reveal.js template.
 The deck is three parts:
 
 1. **Understanding MOSAIC** — why a human–AI study needs a platform like this, what
-   MOSAIC is, the search-and-rescue task, how collaboration happens, and what
-   researchers can study with it (5 slides, problem-first)
-2. **Getting it running** — install, verified step by step, with the traps (9 slides)
-3. **Playing with it** — the rules, the controls, a mission, and the knobs (12 slides)
+   MOSAIC connects, the search-and-rescue task, and the research questions it supports
+2. **Install and verify** — one supported setup path with checkpoints and a compact
+   troubleshooting appendix
+3. **The game and your first mission** — see the task, create a small mission file,
+   run it, and change one experimental parameter
 
-Everything else — the team, the design patterns, the observation schema, custom
+Everything else — the design patterns, the observation schema, custom
 advisors, the experiment protocol, LSL, and the roadmap — lives in an appendix
 after the closing slide, for Q&A.
 
@@ -19,7 +20,7 @@ after the closing slide, for Q&A.
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (43 slides: 31 main + appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (38 slides: 25 main + appendix)
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
 │                         #   screenshots, .band notes, layer bands, you-are-here strip,
@@ -28,6 +29,7 @@ presentation/
 ├── RUNSHEET.md           # facilitator timings, cut list, expected failures
 ├── assets/               # figures used in the deck
 └── labs/                 # the scripts attendees run
+    ├── first_mission.py  # exact minimal example assembled in Part Three
     ├── play.py           # play a mission; has an EDIT ME block of knobs
     ├── tweak.py          # all four injection points in one file
     └── advisor.py        # an AI advisor with a reliability dial (appendix material)
@@ -52,15 +54,10 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
-`gui-screenshot.png` is used twice: as the annotated figure on slide 5 (Part 1)
-and plain on slide 21 (Part 3). The slide-5 annotation coordinates in
-`mosaic-tutorial.qmd` are percentages of this exact 1200×800 image — **replacing
-the file means re-deriving them.**
-
-`cam-full.png` is currently **unused** by the deck: the camera slide now shows
-only the strategies that work, and `FullviewCamera` cannot be passed as
-`camera_strategy` at all (see issue 4 below). Keep the file — it goes back in
-when that bug is fixed.
+`cam-full.png` introduces the search-and-rescue testbed in Part One.
+`gui-screenshot.png` introduces the complete interface in Part Three.
+`victims.png` explains the visual difference between real victims and the decoys
+available in study-specific configurations.
 
 ## Before presenting
 

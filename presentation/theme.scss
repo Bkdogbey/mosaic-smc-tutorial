@@ -1255,27 +1255,166 @@ $heading-font: "Rubik", sans-serif !default;
     line-height: 1.25;
 }
 
-/* What MOSAIC is: render the system relationships as a true flow diagram. */
+/* What MOSAIC is: presentation-native system map. The diagram remains stable
+   when the deck is viewed offline because it does not depend on Mermaid. */
 .overview-diagram {
     width: 100%;
-    min-height: 315px;
-    margin: 0.3rem auto 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0.55rem auto 0;
 }
 
-.overview-diagram .mermaid,
-.overview-diagram .cell,
-.overview-diagram .cell-output-display {
-    width: 100%;
+.system-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 145px minmax(0, 1.15fr) 145px minmax(0, 1fr);
+    align-items: center;
+    gap: 0;
+}
+
+.system-node {
+    min-height: 150px;
+    padding: 0.75rem 0.8rem;
+    border-top: 2px solid rgba(255,255,255,0.22);
+    border-bottom: 2px solid rgba(255,255,255,0.11);
+    background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.018));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
 }
 
-.overview-diagram svg {
-    width: 100% !important;
-    max-width: 1040px !important;
-    max-height: 315px !important;
+.system-node.system-core {
+    min-height: 178px;
+    border: 2px solid $primary-color;
+    background: linear-gradient(135deg, rgba(236,103,44,0.24), rgba(236,103,44,0.055));
+    box-shadow: 0 14px 36px rgba(0,0,0,0.26);
+}
+
+.system-node p,
+.system-record p {
+    margin: 0;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.62em;
+    line-height: 1.35;
+}
+
+.system-title {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #ffffff;
+    font-size: 1.05em;
+    font-weight: 800;
+}
+
+.system-core .system-title {
+    color: $primary-color;
+    font-size: 1.35em;
+    letter-spacing: 1px;
+}
+
+.system-link {
+    position: relative;
+    height: 86px;
+    background:
+        linear-gradient(rgba(236,103,44,0.75), rgba(236,103,44,0.75))
+        center / calc(100% - 20px) 2px no-repeat;
+}
+
+.system-link.two-way::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: calc(50% - 6px);
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 10px solid $primary-color;
+    z-index: 2;
+}
+
+.system-link.two-way::after {
+    content: "";
+    position: absolute;
+    right: 4px;
+    top: calc(50% - 6px);
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid $primary-color;
+    z-index: 2;
+}
+
+.system-link p {
+    margin: 0;
+    text-align: center;
+    color: rgba(255,255,255,0.66);
+    font-size: 0.48em;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.link-top,
+.link-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.link-top { top: 5px; }
+.link-bottom { bottom: 4px; }
+
+.record-drop {
+    position: relative;
+    width: 220px;
+    height: 46px;
+    margin: 0 auto;
+}
+
+.record-drop::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 31px;
+    border-left: 2px solid rgba(236,103,44,0.72);
+}
+
+.record-drop::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 6px);
+    bottom: 5px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 10px solid $primary-color;
+}
+
+.record-drop p {
+    margin: 0;
+    text-align: center;
+}
+
+.record-drop-label {
+    position: absolute;
+    left: calc(50% + 12px);
+    top: 5px;
+    color: rgba(255,255,255,0.52);
+    font-size: 0.46em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.system-record {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0.45rem 0.9rem;
+    border-left: 4px solid $primary-color;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.045);
+    text-align: center;
+}
+
+.system-record .system-title {
+    display: inline;
+    margin-right: 0.45rem;
+    color: $primary-color;
+    font-size: 0.78em;
 }
 
 .overview-foundation p {
@@ -1295,61 +1434,150 @@ $heading-font: "Rubik", sans-serif !default;
     white-space: nowrap;
 }
 
-/* SAR scenario: keep the screenshot dominant and the conclusion compact. */
-.scenario-view {
-    margin-top: 0.25rem;
+/* SAR scenario: one visual plus a compact mission brief. */
+.scenario-columns {
+    align-items: center;
+    margin-top: 0.4rem;
 }
 
-.scenario-goal {
-    max-width: 980px;
-    margin: 0.45rem auto 0;
-    padding: 0.38rem 0.85rem;
-    border-top: 1px solid rgba(255,255,255,0.14);
-    border-bottom: 1px solid rgba(255,255,255,0.14);
-    text-align: center;
+.scenario-brief {
+    padding: 0.5rem 0 0.5rem 1.1rem;
+    border-left: 4px solid $primary-color;
 }
 
-.scenario-goal p {
-    margin: 0;
+.scenario-brief p,
+.scenario-brief li {
+    margin: 0.15rem 0 0.65rem;
     color: rgba(255,255,255,0.8);
-    font-size: 0.68em;
-    line-height: 1.35;
+    font-size: 0.7em;
+    line-height: 1.4;
 }
 
 .scenario-label {
-    margin-right: 0.55rem;
+    display: block;
+    margin: 0.1rem 0 0.25rem;
     color: $primary-color;
-    font-size: 0.84em;
+    font-size: 0.72em;
     font-weight: 900;
     letter-spacing: 1.6px;
+    text-transform: uppercase;
 }
 
-/* Collaboration: Mermaid makes the optional advice branch and return loop explicit. */
+/* Collaboration: a native decision path with an optional advice branch. */
 .collaboration-diagram {
     width: 100%;
-    min-height: 345px;
-    margin: 0.15rem auto 0;
-    display: flex;
+    margin: 0.55rem auto 0;
+}
+
+.decision-main {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr) 50px) minmax(0, 1fr);
     align-items: center;
+}
+
+.decision-node {
+    min-height: 126px;
+    padding: 0.65rem 0.75rem;
+    border-top: 2px solid rgba(255,255,255,0.18);
+    border-bottom: 2px solid rgba(255,255,255,0.09);
+    background: rgba(255,255,255,0.045);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
-.collaboration-diagram .mermaid,
-.collaboration-diagram .cell,
-.collaboration-diagram .cell-output-display {
-    width: 100%;
+.decision-node.decision-point {
+    border-color: $primary-color;
+    background: rgba(236,103,44,0.12);
+}
+
+.decision-node p {
+    margin: 0;
+    color: rgba(255,255,255,0.66);
+    font-size: 0.56em;
+    line-height: 1.35;
+}
+
+.decision-number {
+    color: rgba(236,103,44,0.7);
+    font-size: 0.65em;
+    font-weight: 900;
+    margin-right: 0.2rem;
+}
+
+.decision-title {
+    color: #ffffff;
+    font-size: 0.94em;
+    font-weight: 800;
+}
+
+.decision-arrow {
+    position: relative;
+    height: 2px;
+    background: rgba(236,103,44,0.72);
+}
+
+.decision-arrow::after,
+.advice-arrow::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -6px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid $primary-color;
+}
+
+.advice-route {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr) 60px minmax(0, 1fr) 205px;
+    gap: 0;
+    align-items: center;
+    max-width: 920px;
+    margin: 0.5rem auto 0;
+    padding-top: 0.45rem;
+    border-top: 1px dashed rgba(255,255,255,0.2);
+}
+
+.advice-label p,
+.advice-return p,
+.advice-step p {
+    margin: 0;
     text-align: center;
+    line-height: 1.3;
 }
 
-.collaboration-diagram svg {
-    width: 100% !important;
-    max-width: 880px !important;
-    max-height: 345px !important;
+.advice-label p {
+    color: $primary-color;
+    font-size: 0.52em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
-.overview-diagram .mermaid,
-.collaboration-diagram .mermaid {
-    background: transparent !important;
+.advice-step {
+    padding: 0.4rem 0.65rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.035);
+}
+
+.advice-step p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.58em;
+    font-weight: 700;
+}
+
+.advice-arrow {
+    position: relative;
+    height: 2px;
+    background: rgba(236,103,44,0.62);
+}
+
+.advice-return p {
+    color: rgba(255,255,255,0.48);
+    font-size: 0.48em;
+    font-weight: 700;
 }
 
 .cycle-band {
@@ -1430,6 +1658,304 @@ $heading-font: "Rubik", sans-serif !default;
 
 .research-extension-label {
     margin-right: 0.45rem;
+    color: #ffffff;
+    font-weight: 800;
+}
+
+/* ── Part Three workshop flow ──────────────────────────────────────────────
+   The game is introduced visually before the code is assembled in three
+   short steps. Layouts stay flat and readable from the back of the room. */
+
+.game-intro,
+.feature-columns,
+.control-columns,
+.next-columns {
+    align-items: center;
+    margin-top: 0.45rem;
+}
+
+.mission-summary {
+    padding: 0.25rem 0 0.25rem 1rem;
+    border-left: 4px solid $primary-color;
+}
+
+.mission-summary p {
+    margin: 0 0 0.75rem;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.72em;
+    line-height: 1.4;
+}
+
+.victim-key {
+    margin-top: 0.4rem;
+    text-align: center;
+}
+
+.victim-key p {
+    margin: 0.18rem 0;
+    color: rgba(255,255,255,0.64);
+    font-size: 0.58em;
+}
+
+.real-key,
+.decoy-key {
+    display: inline-block;
+    min-width: 105px;
+    margin-right: 0.4rem;
+    color: #ffffff;
+    font-weight: 800;
+    text-align: right;
+}
+
+.real-key { color: $primary-color; }
+.decoy-key { color: #bdbdbd; }
+
+.feature-list {
+    border-top: 1px solid rgba(255,255,255,0.14);
+}
+
+.feature-row {
+    padding: 0.55rem 0.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+
+.feature-row p {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 0.65rem;
+    align-items: baseline;
+    margin: 0;
+    color: rgba(255,255,255,0.72);
+    font-size: 0.62em;
+    line-height: 1.35;
+}
+
+.feature-name {
+    color: $primary-color;
+    font-size: 1.05em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.control-columns table {
+    width: 96%;
+    font-size: 0.78em;
+}
+
+.control-columns table td,
+.control-columns table th {
+    padding-top: 0.34em;
+    padding-bottom: 0.34em;
+}
+
+.screen-guide {
+    border-top: 1px solid rgba(255,255,255,0.14);
+}
+
+.screen-guide p {
+    display: grid;
+    grid-template-columns: 165px 1fr;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.62em;
+    line-height: 1.32;
+}
+
+.screen-name {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.code-explain {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    margin-top: 0.8rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(255,255,255,0.14);
+}
+
+.code-explain p {
+    margin: 0;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.59em;
+    line-height: 1.4;
+}
+
+.code-label {
+    display: block;
+    margin-bottom: 0.18rem;
+    color: $primary-color;
+    font-size: 1.05em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.parameter-line p {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 0.55rem 0 0;
+    padding: 0.45rem 0;
+    border-top: 1px solid rgba(255,255,255,0.13);
+    border-bottom: 1px solid rgba(255,255,255,0.13);
+}
+
+.parameter-value {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.58em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.workshop-check {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.workshop-step {
+    min-height: 240px;
+    padding: 0.85rem 1rem;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.workshop-step:last-child { border-right: none; }
+
+.workshop-step p {
+    margin: 0;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.62em;
+    line-height: 1.4;
+}
+
+.workshop-number {
+    display: block;
+    color: rgba(236,103,44,0.62);
+    font-size: 2.2em;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.workshop-title {
+    display: block;
+    margin: 0.25rem 0 0.4rem;
+    color: #ffffff;
+    font-size: 1.35em;
+    font-weight: 800;
+}
+
+.exercise-band {
+    margin-top: 0.75rem;
+    padding: 0.48rem 0.8rem;
+    border-left: 4px solid $primary-color;
+    background: rgba(236,103,44,0.09);
+}
+
+.exercise-band p {
+    margin: 0;
+    color: rgba(255,255,255,0.78);
+    font-size: 0.66em;
+    line-height: 1.35;
+}
+
+.exercise-label {
+    margin-right: 0.55rem;
+    color: $primary-color;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.study-path {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.7rem;
+    margin-top: 1.2rem;
+}
+
+.study-stage {
+    position: relative;
+    min-height: 230px;
+    padding: 0.9rem 1rem;
+    border-top: 3px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    background: linear-gradient(135deg, rgba(255,255,255,0.055), rgba(255,255,255,0.015));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.study-stage.study-active {
+    border-top-color: $primary-color;
+    background: linear-gradient(135deg, rgba(236,103,44,0.16), rgba(236,103,44,0.035));
+}
+
+.study-stage + .study-stage::before {
+    content: "";
+    position: absolute;
+    left: -1.7rem;
+    top: 50%;
+    width: 1.7rem;
+    height: 2px;
+    background: rgba(236,103,44,0.7);
+}
+
+.study-stage + .study-stage::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: calc(50% - 6px);
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid $primary-color;
+}
+
+.study-stage p {
+    margin: 0;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.63em;
+    line-height: 1.4;
+}
+
+.study-title {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #ffffff;
+    font-size: 1.15em;
+    font-weight: 800;
+}
+
+.study-active .study-title { color: $primary-color; }
+
+.resource-list {
+    padding: 0.35rem 0 0.35rem 1rem;
+    border-left: 4px solid $primary-color;
+}
+
+.resource-list p {
+    margin: 0 0 0.8rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.61em;
+    line-height: 1.38;
+}
+
+.resource-label {
+    display: block;
+    margin-bottom: 0.12rem;
     color: #ffffff;
     font-weight: 800;
 }
