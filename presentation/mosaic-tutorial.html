@@ -99,7 +99,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-09402fe21dcbce45bcd9d5c87d78123c.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-375c764011121b2c60e9dbfadb8ebaec.css">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -198,7 +198,7 @@
 
 <section id="title-slide" data-background-color="#252525" data-background-image="assets/background.jpg" data-background-opacity="0.3" class="quarto-title-block center">
   <h1 class="title">MOSAIC<br>A Modular Testbed for<br><span class="accent">Human–AI Collaboration</span></h1>
-  <p class="subtitle">Hands-on tutorial · IEEE SMC 2026, Bellevue WA</p>
+  <p class="subtitle">Hands-on Search-and-Rescue Tutorial<br>IEEE SMC 2026 · Bellevue, WA</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -218,68 +218,126 @@ Bennett Kwaku Dogbey
 <!-- ============ PART 1 ============ -->
 <div class="divider">
 <p><span class="divider-title">Part One</span></p>
-<p><span class="divider-subtitle">What MOSAIC is</span></p>
+<p><span class="divider-subtitle">Understanding MOSAIC</span></p>
+<p><span class="divider-path">Why it exists → What it is → How it works</span></p>
 <div class="you-are-here">
 <p><span class="stop here">What it is</span> <span class="stop">Install</span> <span class="stop">Use it</span></p>
 </div>
 </div>
 </section>
+<section id="why-do-we-need-mosaic" class="slide level2">
+<h2>Why Do We Need <span class="accent">MOSAIC</span>?</h2>
+<div class="hook">
+<p>A human–AI experiment requires more than an AI model.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:38%;">
+<div class="arch detached">
+<div class="arch-row">
+<div class="arch-block">
+<p><span class="arch-title">Task</span></p>
+</div>
+<div class="arch-block">
+<p><span class="arch-title">Human</span></p>
+</div>
+</div>
+<div class="arch-row">
+<div class="arch-block">
+<p><span class="arch-title">AI</span></p>
+</div>
+<div class="arch-block">
+<p><span class="arch-title">Measurement</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:62%;">
+<ul>
+<li><strong>Meaningful decisions</strong> — assistance can affect what the participant does.</li>
+<li><strong>Repeatable conditions</strong> — comparable across participants.</li>
+<li><strong>Synchronized data</strong> — actions, advice, outcomes and optional sensors, on one clock.</li>
+<li><strong>Reconfigurable components</strong> — a new study without rebuilding the task.</li>
+</ul>
+</div></div>
+<div class="punchline">
+<p>MOSAIC brings these requirements together in <span class="accent">one research platform</span>.</p>
+</div>
+</section>
 <section id="what-is-mosaic" class="slide level2">
 <h2>What Is <span class="accent">MOSAIC</span>?</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
 <div class="hook">
-<p>A modular platform for human–AI collaboration research.</p>
+<p>A modular software testbed for studying human–AI collaboration in controlled, interactive tasks.</p>
 </div>
-<p>Configurable interactive environments, AI assistance, human interfaces, and synchronized data collection — built on <a href="https://github.com/Farama-Foundation/Minigrid">MiniGrid</a>.</p>
-<p>Its first testbed is a <strong>search-and-rescue</strong> game: rescue survivors from a burning building before time runs out.</p>
+<div class="arch">
+<div class="arch-row">
+<div class="arch-block">
+<p><span class="arch-title">Human</span></p>
+<p>The participant and what they see</p>
+</div>
+<div class="arch-block">
+<p><span class="arch-title">Task</span></p>
+<p>The environment and its rules</p>
+</div>
+<div class="arch-block">
+<p><span class="arch-title">AI</span></p>
+<p>The advisor, when asked</p>
+</div>
+</div>
+<div class="arch-link">
+<p>⇅ actions · observations · advice</p>
+</div>
+<div class="arch-row">
+<div class="arch-block">
+<p><span class="arch-title">Measurement</span></p>
+<p>One synchronized record of the whole session</p>
+</div>
+</div>
+</div>
+<div class="band">
+<p>Actions, advice, outcomes and optional sensor data can be recorded throughout the interaction.</p>
+</div>
+<div class="cards cols-3">
+<div class="card">
+<p><span class="card-title">Built on</span></p>
+<p>Gymnasium and MiniGrid.</p>
+</div>
+<div class="card">
+<p><span class="card-title">Runs as</span></p>
+<p>Human-only, human–AI, or programmatic.</p>
+</div>
+<div class="card">
+<p><span class="card-title">Configured by</span></p>
+<p>Task, interface, advisor and experiment components, set independently.</p>
+</div>
+</div>
 <div class="punchline">
-<p>Many pieces, <span class="accent">one picture</span>.</p>
-</div>
-</div><div class="column" style="width:40%;">
-<p><img data-src="assets/game-view.png"></p>
-</div></div>
-</section>
-<section id="why-was-mosaic-created" class="slide level2">
-<h2>Why Was MOSAIC <span class="accent">Created</span>?</h2>
-<div class="hook">
-<p>What does a human–AI teaming study actually need?</p>
-</div>
-<ul>
-<li><strong>Decisions have to matter.</strong> A task you can solve alone measures nothing about teaming.</li>
-<li><strong>Conditions have to be repeatable.</strong> Another lab should run your exact condition, not their approximation of it.</li>
-<li><strong>Everything shares one clock.</strong> Human actions, AI advice, performance and sensor data are only comparable when timestamped together.</li>
-<li><strong>Reconfiguring, not rebuilding.</strong> Your manipulation should be a setting, not a fork of the codebase.</li>
-</ul>
-<div class="punchline">
-<p>Most testbeds manage two of these. MOSAIC is our attempt at <span class="accent">all four at once</span>.</p>
+<p>Many pieces, <span class="accent">one experimental system</span>.</p>
 </div>
 </section>
-<section id="the-search-and-rescue-scenario" class="slide level2">
-<h2>The <span class="accent">Search-and-Rescue</span> Scenario</h2>
+<section id="the-first-testbed-search-and-rescue" class="slide level2">
+<h2>The First Testbed: <span class="accent">Search and Rescue</span></h2>
 <div class="annotated">
-<p><img data-src="assets/gui-screenshot.png" height="470"></p>
+<p><img data-src="assets/gui-screenshot.png" height="380"></p>
 <div class="anno fragment" style="--x:34%; --y:11%; --w:6%; --h:8%;">
-<p>You — one operator, a building of rooms</p>
+<p>Human operator — navigates the building</p>
 </div>
-<div class="anno fragment below" style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px;">
-<p>Victims — and lookalike decoys</p>
+<div class="anno fragment below" style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px; --lx:60px;">
+<p>Victims and decoys — visual discrimination</p>
 </div>
-<div class="anno fragment" style="--x:26%; --y:60%; --w:21%; --h:21%;">
-<p>Lava — instant mission failure</p>
-</div>
-<div class="anno fragment" style="--x:60%; --y:59%; --w:8%; --h:12%; --lx:-90px; --ly:-34px;">
-<p>Locked door — bring a key</p>
-</div>
-<div class="anno fragment below" style="--x:67%; --y:0%; --w:32%; --h:26%;">
-<p>Time and victim health both run down</p>
+<div class="anno fragment" style="--x:26%; --y:59%; --w:42%; --h:22%; --lx:-60px;">
+<p>Hazards and locked rooms — risk and planning</p>
 </div>
 <div class="anno fragment mid" style="--x:67%; --y:50%; --w:32%; --h:48%;">
-<p>The AI teammate</p>
+<p>AI advisor — on request</p>
 </div>
 </div>
 <div class="punchline">
-<p>Navigate, search, discriminate, and finish before the clock or the survivors <span class="accent">run out</span>.</p>
+<p>Rescue the real victims while managing hazards, uncertainty and <span class="accent">limited resources</span>.</p>
+</div>
+<div class="note">
+<p>A study configuration can also introduce time pressure and declining victim health.</p>
+</div>
+<div class="punchline">
+<p>The task creates decisions about where to search, whom to rescue, and <span class="accent">when to rely on AI advice</span>.</p>
 </div>
 </section>
 <section id="how-humanai-collaboration-happens" class="slide level2">
@@ -288,87 +346,61 @@ Bennett Kwaku Dogbey
 <div class="flow-step">
 <p><span class="step-num">1</span></p>
 <p><strong>Observe</strong></p>
-<p>The participant reads the room — what they can see, and what the mission still needs.</p>
+<p>The participant reads the current task.</p>
 </div>
 <div class="flow-step">
 <p><span class="step-num">2</span></p>
 <p><strong>Decide</strong></p>
-<p>Act alone, or ask the AI teammate for advice.</p>
+<p>Act independently — or request advice.</p>
 </div>
 <div class="flow-step">
 <p><span class="step-num">3</span></p>
 <p><strong>Advise</strong></p>
-<p>The AI examines the current game state and answers in the chat panel.</p>
+<p>When asked, the AI responds using the available task observation.</p>
 </div>
 <div class="flow-step">
 <p><span class="step-num">4</span></p>
 <p><strong>Respond</strong></p>
-<p>They accept it, ignore it, or do something else entirely.</p>
+<p>The participant follows, modifies, or rejects that advice.</p>
 </div>
-<div class="flow-step secondary">
+<div class="flow-step">
 <p><span class="step-num">5</span></p>
-<p><strong>Record</strong></p>
-<p>Action, advice, outcome and sensor data — all on one clock.</p>
+<p><strong>Update</strong></p>
+<p>The environment changes and the cycle repeats.</p>
 </div>
+</div>
+<div class="band">
+<p>The complete interaction is recorded throughout the cycle.</p>
 </div>
 <div class="punchline">
-<p>Almost everything worth measuring lives in the gap between <span class="accent">step 3 and step 4</span>.</p>
+<p>The key question is whether — and how — AI advice <span class="accent">changes human decisions</span>.</p>
 </div>
 </section>
-<section id="the-main-parts-of-mosaic" class="slide level2">
-<h2>The Main <span class="accent">Parts</span> of MOSAIC</h2>
-<div class="arch fill short">
-<div class="arch-row">
-<div class="arch-block">
-<p><span class="arch-title">Environment</span></p>
-<p>Rooms, victims, hazards, doors, rewards — and the rules of the mission</p>
+<section id="what-can-researchers-study" class="slide level2">
+<h2>What Can <span class="accent">Researchers</span> Study?</h2>
+<div class="cards cols-2 fill short">
+<div class="card">
+<p><span class="card-title">Reliance</span></p>
+<p>When do people request, follow, or reject AI advice?</p>
 </div>
-<div class="arch-block">
-<p><span class="arch-title">Human Interface</span></p>
-<p>The game view, the controls, mission information, and the AI chat panel</p>
+<div class="card">
+<p><span class="card-title">Advice Quality</span></p>
+<p>How do correct, incorrect, or uncertain recommendations affect decisions?</p>
 </div>
+<div class="card">
+<p><span class="card-title">Human State</span></p>
+<p>How do time pressure and workload affect human–AI collaboration?</p>
 </div>
-<div class="arch-row">
-<div class="arch-block">
-<p><span class="arch-title">AI Advisor</span></p>
-<p>Scripted, LLM-based, or any other advisor a researcher defines</p>
-</div>
-<div class="arch-block secondary">
-<p><span class="arch-title">Experiment System</span></p>
-<p>Configuration, sensors, logging, surveys, and replay</p>
+<div class="card">
+<p><span class="card-title">Interface Design</span></p>
+<p>How do explanations, alerts, and feedback influence performance and trust?</p>
 </div>
 </div>
+<div class="note">
+<p>And: how do different AI models or advisory strategies change team behaviour?</p>
 </div>
 <div class="punchline">
-<p>Four parts you can change <span class="accent">one at a time</span> — that is what modular buys you.</p>
-</div>
-</section>
-<section id="what-can-mosaic-be-used-for" class="slide level2">
-<h2>What Can MOSAIC Be <span class="accent">Used For</span>?</h2>
-<div class="cards cols-3 fill short">
-<div class="card">
-<p><span class="card-title">Interactive Mode</span></p>
-<p>A human plays the search-and-rescue game on their own.</p>
-</div>
-<div class="card">
-<p><span class="card-title">Human–AI Mode</span></p>
-<p>The participant plays alongside an AI teammate they can ask for advice.</p>
-</div>
-<div class="card">
-<p><span class="card-title">Experiment Mode</span></p>
-<p>The complete study protocol, with sensing and logging throughout.</p>
-</div>
-<div class="card">
-<p><span class="card-title">Programmatic Use</span></p>
-<p>Scripted AI agents and Gymnasium-compatible experimentation, no GUI required.</p>
-</div>
-<div class="card secondary" style="grid-column: span 2;">
-<p><span class="card-title">Replay and Analysis</span></p>
-<p>Review a recorded session frame by frame, against the exact world the participant saw.</p>
-</div>
-</div>
-<div class="punchline">
-<p>Now that we understand the platform, let’s <span class="accent">install it</span> and run our first mission.</p>
+<p>In Parts Two and Three, we will install MOSAIC, launch a mission, and <span class="accent">modify its components</span>.</p>
 </div>
 </section>
 <section class="slide level2">

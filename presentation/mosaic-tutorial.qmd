@@ -3,7 +3,7 @@
 # Render:  quarto render mosaic-tutorial.qmd
 #          quarto preview mosaic-tutorial.qmd
 title: "MOSAIC<br>A Modular Testbed for<br>[Human–AI Collaboration]{.accent}"
-subtitle: "Hands-on tutorial · IEEE SMC 2026, Bellevue WA"
+subtitle: "Hands-on Search-and-Rescue Tutorial<br>IEEE SMC 2026 · Bellevue, WA"
 author: "Bennett Kwaku Dogbey"
 institute: "iHuman Lab · Oklahoma State University"
 date: "2026-10-04"
@@ -33,7 +33,9 @@ title-slide-attributes:
 ::: {.divider}
 [Part One]{.divider-title}
 
-[What MOSAIC is]{.divider-subtitle}
+[Understanding MOSAIC]{.divider-subtitle}
+
+[Why it exists → What it is → How it works]{.divider-path}
 
 ::: {.you-are-here}
 [What it is]{.stop .here} [Install]{.stop} [Use it]{.stop}
@@ -42,81 +44,163 @@ title-slide-attributes:
 
 ---
 
-## What Is [MOSAIC]{.accent}?
+## Why Do We Need [MOSAIC]{.accent}?
+
+::: {.hook}
+A human–AI experiment requires more than an AI model.
+:::
 
 ::: {.columns}
-::: {.column width="60%"}
+::: {.column width="38%"}
 
-::: {.hook}
-A modular platform for human–AI collaboration research.
+:::: {.arch .detached}
+
+::: {.arch-row}
+::: {.arch-block}
+[Task]{.arch-title}
+:::
+::: {.arch-block}
+[Human]{.arch-title}
+:::
 :::
 
-Configurable interactive environments, AI assistance, human interfaces, and synchronized data collection — built on [MiniGrid](https://github.com/Farama-Foundation/Minigrid).
+::: {.arch-row}
+::: {.arch-block}
+[AI]{.arch-title}
+:::
+::: {.arch-block}
+[Measurement]{.arch-title}
+:::
+:::
 
-Its first testbed is a **search-and-rescue** game: rescue survivors from a burning building before time runs out.
+::::
+
+:::
+::: {.column width="62%"}
+
+- **Meaningful decisions** — assistance can affect what the participant does.
+- **Repeatable conditions** — comparable across participants.
+- **Synchronized data** — actions, advice, outcomes and optional sensors, on one clock.
+- **Reconfigurable components** — a new study without rebuilding the task.
+
+:::
+:::
 
 ::: {.punchline}
-Many pieces, [one picture]{.accent}.
-:::
-
-:::
-::: {.column width="40%"}
-![](assets/game-view.png)
-:::
+MOSAIC brings these requirements together in [one research platform]{.accent}.
 :::
 
 ---
 
-## Why Was MOSAIC [Created]{.accent}?
+## What Is [MOSAIC]{.accent}?
 
 ::: {.hook}
-What does a human–AI teaming study actually need?
+A modular software testbed for studying human–AI collaboration in controlled, interactive tasks.
 :::
 
-- **Decisions have to matter.** A task you can solve alone measures nothing about teaming.
-- **Conditions have to be repeatable.** Another lab should run your exact condition, not their approximation of it.
-- **Everything shares one clock.** Human actions, AI advice, performance and sensor data are only comparable when timestamped together.
-- **Reconfiguring, not rebuilding.** Your manipulation should be a setting, not a fork of the codebase.
+:::: {.arch}
+
+::: {.arch-row}
+
+::: {.arch-block}
+[Human]{.arch-title}
+
+The participant and what they see
+:::
+
+::: {.arch-block}
+[Task]{.arch-title}
+
+The environment and its rules
+:::
+
+::: {.arch-block}
+[AI]{.arch-title}
+
+The advisor, when asked
+:::
+
+:::
+
+::: {.arch-link}
+⇅ actions · observations · advice
+:::
+
+::: {.arch-row}
+::: {.arch-block}
+[Measurement]{.arch-title}
+
+One synchronized record of the whole session
+:::
+:::
+
+::::
+
+::: {.band}
+Actions, advice, outcomes and optional sensor data can be recorded throughout the interaction.
+:::
+
+:::: {.cards .cols-3}
+
+::: {.card}
+[Built on]{.card-title}
+
+Gymnasium and MiniGrid.
+:::
+
+::: {.card}
+[Runs as]{.card-title}
+
+Human-only, human–AI, or programmatic.
+:::
+
+::: {.card}
+[Configured by]{.card-title}
+
+Task, interface, advisor and experiment components, set independently.
+:::
+
+::::
 
 ::: {.punchline}
-Most testbeds manage two of these. MOSAIC is our attempt at [all four at once]{.accent}.
+Many pieces, [one experimental system]{.accent}.
 :::
 
 ---
 
-## The [Search-and-Rescue]{.accent} Scenario
+## The First Testbed: [Search and Rescue]{.accent}
 
 ::: {.annotated}
-![](assets/gui-screenshot.png){height="470"}
+![](assets/gui-screenshot.png){height="380"}
 
 ::: {.anno .fragment style="--x:34%; --y:11%; --w:6%; --h:8%;"}
-You — one operator, a building of rooms
+Human operator — navigates the building
 :::
 
-::: {.anno .fragment .below style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px;"}
-Victims — and lookalike decoys
+::: {.anno .fragment .below style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px; --lx:60px;"}
+Victims and decoys — visual discrimination
 :::
 
-::: {.anno .fragment style="--x:26%; --y:60%; --w:21%; --h:21%;"}
-Lava — instant mission failure
-:::
-
-::: {.anno .fragment style="--x:60%; --y:59%; --w:8%; --h:12%; --lx:-90px; --ly:-34px;"}
-Locked door — bring a key
-:::
-
-::: {.anno .fragment .below style="--x:67%; --y:0%; --w:32%; --h:26%;"}
-Time and victim health both run down
+::: {.anno .fragment style="--x:26%; --y:59%; --w:42%; --h:22%; --lx:-60px;"}
+Hazards and locked rooms — risk and planning
 :::
 
 ::: {.anno .fragment .mid style="--x:67%; --y:50%; --w:32%; --h:48%;"}
-The AI teammate
+AI advisor — on request
 :::
 
 :::
 
 ::: {.punchline}
-Navigate, search, discriminate, and finish before the clock or the survivors [run out]{.accent}.
+Rescue the real victims while managing hazards, uncertainty and [limited resources]{.accent}.
+:::
+
+::: {.note}
+A study configuration can also introduce time pressure and declining victim health.
+:::
+
+::: {.punchline}
+The task creates decisions about where to search, whom to rescue, and [when to rely on AI advice]{.accent}.
 :::
 
 ---
@@ -130,7 +214,7 @@ Navigate, search, discriminate, and finish before the clock or the survivors [ru
 
 **Observe**
 
-The participant reads the room — what they can see, and what the mission still needs.
+The participant reads the current task.
 :::
 
 ::: {.flow-step}
@@ -138,7 +222,7 @@ The participant reads the room — what they can see, and what the mission still
 
 **Decide**
 
-Act alone, or ask the AI teammate for advice.
+Act independently — or request advice.
 :::
 
 ::: {.flow-step}
@@ -146,7 +230,7 @@ Act alone, or ask the AI teammate for advice.
 
 **Advise**
 
-The AI examines the current game state and answers in the chat panel.
+When asked, the AI responds using the available task observation.
 :::
 
 ::: {.flow-step}
@@ -154,107 +238,65 @@ The AI examines the current game state and answers in the chat panel.
 
 **Respond**
 
-They accept it, ignore it, or do something else entirely.
+The participant follows, modifies, or rejects that advice.
 :::
 
-::: {.flow-step .secondary}
+::: {.flow-step}
 [5]{.step-num}
 
-**Record**
+**Update**
 
-Action, advice, outcome and sensor data — all on one clock.
+The environment changes and the cycle repeats.
 :::
 
 ::::
 
+::: {.band}
+The complete interaction is recorded throughout the cycle.
+:::
+
 ::: {.punchline}
-Almost everything worth measuring lives in the gap between [step 3 and step 4]{.accent}.
+The key question is whether — and how — AI advice [changes human decisions]{.accent}.
 :::
 
 ---
 
-## The Main [Parts]{.accent} of MOSAIC
+## What Can [Researchers]{.accent} Study?
 
-:::: {.arch .fill .short}
+:::: {.cards .cols-2 .fill .short}
 
-::: {.arch-row}
+::: {.card}
+[Reliance]{.card-title}
 
-::: {.arch-block}
-[Environment]{.arch-title}
-
-Rooms, victims, hazards, doors, rewards — and the rules of the mission
+When do people request, follow, or reject AI advice?
 :::
 
-::: {.arch-block}
-[Human Interface]{.arch-title}
+::: {.card}
+[Advice Quality]{.card-title}
 
-The game view, the controls, mission information, and the AI chat panel
+How do correct, incorrect, or uncertain recommendations affect decisions?
 :::
 
+::: {.card}
+[Human State]{.card-title}
+
+How do time pressure and workload affect human–AI collaboration?
 :::
 
-::: {.arch-row}
+::: {.card}
+[Interface Design]{.card-title}
 
-::: {.arch-block}
-[AI Advisor]{.arch-title}
-
-Scripted, LLM-based, or any other advisor a researcher defines
-:::
-
-::: {.arch-block .secondary}
-[Experiment System]{.arch-title}
-
-Configuration, sensors, logging, surveys, and replay
-:::
-
+How do explanations, alerts, and feedback influence performance and trust?
 :::
 
 ::::
 
-::: {.punchline}
-Four parts you can change [one at a time]{.accent} — that is what modular buys you.
+::: {.note}
+And: how do different AI models or advisory strategies change team behaviour?
 :::
-
----
-
-## What Can MOSAIC Be [Used For]{.accent}?
-
-:::: {.cards .cols-3 .fill .short}
-
-::: {.card}
-[Interactive Mode]{.card-title}
-
-A human plays the search-and-rescue game on their own.
-:::
-
-::: {.card}
-[Human–AI Mode]{.card-title}
-
-The participant plays alongside an AI teammate they can ask for advice.
-:::
-
-::: {.card}
-[Experiment Mode]{.card-title}
-
-The complete study protocol, with sensing and logging throughout.
-:::
-
-::: {.card}
-[Programmatic Use]{.card-title}
-
-Scripted AI agents and Gymnasium-compatible experimentation, no GUI required.
-:::
-
-::: {.card .secondary style="grid-column: span 2;"}
-[Replay and Analysis]{.card-title}
-
-Review a recorded session frame by frame, against the exact world the participant saw.
-:::
-
-::::
 
 ::: {.punchline}
-Now that we understand the platform, let's [install it]{.accent} and run our first mission.
+In Parts Two and Three, we will install MOSAIC, launch a mission, and [modify its components]{.accent}.
 :::
 
 ---

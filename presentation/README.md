@@ -5,8 +5,9 @@ researchers, built on the iHuman Lab Quarto reveal.js template.
 
 The deck is three parts:
 
-1. **What MOSAIC is** — what it is, why it exists, the search-and-rescue task, how
-   human–AI collaboration happens, the four parts, and what it can be used for (6 slides)
+1. **Understanding MOSAIC** — why a human–AI study needs a platform like this, what
+   MOSAIC is, the search-and-rescue task, how collaboration happens, and what
+   researchers can study with it (5 slides, problem-first)
 2. **Getting it running** — install, verified step by step, with the traps (9 slides)
 3. **Playing with it** — the rules, the controls, a mission, and the knobs (12 slides)
 
@@ -18,10 +19,11 @@ after the closing slide, for Q&A.
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (44 slides: 32 main + appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (43 slides: 31 main + appendix)
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
-│                         #   architecture diagram, annotated screenshots, layer bands,
-│                         #   you-are-here strip, .checkpoint callouts, dark-theme panel-tabset)
+│                         #   architecture diagram + .detached variant, annotated
+│                         #   screenshots, .band notes, layer bands, you-are-here strip,
+│                         #   .checkpoint callouts, dark-theme panel-tabset)
 ├── SETUP.md              # send this to attendees BEFORE the session
 ├── RUNSHEET.md           # facilitator timings, cut list, expected failures
 ├── assets/               # figures used in the deck
@@ -51,7 +53,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
 `gui-screenshot.png` is used twice: as the annotated figure on slide 5 (Part 1)
-and plain on slide 22 (Part 3). The slide-5 annotation coordinates in
+and plain on slide 21 (Part 3). The slide-5 annotation coordinates in
 `mosaic-tutorial.qmd` are percentages of this exact 1200×800 image — **replacing
 the file means re-deriving them.**
 

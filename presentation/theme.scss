@@ -112,6 +112,19 @@ $heading-font: "Rubik", sans-serif !default;
 #title-slide {
     text-align: left;
 
+    /* Repository, bottom-left. Quarto generates this slide, so there is nowhere in the
+       .qmd to put it — it has to come from CSS. Distinct from .subtitle::after below,
+       which is the accent bar. */
+    &::after {
+        content: "github.com/iHuman-Lab/mosaic";
+        position: absolute;
+        right: 0;
+        top: 72%;
+        font-size: 0.6em;
+        letter-spacing: 1px;
+        color: rgba(255,255,255,0.4);
+    }
+
     .subtitle::after {
         @include heading-accent(10px);
         margin-top: 1rem;
@@ -629,18 +642,35 @@ $heading-font: "Rubik", sans-serif !default;
     gap: 1rem;
 }
 
-/* Fill mode — ::: {.arch .fill} stretches the rows down the slide, for a diagram with
-   few enough blocks that it would otherwise sit in the top third. Add .short when a
-   punchline follows, so there is room for it. Mirrors .cards.fill / .cards.fill.short. */
-.arch.fill { min-height: 500px; }
-.arch.fill.short { min-height: 410px; }
+/* Detached mode — ::: {.arch .detached} draws the same blocks as separate, unjoined
+   pieces: dashed muted borders, no accent bar, wide gaps. For showing components that
+   do NOT yet work together, against a plain .arch showing the same four connected. */
+.arch.detached {
+    gap: 1.1rem;
+}
 
-.arch.fill .arch-row { flex: 1; }
+.arch.detached .arch-row {
+    gap: 1.6rem;
+}
 
-.arch.fill .arch-block {
+.arch.detached .arch-block {
+    background: none;
+    border: 2px dashed rgba(255,255,255,0.28);
+    border-left: 2px dashed rgba(255,255,255,0.28);
+    text-align: center;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    min-height: 92px;
+    min-width: 0;
+}
+
+/* smaller than a connected .arch-title, so a long word like MEASUREMENT cannot
+   force its cell wider than its siblings and break the grid */
+.arch.detached .arch-title {
+    font-size: 1em;
+    color: rgba(255,255,255,0.65);
+    margin-right: 0;
 }
 
 .arch-block {
@@ -745,6 +775,24 @@ $heading-font: "Rubik", sans-serif !default;
 .layer .card-title {
     font-size: 1.05em;
     margin-bottom: 0.3rem;
+}
+
+/* Band — ::: {.band} for a narrow full-width note under a diagram, for something that
+   is true throughout the diagram rather than at one step in it. */
+.band {
+    margin-top: 0.4rem;
+    padding: 0.3rem 0.9rem;
+    background: rgba(236,103,44,0.1);
+    border-left: 4px solid $primary-color;
+    border-radius: 4px;
+}
+
+.band p {
+    margin: 0;
+    text-align: center;
+    font-size: 0.66em;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.75);
 }
 
 /* You-are-here strip — ::: {.you-are-here} on a divider: [Stop]{.stop} spans, the current one [Stop]{.stop .here} */
@@ -976,6 +1024,17 @@ $heading-font: "Rubik", sans-serif !default;
     font-size: 1.3rem;
     color: rgba(255,255,255,0.6);
     margin-top: 0.6rem;
+}
+
+/* Optional third line on a divider — the route this part takes, in small caps */
+.divider-path {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $primary-color;
+    margin-top: 1.4rem;
 }
 
 /* Full-bleed image slide caption — a text overlay pinned to the bottom of the slide */
