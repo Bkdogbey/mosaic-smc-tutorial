@@ -35,7 +35,7 @@ title-slide-attributes:
 
 [Understanding MOSAIC]{.divider-subtitle}
 
-[Why it exists → What it is → How it works]{.divider-path}
+[Why it exists → What it connects → What we can study]{.divider-path}
 
 ::: {.you-are-here}
 [What it is]{.stop .here} [Install]{.stop} [Use it]{.stop}
@@ -50,41 +50,57 @@ title-slide-attributes:
 A human–AI experiment requires more than an AI model.
 :::
 
-::: {.columns}
-::: {.column width="38%"}
+::::: {.need-map}
 
-:::: {.arch .detached}
+:::: {.need-column}
 
-::: {.arch-row}
-::: {.arch-block}
-[Task]{.arch-title}
-:::
-::: {.arch-block}
-[Human]{.arch-title}
-:::
+::: {.need-item}
+[01]{.need-index}
+
+[Meaningful decisions]{.need-title}
+
+Assistance should have the opportunity to change what a participant does.
 :::
 
-::: {.arch-row}
-::: {.arch-block}
-[AI]{.arch-title}
-:::
-::: {.arch-block}
-[Measurement]{.arch-title}
-:::
+::: {.need-item}
+[02]{.need-index}
+
+[Repeatable conditions]{.need-title}
+
+Tasks and study settings should be comparable across participants.
 :::
 
 ::::
 
-:::
-::: {.column width="62%"}
+::: {.need-core}
+[Human–AI]{.need-core-top}
 
-- **Meaningful decisions** — assistance can affect what the participant does.
-- **Repeatable conditions** — comparable across participants.
-- **Synchronized data** — actions, advice, outcomes and optional sensors, on one clock.
-- **Reconfigurable components** — a new study without rebuilding the task.
+[STUDY]{.need-core-title}
 
+[one coordinated system]{.need-core-subtitle}
 :::
+
+:::: {.need-column}
+
+::: {.need-item}
+[03]{.need-index}
+
+[Synchronized evidence]{.need-title}
+
+Actions, advice, outcomes, and optional sensors need a common time base.
 :::
+
+::: {.need-item}
+[04]{.need-index}
+
+[Reconfigurable studies]{.need-title}
+
+Researchers should vary conditions without rebuilding the core task.
+:::
+
+::::
+
+:::::
 
 ::: {.punchline}
 MOSAIC brings these requirements together in [one research platform]{.accent}.
@@ -95,72 +111,53 @@ MOSAIC brings these requirements together in [one research platform]{.accent}.
 ## What Is [MOSAIC]{.accent}?
 
 ::: {.hook}
-A modular software testbed for studying human–AI collaboration in controlled, interactive tasks.
+A modular software testbed for controlled, interactive human–AI collaboration research.
 :::
 
-:::: {.arch}
+::::: {.mosaic-map}
 
-::: {.arch-row}
+::: {.mosaic-node .participant-node}
+[Human]{.mosaic-node-title}
 
-::: {.arch-block}
-[Human]{.arch-title}
-
-The participant and what they see
+Observes, decides, and acts
 :::
 
-::: {.arch-block}
-[Task]{.arch-title}
+::: {.mosaic-link .participant-link}
+[actions →]{.link-forward}
 
-The environment and its rules
+[← observations]{.link-back}
 :::
 
-::: {.arch-block}
-[AI]{.arch-title}
+::: {.mosaic-node .mosaic-core}
+[MOSAIC]{.mosaic-core-title}
 
-The advisor, when asked
+Task environment  
++ human interface
 :::
 
+::: {.mosaic-link .advisor-link}
+[task state →]{.link-forward}
+
+[← advice]{.link-back}
 :::
 
-::: {.arch-link}
-⇅ actions · observations · advice
+::: {.mosaic-node .advisor-node}
+[AI Advisor]{.mosaic-node-title}
+
+Responds when requested
 :::
 
-::: {.arch-row}
-::: {.arch-block}
-[Measurement]{.arch-title}
+::: {.mosaic-record}
+[Experiment record]{.record-title}
 
-One synchronized record of the whole session
-:::
+Actions · advice · outcomes · optional sensor streams
 :::
 
-::::
+:::::
 
-::: {.band}
-Actions, advice, outcomes and optional sensor data can be recorded throughout the interaction.
+::: {.overview-foundation}
+[Gymnasium + MiniGrid]{.foundation-item} [Human-only, human–AI, or programmatic]{.foundation-item} [Components configured independently]{.foundation-item}
 :::
-
-:::: {.cards .cols-3}
-
-::: {.card}
-[Built on]{.card-title}
-
-Gymnasium and MiniGrid.
-:::
-
-::: {.card}
-[Runs as]{.card-title}
-
-Human-only, human–AI, or programmatic.
-:::
-
-::: {.card}
-[Configured by]{.card-title}
-
-Task, interface, advisor and experiment components, set independently.
-:::
-
-::::
 
 ::: {.punchline}
 Many pieces, [one experimental system]{.accent}.
@@ -170,133 +167,149 @@ Many pieces, [one experimental system]{.accent}.
 
 ## The First Testbed: [Search and Rescue]{.accent}
 
-::: {.annotated}
-![](assets/gui-screenshot.png){height="380"}
+::: {.annotated .scenario-view}
+![](assets/gui-screenshot.png){height="420"}
 
 ::: {.anno .fragment style="--x:34%; --y:11%; --w:6%; --h:8%;"}
-Human operator — navigates the building
+Human operator
 :::
 
-::: {.anno .fragment .below style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px; --lx:60px;"}
-Victims and decoys — visual discrimination
+::: {.anno .fragment .below style="--x:14%; --y:72%; --w:5%; --h:8%; --ly:8px; --lx:58px;"}
+Victims and lookalike decoys
 :::
 
-::: {.anno .fragment style="--x:26%; --y:59%; --w:42%; --h:22%; --lx:-60px;"}
-Hazards and locked rooms — risk and planning
+::: {.anno .fragment style="--x:26%; --y:59%; --w:42%; --h:22%; --lx:-45px;"}
+Hazards and locked rooms
 :::
 
 ::: {.anno .fragment .mid style="--x:67%; --y:50%; --w:32%; --h:48%;"}
-AI advisor — on request
+Optional AI advice
 :::
 
 :::
 
-::: {.punchline}
-Rescue the real victims while managing hazards, uncertainty and [limited resources]{.accent}.
-:::
-
-::: {.note}
-A study configuration can also introduce time pressure and declining victim health.
+::: {.scenario-goal}
+[MISSION]{.scenario-label} Rescue the real victims while managing hazards, uncertainty, and limited resources.
 :::
 
 ::: {.punchline}
-The task creates decisions about where to search, whom to rescue, and [when to rely on AI advice]{.accent}.
+Where should I search? Whom should I rescue? [When should I rely on AI advice?]{.accent}
 :::
 
 ---
 
 ## How Human–AI [Collaboration]{.accent} Happens
 
-:::: {.flow-diagram .horizontal .fill .short}
+:::: {.collab-map}
 
-::: {.flow-step}
-[1]{.step-num}
+::: {.collab-node .observe-node}
+[1]{.collab-number}
 
-**Observe**
+[Observe]{.collab-title}
 
-The participant reads the current task.
+Read the task state.
 :::
 
-::: {.flow-step}
-[2]{.step-num}
-
-**Decide**
-
-Act independently — or request advice.
+::: {.collab-arrow .observe-arrow}
+→
 :::
 
-::: {.flow-step}
-[3]{.step-num}
+::: {.collab-node .decide-node}
+[2]{.collab-number}
 
-**Advise**
+[Decide]{.collab-title}
 
-When asked, the AI responds using the available task observation.
+Act independently or request advice.
 :::
 
-::: {.flow-step}
-[4]{.step-num}
-
-**Respond**
-
-The participant follows, modifies, or rejects that advice.
+::: {.collab-arrow .direct-arrow}
+[act directly]{.arrow-label} →
 :::
 
-::: {.flow-step}
-[5]{.step-num}
+::: {.collab-node .act-node}
+[5]{.collab-number}
 
-**Update**
+[Act]{.collab-title}
 
-The environment changes and the cycle repeats.
+Choose the final action.
+:::
+
+::: {.collab-branch}
+[request advice]{.branch-label} ↓
+:::
+
+::: {.collab-node .ask-node}
+[3]{.collab-number}
+
+[Ask AI]{.collab-title}
+
+Send the available task observation.
+:::
+
+::: {.collab-arrow .advice-arrow}
+→
+:::
+
+::: {.collab-node .evaluate-node}
+[4]{.collab-number}
+
+[Evaluate]{.collab-title}
+
+Follow, modify, or reject the advice.
+:::
+
+::: {.collab-arrow .rejoin-arrow}
+↗
 :::
 
 ::::
 
-::: {.band}
-The complete interaction is recorded throughout the cycle.
+::: {.cycle-band}
+[Environment updates]{.cycle-title} The result changes the task, and the participant observes again. [Recorded throughout]{.cycle-record}
 :::
 
 ::: {.punchline}
-The key question is whether — and how — AI advice [changes human decisions]{.accent}.
+The central question is whether — and how — AI advice [changes human decisions]{.accent}.
 :::
 
 ---
 
 ## What Can [Researchers]{.accent} Study?
 
-:::: {.cards .cols-2 .fill .short}
+:::: {.research-grid}
 
-::: {.card}
-[Reliance]{.card-title}
+::: {.research-question}
+[Reliance]{.research-topic}
 
 When do people request, follow, or reject AI advice?
 :::
 
-::: {.card}
-[Advice Quality]{.card-title}
+::: {.research-question}
+[Advice quality]{.research-topic}
 
 How do correct, incorrect, or uncertain recommendations affect decisions?
 :::
 
-::: {.card}
-[Human State]{.card-title}
+::: {.research-question}
+[Human state]{.research-topic}
 
-How do time pressure and workload affect human–AI collaboration?
+How do time pressure and workload affect collaboration?
 :::
 
-::: {.card}
-[Interface Design]{.card-title}
+::: {.research-question}
+[Interface design]{.research-topic}
 
-How do explanations, alerts, and feedback influence performance and trust?
+How do explanations, alerts, and feedback affect performance and trust?
 :::
 
 ::::
 
-::: {.note}
-And: how do different AI models or advisory strategies change team behaviour?
+::: {.research-extension}
+[Extend the question]{.research-extension-label} Compare AI models, advisory strategies, task configurations, or sensing conditions.
 :::
 
 ::: {.punchline}
-In Parts Two and Three, we will install MOSAIC, launch a mission, and [modify its components]{.accent}.
+Next, we will install MOSAIC, launch a mission, and [change the experiment ourselves]{.accent}.
 :::
 
 ---
