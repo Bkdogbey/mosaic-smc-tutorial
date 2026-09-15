@@ -128,43 +128,12 @@ Lines reading `Timeout during mission generation: connect_all failed` or
 `Sampling rejected: unreachable object at ...` may appear. Both are the level
 generator retrying — warnings, not errors.
 
-## 5 · Run the provided first mission
+## 5 · You are ready for Part Three
 
-Part Three uses the completed example in the tutorial repository. You do not
-need to create or copy a Python file.
-
-If you do not already have the workshop repository, clone it in a separate
-folder:
-
-```bash
-git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
-```
-
-Then, with the MOSAIC virtual environment still active:
-
-```bash
-cd mosaic-smc-tutorial/presentation
-python labs/first_mission.py
-```
-
-The file uses the reusable MOSAIC package only and does not require the
-study-specific `experiment` package. A later notebook will use the same mission
-setup for interactive exploration.
-
-| Key | Action |
-| --- | --- |
-| `↑` | Move forward |
-| `←` `→` | Turn left / right |
-| `Space` | Open a door |
-| `Tab` or `Page Up` | Rescue (pick up) |
-| `Left Shift` or `Page Down` | Drop the key you are carrying |
-| `Alt` | Ask the AI advisor |
-| `Backspace` | Restart the mission |
-| `F11` | Toggle fullscreen |
-| `Esc` | Quit |
-
-The published docs also list `W` for forward — it is not actually mapped. Use the
-arrow keys.
+No additional tutorial script is required at this stage. The slides show the
+complete minimum code for building a SAR environment and launching the GUI in
+two readable sections. A companion Jupyter notebook will later provide the same
+steps as an interactive walkthrough.
 
 ## Troubleshooting
 

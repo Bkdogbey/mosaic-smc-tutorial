@@ -479,8 +479,8 @@ $heading-font: "Rubik", sans-serif !default;
 
 /* !important: the generic content-image rule above wins on specificity via its :not() */
 .reveal .slides section .member img {
-    width: 190px;
-    height: 190px;
+    width: 210px;
+    height: 210px;
     object-fit: cover;
     border-radius: 50% !important;
     border: 3px solid $primary-color;
@@ -511,9 +511,12 @@ $heading-font: "Rubik", sans-serif !default;
 }
 
 .member-link p {
-    font-size: 0.65em;
+    max-width: 1040px;
+    margin: 0.7rem auto 0;
+    font-size: 0.66em;
     color: rgba(255,255,255,0.5);
-    margin: 0.3rem 0 0;
+    line-height: 1.45;
+    text-align: center;
 }
 
 /* Card grid layouts — ::: {.cards .cols-2} (or .cols-3 / .cols-4) fixes the column count,
@@ -1941,7 +1944,304 @@ $heading-font: "Rubik", sans-serif !default;
 
 .study-active .study-title { color: $primary-color; }
 
-/* Part Three: mission assembly, camera comparison, advisor path, and study layers */
+/* Part Three: runtime map, annotated interface, gameplay, and extension points */
+.mosaic-map {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2fr) minmax(0, 0.9fr);
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.35rem;
+}
+
+.mosaic-actor,
+.mosaic-layer,
+.mosaic-foundation {
+    border-radius: 8px;
+    background: rgba(255,255,255,0.055);
+}
+
+.mosaic-actor {
+    min-height: 190px;
+    padding: 1rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.mosaic-actor.optional {
+    border-style: dashed;
+    border-color: rgba(236,103,44,0.6);
+}
+
+.mosaic-actor p,
+.mosaic-layer p,
+.mosaic-foundation p {
+    margin: 0;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.65em;
+    line-height: 1.4;
+}
+
+.mosaic-title {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 800;
+}
+
+.mosaic-core {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mosaic-layer {
+    padding: 0.7rem 1rem;
+    border-left: 5px solid $primary-color;
+    text-align: center;
+}
+
+.mosaic-layer.sar-layer {
+    border-color: rgba(255,255,255,0.3);
+    border-left-color: $secondary-color;
+}
+
+.mosaic-connector p {
+    margin: 0;
+    color: $primary-color;
+    font-size: 0.52em;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.mosaic-foundation {
+    padding: 0.45rem 0.7rem;
+    border: 1px solid rgba(255,255,255,0.14);
+    text-align: center;
+}
+
+.foundation-name {
+    color: $primary-color;
+    font-weight: 800;
+}
+
+.mosaic-links {
+    margin-top: 0.6rem;
+}
+
+.mosaic-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.map-link-item p {
+    margin: 0;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.54em;
+    text-align: center;
+}
+
+.map-link {
+    display: block;
+    margin-bottom: 0.12rem;
+    color: $primary-color;
+    font-size: 1.08em;
+    font-weight: 800;
+}
+
+.map-detail {
+    display: block;
+}
+
+.interface-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.25rem;
+}
+
+.interface-shot {
+    position: relative;
+    width: 100%;
+}
+
+.interface-shot > p {
+    margin: 0;
+}
+
+.reveal .slides section .interface-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.interface-marker {
+    position: absolute;
+    z-index: 3;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: $primary-color;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.65);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 27px;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.marker-agent { left: 36.7%; top: 15%; }
+.marker-victim { left: 65%; top: 65%; }
+.marker-lava { left: 9%; top: 35%; }
+.marker-info { left: 84%; top: 22%; }
+.marker-chat { left: 84%; top: 62%; }
+.marker-vignette { left: 6.7%; top: 10%; }
+
+.viewport-frame {
+    position: absolute;
+    z-index: 2;
+    left: 6.65%;
+    top: 10%;
+    width: 60.15%;
+    height: 80%;
+    border: 2px dashed rgba(236,103,44,0.9);
+    box-shadow: inset 0 0 22px rgba(236,103,44,0.22);
+    pointer-events: none;
+}
+
+.interface-legend {
+    border-top: 1px solid rgba(255,255,255,0.14);
+}
+
+.interface-feature {
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+
+.interface-feature p {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 0.45rem;
+    margin: 0;
+    padding: 0.36rem 0;
+    color: rgba(255,255,255,0.66);
+    font-size: 0.55em;
+    line-height: 1.3;
+}
+
+.feature-index {
+    grid-row: 1 / span 2;
+    display: flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: $primary-color;
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.feature-title {
+    display: block;
+    color: #ffffff;
+    font-size: 1.08em;
+    font-weight: 800;
+}
+
+.feature-desc {
+    grid-column: 2;
+}
+
+.gameplay-loop {
+    border-top: 1px solid rgba(255,255,255,0.14);
+}
+
+.gameplay-step p {
+    display: grid;
+    grid-template-columns: 34px 95px 1fr;
+    gap: 0.35rem;
+    align-items: center;
+    margin: 0;
+    padding: 0.52rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.66);
+    font-size: 0.62em;
+    line-height: 1.3;
+}
+
+.gameplay-number {
+    color: $primary-color;
+    font-size: 1.5em;
+    font-weight: 900;
+}
+
+.gameplay-title {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.gameplay-detail {
+    display: block;
+}
+
+.screen-shortcuts p {
+    margin: 0.65rem 0 0;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.55em;
+    text-align: center;
+}
+
+.launch-columns {
+    align-items: center;
+}
+
+.launch-columns .workshop-check.compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 0;
+    margin: 0 0 0 0.6rem;
+}
+
+.launch-columns .workshop-step {
+    min-height: 115px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.launch-columns .workshop-step:nth-child(2) {
+    border-right: none;
+}
+
+.launch-columns .workshop-step:nth-child(n+3) {
+    border-bottom: none;
+}
+
+.extension-cards {
+    min-height: 390px;
+    grid-auto-rows: 1fr;
+    gap: 1rem;
+}
+
+.extension-cards .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.9rem 1.1rem;
+}
+
+.extension-cards .card p {
+    font-size: 0.72em;
+}
+
 .mission-assembly {
     gap: 0.15rem;
     margin-top: 0.25rem;
@@ -1978,8 +2278,8 @@ $heading-font: "Rubik", sans-serif !default;
 }
 
 .reveal .slides section .camera-view img {
-    width: 210px;
-    height: 210px;
+    width: 245px;
+    height: 245px;
     object-fit: contain;
     background: #000000;
     margin: 0 auto 0.35rem;

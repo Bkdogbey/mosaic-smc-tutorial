@@ -9,17 +9,18 @@ The deck is three parts:
    MOSAIC connects, the search-and-rescue task, and the research questions it supports
 2. **Install and verify** — one supported setup path with checkpoints and a compact
    troubleshooting appendix
-3. **Using the search-and-rescue testbed** — see how a mission is assembled, run
-   the provided example, compare camera views, and change one task parameter
+3. **Using the search-and-rescue testbed** — understand the runtime building
+   blocks, inspect the game interface, compare real camera views, and assemble
+   an environment and GUI from the slide code
 
-Technical details about the observation schema, the advisor contract, the iHuman
-Lab protocol, instrumentation, and the roadmap live in the appendix for Q&A.
+Technical details about installation recovery, the observation schema, the
+advisor contract, and the roadmap live in the appendix for Q&A.
 
 ## Contents
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (32 slides: 25 main + appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (30 slides: 25 main + 5 appendix)
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
 │                         #   screenshots, .band notes, layer bands, you-are-here strip,
@@ -27,8 +28,7 @@ presentation/
 ├── SETUP.md              # send this to attendees BEFORE the session
 ├── RUNSHEET.md           # facilitator timings, cut list, expected failures
 ├── assets/               # figures used in the deck
-└── labs/                 # the scripts attendees run
-    ├── first_mission.py  # provided minimal example run in Part Three
+└── labs/                 # optional code examples
     ├── play.py           # play a mission; has an EDIT ME block of knobs
     ├── tweak.py          # all four injection points in one file
     └── advisor.py        # optional development example; not used in the main deck
@@ -48,16 +48,15 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | File | Source |
 | --- | --- |
 | `gui-screenshot.png`, `game-view.png` | MOSAIC docs |
-| `cam-full.png`, `cam-room.png` | Generated from camera strategies at `room_size=8`, 3×3 rooms |
-| `cam-cone.png` | Forward-visibility illustration based on the tutorial game artwork |
+| `cam-follow.png`, `cam-room.png`, `cam-cone.png` | Real renders from the three supported camera strategies, using the same seeded SAR state |
 | `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
 `cam-full.png` introduces the search-and-rescue testbed in Part One.
 `gui-screenshot.png` introduces the complete interface in Part Three.
-`game-view.png`, `cam-room.png`, and `cam-cone.png` introduce the three supported
-camera choices in Part Three. `victims.png` remains available for reference.
+`cam-follow.png`, `cam-room.png`, and `cam-cone.png` compare the three supported
+camera choices in Part Three. `victims.png` shows the real and decoy victim shapes.
 
 ## Before presenting
 
