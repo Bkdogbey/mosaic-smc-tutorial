@@ -128,17 +128,28 @@ Lines reading `Timeout during mission generation: connect_all failed` or
 `Sampling rejected: unreachable object at ...` may appear. Both are the level
 generator retrying — warnings, not errors.
 
-## 5 · Your first mission
+## 5 · Run the provided first mission
 
-Part Three of the tutorial builds `first_mission.py` line by line, then runs:
+Part Three uses the completed example in the tutorial repository. You do not
+need to create or copy a Python file.
+
+If you do not already have the workshop repository, clone it in a separate
+folder:
 
 ```bash
-python first_mission.py
+git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
 ```
 
-A finished reference copy lives in the tutorial repository at
-`presentation/labs/first_mission.py`. The file uses the reusable MOSAIC package
-only and does not require the study-specific `experiment` package.
+Then, with the MOSAIC virtual environment still active:
+
+```bash
+cd mosaic-smc-tutorial/presentation
+python labs/first_mission.py
+```
+
+The file uses the reusable MOSAIC package only and does not require the
+study-specific `experiment` package. A later notebook will use the same mission
+setup for interactive exploration.
 
 | Key | Action |
 | --- | --- |
@@ -174,16 +185,6 @@ arrow keys.
 
 If you are still stuck when you arrive, come to the front — we have helpers and a
 pre-built environment on a spare machine.
-
-## Optional — a real LLM advisor
-
-Only needed if you want to use OpenAI or Gemini during the session. Everything in
-the tutorial works without it.
-
-```bash
-python -m pip install llama_index
-export OPENAI_API_KEY="sk-..."     # or GOOGLE_API_KEY
-```
 
 ## Links
 

@@ -1,8 +1,9 @@
 """Minimal MOSAIC search-and-rescue mission used in Part Three.
 
-Run from an active environment that has MOSAIC installed:
+Run from the tutorial repository with an active environment that has MOSAIC
+installed:
 
-    python first_mission.py
+    python presentation/labs/first_mission.py
 """
 
 from mosaic.gui.main import SAREnvGUI

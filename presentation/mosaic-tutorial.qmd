@@ -543,7 +543,7 @@ If you see this message, the environment and GUI imports are working.
 :::
 
 ::: {.punchline}
-Installation is complete. Next, we will [build and launch a mission]{.accent}.
+Installation is complete. Next, we will [run and inspect the provided mission]{.accent}.
 :::
 
 ---
@@ -553,9 +553,9 @@ Installation is complete. Next, we will [build and launch a mission]{.accent}.
 ::: {.divider}
 [Part Three]{.divider-title}
 
-[The game and your first mission]{.divider-subtitle}
+[Using the search-and-rescue testbed]{.divider-subtitle}
 
-[See the task → Build it → Run it → Change it]{.divider-path}
+[See the task · Run the example · Change the study]{.divider-path}
 
 ::: {.you-are-here}
 [What it is]{.stop} [Install]{.stop} [Use it]{.stop .here}
@@ -564,7 +564,71 @@ Installation is complete. Next, we will [build and launch a mission]{.accent}.
 
 ---
 
-## The Search and Rescue [Game]{.accent}
+## Mission [Assembly]{.accent}
+
+::: {.hook}
+The supplied example combines a reusable task with replaceable study components.
+:::
+
+::: {.arch .mission-assembly}
+
+::: {.arch-row}
+::: {.arch-block}
+[Task content]{.arch-title}
+
+Victims, lava, locked rooms, and keys
+:::
+::: {.arch-block}
+[Task view]{.arch-title}
+
+A camera strategy defines the participant's observation
+:::
+::: {.arch-block .secondary}
+[Optional advice]{.arch-title}
+
+An `LLMClient` supplies text advice when requested
+:::
+:::
+
+::: {.arch-link}
+PASSED INTO THE ENVIRONMENT AND GUI
+:::
+
+::: {.arch-row}
+::: {.arch-block}
+[`build_sar_env(...)`]{.arch-title}
+
+Creates the Gymnasium and MiniGrid search-and-rescue task
+:::
+::: {.arch-block}
+[`SAREnvGUI(...)`]{.arch-title}
+
+Connects keyboard input, task rendering, status, and advice
+:::
+:::
+
+::: {.arch-link}
+RUNS AS ONE PARTICIPANT SESSION
+:::
+
+::: {.arch-row}
+::: {.arch-block .secondary}
+[Human interaction]{.arch-title}
+
+The participant observes, moves, rescues, and may request advice
+:::
+::: {.arch-block .secondary}
+[Research record]{.arch-title}
+
+Actions, observations, outcomes, and timing can be recorded
+:::
+:::
+
+:::
+
+---
+
+## The Search and Rescue [Task]{.accent}
 
 :::: {.columns .game-intro}
 
@@ -575,17 +639,17 @@ Installation is complete. Next, we will [build and launch a mission]{.accent}.
 ::: {.column width="34%"}
 
 ::: {.mission-summary}
-[Goal]{.scenario-label}
+[Mission]{.scenario-label}
 
-Find and rescue every real victim.
+Search the building and rescue every real victim.
 
-[Pressure]{.scenario-label}
+[Constraints]{.scenario-label}
 
-Manage locked rooms, keys, hazards, and limited time.
+Doors may require matching keys. Lava restricts safe routes.
 
-[Choice]{.scenario-label}
+[Study options]{.scenario-label}
 
-Act independently or ask the advisor for guidance.
+Researchers can vary layouts, timing, camera views, and advice.
 :::
 
 :::
@@ -593,57 +657,7 @@ Act independently or ask the advisor for guidance.
 ::::
 
 ::: {.punchline}
-The task turns advice into a decision that can affect [time, safety, and mission success]{.accent}.
-:::
-
----
-
-## Task [Features]{.accent}
-
-:::: {.columns .feature-columns}
-
-::: {.column width="42%"}
-![](assets/victims.png){height="310" fig-align="center"}
-
-::: {.victim-key}
-[Real victim]{.real-key} centered shape
-
-[Decoy]{.decoy-key} offset shape in study configurations
-:::
-:::
-
-::: {.column width="58%"}
-
-::: {.feature-list}
-
-::: {.feature-row}
-[Building]{.feature-name} Multiroom layouts with doors and color matched keys
-:::
-
-::: {.feature-row}
-[Risk]{.feature-name} Lava constrains movement and route planning
-:::
-
-::: {.feature-row}
-[Uncertainty]{.feature-name} Study components can add decoys and victim health loss
-:::
-
-::: {.feature-row}
-[Observation]{.feature-name} Camera strategies control how much of the world the participant sees
-:::
-
-::: {.feature-row}
-[Feedback]{.feature-name} Status, reward, time, advice, and event vignettes appear in the GUI
-:::
-
-:::
-
-:::
-
-::::
-
-::: {.punchline}
-The reusable core supplies the task mechanics. A study can add its own [calibration and experimental conditions]{.accent}.
+The participant must make decisions while the environment records the state behind each action.
 :::
 
 ---
@@ -689,131 +703,134 @@ The default dummy advisor works without an API key, so the `Alt` control can be 
 
 ---
 
-## The First Mission [File]{.accent}
+## Camera [Views]{.accent}
 
-::: {.hook}
-Create `first_mission.py` in the MOSAIC repository folder.
+::: {.camera-grid}
+
+::: {.camera-view}
+![](assets/game-view.png){fig-alt="An eight by eight moving crop of the search-and-rescue grid"}
+
+[Moving viewport]{.camera-title}
+
+`EdgeFollowCamera` is the default. The view follows the agent across the building.
+:::
+
+::: {.camera-view}
+![](assets/cam-room.png){fig-alt="The complete room containing the agent"}
+
+[Current room]{.camera-title}
+
+`AgentFOVCamera` shows the complete room occupied by the agent.
+:::
+
+::: {.camera-view}
+![](assets/cam-cone.png){fig-alt="Illustration of a forward visibility cone with the remaining tiles hidden"}
+
+[Forward visibility]{.camera-title}
+
+`AgentConeCamera` hides tiles outside MiniGrid's forward field of view.
+:::
+
 :::
 
 ```python
-from mosaic.gui.main import SAREnvGUI
-from mosaic.sar.env import build_sar_env
-from mosaic.sar.placers import (
-    LavaPlacer,
-    LockedRoomPlacer,
-    VictimPlacer,
-)
+env = build_sar_env(..., camera_strategy=AgentFOVCamera())
 ```
-
-::: {.code-explain}
-[Environment]{.code-label} `build_sar_env` creates the Gymnasium task.
-
-[Components]{.code-label} The placer objects configure victims, lava, and locked rooms.
-
-[Interface]{.code-label} `SAREnvGUI` connects the participant to the task.
-:::
-
----
-
-## Mission [Configuration]{.accent}
-
-```python
-env = build_sar_env(
-    screen_size=720,
-    num_rows=2,
-    num_cols=2,
-    room_size=8,
-    victim_placer=VictimPlacer(num_real_victims=1),
-    lava_placer=LavaPlacer(lava_per_room=1),
-    locked_room_placer=LockedRoomPlacer(
-        locked_room_prob=0.25
-    ),
-)
-```
-
-::: {.parameter-line}
-[4 rooms]{.parameter-value} [1 victim per room]{.parameter-value} [1 lava tile per room]{.parameter-value} [about 1 locked room]{.parameter-value}
-:::
 
 ::: {.note}
-Each placer receives its own settings. Replacing a placer changes one aspect of the task without rewriting the environment.
+The camera changes what the participant sees. It does not change the underlying task state.
 :::
 
 ---
 
-## GUI [Launch]{.accent}
+## Running the Provided [Mission]{.accent}
 
-Add these final lines to `first_mission.py`:
+::: {.hook}
+The workshop repository already contains the complete example. No new file is required.
+:::
 
-```python
-gui = SAREnvGUI(
-    env,
-    config={"fullscreen": False, "max_time": 3},
-)
-gui.run()
-```
-
-Run the file from the active virtual environment:
+From the tutorial repository, activate the environment used in Part Two and run:
 
 ```bash
-python first_mission.py
+cd presentation
+python labs/first_mission.py
 ```
 
 ::: {.checkpoint}
 The MOSAIC window should open with the game on the left and the mission and chat panels on the right.
 :::
 
-::: {.note}
-`gui.run()` performs the first environment reset. No separate `env.reset()` call is required for this example.
-:::
-
----
-
-## First Run [Checkpoint]{.accent}
-
-::: {.workshop-check}
-
+::: {.workshop-check .compact}
 ::: {.workshop-step}
 [1]{.workshop-number}
-
 [Move]{.workshop-title}
-
-Use the arrow keys to enter another room.
+Use the arrow keys.
 :::
-
 ::: {.workshop-step}
 [2]{.workshop-number}
-
 [Interact]{.workshop-title}
-
-Open a door or collect the key that matches it.
+Open a door or collect its key.
 :::
-
 ::: {.workshop-step}
 [3]{.workshop-number}
-
 [Rescue]{.workshop-title}
-
 Face a victim and press `Tab`.
 :::
-
 ::: {.workshop-step}
 [4]{.workshop-number}
-
-[Ask]{.workshop-title}
-
-Press `Alt` and watch the chat panel.
+[Restart]{.workshop-title}
+Press `Backspace` for a new run.
 :::
-
-:::
-
-::: {.checkpoint}
-Before moving on, confirm that movement changes the game view and a rescue changes the mission panel.
 :::
 
 ---
 
-## One Parameter, One [Manipulation]{.accent}
+## Inside the Mission [File]{.accent}
+
+:::: {.columns .mission-code}
+
+::: {.column width="62%"}
+```python
+env = build_sar_env(
+    screen_size=720,
+    num_rows=2,
+    num_cols=2,
+    room_size=8,
+    victim_placer=VictimPlacer(
+        num_real_victims=1
+    ),
+    lava_placer=LavaPlacer(lava_per_room=1),
+    locked_room_placer=LockedRoomPlacer(
+        locked_room_prob=0.25
+    ),
+)
+
+SAREnvGUI(
+    env,
+    config={"fullscreen": False, "max_time": 3},
+).run()
+```
+:::
+
+::: {.column width="38%"}
+::: {.code-explain}
+[Layout]{.code-label} Two rows and two columns create four rooms.
+
+[Content]{.code-label} Each placer controls one type of object.
+
+[Interface]{.code-label} `SAREnvGUI` runs the keyboard and rendering loop.
+:::
+:::
+
+::::
+
+::: {.note}
+`gui.run()` performs the first reset, so this example does not call `env.reset()` separately.
+:::
+
+---
+
+## Changing the [Task]{.accent}
 
 ::: {.hook}
 Change one setting, rerun the file, and compare the experience.
@@ -827,7 +844,7 @@ Change one setting, rerun the file, and compare the experience.
 | More targets | `num_real_victims=2` | More rescues in each room |
 
 ::: {.exercise-band}
-[Workshop task]{.exercise-label} Choose one row. Change only that setting, save the file, and run `python first_mission.py` again.
+[Workshop task]{.exercise-label} Edit `labs/first_mission.py`, change one setting, and run the file again.
 :::
 
 ::: {.note}
@@ -836,69 +853,123 @@ Avoid `locked_room_prob=1.0` in the current generator. A fully locked layout may
 
 ---
 
-## From Mission to [Study]{.accent}
+## Adding an AI [Advisor]{.accent}
 
-::: {.study-path}
-
-::: {.study-stage}
-[Reusable task]{.study-title}
-
-Rooms, victims, hazards, actions, observations, and rewards
+::: {.hook}
+MOSAIC keeps provider setup outside the game and exposes one text advice interface.
 :::
 
-::: {.study-stage .study-active}
-[Study configuration]{.study-title}
+::: {.advisor-pipeline}
+::: {.advisor-node}
+[Observation]{.advisor-title}
 
-Difficulty, timing, scoring, camera, and advisor behavior
+Current task state
+:::
+::: {.advisor-node}
+[Prompt builder]{.advisor-title}
+
+State becomes text
+:::
+::: {.advisor-node .active}
+[`LLMClient`]{.advisor-title}
+
+Provider-independent query
+:::
+::: {.advisor-node}
+[Response processor]{.advisor-title}
+
+Reply becomes advice
+:::
+::: {.advisor-node}
+[Chat panel]{.advisor-title}
+
+Participant sees the result
+:::
 :::
 
-::: {.study-stage}
-[Experiment protocol]{.study-title}
+```python
+SAREnvGUI(env, llm_client=your_client).run()
+```
 
-Conditions, participant instructions, logging, sensing, and replay
-:::
-
-:::
-
-::: {.punchline}
-The first mission uses neutral defaults. Research code supplies the [calibration required by a specific study]{.accent}.
+::: {.note}
+The default `DummyLLMClient` keeps the tutorial offline. The documentation covers provider packages, credentials, and custom prompt processing.
 :::
 
 ---
 
-## Where to Go [Next]{.accent}
-
-:::: {.columns .next-columns}
-
-::: {.column width="56%"}
+## An Example Study [Protocol]{.accent}
 
 ::: {.hook}
-Use the first mission as a small, working baseline.
+The iHuman Lab study wraps MOSAIC with measures collected before and after the search-and-rescue task.
 :::
 
-- Add a camera strategy to change what the participant can see
-- Provide an `LLMClient` implementation for live advice
-- Add study components under `experiment/`
-- Use the test suite before collecting participant data
+::: {.protocol-sequence}
+::: {.protocol-stage .secondary}
+[Before the task]{.protocol-title}
 
+Eye-tracker calibration and baseline attention tasks
+:::
+::: {.protocol-stage .active}
+[During the task]{.protocol-title}
+
+Practice followed by the main SAR mission with optional AI advice
+:::
+::: {.protocol-stage .secondary}
+[After the task]{.protocol-title}
+
+Situation-awareness and workload measures
+:::
 :::
 
-::: {.column width="44%"}
-
-::: {.resource-list}
-[Source code]{.resource-label}
-<https://github.com/iHuman-Lab/mosaic>
-
-[Tutorial deck]{.resource-label}
-<https://github.com/Bkdogbey/mosaic-smc-tutorial>
-
-[Project documentation]{.resource-label}
-<https://ihuman-lab.github.io/mosaic/>
+::: {.note}
+This protocol belongs to one iHuman Lab study. MOSAIC does not require these measures or this sequence.
 :::
 
+::: {.punchline}
+Researchers can retain the reusable task while defining a protocol for their own research question.
 :::
 
+---
+
+## The Connected [Experiment]{.accent}
+
+:::: {.layer .experiment-stack}
+::: {.layer-label}
+**`mosaic/`**
+
+Reusable package
+:::
+::: {.experiment-line}
+[Environment core]{.experiment-item} [SAR mechanics]{.experiment-item} [GUI]{.experiment-item} [LLM interface]{.experiment-item}
+:::
 ::::
+
+::: {.stack-link}
+CONSTRUCTOR INJECTION AND GYMNASIUM INTERFACES
+:::
+
+:::: {.layer .secondary .experiment-stack}
+::: {.layer-label}
+**`experiment/`**
+
+Study code
+:::
+::: {.experiment-line}
+[Calibration]{.experiment-item} [Conditions]{.experiment-item} [Protocol]{.experiment-item} [Instrumentation]{.experiment-item}
+:::
+::::
+
+::: {.stack-link}
+PRODUCES A STUDY RECORD
+:::
+
+::: {.record-line}
+[Participant actions]{.record-item} [Task state]{.record-item} [Advice and timing]{.record-item} [Sensor streams]{.record-item}
+:::
+
+::: {.punchline}
+The tutorial starts with the reusable example. A full study adds only the components required by its research design.
+:::
 
 ---
 
@@ -929,7 +1000,7 @@ bennett.dogbey@okstate.edu
 ::: {.divider}
 [Appendix]{.divider-title}
 
-[Backup slides — beyond the basics]{.divider-subtitle}
+[Technical notes and troubleshooting]{.divider-subtitle}
 :::
 
 ---
@@ -945,175 +1016,15 @@ bennett.dogbey@okstate.edu
 | GUI opens on no display | Run locally rather than through a headless or SSH-only session |
 | `No module named 'tabulate'` | Run `python -m pip install tabulate` |
 
-::: {.punchline}
-Recover the failed checkpoint, verify `MOSAIC ready`, and then rejoin the tutorial.
+::: {.note}
+The current package metadata installs plain `pygame`, while `pygame_gui` expects `pygame-ce`. Both use the `pygame` namespace, which makes the force-reinstall step necessary.
 :::
 
 ---
 
-## Why the Pygame [Workaround]{.accent}?
+## Step [Observation]{.accent}
 
-::: {.hook}
-Two distributions currently install into the same Python namespace.
-:::
-
-:::: {.cards .cols-3 .fill .short}
-
-::: {.card}
-[MOSAIC metadata]{.card-title}
-
-The current `pyproject.toml` declares plain `pygame`.
-:::
-
-::: {.card}
-[GUI dependency]{.card-title}
-
-`pygame_gui` expects features supplied by `pygame-ce`.
-:::
-
-::: {.card .secondary}
-[Runtime workaround]{.card-title}
-
-Remove plain `pygame`, then force-reinstall `pygame-ce` so its files win.
-:::
-
-::::
-
-::: {.punchline}
-The release-quality fix is upstream: declare `pygame-ce` and `tabulate` directly in MOSAIC's package metadata.
-:::
-
----
-
-## Three Design Choices That Make It [Yours]{.accent}
-
-:::: {.cards .cols-3 .fill .short}
-
-::: {.card}
-[Dependency Injection]{.card-title}
-
-Components are built first, then passed in — never subclassed, never looked up.
-
-`build_sar_env(victim_placer=MyPlacer())`
-
-::: {.card-meta}
-A new world is a new object, not a new environment
-:::
-:::
-
-::: {.card}
-[Strategy Pattern]{.card-title}
-
-Interchangeable behaviours behind one interface — five cameras, one argument.
-
-`env.switch_camera(AgentConeCamera())`
-
-::: {.card-meta}
-Change what participants see, even mid-session
-:::
-:::
-
-::: {.card}
-[Factory Functions]{.card-title}
-
-One call builds a fully wired object from parts you already made.
-
-`build_sar_env(...)` · `build_llm_client(...)`
-
-::: {.card-meta}
-A condition is a function call you can put in a config
-:::
-:::
-
-::::
-
-::: {.punchline}
-Your manipulation is a [constructor argument]{.accent}. That is the whole design.
-:::
-
----
-
-## The Building Blocks, [in Code]{.accent}
-
-::::: {.layer}
-
-::: {.layer-label}
-**`mosaic/`**\
-the contract\
-`pip install -e .`
-:::
-
-:::: {.cards .cols-4}
-
-::: {.card}
-[core/]{.card-title}
-
-`SARLevelGen` on MiniGrid · five `CameraStrategy` classes · the `Placer` base
-:::
-
-::: {.card}
-[sar/]{.card-title}
-
-`PickupVictimEnv` · `build_sar_env()` · survivors and decoys · `RescueAction` · `GameObservation`
-:::
-
-::: {.card}
-[gui/]{.card-title}
-
-`SAREnvGUI` · `InfoPanel` · `ChatPanel` · `EdgeVignette` · `User` input
-:::
-
-::: {.card}
-[llm/]{.card-title}
-
-`LLMClient` · `DummyLLMClient` · prompt builder · pathfinding · reply parser
-:::
-
-::::
-
-:::::
-
-::::: {.layer .secondary}
-
-::: {.layer-label}
-**`experiment/`**\
-one lab's wiring\
-not packaged
-:::
-
-:::: {.cards .cols-3}
-
-::: {.card .secondary}
-[Providers]{.card-title}
-
-`llm.py` — OpenAI and Gemini through llama_index
-:::
-
-::: {.card .secondary}
-[Study tuning]{.card-title}
-
-`placers.py` — health and decay by lava risk · `pacing.py` — the step budget
-:::
-
-::: {.card .secondary}
-[Instrumented run]{.card-title}
-
-`game.py` → LSL · `sensors/` Tobii · `replay.py` · YAML configs
-:::
-
-::::
-
-:::::
-
-::: {.punchline}
-Contract lives in `mosaic/`, wiring lives in `experiment/`. Your study becomes a [second `experiment/`]{.accent} — not a fork.
-:::
-
----
-
-## What Gets [Logged]{.accent}
-
-Every step returns an enriched observation:
+The SAR environment can return an enriched observation at each step:
 
 ```python
 ['agent_dir', 'agent_x', 'agent_y', 'cam_top_x', 'cam_top_y',
@@ -1123,14 +1034,14 @@ Every step returns an enriched observation:
  'step_count', 'victim_health']
 ```
 
-`grid` is a full integer-encoded snapshot of the world — walls, lava, survivors, decoys, doors with colour and lock state, keys.
+`grid` contains an integer-encoded snapshot of the world, including walls, hazards, victims, doors, and keys.
 
 ::: {.note}
-The four `cam_*` fields come from the default `EdgeFollowCamera`. Swap to `AgentConeCamera` or `AgentFOVCamera` and they are absent — worth knowing before you write the analysis.
+The four `cam_*` fields come from the default `EdgeFollowCamera`. `AgentConeCamera` and `AgentFOVCamera` do not currently add those fields.
 :::
 
 ::: {.punchline}
-Which is why a session can be [replayed exactly]{.accent}, without re-running the environment.
+Study logging can store these observations for frame reconstruction and later analysis.
 :::
 
 ---
@@ -1144,107 +1055,15 @@ class LLMClient(ABC):
         """Send text, get text back."""
 ```
 
-That is the whole interface. It knows nothing about SAR, prompts, the GUI, or your conditions.
+The client knows nothing about SAR, prompts, GUI panels, or study conditions.
 
 ::: {.punchline}
-Anything with a `query` method is a [teammate]{.accent} — GPT, Gemini, a rule, a human confederate behind a socket.
+A custom advisor subclasses `LLMClient` and implements `query`. Provider setup remains outside the reusable game.
 :::
 
 ---
 
-## An Advisor With a [Reliability Dial]{.accent}
-
-Advice is correct with probability `p_correct` — and every call records whether it was.
-
-```python
-import random
-from mosaic.llm.client import LLMClient
-
-class ScriptedAdvisor(LLMClient):
-    def __init__(self, p_correct=1.0, seed=0):
-        self.p_correct, self.rng, self.log = p_correct, random.Random(seed), []
-
-    def query(self, prompt: str) -> str:
-        correct = self.rng.random() < self.p_correct
-        heading = self.rng.choice(["north", "south", "east", "west"])
-        advice = (f"Head {heading} — there's a survivor in the next room."
-                  if correct else
-                  f"Nothing {heading} of you. Hold position and search here.")
-        self.log.append({"correct": correct, "advice": advice})
-        return advice
-```
-
----
-
-## Plug It [In]{.accent}
-
-```python
-advisor = ScriptedAdvisor(p_correct=0.7, seed=42)
-
-SAREnvGUI(env, config={"fullscreen": False}, llm_client=advisor).run()
-```
-
-Press `Alt` in the game. Advice appears in the chat panel, and `advisor.log` holds the ground truth for every piece of it.
-
-```bash
-python labs/advisor.py
-```
-
-::: {.punchline}
-You now have advice reliability as an [independent variable]{.accent}, with per-trial ground truth for the analysis.
-:::
-
----
-
-## What That [Buys You]{.accent}
-
-:::: {.cards .cols-2 .fill}
-
-::: {.card}
-[Reliance]{.card-title}
-
-Did they follow advice they should have ignored — and ignore advice they should have followed? `advisor.log` tells you which was which.
-
-::: {.card-meta}
-Compliance, over- and under-reliance
-:::
-:::
-
-::: {.card}
-[Trust Repair]{.card-title}
-
-Drop `p_correct` mid-session, then raise it again. Watch reliance recover — or not.
-
-::: {.card-meta}
-Reliance over time, after a failure
-:::
-:::
-
-::: {.card}
-[Latency]{.card-title}
-
-Add a `time.sleep` in `query`. Slow advice is a manipulation, not a bug.
-
-::: {.card-meta}
-Advice uptake against delay
-:::
-:::
-
-::: {.card .secondary}
-[Adaptive Guidance]{.card-title}
-
-Make `p_correct` a function of the participant's own performance so far.
-
-::: {.card-meta}
-Calibration under adaptation
-:::
-:::
-
-::::
-
----
-
-## The Full [Protocol]{.accent}
+## iHuman Lab Study [Protocol]{.accent}
 
 :::: {.flow-diagram .horizontal .fill .short}
 
@@ -1252,7 +1071,7 @@ Calibration under adaptation
 [Before]{.step-num}
 
 **1 · Eye-tracker calibration**\
-Tobii — skipped automatically if there is no tracker
+Tobii setup for the instrumented study
 
 **2 · Visual search**\
 Baseline attention
@@ -1283,8 +1102,8 @@ Perceived workload
 
 ::::
 
-::: {.punchline}
-One runner drives all seven phases — baselines, the mission, and the surveys [land in one session]{.accent}.
+::: {.note}
+This sequence describes the study code in `experiment/`. It is an example built with MOSAIC, not the required MOSAIC workflow.
 :::
 
 ---
@@ -1294,16 +1113,16 @@ One runner drives all seven phases — baselines, the mission, and the surveys [
 ::: {.columns}
 ::: {.column width="55%"}
 
-Every frame of the main mission is streamed over **Lab Streaming Layer** as one record:
+The iHuman Lab experiment can stream mission state through **Lab Streaming Layer**:
 
 - Full grid state, agent pose, camera bounds
 - Action taken and reward received
 - Advice text, with request and response timestamps
 - Gaze coordinates from the Tobii bridge
-- Participant ID, trial number, condition order
+- Participant and condition metadata
 
 ::: {.punchline}
-One clock. One file. [Areas-of-interest analysis afterwards]{.accent}, against the exact frame the participant saw.
+Synchronized task and sensor records support later temporal and area-of-interest analysis.
 :::
 
 :::
@@ -1312,10 +1131,10 @@ One clock. One file. [Areas-of-interest analysis afterwards]{.accent}, against t
 ```bash
 # replay any session, frame by frame
 python -m experiment.replay \
-  --file session_p07.json
+  session_p07.json
 ```
 
-No eye tracker in your lab? The protocol detects that and skips it.
+This instrumentation belongs to the study layer and is not required to run the MOSAIC package.
 
 :::
 :::
@@ -1329,40 +1148,40 @@ No eye tracker in your lab? The protocol detects that and skips it.
 ::: {.card}
 [PyPI Release]{.card-title} [Next]{.badge}
 
-`pip install mosaic` with no clone and no dependency workaround — Part 2 of this tutorial gets three slides shorter.
+Package installation without cloning the source repository or applying the current dependency workaround.
 
 ::: {.card-meta}
-Fixes the pygame-ce trap
+Planned packaging improvement
 :::
 :::
 
 ::: {.card}
 [Gymnasium Registration]{.card-title} [Next]{.badge}
 
-`gym.make("MOSAIC-SAR-v0")` for the RL side of the room. The environment is already Gymnasium-compatible.
+Gymnasium registration for creating the SAR environment through `gym.make(...)`.
 
 ::: {.card-meta}
-Train agents on the same task people play
+Planned public entry point
 :::
 :::
 
 ::: {.card}
 [JOSS Submission]{.card-title} [Next]{.badge}
 
-A citable software paper, with the API and docs to match.
+A citable software paper describing the reusable package and its research purpose.
 
 ::: {.card-meta}
-Something to cite in your methods section
+Submission in preparation
 :::
 :::
 
 ::: {.card .secondary}
 [Beyond SAR]{.card-title} [Later]{.badge .secondary}
 
-The same modular pieces — environment, interface, advisor, sensing — in other collaborative domains.
+Adapt the same interfaces to collaborative tasks beyond search and rescue.
 
 ::: {.card-meta}
-Same blocks, a new task
+Longer-term direction
 :::
 :::
 

@@ -1941,6 +1941,259 @@ $heading-font: "Rubik", sans-serif !default;
 
 .study-active .study-title { color: $primary-color; }
 
+/* Part Three: mission assembly, camera comparison, advisor path, and study layers */
+.mission-assembly {
+    gap: 0.15rem;
+    margin-top: 0.25rem;
+}
+
+.mission-assembly .arch-row {
+    gap: 0.7rem;
+}
+
+.mission-assembly .arch-block {
+    padding: 0.55rem 0.75rem;
+}
+
+.mission-assembly .arch-block p {
+    font-size: 0.66em;
+    line-height: 1.3;
+}
+
+.mission-assembly .arch-title {
+    display: block;
+    font-size: 1.05em;
+    margin: 0 0 0.2rem;
+}
+
+.camera-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.1rem;
+    margin: 0.3rem 0 0.45rem;
+}
+
+.camera-view {
+    text-align: center;
+}
+
+.reveal .slides section .camera-view img {
+    width: 210px;
+    height: 210px;
+    object-fit: contain;
+    background: #000000;
+    margin: 0 auto 0.35rem;
+}
+
+.camera-view p {
+    margin: 0.15rem 0;
+    font-size: 0.67em;
+    line-height: 1.35;
+}
+
+.camera-title {
+    display: block;
+    color: $primary-color;
+    font-size: 1.18em;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+}
+
+.workshop-check.compact {
+    min-height: 145px;
+    margin-top: 0.7rem;
+}
+
+.workshop-check.compact .workshop-step {
+    padding: 0.45rem 0.65rem;
+}
+
+.workshop-check.compact .workshop-step p {
+    font-size: 0.65em;
+    line-height: 1.25;
+}
+
+.mission-code pre code {
+    font-size: 1em;
+    line-height: 1.35;
+}
+
+.mission-code .code-explain {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin: 0.25rem 0 0 0.9rem;
+    padding-top: 0;
+    border-top: none;
+}
+
+.mission-code .code-explain p {
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+    font-size: 0.64em;
+}
+
+.advisor-pipeline {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin: 1.1rem 0 0.8rem;
+}
+
+.advisor-node {
+    position: relative;
+    min-height: 145px;
+    padding: 0.75rem 0.55rem;
+    border-top: 4px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.05);
+    text-align: center;
+}
+
+.advisor-node.active {
+    border-top-color: $primary-color;
+    background: rgba(236,103,44,0.11);
+}
+
+.advisor-node + .advisor-node::before {
+    content: "\25B6";
+    position: absolute;
+    left: -0.95rem;
+    top: 48%;
+    transform: translateY(-50%);
+    color: $primary-color;
+    font-size: 0.75em;
+}
+
+.advisor-node p {
+    margin: 0.2rem 0;
+    font-size: 0.66em;
+    line-height: 1.35;
+}
+
+.advisor-title {
+    display: block;
+    color: #ffffff;
+    font-size: 1.05em;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.advisor-node.active .advisor-title {
+    color: $primary-color;
+}
+
+.protocol-sequence {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8rem;
+    margin: 1.4rem 0 1.1rem;
+}
+
+.protocol-stage {
+    position: relative;
+    min-height: 230px;
+    padding: 1.1rem;
+    border: 1px solid rgba(236,103,44,0.55);
+    border-top: 6px solid $primary-color;
+    background: rgba(255,255,255,0.05);
+}
+
+.protocol-stage.secondary {
+    border-color: rgba(189,189,189,0.4);
+    border-top-color: $secondary-color;
+}
+
+.protocol-stage + .protocol-stage::before {
+    content: "\25B6";
+    position: absolute;
+    left: -1.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $primary-color;
+    font-size: 0.85em;
+}
+
+.protocol-stage p {
+    font-size: 0.76em;
+    line-height: 1.45;
+    margin: 0.25rem 0;
+}
+
+.protocol-title {
+    display: block;
+    color: $primary-color;
+    font-size: 1.15em;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.protocol-stage.secondary .protocol-title {
+    color: #bdbdbd;
+}
+
+.experiment-stack {
+    margin-top: 0.5rem;
+}
+
+.experiment-line,
+.record-line {
+    display: block;
+}
+
+.experiment-line > p,
+.record-line > p {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.7rem;
+    align-items: stretch;
+    margin: 0;
+}
+
+.experiment-item,
+.record-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 88px;
+    padding: 0.45rem;
+    border: 1px solid rgba(236,103,44,0.45);
+    border-top: 4px solid $primary-color;
+    background: rgba(255,255,255,0.06);
+    color: #ffffff;
+    font-size: 0.72em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.layer.secondary .experiment-item {
+    border-color: rgba(189,189,189,0.4);
+    border-top-color: $secondary-color;
+}
+
+.record-line {
+    margin: 0.35rem 0 0.45rem 226px;
+}
+
+.record-item {
+    min-height: 62px;
+    border-top-width: 1px;
+    border-color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.75);
+    font-size: 0.65em;
+}
+
+.stack-link {
+    margin: 0.25rem 0 0.25rem 226px;
+    color: $primary-color;
+    font-size: 0.55em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.stack-link p {
+    margin: 0;
+}
+
 .resource-list {
     padding: 0.35rem 0 0.35rem 1rem;
     border-left: 4px solid $primary-color;
