@@ -532,9 +532,10 @@ Bennett Kwaku Dogbey
 <span id="cb7-2"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span>
 <span id="cb7-3"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip uninstall <span class="at">-y</span> pygame</span>
 <span id="cb7-4"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
-<span id="cb7-5"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-5"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install tabulate</span>
+<span id="cb7-6"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install jupyterlab matplotlib</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="checkpoint">
-<p>The final installation should include <code>mosaic</code>, <code>minigrid</code>, <code>pygame-ce</code>, <code>pygame_gui</code>, and <code>tabulate</code>.</p>
+<p>The final installation should include <code>mosaic</code>, <code>minigrid</code>, <code>pygame-ce</code>, <code>pygame_gui</code>, <code>tabulate</code>, JupyterLab, and Matplotlib.</p>
 </div>
 <div class="note">
 <p><strong>Temporary development workaround.</strong> The current package metadata installs plain <code>pygame</code>, while <code>pygame_gui</code> uses <code>pygame-ce</code>. Reinstalling <code>pygame-ce</code> last gives the GUI the implementation it expects. Pip may still report that MOSAIC declares <code>pygame</code>; the readiness check on the next slide verifies the runtime.</p>
@@ -828,7 +829,7 @@ Bennett Kwaku Dogbey
 </div>
 </div></div>
 <div class="note">
-<p>The companion Jupyter notebook will place these code cells in one guided, runnable walkthrough.</p>
+<p>The companion notebook, <code>mosaic-tutorial.ipynb</code>, contains these steps as one guided, runnable walkthrough.</p>
 </div>
 </section>
 <section id="change-the-task" class="slide level2">

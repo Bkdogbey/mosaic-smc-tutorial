@@ -9,6 +9,7 @@ and use the search-and-rescue testbed.
 - [ ] Render `mosaic-tutorial.qmd` and open `mosaic-tutorial.html` in a browser.
 - [ ] Test the deck at the projector's 16:9 resolution.
 - [ ] Keep one working MOSAIC environment and one running mission as a fallback.
+- [ ] Open `mosaic-tutorial.ipynb` using the MOSAIC virtual environment.
 - [ ] Send `SETUP.md` to attendees before the conference.
 - [ ] Ask one lab member to help with installation during Part Two.
 - [ ] Keep one working MOSAIC GUI session open as a fallback for Part Three.
@@ -56,8 +57,8 @@ and use the search-and-rescue testbed.
 - Slide 19 compares real renders of one seeded world under the three camera
   strategies. Only visibility changes; the task state does not.
 - Slides 20–21 show the complete minimum code in two readable pieces: build the
-  SAR environment, then pass it to `SAREnvGUI` and run it. No Python file is
-  created in the deck.
+  SAR environment, then pass it to `SAREnvGUI` and run it. The companion
+  notebook contains the same sequence; no standalone Python file is created.
 - On slide 22, change one constructor value and describe the resulting task.
 - Slide 23 shows the AI-advisor capability and one injection point only. Refer
   provider configuration to the project documentation.

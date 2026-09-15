@@ -491,10 +491,11 @@ python -m pip install -e .
 python -m pip uninstall -y pygame
 python -m pip install --force-reinstall "pygame-ce>=2.5.2"
 python -m pip install tabulate
+python -m pip install jupyterlab matplotlib
 ```
 
 ::: {.checkpoint}
-The final installation should include `mosaic`, `minigrid`, `pygame-ce`, `pygame_gui`, and `tabulate`.
+The final installation should include `mosaic`, `minigrid`, `pygame-ce`, `pygame_gui`, `tabulate`, JupyterLab, and Matplotlib.
 :::
 
 ::: {.note}
@@ -866,7 +867,7 @@ Press `Backspace` for a new run.
 ::::
 
 ::: {.note}
-The companion Jupyter notebook will place these code cells in one guided, runnable walkthrough.
+The companion notebook, `mosaic-tutorial.ipynb`, contains these steps as one guided, runnable walkthrough.
 :::
 
 ---

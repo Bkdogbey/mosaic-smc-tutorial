@@ -45,6 +45,7 @@ next step installs into the wrong Python.
 ```bash
 python -m pip install --upgrade pip
 python -m pip install -e .
+python -m pip install jupyterlab matplotlib
 ```
 
 ```text
@@ -128,12 +129,26 @@ Lines reading `Timeout during mission generation: connect_all failed` or
 `Sampling rejected: unreachable object at ...` may appear. Both are the level
 generator retrying — warnings, not errors.
 
-## 5 · You are ready for Part Three
+## 5 · Launch the companion notebook
 
-No additional tutorial script is required at this stage. The slides show the
-complete minimum code for building a SAR environment and launching the GUI in
-two readable sections. A companion Jupyter notebook will later provide the same
-steps as an interactive walkthrough.
+Keep the MOSAIC virtual environment active. If you do not already have the
+tutorial repository, clone it beside the MOSAIC repository:
+
+```bash
+cd ..
+git clone --branch part-one-redesign --single-branch \
+  https://github.com/Bkdogbey/mosaic-smc-tutorial.git
+```
+
+Then open the notebook:
+
+```bash
+cd mosaic-smc-tutorial/presentation
+python -m jupyter lab mosaic-tutorial.ipynb
+```
+
+The environment previews appear inside the notebook. Gameplay opens in a
+separate Pygame window, so the notebook must run in a local desktop session.
 
 ## Troubleshooting
 
