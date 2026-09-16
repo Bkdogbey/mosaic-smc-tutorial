@@ -12,7 +12,7 @@ Wi-Fi and under a minute on a good connection.
 - Git
 - A laptop with a real display — the game opens a window, so a remote/SSH-only
   machine or Colab will not work for the GUI
-- No API key is required. The AI advisor falls back to a built-in stub.
+- No API key is required for the core tutorial. AI-provider setup is optional.
 
 ## 1 · Clone and isolate
 
@@ -21,8 +21,8 @@ Wi-Fi and under a minute on a good connection.
 ```bash
 git clone https://github.com/iHuman-Lab/mosaic.git
 cd mosaic
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv mosaic_env
+source mosaic_env/bin/activate
 ```
 
 **Windows PowerShell**
@@ -30,22 +30,39 @@ source .venv/bin/activate
 ```powershell
 git clone https://github.com/iHuman-Lab/mosaic.git
 cd mosaic
-python -m venv .venv
-.venv\Scripts\Activate.ps1
+python -m venv mosaic_env
+.\mosaic_env\Scripts\Activate.ps1
 ```
 
-✓ **Checkpoint** — your prompt now starts with `(.venv)`. If it does not, the
+If PowerShell blocks the activation script:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\mosaic_env\Scripts\Activate.ps1
+```
+
+**Conda alternative on any platform**
+
+```bash
+git clone https://github.com/iHuman-Lab/mosaic.git
+cd mosaic
+conda create --name mosaic_env python=3.11 -y
+conda activate mosaic_env
+```
+
+Choose either `venv` or Conda. Do not create both environments.
+
+✓ **Checkpoint** — your prompt now starts with `(mosaic_env)`. If it does not, the
 next step installs into the wrong Python.
 
 > Ubuntu: if you see `ensurepip is not available`, run
-> `sudo apt install python3-venv`, delete `.venv`, and repeat.
+> `sudo apt install python3-venv`, delete `mosaic_env`, and repeat.
 
 ## 2 · Install the package
 
 ```bash
 python -m pip install --upgrade pip
 python -m pip install -e .
-python -m pip install jupyterlab matplotlib
 ```
 
 ```text
@@ -129,26 +146,26 @@ Lines reading `Timeout during mission generation: connect_all failed` or
 `Sampling rejected: unreachable object at ...` may appear. Both are the level
 generator retrying — warnings, not errors.
 
-## 5 · Launch the companion notebook
+## 5 · Run MOSAIC
 
-Keep the MOSAIC virtual environment active. If you do not already have the
-tutorial repository, clone it beside the MOSAIC repository:
+Keep `mosaic_env` active and remain in the cloned `mosaic` directory.
 
-```bash
-cd ..
-git clone --branch part-one-redesign --single-branch \
-  https://github.com/Bkdogbey/mosaic-smc-tutorial.git
+**Windows PowerShell**
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m experiment.main
 ```
 
-Then open the notebook:
+**macOS / Linux**
 
 ```bash
-cd mosaic-smc-tutorial/presentation
-python -m jupyter lab mosaic-tutorial.ipynb
+PYTHONPATH=src python -m experiment.main
 ```
 
-The environment previews appear inside the notebook. Gameplay opens in a
-separate Pygame window, so the notebook must run in a local desktop session.
+The Pygame interface opens in a separate window. Use the arrow keys to move and
+press `Esc` to quit. No tutorial repository, notebook, or additional Python file
+is required.
 
 ## Troubleshooting
 
@@ -157,9 +174,11 @@ separate Pygame window, so the notebook must run in a local desktop session.
 | `ImportError: cannot import name 'DIRECTION_LTR'` | You skipped step 3. |
 | `AttributeError: module 'pygame' has no attribute 'surface'` | You ran step 3 without `--force-reinstall`. Rerun it with the flag. |
 | `ERROR: mosaic 0.1.0 requires pygame` | Harmless warning from step 3, not an error. Carry on. |
-| `ensurepip is not available` | `sudo apt install python3-venv`, delete `.venv`, remake it. |
+| PowerShell reports that `mosaic_env` could not be loaded | Run `.\mosaic_env\Scripts\Activate.ps1`; the leading `.\` is required. |
+| `ensurepip is not available` | `sudo apt install python3-venv`, delete `mosaic_env`, remake it. |
 | `ModuleNotFoundError: No module named 'mosaic'` | The virtual environment is not active, or `pip install -e .` did not finish. |
-| Window appears and closes immediately | Run the file from a terminal and read the traceback. The tutorial example ends with `gui.run()`, which performs the first reset. |
+| `No module named 'experiment'` | Run from the cloned repository root and set `PYTHONPATH=src` for the current terminal. |
+| Window appears and closes immediately | Run `python -m experiment.main` from a terminal and read the traceback. |
 | `Timeout during mission generation` / `Sampling rejected` | Harmless warnings; the generator retries automatically. |
 | Hangs forever with no window, after changing settings | You set `locked_room_prob=1.0`. Every room locked leaves no solvable layout and the generator retries forever. Use `0.9` or less. |
 | `AttributeError: 'FullviewCamera' object has no attribute 'reset'` | Known bug. Use `AgentFOVCamera`, `AgentConeCamera`, or the default `EdgeFollowCamera`. |

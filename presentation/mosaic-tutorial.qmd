@@ -365,7 +365,7 @@ Next, we will install MOSAIC, launch a mission, and [change the task ourselves]{
 
 [Install and verify]{.divider-subtitle}
 
-[Check → Isolate → Install → Verify]{.divider-path}
+[Check · Clone · Install · Verify · Run]{.divider-path}
 
 ::: {.you-are-here}
 [What it is]{.stop} [Install]{.stop .here} [Use it]{.stop}
@@ -415,10 +415,10 @@ The environment itself can run headless; today's interface cannot.
 ::: {.card .secondary}
 [No API key required]{.card-title}
 
-The built-in dummy advisor lets every participant complete the tutorial offline.
+The core tutorial runs without contacting an AI provider.
 
 ::: {.card-meta}
-A provider key is only needed for an optional live-model demonstration.
+AI-advisor setup remains an optional capability covered later.
 :::
 :::
 
@@ -430,7 +430,7 @@ Our shared checkpoint: the core environment and GUI both [import successfully]{.
 
 ---
 
-## Step 1 · Get the [Code]{.accent} and Isolate It
+## Step 1 · Get the [Code]{.accent} and Create an Environment
 
 ::: {.panel-tabset}
 
@@ -439,8 +439,8 @@ Our shared checkpoint: the core environment and GUI both [import successfully]{.
 ```bash
 git clone https://github.com/iHuman-Lab/mosaic.git
 cd mosaic
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv mosaic_env
+source mosaic_env/bin/activate
 ```
 
 ### Windows PowerShell
@@ -448,17 +448,17 @@ source .venv/bin/activate
 ```powershell
 git clone https://github.com/iHuman-Lab/mosaic.git
 cd mosaic
-python -m venv .venv
-.venv\Scripts\Activate.ps1
+python -m venv mosaic_env
+.\mosaic_env\Scripts\Activate.ps1
 ```
 
-### Windows CMD
+### Conda · Any Platform
 
-```text
+```bash
 git clone https://github.com/iHuman-Lab/mosaic.git
 cd mosaic
-python -m venv .venv
-.venv\Scripts\activate.bat
+conda create --name mosaic_env python=3.11 -y
+conda activate mosaic_env
 ```
 
 :::
@@ -470,11 +470,11 @@ python -m venv .venv
 python --version
 ```
 
-Your prompt should begin with `(.venv)`, and Python should report version 3.10 or 3.11.
+Your prompt should begin with `(mosaic_env)`, and Python should report version 3.10 or 3.11.
 :::
 
 ::: {.note}
-Ubuntu only: if `ensurepip is not available`, install `python3-venv`, remove the incomplete `.venv`, and create it again.
+Choose either `venv` or Conda. Ubuntu users who see `ensurepip is not available` should install `python3-venv`, remove the incomplete `mosaic_env`, and repeat the step.
 :::
 
 ---
@@ -491,11 +491,10 @@ python -m pip install -e .
 python -m pip uninstall -y pygame
 python -m pip install --force-reinstall "pygame-ce>=2.5.2"
 python -m pip install tabulate
-python -m pip install jupyterlab matplotlib
 ```
 
 ::: {.checkpoint}
-The final installation should include `mosaic`, `minigrid`, `pygame-ce`, `pygame_gui`, `tabulate`, JupyterLab, and Matplotlib.
+The final installation should include `mosaic`, `minigrid`, `pygame-ce`, `pygame_gui`, and `tabulate`.
 :::
 
 ::: {.note}
@@ -545,6 +544,39 @@ Installation is complete. Next, we will [see how a MOSAIC mission is built and p
 
 ---
 
+## Step 4 · Run [MOSAIC]{.accent}
+
+::: {.hook}
+Launch the included interactive mission from the MOSAIC repository root.
+:::
+
+::: {.panel-tabset}
+
+### Windows PowerShell
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m experiment.main
+```
+
+### macOS / Linux
+
+```bash
+PYTHONPATH=src python -m experiment.main
+```
+
+:::
+
+::: {.checkpoint}
+The game window opens and the arrow keys move the agent. Press `Esc` to close it.
+:::
+
+::: {.note}
+Keep the environment active and run the command from the cloned `mosaic` directory. No additional repository, notebook, or Python file is required.
+:::
+
+---
+
 <!-- ============ PART 3 ============ -->
 
 ::: {.divider}
@@ -552,7 +584,7 @@ Installation is complete. Next, we will [see how a MOSAIC mission is built and p
 
 [Using the search-and-rescue testbed]{.divider-subtitle}
 
-[See the interface · Understand the code · Explore the options]{.divider-path}
+[Inspect the interface · Modify the mission · Compare options]{.divider-path}
 
 ::: {.you-are-here}
 [What it is]{.stop} [Install]{.stop} [Use it]{.stop .here}
@@ -712,7 +744,7 @@ The default `VictimPlacer` places real victims. A custom placer can add decoys o
 | `Space` | Open a door |
 | `Tab` | Rescue or pick up |
 | `Left Shift` | Drop the carried key |
-| `Alt` | Ask the AI advisor |
+| `Alt` | Ask a configured AI advisor |
 
 :::
 
@@ -779,115 +811,68 @@ These are real renders of the same seeded world and agent position. Only the cam
 
 ---
 
-## Build a SAR [Environment]{.accent}
+## The Included [Mission]{.accent}
 
 :::: {.columns .mission-code}
 
 ::: {.column width="65%"}
 ```python
-from mosaic.sar.env import build_sar_env
-from mosaic.sar.placers import (
-    VictimPlacer, LavaPlacer, LockedRoomPlacer,
+# src/experiment/main.py
+env = build_sar_env(
+    screen_size=800,
+    num_rows=3,
+    num_cols=3,
+    room_size=10,
+    victim_placer=LavaRiskVictimPlacer(
+        num_real_victims=game_config.get("num_real_victims", 6),
+        num_fake_victims=game_config.get("num_fake_victims", 12),
+    ),
+    lava_placer=SectorSpreadLavaPlacer(
+        lava_per_room=game_config.get("lava_per_room", 8)
+    ),
+    locked_room_placer=LockedRoomPlacer(locked_room_prob=0.5),
+    camera_strategy=AgentFOVCamera(),
 )
 
-env = build_sar_env(
-    screen_size=720,
-    num_rows=2,
-    num_cols=2,
-    room_size=8,
-    victim_placer=VictimPlacer(num_real_victims=1),
-    lava_placer=LavaPlacer(lava_per_room=1),
-    locked_room_placer=LockedRoomPlacer(
-        locked_room_prob=0.25
-    ),
-)
+gui = SAREnvGUI(env, config=config, llm_client=llm_client)
+gui.run()
 ```
 :::
 
 ::: {.column width="35%"}
 ::: {.code-explain}
-[Layout]{.code-label} Rows, columns, and room size define the building.
+[World]{.code-label} Rows, columns, and room size define the building.
 
-[Contents]{.code-label} Each placer configures one kind of task object.
+[Task logic]{.code-label} Placers configure the victims, hazards, and access rules.
 
-[Environment]{.code-label} The result follows Gymnasium's reset and step interface.
+[Interface]{.code-label} The camera selects the view, then `SAREnvGUI` starts the interaction loop.
 :::
 :::
 
 ::::
-
----
-
-## Launch and [Play]{.accent}
-
-::: {.hook}
-Pass the environment to the GUI; the GUI performs the first reset and starts the interaction loop.
-:::
-
-:::: {.columns .launch-columns}
-::: {.column width="48%"}
-```python
-from mosaic.gui.main import SAREnvGUI
-
-gui = SAREnvGUI(
-    env,
-    config={
-        "fullscreen": False,
-        "max_time": 3,
-    },
-)
-gui.run()
-```
-:::
-
-::: {.column width="52%"}
-::: {.workshop-check .compact}
-::: {.workshop-step}
-[1]{.workshop-number}
-[Move]{.workshop-title}
-Use the arrow keys.
-:::
-::: {.workshop-step}
-[2]{.workshop-number}
-[Unlock]{.workshop-title}
-Collect keys and open doors.
-:::
-::: {.workshop-step}
-[3]{.workshop-number}
-[Rescue]{.workshop-title}
-Face the target and press `Tab`.
-:::
-::: {.workshop-step}
-[4]{.workshop-number}
-[Restart]{.workshop-title}
-Press `Backspace` for a new run.
-:::
-:::
-:::
-::::
-
-::: {.note}
-The companion notebook, `mosaic-tutorial.ipynb`, contains these steps as one guided, runnable walkthrough.
-:::
 
 ---
 
 ## Change the [Task]{.accent}
 
 ::: {.hook}
-Small constructor changes produce visibly different missions.
+Edit the included runner, change one setting, and launch the same command again.
 :::
+
+```powershell
+code src\experiment\main.py
+```
 
 | Change | Code setting | What the player experiences |
 |---|---|---|
-| Larger building | `num_rows=3, num_cols=3` | More rooms to search |
-| More hazards | `LavaPlacer(lava_per_room=3)` | Fewer safe routes |
+| Smaller building | `num_rows=2, num_cols=2` | Four rooms instead of nine |
+| Fewer hazards | `SectorSpreadLavaPlacer(lava_per_room=2)` | More safe routes |
 | More locked rooms | `locked_room_prob=0.50` | More key and door decisions |
 | More rescue targets | `num_real_victims=2` | More victims in each room |
-| Different visibility | `camera_strategy=AgentFOVCamera()` | A complete room view |
+| Different visibility | `camera_strategy=AgentConeCamera()` | Forward visibility only |
 
 ::: {.note}
-In the companion notebook, change one value and rerun the environment and GUI cells to compare the result.
+Victim and lava counts apply to each room. Change one value at a time, save the file, and repeat the Step 4 launch command.
 :::
 
 ---
@@ -931,7 +916,7 @@ SAREnvGUI(env, llm_client=your_client).run()
 ```
 
 ::: {.note}
-The default `DummyLLMClient` keeps MOSAIC usable offline. Provider setup and custom prompt processing are covered in the documentation.
+`DummyLLMClient` supports offline testing. Provider setup and custom prompt processing remain optional and are covered in the documentation.
 :::
 
 ---
@@ -1009,8 +994,10 @@ bennett.dogbey@okstate.edu
 |---|---|
 | `cannot import name 'DIRECTION_LTR'` | Reinstall `pygame-ce` using `--force-reinstall` |
 | `module 'pygame' has no attribute 'surface'` | Plain `pygame` removed shared files; force-reinstall `pygame-ce` |
-| `ensurepip is not available` | Install `python3-venv`, delete `.venv`, and create it again |
-| `No module named 'mosaic'` | Activate `.venv` and rerun `python -m pip install -e .` |
+| `ensurepip is not available` | Install `python3-venv`, delete `mosaic_env`, and create it again |
+| PowerShell cannot load `mosaic_env` | Run `.\mosaic_env\Scripts\Activate.ps1` with the leading `.\` |
+| `No module named 'mosaic'` | Activate `mosaic_env` and rerun `python -m pip install -e .` |
+| `No module named 'experiment'` | Run from the repository root and set `PYTHONPATH=src` for the current shell |
 | GUI opens on no display | Run locally rather than through a headless or SSH-only session |
 | `No module named 'tabulate'` | Run `python -m pip install tabulate` |
 

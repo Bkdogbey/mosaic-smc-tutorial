@@ -448,7 +448,7 @@ Bennett Kwaku Dogbey
 <div class="divider">
 <p><span class="divider-title">Part Two</span></p>
 <p><span class="divider-subtitle">Install and verify</span></p>
-<p><span class="divider-path">Check → Isolate → Install → Verify</span></p>
+<p><span class="divider-path">Check · Clone · Install · Verify · Run</span></p>
 <div class="you-are-here">
 <p><span class="stop">What it is</span> <span class="stop here">Install</span> <span class="stop">Use it</span></p>
 </div>
@@ -479,9 +479,9 @@ Bennett Kwaku Dogbey
 </div>
 <div class="card secondary">
 <p><span class="card-title">No API key required</span></p>
-<p>The built-in dummy advisor lets every participant complete the tutorial offline.</p>
+<p>The core tutorial runs without contacting an AI provider.</p>
 <div class="card-meta">
-<p>A provider key is only needed for an optional live-model demonstration.</p>
+<p>AI-advisor setup remains an optional capability covered later.</p>
 </div>
 </div>
 </div>
@@ -489,38 +489,38 @@ Bennett Kwaku Dogbey
 <p>Our shared checkpoint: the core environment and GUI both <span class="accent">import successfully</span>.</p>
 </div>
 </section>
-<section id="step-1-get-the-code-and-isolate-it" class="slide level2">
-<h2>Step 1 · Get the <span class="accent">Code</span> and Isolate It</h2>
+<section id="step-1-get-the-code-and-create-an-environment" class="slide level2">
+<h2>Step 1 · Get the <span class="accent">Code</span> and Create an Environment</h2>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">macOS / Linux</a></li><li><a href="#tabset-1-2">Windows PowerShell</a></li><li><a href="#tabset-1-3">Windows CMD</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">macOS / Linux</a></li><li><a href="#tabset-1-2">Windows PowerShell</a></li><li><a href="#tabset-1-3">Conda · Any Platform</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
 <span id="cb3-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
-<span id="cb3-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
-<span id="cb3-4"><a href=""></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv mosaic_env</span>
+<span id="cb3-4"><a href=""></a><span class="bu">source</span> mosaic_env/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href=""></a>git clone https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>iHuman-Lab<span class="op">/</span>mosaic<span class="op">.</span><span class="fu">git</span></span>
 <span id="cb4-2"><a href=""></a><span class="fu">cd</span> mosaic</span>
-<span id="cb4-3"><a href=""></a>python <span class="op">-</span>m venv <span class="op">.</span><span class="fu">venv</span></span>
-<span id="cb4-4"><a href=""></a><span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href=""></a>python <span class="op">-</span>m venv mosaic_env</span>
+<span id="cb4-4"><a href=""></a><span class="op">.</span>\mosaic_env\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href=""></a>git clone https://github.com/iHuman-Lab/mosaic.git</span>
-<span id="cb5-2"><a href=""></a>cd mosaic</span>
-<span id="cb5-3"><a href=""></a>python -m venv .venv</span>
-<span id="cb5-4"><a href=""></a>.venv\Scripts\activate.bat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
+<span id="cb5-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
+<span id="cb5-3"><a href=""></a><span class="ex">conda</span> create <span class="at">--name</span> mosaic_env python=3.11 <span class="at">-y</span></span>
+<span id="cb5-4"><a href=""></a><span class="ex">conda</span> activate mosaic_env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <div class="checkpoint">
 <p><strong>Checkpoint</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="ex">python</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Your prompt should begin with <code>(.venv)</code>, and Python should report version 3.10 or 3.11.</p>
+<p>Your prompt should begin with <code>(mosaic_env)</code>, and Python should report version 3.10 or 3.11.</p>
 </div>
 <div class="note">
-<p>Ubuntu only: if <code>ensurepip is not available</code>, install <code>python3-venv</code>, remove the incomplete <code>.venv</code>, and create it again.</p>
+<p>Choose either <code>venv</code> or Conda. Ubuntu users who see <code>ensurepip is not available</code> should install <code>python3-venv</code>, remove the incomplete <code>mosaic_env</code>, and repeat the step.</p>
 </div>
 </section>
 <section id="step-2-install-mosaic" class="slide level2">
@@ -532,10 +532,9 @@ Bennett Kwaku Dogbey
 <span id="cb7-2"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span>
 <span id="cb7-3"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip uninstall <span class="at">-y</span> pygame</span>
 <span id="cb7-4"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
-<span id="cb7-5"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install tabulate</span>
-<span id="cb7-6"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install jupyterlab matplotlib</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-5"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="checkpoint">
-<p>The final installation should include <code>mosaic</code>, <code>minigrid</code>, <code>pygame-ce</code>, <code>pygame_gui</code>, <code>tabulate</code>, JupyterLab, and Matplotlib.</p>
+<p>The final installation should include <code>mosaic</code>, <code>minigrid</code>, <code>pygame-ce</code>, <code>pygame_gui</code>, and <code>tabulate</code>.</p>
 </div>
 <div class="note">
 <p><strong>Temporary development workaround.</strong> The current package metadata installs plain <code>pygame</code>, while <code>pygame_gui</code> uses <code>pygame-ce</code>. Reinstalling <code>pygame-ce</code> last gives the GUI the implementation it expects. Pip may still report that MOSAIC declares <code>pygame</code>; the readiness check on the next slide verifies the runtime.</p>
@@ -573,13 +572,37 @@ Bennett Kwaku Dogbey
 <p>Installation is complete. Next, we will <span class="accent">see how a MOSAIC mission is built and played</span>.</p>
 </div>
 </section>
+<section id="step-4-run-mosaic" class="slide level2">
+<h2>Step 4 · Run <span class="accent">MOSAIC</span></h2>
+<div class="hook">
+<p>Launch the included interactive mission from the MOSAIC repository root.</p>
+</div>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Windows PowerShell</a></li><li><a href="#tabset-2-2">macOS / Linux</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href=""></a><span class="va">$env</span><span class="op">:</span><span class="va">PYTHONPATH</span> <span class="op">=</span> <span class="st">"src"</span></span>
+<span id="cb12-2"><a href=""></a>python <span class="op">-</span>m experiment<span class="op">.</span><span class="fu">main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-2-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python</span> <span class="at">-m</span> experiment.main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="checkpoint">
+<p>The game window opens and the arrow keys move the agent. Press <code>Esc</code> to close it.</p>
+</div>
+<div class="note">
+<p>Keep the environment active and run the command from the cloned <code>mosaic</code> directory. No additional repository, notebook, or Python file is required.</p>
+</div>
+</section>
 <section class="slide level2">
 
 <!-- ============ PART 3 ============ -->
 <div class="divider">
 <p><span class="divider-title">Part Three</span></p>
 <p><span class="divider-subtitle">Using the search-and-rescue testbed</span></p>
-<p><span class="divider-path">See the interface · Understand the code · Explore the options</span></p>
+<p><span class="divider-path">Inspect the interface · Modify the mission · Compare options</span></p>
 <div class="you-are-here">
 <p><span class="stop">What it is</span> <span class="stop">Install</span> <span class="stop here">Use it</span></p>
 </div>
@@ -720,7 +743,7 @@ Bennett Kwaku Dogbey
 </tr>
 <tr class="even">
 <td><code>Alt</code></td>
-<td>Ask the AI advisor</td>
+<td>Ask a configured AI advisor</td>
 </tr>
 </tbody>
 </table>
@@ -767,76 +790,43 @@ Bennett Kwaku Dogbey
 <p>These are real renders of the same seeded world and agent position. Only the camera strategy changes.</p>
 </div>
 </section>
-<section id="build-a-sar-environment" class="slide level2">
-<h2>Build a SAR <span class="accent">Environment</span></h2>
+<section id="the-included-mission" class="slide level2">
+<h2>The Included <span class="accent">Mission</span></h2>
 <div class="columns mission-code">
 <div class="column" style="width:65%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">from</span> mosaic.sar.env <span class="im">import</span> build_sar_env</span>
-<span id="cb12-2"><a href=""></a><span class="im">from</span> mosaic.sar.placers <span class="im">import</span> (</span>
-<span id="cb12-3"><a href=""></a>    VictimPlacer, LavaPlacer, LockedRoomPlacer,</span>
-<span id="cb12-4"><a href=""></a>)</span>
-<span id="cb12-5"><a href=""></a></span>
-<span id="cb12-6"><a href=""></a>env <span class="op">=</span> build_sar_env(</span>
-<span id="cb12-7"><a href=""></a>    screen_size<span class="op">=</span><span class="dv">720</span>,</span>
-<span id="cb12-8"><a href=""></a>    num_rows<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb12-9"><a href=""></a>    num_cols<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb12-10"><a href=""></a>    room_size<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb12-11"><a href=""></a>    victim_placer<span class="op">=</span>VictimPlacer(num_real_victims<span class="op">=</span><span class="dv">1</span>),</span>
-<span id="cb12-12"><a href=""></a>    lava_placer<span class="op">=</span>LavaPlacer(lava_per_room<span class="op">=</span><span class="dv">1</span>),</span>
-<span id="cb12-13"><a href=""></a>    locked_room_placer<span class="op">=</span>LockedRoomPlacer(</span>
-<span id="cb12-14"><a href=""></a>        locked_room_prob<span class="op">=</span><span class="fl">0.25</span></span>
-<span id="cb12-15"><a href=""></a>    ),</span>
-<span id="cb12-16"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="co"># src/experiment/main.py</span></span>
+<span id="cb14-2"><a href=""></a>env <span class="op">=</span> build_sar_env(</span>
+<span id="cb14-3"><a href=""></a>    screen_size<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb14-4"><a href=""></a>    num_rows<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb14-5"><a href=""></a>    num_cols<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb14-6"><a href=""></a>    room_size<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb14-7"><a href=""></a>    victim_placer<span class="op">=</span>LavaRiskVictimPlacer(</span>
+<span id="cb14-8"><a href=""></a>        num_real_victims<span class="op">=</span>game_config.get(<span class="st">"num_real_victims"</span>, <span class="dv">6</span>),</span>
+<span id="cb14-9"><a href=""></a>        num_fake_victims<span class="op">=</span>game_config.get(<span class="st">"num_fake_victims"</span>, <span class="dv">12</span>),</span>
+<span id="cb14-10"><a href=""></a>    ),</span>
+<span id="cb14-11"><a href=""></a>    lava_placer<span class="op">=</span>SectorSpreadLavaPlacer(</span>
+<span id="cb14-12"><a href=""></a>        lava_per_room<span class="op">=</span>game_config.get(<span class="st">"lava_per_room"</span>, <span class="dv">8</span>)</span>
+<span id="cb14-13"><a href=""></a>    ),</span>
+<span id="cb14-14"><a href=""></a>    locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
+<span id="cb14-15"><a href=""></a>    camera_strategy<span class="op">=</span>AgentFOVCamera(),</span>
+<span id="cb14-16"><a href=""></a>)</span>
+<span id="cb14-17"><a href=""></a></span>
+<span id="cb14-18"><a href=""></a>gui <span class="op">=</span> SAREnvGUI(env, config<span class="op">=</span>config, llm_client<span class="op">=</span>llm_client)</span>
+<span id="cb14-19"><a href=""></a>gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:35%;">
 <div class="code-explain">
-<p><span class="code-label">Layout</span> Rows, columns, and room size define the building.</p>
-<p><span class="code-label">Contents</span> Each placer configures one kind of task object.</p>
-<p><span class="code-label">Environment</span> The result follows Gymnasium’s reset and step interface.</p>
+<p><span class="code-label">World</span> Rows, columns, and room size define the building.</p>
+<p><span class="code-label">Task logic</span> Placers configure the victims, hazards, and access rules.</p>
+<p><span class="code-label">Interface</span> The camera selects the view, then <code>SAREnvGUI</code> starts the interaction loop.</p>
 </div>
 </div></div>
-</section>
-<section id="launch-and-play" class="slide level2">
-<h2>Launch and <span class="accent">Play</span></h2>
-<div class="hook">
-<p>Pass the environment to the GUI; the GUI performs the first reset and starts the interaction loop.</p>
-</div>
-<div class="columns launch-columns">
-<div class="column" style="width:48%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="im">from</span> mosaic.gui.main <span class="im">import</span> SAREnvGUI</span>
-<span id="cb13-2"><a href=""></a></span>
-<span id="cb13-3"><a href=""></a>gui <span class="op">=</span> SAREnvGUI(</span>
-<span id="cb13-4"><a href=""></a>    env,</span>
-<span id="cb13-5"><a href=""></a>    config<span class="op">=</span>{</span>
-<span id="cb13-6"><a href=""></a>        <span class="st">"fullscreen"</span>: <span class="va">False</span>,</span>
-<span id="cb13-7"><a href=""></a>        <span class="st">"max_time"</span>: <span class="dv">3</span>,</span>
-<span id="cb13-8"><a href=""></a>    },</span>
-<span id="cb13-9"><a href=""></a>)</span>
-<span id="cb13-10"><a href=""></a>gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:52%;">
-<div class="workshop-check compact">
-<div class="workshop-step">
-<p><span class="workshop-number">1</span> <span class="workshop-title">Move</span> Use the arrow keys.</p>
-</div>
-<div class="workshop-step">
-<p><span class="workshop-number">2</span> <span class="workshop-title">Unlock</span> Collect keys and open doors.</p>
-</div>
-<div class="workshop-step">
-<p><span class="workshop-number">3</span> <span class="workshop-title">Rescue</span> Face the target and press <code>Tab</code>.</p>
-</div>
-<div class="workshop-step">
-<p><span class="workshop-number">4</span> <span class="workshop-title">Restart</span> Press <code>Backspace</code> for a new run.</p>
-</div>
-</div>
-</div></div>
-<div class="note">
-<p>The companion notebook, <code>mosaic-tutorial.ipynb</code>, contains these steps as one guided, runnable walkthrough.</p>
-</div>
 </section>
 <section id="change-the-task" class="slide level2">
 <h2>Change the <span class="accent">Task</span></h2>
 <div class="hook">
-<p>Small constructor changes produce visibly different missions.</p>
+<p>Edit the included runner, change one setting, and launch the same command again.</p>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href=""></a>code src\experiment\main<span class="op">.</span><span class="fu">py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -852,14 +842,14 @@ Bennett Kwaku Dogbey
 </thead>
 <tbody>
 <tr class="odd">
-<td>Larger building</td>
-<td><code>num_rows=3, num_cols=3</code></td>
-<td>More rooms to search</td>
+<td>Smaller building</td>
+<td><code>num_rows=2, num_cols=2</code></td>
+<td>Four rooms instead of nine</td>
 </tr>
 <tr class="even">
-<td>More hazards</td>
-<td><code>LavaPlacer(lava_per_room=3)</code></td>
-<td>Fewer safe routes</td>
+<td>Fewer hazards</td>
+<td><code>SectorSpreadLavaPlacer(lava_per_room=2)</code></td>
+<td>More safe routes</td>
 </tr>
 <tr class="odd">
 <td>More locked rooms</td>
@@ -873,13 +863,13 @@ Bennett Kwaku Dogbey
 </tr>
 <tr class="odd">
 <td>Different visibility</td>
-<td><code>camera_strategy=AgentFOVCamera()</code></td>
-<td>A complete room view</td>
+<td><code>camera_strategy=AgentConeCamera()</code></td>
+<td>Forward visibility only</td>
 </tr>
 </tbody>
 </table>
 <div class="note">
-<p>In the companion notebook, change one value and rerun the environment and GUI cells to compare the result.</p>
+<p>Victim and lava counts apply to each room. Change one value at a time, save the file, and repeat the Step 4 launch command.</p>
 </div>
 </section>
 <section id="add-an-ai-advisor" class="slide level2">
@@ -909,9 +899,9 @@ Bennett Kwaku Dogbey
 <p>Participant sees the result</p>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>SAREnvGUI(env, llm_client<span class="op">=</span>your_client).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>SAREnvGUI(env, llm_client<span class="op">=</span>your_client).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="note">
-<p>The default <code>DummyLLMClient</code> keeps MOSAIC usable offline. Provider setup and custom prompt processing are covered in the documentation.</p>
+<p><code>DummyLLMClient</code> supports offline testing. Provider setup and custom prompt processing remain optional and are covered in the documentation.</p>
 </div>
 </section>
 <section id="mosaic-extension-points" class="slide level2">
@@ -988,11 +978,19 @@ Bennett Kwaku Dogbey
 </tr>
 <tr class="odd">
 <td><code>ensurepip is not available</code></td>
-<td>Install <code>python3-venv</code>, delete <code>.venv</code>, and create it again</td>
+<td>Install <code>python3-venv</code>, delete <code>mosaic_env</code>, and create it again</td>
 </tr>
 <tr class="even">
+<td>PowerShell cannot load <code>mosaic_env</code></td>
+<td>Run <code>.\mosaic_env\Scripts\Activate.ps1</code> with the leading <code>.\</code></td>
+</tr>
+<tr class="odd">
 <td><code>No module named 'mosaic'</code></td>
-<td>Activate <code>.venv</code> and rerun <code>python -m pip install -e .</code></td>
+<td>Activate <code>mosaic_env</code> and rerun <code>python -m pip install -e .</code></td>
+</tr>
+<tr class="even">
+<td><code>No module named 'experiment'</code></td>
+<td>Run from the repository root and set <code>PYTHONPATH=src</code> for the current shell</td>
 </tr>
 <tr class="odd">
 <td>GUI opens on no display</td>
@@ -1011,11 +1009,11 @@ Bennett Kwaku Dogbey
 <section id="step-observation" class="slide level2">
 <h2>Step <span class="accent">Observation</span></h2>
 <p>The SAR environment can return an enriched observation at each step:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>[<span class="st">'agent_dir'</span>, <span class="st">'agent_x'</span>, <span class="st">'agent_y'</span>, <span class="st">'cam_top_x'</span>, <span class="st">'cam_top_y'</span>,</span>
-<span id="cb15-2"><a href=""></a> <span class="st">'cam_view_h'</span>, <span class="st">'cam_view_w'</span>, <span class="st">'carrying'</span>, <span class="st">'direction'</span>, <span class="st">'grid'</span>,</span>
-<span id="cb15-3"><a href=""></a> <span class="st">'image'</span>, <span class="st">'max_steps'</span>, <span class="st">'mission'</span>, <span class="st">'mission_status'</span>, <span class="st">'num_cols'</span>,</span>
-<span id="cb15-4"><a href=""></a> <span class="st">'num_rows'</span>, <span class="st">'remaining_victims'</span>, <span class="st">'room_size'</span>, <span class="st">'saved_victims'</span>,</span>
-<span id="cb15-5"><a href=""></a> <span class="st">'step_count'</span>, <span class="st">'victim_health'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>[<span class="st">'agent_dir'</span>, <span class="st">'agent_x'</span>, <span class="st">'agent_y'</span>, <span class="st">'cam_top_x'</span>, <span class="st">'cam_top_y'</span>,</span>
+<span id="cb17-2"><a href=""></a> <span class="st">'cam_view_h'</span>, <span class="st">'cam_view_w'</span>, <span class="st">'carrying'</span>, <span class="st">'direction'</span>, <span class="st">'grid'</span>,</span>
+<span id="cb17-3"><a href=""></a> <span class="st">'image'</span>, <span class="st">'max_steps'</span>, <span class="st">'mission'</span>, <span class="st">'mission_status'</span>, <span class="st">'num_cols'</span>,</span>
+<span id="cb17-4"><a href=""></a> <span class="st">'num_rows'</span>, <span class="st">'remaining_victims'</span>, <span class="st">'room_size'</span>, <span class="st">'saved_victims'</span>,</span>
+<span id="cb17-5"><a href=""></a> <span class="st">'step_count'</span>, <span class="st">'victim_health'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>grid</code> contains an integer-encoded snapshot of the world, including walls, hazards, victims, doors, and keys.</p>
 <div class="note">
 <p>The four <code>cam_*</code> fields come from the default <code>EdgeFollowCamera</code>. <code>AgentConeCamera</code> and <code>AgentFOVCamera</code> do not currently add those fields.</p>
@@ -1026,10 +1024,10 @@ Bennett Kwaku Dogbey
 </section>
 <section id="the-advisor-contract" class="slide level2">
 <h2>The Advisor <span class="accent">Contract</span></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="kw">class</span> LLMClient(ABC):</span>
-<span id="cb16-2"><a href=""></a>    <span class="at">@abstractmethod</span></span>
-<span id="cb16-3"><a href=""></a>    <span class="kw">def</span> query(<span class="va">self</span>, prompt: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb16-4"><a href=""></a>        <span class="co">"""Send text, get text back."""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="kw">class</span> LLMClient(ABC):</span>
+<span id="cb18-2"><a href=""></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb18-3"><a href=""></a>    <span class="kw">def</span> query(<span class="va">self</span>, prompt: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb18-4"><a href=""></a>        <span class="co">"""Send text, get text back."""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The base interface knows nothing about SAR, prompts, or GUI panels.</p>
 <div class="punchline">
 <p>A custom advisor subclasses <code>LLMClient</code> and implements <code>query</code>. Provider setup remains outside the reusable game.</p>

@@ -7,11 +7,10 @@ The deck is three parts:
 
 1. **Understanding MOSAIC** — why a human–AI study needs a platform like this, what
    MOSAIC connects, the search-and-rescue task, and the research questions it supports
-2. **Install and verify** — one supported setup path with checkpoints and a compact
-   troubleshooting appendix
-3. **Using the search-and-rescue testbed** — understand the runtime building
-   blocks, inspect the game interface, compare real camera views, and assemble
-   an environment and GUI from the slide code
+2. **Install and verify** — `venv` and Conda setup paths, import checkpoints,
+   and a direct launch from the cloned MOSAIC repository
+3. **Using the search-and-rescue testbed** — inspect the interface, compare
+   camera views, and modify the mission already provided in `experiment.main`
 
 Technical details about installation recovery, the observation schema, the
 advisor contract, and the roadmap live in the appendix for Q&A.
@@ -21,7 +20,7 @@ advisor contract, and the roadmap live in the appendix for Q&A.
 ```
 presentation/
 ├── mosaic-tutorial.qmd   # the deck — edit this (30 slides: 25 main + 5 appendix)
-├── mosaic-tutorial.ipynb # guided, runnable Part Three notebook
+├── mosaic-tutorial.ipynb # optional development prototype; not required by attendees
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
 │                         #   screenshots, .band notes, layer bands, you-are-here strip,
@@ -66,17 +65,6 @@ camera choices in Part Three. `victims.png` shows the real and decoy victim shap
    pygame-ce section should be **deleted** once the PyPI release fixes the
    dependency.
 3. Read `RUNSHEET.md`.
-
-## Run the companion notebook
-
-After completing `SETUP.md`, launch the notebook from this directory:
-
-```bash
-python -m jupyter lab mosaic-tutorial.ipynb
-```
-
-The notebook previews observations and camera strategies inline. Its gameplay
-cells open the real MOSAIC GUI in a separate Pygame window.
 
 ## Repo issues this tutorial exposed
 
