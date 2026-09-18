@@ -51,20 +51,30 @@ and use the search-and-rescue testbed.
 
 - Slide 16 explains the runtime relationship among the participant, GUI, SAR
   environment, Gymnasium/MiniGrid foundation, and optional advisor.
-- Slide 17 uses numbered callouts on the real interface. Point out that the
-  dashed game-view boundary is where event vignettes appear.
+- Slide 17 reveals one region at a time — press forward five times. The tile rail
+  down the right is the visual vocabulary; each fragment then dims the screen and
+  rings a single region. The screenshot is caught mid-flash, so the green glow
+  around the game view is the edge vignette firing after a rescue — point at it.
 - Slide 18 introduces both victim object types, then the lava and door/key
   mechanics. Clarify that the default placer uses real victims only.
-- Slide 19 introduces the controls through the observe–navigate–identify–rescue
-  gameplay loop.
-- Slide 20 compares real renders of one seeded world under the three camera
-  strategies. Only visibility changes; the task state does not.
+- Slide 19 groups the six keys by intent: move, get in, rescue, ask. `Tab`
+  appears twice on purpose — picking up a key and rescuing a victim are the same
+  key.
+- Slide 20 compares three live captures of one frozen frame. The white ring is
+  the agent and the dashed box is the room it stands in: the box is clipped by
+  the moving viewport, matches the room camera exactly, and is mostly unlit under
+  the cone camera. Only visibility changes; the task state does not.
 - Slide 21 shows how the included `src/experiment/main.py` composes the mission.
 - On slide 22, change one value in that existing file and rerun the command from
   slide 14. Do not create a separate tutorial script.
-- Slide 23 shows the AI-advisor capability and one injection point only. Refer
-  provider configuration to the project documentation.
+- Slide 23 is a live demo. `ScriptedAdvisor` needs no API key: run it, press
+  `Alt`, and show that roughly half the advice is wrong by construction. Make the
+  point that `p_correct` turns advice reliability into an experimental variable.
+  The note names the one-argument swap to GPT or Gemini — mention it, but do not
+  attempt it live; it needs a key and the `llama-index` provider package.
 - Slide 24 closes on the four main extension points in MOSAIC.
+- The final appendix slide is now about what attendees could build next, not the
+  project roadmap. Use it only if there is time and interest.
 
 ## Expected problems
 
@@ -78,7 +88,7 @@ and use the search-and-rescue testbed.
 | No window or `No available video device` | The GUI needs a local graphical session. Use the fallback laptop or run the environment headless. |
 | Generation appears to hang after customization | Check that `locked_room_prob` is below `1.0`. |
 | More victims than expected | `num_real_victims` is per room, not a building-wide total. |
-| `Alt` produces no reply | The core workshop does not configure a provider. Use the advisor documentation for the optional extension. |
+| `Alt` produces no reply | No advisor is attached. The slide-23 `ScriptedAdvisor` runs without a provider; a real provider is the optional extension. |
 
 ## Cut list
 
@@ -86,7 +96,8 @@ If the session runs long:
 
 1. Explain slides 16–17 in one minute each without pausing on every feature.
 2. Demonstrate the parameter change on slide 22 instead of waiting for everyone.
-3. Summarize the advisor path on slide 23 and close on the extension points on slide 24.
+3. Describe the advisor demo on slide 23 without running it, and close on the
+   extension points on slide 24.
 
 Do not cut the installation checkpoints, controls, camera comparison, or the
 environment-to-GUI code path.

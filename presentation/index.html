@@ -99,7 +99,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-0dc8ee767374ec8eef9b3de7d70c7687.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-98dd69200ac3fbcfa3a98ae6d60df03d.css">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -198,7 +198,7 @@
 
 <section id="title-slide" data-background-color="#252525" data-background-image="assets/background.jpg" data-background-opacity="0.3" class="quarto-title-block center">
   <h1 class="title">MOSAIC<br>A Modular Testbed for<br><span class="accent">Human–AI Collaboration</span></h1>
-  <p class="subtitle">Hands-on Search-and-Rescue Tutorial<br>IEEE SMC 2026 · Bellevue, WA</p>
+  <p class="subtitle">IEEE SMC 2026 · Bellevue, WA<br><span class="title-repo">github.com/iHuman-Lab/mosaic</span></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -233,7 +233,7 @@ Bennett Kwaku Dogbey
 </div>
 </div>
 <div class="member-link">
-<p>Our work spans brain–computer interfaces, human–robot interaction, AI-assisted decision-making, and cognitive augmentation.</p>
+<p>Our work spans brain–computer interfaces, human–robot interaction, human-AI interaction, and cognitive augmentation.</p>
 <p><a href="https://ihuman-lab.github.io/lab-website/">iHuman Lab · Oklahoma State University</a></p>
 </div>
 </section>
@@ -639,49 +639,65 @@ Bennett Kwaku Dogbey
 <p>Receives a task description and returns text advice through <code>LLMClient</code>.</p>
 </div>
 </div>
-<div class="mosaic-links">
-<div class="map-link-item">
-<p><span class="map-link">Human ↔︎ GUI</span> <span class="map-detail">controls and visual feedback</span></p>
-</div>
-<div class="map-link-item">
-<p><span class="map-link">GUI ↔︎ SAR</span> <span class="map-detail">actions, observations, reward, and events</span></p>
-</div>
-<div class="map-link-item">
-<p><span class="map-link">Advisor ↔︎ GUI</span> <span class="map-detail">request and text response</span></p>
-</div>
+<div class="punchline">
+<p>The interface and the environment are separate pieces, which is why we can <span class="accent">change either one without touching the other</span>.</p>
 </div>
 </section>
 <section id="the-game-interface" class="slide level2">
 <h2>The Game <span class="accent">Interface</span></h2>
-<div class="interface-stage">
-<div class="interface-shot">
-<p><img data-src="assets/gui-screenshot.png" alt="MOSAIC game interface with numbered callouts for the agent, victim, lava, information panel, chat panel, and game-view boundary"></p>
-<p><span class="interface-marker marker-agent">1</span> <span class="interface-marker marker-victim">2</span> <span class="interface-marker marker-lava">3</span> <span class="interface-marker marker-info">4</span> <span class="interface-marker marker-chat">5</span> <span class="interface-marker marker-vignette">6</span> <span class="viewport-frame" aria-hidden="true"></span></p>
+<div class="hook compact">
+<p>What the tiles mean, and where to read the mission.</p>
 </div>
-<div class="interface-legend">
-<div class="interface-feature">
-<p><span class="feature-index">1</span> <span class="feature-title">Agent</span> <span class="feature-desc">Position and facing direction</span></p>
+<div class="columns interface-split">
+<div class="column" style="width:73%;">
+<div class="annotated">
+<p><img data-src="assets/gui-screenshot-live.png" alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue" height="430"></p>
+<div class="anno fragment fade-in-then-out mid" style="--x:0.3%; --y:0.4%; --w:66%; --h:99%;">
+<p>Game view — and its edge flashes on events</p>
 </div>
-<div class="interface-feature">
-<p><span class="feature-index">2</span> <span class="feature-title">Victim</span> <span class="feature-desc">Target to identify and rescue</span></p>
+<div class="anno fragment fade-in-then-out left" style="--x:67.7%; --y:5%; --w:31.5%; --h:9.8%;">
+<p>Rescued, remaining, steps, inventory</p>
 </div>
-<div class="interface-feature">
-<p><span class="feature-index">3</span> <span class="feature-title">Lava</span> <span class="feature-desc">Hazard that constrains safe routes</span></p>
+<div class="anno fragment fade-in-then-out left" style="--x:67.7%; --y:15.2%; --w:31.5%; --h:10.4%;">
+<p>Reward and the clock</p>
 </div>
-<div class="interface-feature">
-<p><span class="feature-index">4</span> <span class="feature-title">Mission information</span> <span class="feature-desc">Rescue count, steps, reward, and time</span></p>
+<div class="anno fragment fade-in-then-out left" style="--x:67.7%; --y:25.8%; --w:31.5%; --h:23.2%;">
+<p>Controls, always on screen</p>
 </div>
-<div class="interface-feature">
-<p><span class="feature-index">5</span> <span class="feature-title">AI chat</span> <span class="feature-desc">Requested guidance and system messages</span></p>
-</div>
-<div class="interface-feature">
-<p><span class="feature-index">6</span> <span class="feature-title">Edge vignette</span> <span class="feature-desc">Event feedback flashes around the game view</span></p>
+<div class="anno fragment fade-in-then-out left" style="--x:67.1%; --y:50.4%; --w:32.5%; --h:49.2%;">
+<p>Chat — where AI advice arrives</p>
 </div>
 </div>
+</div><div class="column" style="width:27%;">
+<div class="world-rail">
+<div class="world-item">
+<p><img data-src="assets/sprites/agent.png"></p>
+<p><span class="world-name">You</span></p>
 </div>
+<div class="world-item">
+<p><img data-src="assets/sprites/victim-real.png"></p>
+<p><span class="world-name">Victim</span></p>
+</div>
+<div class="world-item">
+<p><img data-src="assets/sprites/lava.png"></p>
+<p><span class="world-name">Lava</span></p>
+</div>
+<div class="world-item">
+<p><img data-src="assets/sprites/door-locked.png"></p>
+<p><span class="world-name">Locked door</span></p>
+</div>
+<div class="world-item">
+<p><img data-src="assets/sprites/key.png"></p>
+<p><span class="world-name">Key</span></p>
+</div>
+</div>
+</div></div>
 </section>
 <section id="victims-hazards-and-access" class="slide level2">
 <h2>Victims, Hazards, and <span class="accent">Access</span></h2>
+<div class="hook">
+<p>Not every victim counts, and not every route is passable.</p>
+</div>
 <div class="columns feature-columns">
 <div class="column" style="width:45%;">
 <p><img data-src="assets/victims.png" alt="Four orientations of a symmetric real victim above four orientations of an offset decoy victim"></p>
@@ -711,90 +727,85 @@ Bennett Kwaku Dogbey
 </section>
 <section id="controls-and-gameplay" class="slide level2">
 <h2>Controls and <span class="accent">Gameplay</span></h2>
-<div class="columns control-columns">
-<div class="column" style="width:51%;">
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Key</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>↑</code></td>
-<td>Move forward</td>
-</tr>
-<tr class="even">
-<td><code>←</code> <code>→</code></td>
-<td>Turn left or right</td>
-</tr>
-<tr class="odd">
-<td><code>Space</code></td>
-<td>Open a door</td>
-</tr>
-<tr class="even">
-<td><code>Tab</code></td>
-<td>Rescue or pick up</td>
-</tr>
-<tr class="odd">
-<td><code>Left Shift</code></td>
-<td>Drop the carried key</td>
-</tr>
-<tr class="even">
-<td><code>Alt</code></td>
-<td>Ask a configured AI advisor</td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:49%;">
-<div class="gameplay-loop">
-<div class="gameplay-step">
-<p><span class="gameplay-number">1</span> <span class="gameplay-title">Observe</span> <span class="gameplay-detail">Read the grid and mission panel.</span></p>
+<div class="hook">
+<p>Six keys, grouped by what you are trying to do.</p>
 </div>
-<div class="gameplay-step">
-<p><span class="gameplay-number">2</span> <span class="gameplay-title">Navigate</span> <span class="gameplay-detail">Move around hazards and find access routes.</span></p>
+<div class="phase-grid">
+<div class="phase">
+<p><span class="phase-name">Move</span></p>
+<div class="key-row">
+<p><span class="keycap">↑</span> <span class="key-action">Go forward one tile</span></p>
 </div>
-<div class="gameplay-step">
-<p><span class="gameplay-number">3</span> <span class="gameplay-title">Identify</span> <span class="gameplay-detail">Distinguish the target before acting.</span></p>
+<div class="key-row">
+<p><span class="keycap">←</span><span class="keycap">→</span> <span class="key-action">Turn to face a new direction</span></p>
 </div>
-<div class="gameplay-step">
-<p><span class="gameplay-number">4</span> <span class="gameplay-title">Rescue</span> <span class="gameplay-detail">Face the victim and press <code>Tab</code>.</span></p>
+</div>
+<div class="phase">
+<p><span class="phase-name">Get in</span></p>
+<div class="key-row">
+<p><span class="keycap">Tab</span> <span class="key-action">Pick up the key you are facing</span></p>
+</div>
+<div class="key-row">
+<p><span class="keycap wide">Space</span> <span class="key-action">Open the door you are facing</span></p>
+</div>
+<p><span class="phase-note">Carry one key at a time — <span class="keycap inline">Shift</span> drops it.</span></p>
+</div>
+<div class="phase">
+<p><span class="phase-name">Rescue</span></p>
+<div class="key-row">
+<p><span class="keycap">Tab</span> <span class="key-action">Rescue the victim you are facing</span></p>
+</div>
+<p><span class="phase-note">Check the cross before you press it. A decoy costs you points.</span></p>
+</div>
+<div class="phase optional">
+<p><span class="phase-name">Ask</span></p>
+<div class="key-row">
+<p><span class="keycap">Alt</span> <span class="key-action">Request advice from the AI</span></p>
+</div>
+<p><span class="phase-note">Silent until an advisor is attached.</span></p>
 </div>
 </div>
 <div class="screen-shortcuts">
 <p><code>Backspace</code> restart &nbsp;·&nbsp; <code>F11</code> fullscreen &nbsp;·&nbsp; <code>Esc</code> quit</p>
 </div>
-</div></div>
 </section>
 <section id="camera-views" class="slide level2">
 <h2>Camera <span class="accent">Views</span></h2>
+<div class="hook compact">
+<p>One seeded world, one agent position, three camera strategies.</p>
+</div>
 <div class="camera-grid">
 <div class="camera-view">
-<p><img data-src="assets/cam-follow.png" alt="Actual EdgeFollowCamera render showing an eight-by-eight moving crop around the agent"></p>
+<p><img data-src="assets/cam-follow-annot.png" alt="Live EdgeFollowCamera capture: an eight-by-eight moving crop, the room outline clipped by the window edge"></p>
 <p><span class="camera-title">Moving viewport</span></p>
 <p><code>EdgeFollowCamera</code> follows the agent and may show parts of neighboring rooms.</p>
 </div>
 <div class="camera-view">
-<p><img data-src="assets/cam-room.png" alt="Actual AgentFOVCamera render showing the complete room occupied by the agent"></p>
+<p><img data-src="assets/cam-room-annot.png" alt="Live AgentFOVCamera capture: the room outline matches the rendered area exactly"></p>
 <p><span class="camera-title">Current room</span></p>
 <p><code>AgentFOVCamera</code> shows the complete room occupied by the agent.</p>
 </div>
 <div class="camera-view">
-<p><img data-src="assets/cam-cone.png" alt="Actual AgentConeCamera render with tiles outside the forward field of view blacked out"></p>
+<p><img data-src="assets/cam-cone-annot.png" alt="Live AgentConeCamera capture: only a forward wedge of the outlined room is lit"></p>
 <p><span class="camera-title">Forward visibility</span></p>
 <p><code>AgentConeCamera</code> blacks out tiles outside MiniGrid’s forward field of view.</p>
 </div>
 </div>
-<div class="note">
-<p>These are real renders of the same seeded world and agent position. Only the camera strategy changes.</p>
+<div class="camera-key">
+<p><span class="ckey ckey-ring">Agent</span> same tile in all three &nbsp;&nbsp;·&nbsp;&nbsp; <span class="ckey ckey-room">Room</span> the room the agent is standing in</p>
+</div>
+<div class="punchline">
+<p>The task state is identical in all three. Only <span class="accent">what the participant can see</span> changes.</p>
 </div>
 </section>
 <section id="the-included-mission" class="slide level2">
 <h2>The Included <span class="accent">Mission</span></h2>
+<div class="hook">
+<p>One function call composes the whole mission.</p>
+</div>
 <div class="columns mission-code">
 <div class="column" style="width:65%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="co"># src/experiment/main.py</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-code-line-numbers="|4-6|7-14|15,18-19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="co"># src/experiment/main.py</span></span>
 <span id="cb14-2"><a href=""></a>env <span class="op">=</span> build_sar_env(</span>
 <span id="cb14-3"><a href=""></a>    screen_size<span class="op">=</span><span class="dv">800</span>,</span>
 <span id="cb14-4"><a href=""></a>    num_rows<span class="op">=</span><span class="dv">3</span>,</span>
@@ -827,81 +838,81 @@ Bennett Kwaku Dogbey
 <p>Edit the included runner, change one setting, and launch the same command again.</p>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href=""></a>code src\experiment\main<span class="op">.</span><span class="fu">py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Change</th>
-<th>Code setting</th>
-<th>What the player experiences</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Smaller building</td>
-<td><code>num_rows=2, num_cols=2</code></td>
-<td>Four rooms instead of nine</td>
-</tr>
-<tr class="even">
-<td>Fewer hazards</td>
-<td><code>SectorSpreadLavaPlacer(lava_per_room=2)</code></td>
-<td>More safe routes</td>
-</tr>
-<tr class="odd">
-<td>More locked rooms</td>
-<td><code>locked_room_prob=0.50</code></td>
-<td>More key and door decisions</td>
-</tr>
-<tr class="even">
-<td>More rescue targets</td>
-<td><code>num_real_victims=2</code></td>
-<td>More victims in each room</td>
-</tr>
-<tr class="odd">
-<td>Different visibility</td>
-<td><code>camera_strategy=AgentConeCamera()</code></td>
-<td>Forward visibility only</td>
-</tr>
-</tbody>
-</table>
+<div class="change-grid">
+<div class="change-card">
+<p><span class="change-what">Smaller building</span></p>
+<p><code>num_rows=2, num_cols=2</code></p>
+<p><span class="change-effect">Four rooms instead of nine</span></p>
+</div>
+<div class="change-card">
+<p><span class="change-what">Fewer hazards</span></p>
+<p><code>lava_per_room=2</code></p>
+<p><span class="change-effect">More safe routes</span></p>
+</div>
+<div class="change-card">
+<p><span class="change-what">More locked rooms</span></p>
+<p><code>locked_room_prob=0.9</code></p>
+<p><span class="change-effect">More key and door decisions</span></p>
+</div>
+<div class="change-card">
+<p><span class="change-what">Fewer rescue targets</span></p>
+<p><code>num_real_victims=2</code></p>
+<p><span class="change-effect">Two per room instead of six</span></p>
+</div>
+<div class="change-card">
+<p><span class="change-what">Different visibility</span></p>
+<p><code>camera_strategy=AgentConeCamera()</code></p>
+<p><span class="change-effect">Forward visibility only</span></p>
+</div>
+</div>
+<div class="checkpoint">
+<p>Change <strong>one</strong> value, save, and rerun the Step 4 command. The building should look different.</p>
+</div>
 <div class="note">
-<p>Victim and lava counts apply to each room. Change one value at a time, save the file, and repeat the Step 4 launch command.</p>
+<p>Victim and lava counts apply to each room, not to the whole building. Keep <code>locked_room_prob</code> below <code>1.0</code>.</p>
 </div>
 </section>
 <section id="add-an-ai-advisor" class="slide level2">
 <h2>Add an AI <span class="accent">Advisor</span></h2>
 <div class="hook">
-<p>MOSAIC keeps provider setup outside the game and exposes one text advice interface.</p>
+<p>An advisor is anything with <code>query(prompt) -&gt; str</code>. No API key required.</p>
 </div>
-<div class="advisor-pipeline">
+<div class="advisor-pipeline three-up">
 <div class="advisor-node">
 <p><span class="advisor-title">Observation</span></p>
-<p>Current task state</p>
-</div>
-<div class="advisor-node">
-<p><span class="advisor-title">Prompt builder</span></p>
-<p>State becomes text</p>
+<p>Current task state becomes text</p>
 </div>
 <div class="advisor-node active">
 <p><span class="advisor-title"><code>LLMClient</code></span></p>
-<p>Provider-independent query</p>
-</div>
-<div class="advisor-node">
-<p><span class="advisor-title">Response processor</span></p>
-<p>Reply becomes advice</p>
+<p>Any object with <code>query()</code></p>
 </div>
 <div class="advisor-node">
 <p><span class="advisor-title">Chat panel</span></p>
-<p>Participant sees the result</p>
+<p>Participant sees the advice</p>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>SAREnvGUI(env, llm_client<span class="op">=</span>your_client).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="columns advisor-demo">
+<div class="column" style="width:62%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="kw">class</span> ScriptedAdvisor(LLMClient):</span>
+<span id="cb16-2"><a href=""></a>    <span class="kw">def</span> query(<span class="va">self</span>, prompt: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb16-3"><a href=""></a>        correct <span class="op">=</span> <span class="va">self</span>.rng.random() <span class="op">&lt;</span> <span class="va">self</span>.p_correct</span>
+<span id="cb16-4"><a href=""></a>        <span class="cf">return</span> (<span class="ss">f"Head </span><span class="sc">{</span>d<span class="sc">}</span><span class="ss"> — there's a survivor next door."</span></span>
+<span id="cb16-5"><a href=""></a>                <span class="cf">if</span> correct <span class="cf">else</span> <span class="ss">f"Nothing </span><span class="sc">{</span>d<span class="sc">}</span><span class="ss"> of you. Search here."</span>)</span>
+<span id="cb16-6"><a href=""></a></span>
+<span id="cb16-7"><a href=""></a>advisor <span class="op">=</span> ScriptedAdvisor(p_correct<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb16-8"><a href=""></a>SAREnvGUI(env, llm_client<span class="op">=</span>advisor).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:38%;">
+<div class="code-explain">
+<p><span class="code-label">Press <code>Alt</code></span> Advice appears in the chat panel — and half of it is wrong, on purpose.</p>
+<p><span class="code-label"><code>p_correct</code></span> Reliability is a dial you set, not a property you inherit from a model.</p>
+<p><span class="code-label">Real models</span> Same one-argument swap when you want one.</p>
+</div>
+</div></div>
 <div class="note">
-<p><code>DummyLLMClient</code> supports offline testing. Provider setup and custom prompt processing remain optional and are covered in the documentation.</p>
+<p><code>LlamaIndexLLMClient("openai", "gpt-5-mini")</code> or <code>LlamaIndexLLMClient("google", "gemini-2.5-flash")</code> drops straight into the same <code>llm_client=</code> slot — it needs an API key and the matching <code>llama-index</code> provider package, so the tutorial itself stays offline.</p>
+</div>
+<div class="punchline">
+<p>Advice quality becomes <span class="accent">an experimental variable you control</span>.</p>
 </div>
 </section>
 <section id="mosaic-extension-points" class="slide level2">
@@ -1033,37 +1044,43 @@ Bennett Kwaku Dogbey
 <p>A custom advisor subclasses <code>LLMClient</code> and implements <code>query</code>. Provider setup remains outside the reusable game.</p>
 </div>
 </section>
-<section id="where-mosaic-is-headed" class="slide level2">
-<h2>Where MOSAIC Is <span class="accent">Headed</span></h2>
+<section id="where-you-could-take-it" class="slide level2">
+<h2>Where You Could <span class="accent">Take It</span></h2>
+<div class="hook">
+<p>Every piece you have seen today is an argument you can replace.</p>
+</div>
 <div class="cards cols-2 fill">
 <div class="card">
-<p><span class="card-title">PyPI Release</span> <span class="badge">Next</span></p>
-<p>Package installation without cloning the source repository or applying the current dependency workaround.</p>
+<p><span class="card-title">Another task</span></p>
+<p>The GUI, camera, advisor, and logging layers know nothing about search and rescue. A different collaborative task reuses them unchanged.</p>
 <div class="card-meta">
-<p>Planned packaging improvement</p>
+<p>Swap the environment, keep the study machinery</p>
 </div>
 </div>
 <div class="card">
-<p><span class="card-title">Gymnasium Registration</span> <span class="badge">Next</span></p>
-<p>Gymnasium registration for creating the SAR environment through <code>gym.make(...)</code>.</p>
+<p><span class="card-title">Another advisor</span></p>
+<p>Vary reliability, latency, phrasing, or confidence. <code>p_correct</code> was one dial; a real study turns several.</p>
 <div class="card-meta">
-<p>Planned public entry point</p>
+<p>Advice as the manipulated variable</p>
 </div>
 </div>
 <div class="card">
-<p><span class="card-title">JOSS Submission</span> <span class="badge">Next</span></p>
-<p>A citable software paper describing the reusable package and its research purpose.</p>
+<p><span class="card-title">Another signal</span></p>
+<p>Eye tracking, EEG, or physiological streams can share the session time base alongside actions and advice.</p>
 <div class="card-meta">
-<p>Submission in preparation</p>
+<p>One clock across every measure</p>
 </div>
 </div>
 <div class="card secondary">
-<p><span class="card-title">Beyond SAR</span> <span class="badge secondary">Later</span></p>
-<p>Adapt the same interfaces to collaborative tasks beyond search and rescue.</p>
+<p><span class="card-title">Your condition</span></p>
+<p>Placers, cameras, rewards, and advisors are all constructor arguments — so an experimental condition is a config entry, not a fork.</p>
 <div class="card-meta">
-<p>Longer-term direction</p>
+<p>What makes it a testbed rather than a demo</p>
 </div>
 </div>
+</div>
+<div class="punchline">
+<p>The task was the example. <span class="accent">The interfaces are the contribution.</span></p>
 </div>
 
 </section>

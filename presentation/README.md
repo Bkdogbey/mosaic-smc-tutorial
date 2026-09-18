@@ -41,22 +41,55 @@ quarto render mosaic-tutorial.qmd     # build once
 quarto preview mosaic-tutorial.qmd    # live-reload while editing
 ```
 
+Run both from this `presentation/` directory — the deck is not at the repository
+root, so `quarto render mosaic-tutorial.qmd` from one level up fails with
+`ERROR: mosaic-tutorial.qmd not found`.
+
 Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 
 ## Assets
 
 | File | Source |
 | --- | --- |
-| `gui-screenshot.png`, `game-view.png` | MOSAIC docs |
-| `cam-follow.png`, `cam-room.png`, `cam-cone.png` | Real renders from the three supported camera strategies, using the same seeded SAR state |
+| `gui-screenshot-live.png` | Captured by `tools/capture_interface.py` with the edge vignette frozen mid-flash — the green perimeter glow is the one part of the interface a normal screenshot misses |
+| `gui-screenshot.png`, `game-view.png` | MOSAIC docs; superseded by the live capture, kept for reference |
+| `cam-*-live.png` | Captured from the running game by `tools/capture_camera_views.py` — one mission, one frozen frame, re-rendered through each camera with `env.switch_camera()` |
+| `cam-*-annot.png` | The live captures with a white ring on the agent and a dashed outline of its room, so the camera difference is readable from the back of the room |
+| `cam-follow.png`, `cam-room.png`, `cam-cone.png` | The earlier 512px renders, superseded by the live captures and kept for reference |
+| `sprites/*.png` | Single tiles rendered from `minigrid` and MOSAIC's `Victim` / `FakeVictim` classes at 4x supersampling — the world legend on the interface slide |
 | `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
 `cam-full.png` introduces the search-and-rescue testbed in Part One.
 `gui-screenshot.png` introduces the complete interface in Part Three.
-`cam-follow.png`, `cam-room.png`, and `cam-cone.png` compare the three supported
-camera choices in Part Three. `victims.png` shows the real and decoy victim shapes.
+The annotated `cam-*-annot.png` variants compare the three supported camera
+choices in Part Three; the plain renders are kept as the unmarked originals.
+`victims.png` shows the real and decoy victim shapes.
+
+Regenerate everything with the scripts in `tools/`, in this order:
+
+```bash
+python tools/capture_interface.py        # full interface, vignette mid-flash
+python tools/capture_camera_views.py     # play the mission, grab the three views
+python tools/make_camera_annotations.py  # ring + room outline on those captures
+python tools/make_sprites.py             # single tiles for the interface slide
+```
+
+All three need `minigrid` and a checkout of the MOSAIC repository; the capture
+script additionally needs MOSAIC's runtime deps (`pygame-ce`, `pygame_gui`,
+`gymnasium`) and runs headless via SDL's dummy driver. Each script takes the
+MOSAIC path from a constant at the top of the file.
+
+Two things to know before regenerating:
+
+- Do not rebuild the three camera views by constructing three environments. Level
+  generation retries internally, each retry consumes RNG, and three separately
+  seeded builds drift into three different buildings. Build one and switch the
+  camera, which is what `capture_camera_views.py` does.
+- For the same reason the captures are not bit-reproducible across runs: the same
+  seed can lay out a different building. If the interface capture changes, re-check
+  the `.anno` percentages on the interface slide against the new panel positions.
 
 ## Before presenting
 

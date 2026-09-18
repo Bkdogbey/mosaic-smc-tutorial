@@ -3,13 +3,14 @@
 # Render:  quarto render mosaic-tutorial.qmd
 #          quarto preview mosaic-tutorial.qmd
 title: "MOSAIC<br>A Modular Testbed for<br>[Human–AI Collaboration]{.accent}"
-subtitle: "Hands-on Search-and-Rescue Tutorial<br>IEEE SMC 2026 · Bellevue, WA"
+subtitle: "IEEE SMC 2026 · Bellevue, WA<br><span class='title-repo'>github.com/iHuman-Lab/mosaic</span>"
 author: "Bennett Kwaku Dogbey"
 institute: "iHuman Lab · Oklahoma State University"
 date: "2026-10-04"
 date-format: "MMMM D, YYYY"
 format:
   revealjs:
+    output-file: index.html
     theme: [default, theme.scss]
     slide-number: true
     transition: fade
@@ -60,7 +61,7 @@ We study how people and intelligent systems work together.
 :::
 
 ::: {.member-link}
-Our work spans brain–computer interfaces, human–robot interaction, AI-assisted decision-making, and cognitive augmentation.
+Our work spans brain–computer interfaces, human–robot interaction, human-AI interaction, and cognitive augmentation.
 
 [iHuman Lab · Oklahoma State University](https://ihuman-lab.github.io/lab-website/)
 :::
@@ -637,62 +638,90 @@ Receives a task description and returns text advice through `LLMClient`.
 
 :::
 
-::: {.mosaic-links}
-::: {.map-link-item}
-[Human ↔ GUI]{.map-link} [controls and visual feedback]{.map-detail}
-:::
-::: {.map-link-item}
-[GUI ↔ SAR]{.map-link} [actions, observations, reward, and events]{.map-detail}
-:::
-::: {.map-link-item}
-[Advisor ↔ GUI]{.map-link} [request and text response]{.map-detail}
-:::
+::: {.punchline}
+The interface and the environment are separate pieces, which is why we can [change either one without touching the other]{.accent}.
 :::
 
 ---
 
 ## The Game [Interface]{.accent}
 
-::: {.interface-stage}
-
-::: {.interface-shot}
-![](assets/gui-screenshot.png){fig-alt="MOSAIC game interface with numbered callouts for the agent, victim, lava, information panel, chat panel, and game-view boundary"}
-
-<span class="interface-marker marker-agent">1</span>
-<span class="interface-marker marker-victim">2</span>
-<span class="interface-marker marker-lava">3</span>
-<span class="interface-marker marker-info">4</span>
-<span class="interface-marker marker-chat">5</span>
-<span class="interface-marker marker-vignette">6</span>
-<span class="viewport-frame" aria-hidden="true"></span>
+::: {.hook .compact}
+What the tiles mean, and where to read the mission.
 :::
 
-::: {.interface-legend}
-::: {.interface-feature}
-[1]{.feature-index} [Agent]{.feature-title} [Position and facing direction]{.feature-desc}
+:::: {.columns .interface-split}
+
+::: {.column width="73%"}
+::: {.annotated}
+![](assets/gui-screenshot-live.png){height="430" fig-alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue"}
+
+::: {.anno .fragment .fade-in-then-out .mid style="--x:0.3%; --y:0.4%; --w:66%; --h:99%;"}
+Game view — and its edge flashes on events
 :::
-::: {.interface-feature}
-[2]{.feature-index} [Victim]{.feature-title} [Target to identify and rescue]{.feature-desc}
+
+::: {.anno .fragment .fade-in-then-out .left style="--x:67.7%; --y:5%; --w:31.5%; --h:9.8%;"}
+Rescued, remaining, steps, inventory
 :::
-::: {.interface-feature}
-[3]{.feature-index} [Lava]{.feature-title} [Hazard that constrains safe routes]{.feature-desc}
+
+::: {.anno .fragment .fade-in-then-out .left style="--x:67.7%; --y:15.2%; --w:31.5%; --h:10.4%;"}
+Reward and the clock
 :::
-::: {.interface-feature}
-[4]{.feature-index} [Mission information]{.feature-title} [Rescue count, steps, reward, and time]{.feature-desc}
+
+::: {.anno .fragment .fade-in-then-out .left style="--x:67.7%; --y:25.8%; --w:31.5%; --h:23.2%;"}
+Controls, always on screen
 :::
-::: {.interface-feature}
-[5]{.feature-index} [AI chat]{.feature-title} [Requested guidance and system messages]{.feature-desc}
+
+::: {.anno .fragment .fade-in-then-out .left style="--x:67.1%; --y:50.4%; --w:32.5%; --h:49.2%;"}
+Chat — where AI advice arrives
 :::
-::: {.interface-feature}
-[6]{.feature-index} [Edge vignette]{.feature-title} [Event feedback flashes around the game view]{.feature-desc}
 :::
 :::
 
+::: {.column width="27%"}
+::: {.world-rail}
+
+::: {.world-item}
+![](assets/sprites/agent.png)
+
+[You]{.world-name}
 :::
+
+::: {.world-item}
+![](assets/sprites/victim-real.png)
+
+[Victim]{.world-name}
+:::
+
+::: {.world-item}
+![](assets/sprites/lava.png)
+
+[Lava]{.world-name}
+:::
+
+::: {.world-item}
+![](assets/sprites/door-locked.png)
+
+[Locked door]{.world-name}
+:::
+
+::: {.world-item}
+![](assets/sprites/key.png)
+
+[Key]{.world-name}
+:::
+:::
+:::
+
+::::
 
 ---
 
 ## Victims, Hazards, and [Access]{.accent}
+
+::: {.hook}
+Not every victim counts, and not every route is passable.
+:::
 
 :::: {.columns .feature-columns}
 
@@ -733,54 +762,76 @@ The default `VictimPlacer` places real victims. A custom placer can add decoys o
 
 ## Controls and [Gameplay]{.accent}
 
-:::: {.columns .control-columns}
-
-::: {.column width="51%"}
-
-| Key | Action |
-|---|---|
-| `↑` | Move forward |
-| `←` `→` | Turn left or right |
-| `Space` | Open a door |
-| `Tab` | Rescue or pick up |
-| `Left Shift` | Drop the carried key |
-| `Alt` | Ask a configured AI advisor |
-
+::: {.hook}
+Six keys, grouped by what you are trying to do.
 :::
 
-::: {.column width="49%"}
+::: {.phase-grid}
 
-::: {.gameplay-loop}
-::: {.gameplay-step}
-[1]{.gameplay-number} [Observe]{.gameplay-title} [Read the grid and mission panel.]{.gameplay-detail}
+::: {.phase}
+[Move]{.phase-name}
+
+::: {.key-row}
+[↑]{.keycap} [Go forward one tile]{.key-action}
 :::
-::: {.gameplay-step}
-[2]{.gameplay-number} [Navigate]{.gameplay-title} [Move around hazards and find access routes.]{.gameplay-detail}
+
+::: {.key-row}
+[←]{.keycap}[→]{.keycap} [Turn to face a new direction]{.key-action}
 :::
-::: {.gameplay-step}
-[3]{.gameplay-number} [Identify]{.gameplay-title} [Distinguish the target before acting.]{.gameplay-detail}
 :::
-::: {.gameplay-step}
-[4]{.gameplay-number} [Rescue]{.gameplay-title} [Face the victim and press `Tab`.]{.gameplay-detail}
+
+::: {.phase}
+[Get in]{.phase-name}
+
+::: {.key-row}
+[Tab]{.keycap} [Pick up the key you are facing]{.key-action}
 :::
+
+::: {.key-row}
+[Space]{.keycap .wide} [Open the door you are facing]{.key-action}
+:::
+
+[Carry one key at a time — [Shift]{.keycap .inline} drops it.]{.phase-note}
+:::
+
+::: {.phase}
+[Rescue]{.phase-name}
+
+::: {.key-row}
+[Tab]{.keycap} [Rescue the victim you are facing]{.key-action}
+:::
+
+[Check the cross before you press it. A decoy costs you points.]{.phase-note}
+:::
+
+::: {.phase .optional}
+[Ask]{.phase-name}
+
+::: {.key-row}
+[Alt]{.keycap} [Request advice from the AI]{.key-action}
+:::
+
+[Silent until an advisor is attached.]{.phase-note}
+:::
+
 :::
 
 ::: {.screen-shortcuts}
 `Backspace` restart &nbsp;·&nbsp; `F11` fullscreen &nbsp;·&nbsp; `Esc` quit
 :::
 
-:::
-
-::::
-
 ---
 
 ## Camera [Views]{.accent}
 
+::: {.hook .compact}
+One seeded world, one agent position, three camera strategies.
+:::
+
 ::: {.camera-grid}
 
 ::: {.camera-view}
-![](assets/cam-follow.png){fig-alt="Actual EdgeFollowCamera render showing an eight-by-eight moving crop around the agent"}
+![](assets/cam-follow-annot.png){fig-alt="Live EdgeFollowCamera capture: an eight-by-eight moving crop, the room outline clipped by the window edge"}
 
 [Moving viewport]{.camera-title}
 
@@ -788,7 +839,7 @@ The default `VictimPlacer` places real victims. A custom placer can add decoys o
 :::
 
 ::: {.camera-view}
-![](assets/cam-room.png){fig-alt="Actual AgentFOVCamera render showing the complete room occupied by the agent"}
+![](assets/cam-room-annot.png){fig-alt="Live AgentFOVCamera capture: the room outline matches the rendered area exactly"}
 
 [Current room]{.camera-title}
 
@@ -796,7 +847,7 @@ The default `VictimPlacer` places real victims. A custom placer can add decoys o
 :::
 
 ::: {.camera-view}
-![](assets/cam-cone.png){fig-alt="Actual AgentConeCamera render with tiles outside the forward field of view blacked out"}
+![](assets/cam-cone-annot.png){fig-alt="Live AgentConeCamera capture: only a forward wedge of the outlined room is lit"}
 
 [Forward visibility]{.camera-title}
 
@@ -805,18 +856,26 @@ The default `VictimPlacer` places real victims. A custom placer can add decoys o
 
 :::
 
-::: {.note}
-These are real renders of the same seeded world and agent position. Only the camera strategy changes.
+::: {.camera-key}
+[Agent]{.ckey .ckey-ring} same tile in all three &nbsp;&nbsp;·&nbsp;&nbsp; [Room]{.ckey .ckey-room} the room the agent is standing in
+:::
+
+::: {.punchline}
+The task state is identical in all three. Only [what the participant can see]{.accent} changes.
 :::
 
 ---
 
 ## The Included [Mission]{.accent}
 
+::: {.hook}
+One function call composes the whole mission.
+:::
+
 :::: {.columns .mission-code}
 
 ::: {.column width="65%"}
-```python
+```{.python code-line-numbers="|4-6|7-14|15,18-19"}
 # src/experiment/main.py
 env = build_sar_env(
     screen_size=800,
@@ -863,16 +922,56 @@ Edit the included runner, change one setting, and launch the same command again.
 code src\experiment\main.py
 ```
 
-| Change | Code setting | What the player experiences |
-|---|---|---|
-| Smaller building | `num_rows=2, num_cols=2` | Four rooms instead of nine |
-| Fewer hazards | `SectorSpreadLavaPlacer(lava_per_room=2)` | More safe routes |
-| More locked rooms | `locked_room_prob=0.50` | More key and door decisions |
-| More rescue targets | `num_real_victims=2` | More victims in each room |
-| Different visibility | `camera_strategy=AgentConeCamera()` | Forward visibility only |
+::: {.change-grid}
+
+::: {.change-card}
+[Smaller building]{.change-what}
+
+`num_rows=2, num_cols=2`
+
+[Four rooms instead of nine]{.change-effect}
+:::
+
+::: {.change-card}
+[Fewer hazards]{.change-what}
+
+`lava_per_room=2`
+
+[More safe routes]{.change-effect}
+:::
+
+::: {.change-card}
+[More locked rooms]{.change-what}
+
+`locked_room_prob=0.9`
+
+[More key and door decisions]{.change-effect}
+:::
+
+::: {.change-card}
+[Fewer rescue targets]{.change-what}
+
+`num_real_victims=2`
+
+[Two per room instead of six]{.change-effect}
+:::
+
+::: {.change-card}
+[Different visibility]{.change-what}
+
+`camera_strategy=AgentConeCamera()`
+
+[Forward visibility only]{.change-effect}
+:::
+
+:::
+
+::: {.checkpoint}
+Change **one** value, save, and rerun the Step 4 command. The building should look different.
+:::
 
 ::: {.note}
-Victim and lava counts apply to each room. Change one value at a time, save the file, and repeat the Step 4 launch command.
+Victim and lava counts apply to each room, not to the whole building. Keep `locked_room_prob` below `1.0`.
 :::
 
 ---
@@ -880,43 +979,60 @@ Victim and lava counts apply to each room. Change one value at a time, save the 
 ## Add an AI [Advisor]{.accent}
 
 ::: {.hook}
-MOSAIC keeps provider setup outside the game and exposes one text advice interface.
+An advisor is anything with `query(prompt) -> str`. No API key required.
 :::
 
-::: {.advisor-pipeline}
+::: {.advisor-pipeline .three-up}
 ::: {.advisor-node}
 [Observation]{.advisor-title}
 
-Current task state
-:::
-::: {.advisor-node}
-[Prompt builder]{.advisor-title}
-
-State becomes text
+Current task state becomes text
 :::
 ::: {.advisor-node .active}
 [`LLMClient`]{.advisor-title}
 
-Provider-independent query
-:::
-::: {.advisor-node}
-[Response processor]{.advisor-title}
-
-Reply becomes advice
+Any object with `query()`
 :::
 ::: {.advisor-node}
 [Chat panel]{.advisor-title}
 
-Participant sees the result
+Participant sees the advice
 :::
 :::
 
+:::: {.columns .advisor-demo}
+
+::: {.column width="62%"}
 ```python
-SAREnvGUI(env, llm_client=your_client).run()
+class ScriptedAdvisor(LLMClient):
+    def query(self, prompt: str) -> str:
+        correct = self.rng.random() < self.p_correct
+        return (f"Head {d} — there's a survivor next door."
+                if correct else f"Nothing {d} of you. Search here.")
+
+advisor = ScriptedAdvisor(p_correct=0.5)
+SAREnvGUI(env, llm_client=advisor).run()
 ```
+:::
+
+::: {.column width="38%"}
+::: {.code-explain}
+[Press `Alt`]{.code-label} Advice appears in the chat panel — and half of it is wrong, on purpose.
+
+[`p_correct`]{.code-label} Reliability is a dial you set, not a property you inherit from a model.
+
+[Real models]{.code-label} Same one-argument swap when you want one.
+:::
+:::
+
+::::
 
 ::: {.note}
-`DummyLLMClient` supports offline testing. Provider setup and custom prompt processing remain optional and are covered in the documentation.
+`LlamaIndexLLMClient("openai", "gpt-5-mini")` or `LlamaIndexLLMClient("google", "gemini-2.5-flash")` drops straight into the same `llm_client=` slot — it needs an API key and the matching `llama-index` provider package, so the tutorial itself stays offline.
+:::
+
+::: {.punchline}
+Advice quality becomes [an experimental variable you control]{.accent}.
 :::
 
 ---
@@ -1048,48 +1164,56 @@ A custom advisor subclasses `LLMClient` and implements `query`. Provider setup r
 
 ---
 
-## Where MOSAIC Is [Headed]{.accent}
+## Where You Could [Take It]{.accent}
+
+::: {.hook}
+Every piece you have seen today is an argument you can replace.
+:::
 
 :::: {.cards .cols-2 .fill}
 
 ::: {.card}
-[PyPI Release]{.card-title} [Next]{.badge}
+[Another task]{.card-title}
 
-Package installation without cloning the source repository or applying the current dependency workaround.
+The GUI, camera, advisor, and logging layers know nothing about search and rescue. A different collaborative task reuses them unchanged.
 
 ::: {.card-meta}
-Planned packaging improvement
+Swap the environment, keep the study machinery
 :::
 :::
 
 ::: {.card}
-[Gymnasium Registration]{.card-title} [Next]{.badge}
+[Another advisor]{.card-title}
 
-Gymnasium registration for creating the SAR environment through `gym.make(...)`.
+Vary reliability, latency, phrasing, or confidence. `p_correct` was one dial; a real study turns several.
 
 ::: {.card-meta}
-Planned public entry point
+Advice as the manipulated variable
 :::
 :::
 
 ::: {.card}
-[JOSS Submission]{.card-title} [Next]{.badge}
+[Another signal]{.card-title}
 
-A citable software paper describing the reusable package and its research purpose.
+Eye tracking, EEG, or physiological streams can share the session time base alongside actions and advice.
 
 ::: {.card-meta}
-Submission in preparation
+One clock across every measure
 :::
 :::
 
 ::: {.card .secondary}
-[Beyond SAR]{.card-title} [Later]{.badge .secondary}
+[Your condition]{.card-title}
 
-Adapt the same interfaces to collaborative tasks beyond search and rescue.
+Placers, cameras, rewards, and advisors are all constructor arguments — so an experimental condition is a config entry, not a fork.
 
 ::: {.card-meta}
-Longer-term direction
+What makes it a testbed rather than a demo
 :::
 :::
 
 ::::
+
+::: {.punchline}
+The task was the example. [The interfaces are the contribution.]{.accent}
+:::
