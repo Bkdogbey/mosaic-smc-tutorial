@@ -112,19 +112,6 @@ $heading-font: "Rubik", sans-serif !default;
 #title-slide {
     text-align: left;
 
-    /* Repository, bottom-left. Quarto generates this slide, so there is nowhere in the
-       .qmd to put it — it has to come from CSS. Distinct from .subtitle::after below,
-       which is the accent bar. */
-    &::after {
-        content: "github.com/iHuman-Lab/mosaic";
-        position: absolute;
-        right: 0;
-        top: 72%;
-        font-size: 0.6em;
-        letter-spacing: 1px;
-        color: rgba(255,255,255,0.4);
-    }
-
     .subtitle::after {
         @include heading-accent(10px);
         margin-top: 1rem;
