@@ -1248,9 +1248,9 @@ $heading-font: "Rubik", sans-serif !default;
 .need-core-title {
     display: block;
     color: #ffffff;
-    font-size: 1.55em;
+    font-size: 1.3em;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .need-core-subtitle {
@@ -1304,10 +1304,12 @@ $heading-font: "Rubik", sans-serif !default;
     line-height: 1.35;
 }
 
+/* Every block name in the diagram carries the accent, not just the core one --
+   the names are what people read first from the back of the room. */
 .system-title {
     display: block;
     margin-bottom: 0.3rem;
-    color: #ffffff;
+    color: $primary-color;
     font-size: 1.05em;
     font-weight: 800;
 }
@@ -1410,23 +1412,20 @@ $heading-font: "Rubik", sans-serif !default;
     white-space: nowrap;
 }
 
-/* Same visual language as .system-node, shaped as a wide, short band so it reads
-   as another block in the diagram rather than a footnote under it. */
+/* Literally a .system-node laid out wide: same border, fill and type, so the
+   session record reads as the fourth block in the diagram. */
 .system-record {
     max-width: 850px;
     margin: 0 auto;
-    padding: 0.5rem 1rem;
+    min-height: 100px;
+    padding: 0.75rem 1.2rem;
     border-top: 2px solid rgba(255,255,255,0.22);
     border-bottom: 2px solid rgba(255,255,255,0.11);
     background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.018));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
-}
-
-.system-record .system-title {
-    display: block;
-    margin-bottom: 0.2rem;
-    color: #ffffff;
-    font-size: 1.05em;
 }
 
 .overview-foundation p {
@@ -2831,5 +2830,151 @@ $heading-font: "Rubik", sans-serif !default;
     padding: 0.28rem 0;
 }
 .feature-list.compact .feature-row p {
+    font-size: 0.78em;
+}
+
+/* ── Dependency panel (slide 9) ────────────────────────────────────────────── */
+.dep-panel {
+    padding: 0.85rem 1rem 1rem;
+    border-top: 2px solid rgba(255,255,255,0.22);
+    border-bottom: 2px solid rgba(255,255,255,0.11);
+    background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.018));
+}
+.dep-title {
+    display: block;
+    margin: 0.2rem 0 0.5rem;
+    color: $primary-color;
+    font-size: 0.62em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.dep-title + .dep-title,
+.dep-grid + p .dep-title {
+    margin-top: 0.9rem;
+}
+.dep-panel p {
+    margin: 0;
+}
+.dep-grid p,
+.dep-swap p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+}
+.dep {
+    padding: 0.26rem 0.6rem;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.86);
+    font-family: var(--r-code-font, monospace);
+    font-size: 0.56em;
+    white-space: nowrap;
+}
+/* The one package the install replaces, and what replaces it. */
+.dep-out {
+    border-color: rgba(189,189,189,0.5);
+    color: rgba(255,255,255,0.45);
+    text-decoration: line-through;
+}
+.dep-in {
+    border-color: $primary-color;
+    background: rgba(236,103,44,0.16);
+    color: #ffffff;
+    font-weight: 700;
+}
+.dep-swap p {
+    align-items: center;
+}
+.dep-swap .dep-out + .dep-in::before {
+    content: "\2192";
+    display: inline-block;
+    margin-right: 0.5rem;
+    color: $primary-color;
+    text-decoration: none;
+}
+
+/* ── Checkpoint card (slide 14) ────────────────────────────────────────────── */
+.check-card {
+    height: 100%;
+    padding: 0.9rem 1.1rem;
+    border-left: 5px solid $primary-color;
+    background: rgba(255,255,255,0.05);
+}
+.check-title {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: $primary-color;
+    font-size: 0.72em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+.check-item p {
+    margin: 0;
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.82);
+    font-size: 0.66em;
+    line-height: 1.35;
+    position: relative;
+}
+.check-item p::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: $primary-color;
+    font-weight: 900;
+}
+.check-card .check-item:last-child p {
+    border-bottom: none;
+}
+
+/* ── Named wires on the runtime diagram (slide 16) ─────────────────────────── */
+.arch-wire p {
+    display: flex;
+    justify-content: center;
+    gap: 2.2rem;
+    margin: 0;
+    padding: 0.3rem 0;
+}
+.wire-down,
+.wire-up,
+.wire-side {
+    font-family: var(--r-code-font, monospace);
+    font-size: 0.78em;
+    font-weight: 700;
+    color: $primary-color;
+    white-space: nowrap;
+}
+.wire-down::before { content: "\2193\00a0"; }
+.wire-up::before   { content: "\2191\00a0"; }
+.wire-side::before { content: "\2192\00a0"; color: rgba(255,255,255,0.6); }
+.wire-side { color: rgba(255,255,255,0.72); }
+
+/* Run slide: the GIF carries the point, so give it the room to be seen. */
+.run-split img {
+    width: 100%;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 6px;
+}
+
+/* Caption that belongs to a figure inside a column, unlike .slide-caption,
+   which is pinned to the bottom of the whole slide. */
+.fig-note p {
+    margin: 0.45rem 0 0;
+    text-align: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.6em;
+    line-height: 1.35;
+}
+
+/* Give the runtime diagram's blocks room to read as separate stages. */
+.mission-assembly.arch {
+    gap: 0.45rem;
+}
+.mission-assembly .arch-link p {
     font-size: 0.78em;
 }

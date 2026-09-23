@@ -21,7 +21,6 @@ Wi-Fi and under a minute on a good connection.
 
 ```bash
 git clone https://github.com/iHuman-Lab/mosaic.git
-git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
 cd mosaic
 python3 -m venv mosaic_env
 source mosaic_env/bin/activate
@@ -31,7 +30,6 @@ source mosaic_env/bin/activate
 
 ```powershell
 git clone https://github.com/iHuman-Lab/mosaic.git
-git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
 cd mosaic
 python -m venv mosaic_env
 .\mosaic_env\Scripts\Activate.ps1
@@ -48,14 +46,10 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ```bash
 git clone https://github.com/iHuman-Lab/mosaic.git
-git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
 cd mosaic
 conda create --name mosaic_env python=3.11 -y
 conda activate mosaic_env
 ```
-
-Clone both repositories side by side. The tutorial repository holds the lab
-files you will run in the session.
 
 Choose either `venv` or Conda. Do not create both environments.
 
@@ -156,23 +150,28 @@ generator retrying — warnings, not errors.
 
 ## 5 · Run MOSAIC
 
-Keep `mosaic_env` active. `pip install -e .` put `mosaic` on the path, so the
-mission runs from any directory.
+Keep `mosaic_env` active and stay in the cloned `mosaic` directory.
+
+**macOS / Linux**
 
 ```bash
-cd ../mosaic-smc-tutorial/presentation
-python labs/play.py
+PYTHONPATH=src python -m experiment.main
 ```
 
-The Pygame interface opens in a separate window. Use the arrow keys to move and
-press `Esc` to quit. The information panel should read
-`Rescued: 0 | Remaining: 8`.
+**Windows PowerShell**
 
-> **Do not use `python -m experiment.main`.** MOSAIC's own study runner is
-> currently broken on `main` — two imports are commented out in
-> `src/experiment/main.py`, so it exits with
-> `NameError: name 'LavaRiskVictimPlacer' is not defined`. The tutorial uses
-> `labs/play.py`, which needs only the reusable `mosaic` package.
+```powershell
+$env:PYTHONPATH = "src"
+python -m experiment.main
+```
+
+The Pygame interface opens fullscreen. Use the arrow keys to move, `Tab` to
+rescue the victim you are facing, `F11` for a window, and `Esc` to quit. No
+extra repository, notebook, or Python file is required.
+
+> If you cloned before the fix landed, `git pull` first. Two imports were
+> commented out in `src/experiment/main.py`, which made the runner exit with
+> `NameError: name 'LavaRiskVictimPlacer' is not defined`.
 
 ## Troubleshooting
 
@@ -184,14 +183,15 @@ press `Esc` to quit. The information panel should read
 | PowerShell reports that `mosaic_env` could not be loaded | Run `.\mosaic_env\Scripts\Activate.ps1`; the leading `.\` is required. |
 | `ensurepip is not available` | `sudo apt install python3-venv`, delete `mosaic_env`, remake it. |
 | `ModuleNotFoundError: No module named 'mosaic'` | The virtual environment is not active, or `pip install -e .` did not finish. |
-| Window appears and closes immediately | Run `python labs/play.py` from a terminal and read the traceback. |
+| Window appears and closes immediately | Run the command from a terminal and read the traceback. |
 | `Timeout during mission generation` / `Sampling rejected` | Harmless warnings; the generator retries automatically. |
 | Hangs forever with no window, after changing settings | You set `locked_room_prob=1.0`. Every room locked leaves no solvable layout and the generator retries forever. Use `0.9` or less. |
 | `AttributeError: 'FullviewCamera' object has no attribute 'reset'` | Known bug; `AgentCenteredCamera` fails the same way. Use `AgentFOVCamera`, `AgentConeCamera`, or the default `EdgeFollowCamera`. |
 | Nothing renders, or `pygame.error: No available video device` | You are on a headless or remote machine. Use a local laptop. |
-| `Alt` replies `Currently, no commands are available.` | Expected. `labs/play.py` attaches no AI teammate; `labs/advisor.py` shows one that works without a key. |
+| `Alt` replies `Currently, no commands are available.` | Expected. The runner attaches the keyless `dummy` teammate; a real provider is the optional extension. |
 | `Missing optional dependency 'tabulate'` | `pip install tabulate` — normally installed with the package. |
-| `NameError: name 'LavaRiskVictimPlacer' is not defined` | You ran `python -m experiment.main`. Use `python labs/play.py` instead. |
+| `NameError: name 'LavaRiskVictimPlacer' is not defined` | Your clone predates the fix. `git pull` in the `mosaic` directory. |
+| `No module named 'experiment'` | Run from the repository root with `PYTHONPATH=src`. |
 | Font warnings from `pygame_gui` | Harmless. |
 
 If you are still stuck when you arrive, come to the front — we have helpers and a
@@ -201,4 +201,3 @@ pre-built environment on a spare machine.
 
 - Repository — <https://github.com/iHuman-Lab/mosaic>
 - Documentation — <https://ihuman-lab.github.io/mosaic/>
-- Tutorial materials — <https://github.com/Bkdogbey/mosaic-smc-tutorial>

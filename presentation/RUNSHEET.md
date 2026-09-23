@@ -13,7 +13,7 @@ install and run it, then understand and customize it.
 - [ ] Test the Conda alternative in a separate clean environment.
 - [ ] Send `SETUP.md` to attendees before the conference.
 - [ ] Ask one lab member to help with installation during Part Two.
-- [ ] Confirm `python labs/play.py` opens a window on the presenting machine.
+- [ ] Confirm `PYTHONPATH=src python -m experiment.main` opens a window.
 
 ## Timing
 
@@ -44,16 +44,16 @@ install and run it, then understand and customize it.
 
 - Ask attendees to use Python 3.10 or 3.11 for a shared troubleshooting baseline.
   MOSAIC's `pyproject.toml` claims 3.8+, but the code needs 3.10.
-- Slide 10 clones **two** repositories: MOSAIC and the tutorial materials. People
-  who followed `SETUP.md` already have both.
-- Slide 11: the package metadata installs both `pygame` and `pygame-ce`. Use the
-  exact uninstall and force-reinstall commands. `tabulate` is now declared
-  upstream, so the separate install is only a fallback.
+- Slide 9 lists the eight packages `pip install -e .` brings in and shows the
+  one swap — `pygame` out, `pygame-ce` in. That swap is the only manual step.
+- Slide 10 clones one repository. Everyone stays in `mosaic` all session.
+- Slide 11: use the exact uninstall and force-reinstall commands; `--force-reinstall`
+  is required. `tabulate` is declared upstream, so no separate install.
 - Do not advance from slide 12 until most attendees see `MOSAIC ready`.
-- Slide 13 launches `python labs/play.py` from `mosaic-smc-tutorial/presentation`.
-  **Do not use `python -m experiment.main`** — it is broken on MOSAIC's `main`
-  (two imports commented out in `src/experiment/main.py`) and exits with
-  `NameError: name 'LavaRiskVictimPlacer' is not defined`.
+- Slide 13 launches `PYTHONPATH=src python -m experiment.main` — MOSAIC's own
+  study runner. The GIF on the slide is the real interface, so you can talk
+  through it while people are still installing. It opens fullscreen; F11 gives
+  a window. Anyone who cloned before the import fix landed needs `git pull`.
 - Hold at slide 14 until most attendees can move the agent, then ask everyone to
   press `Esc`. The appendix recovery slide is available while helpers work with
   individual machines.
@@ -71,25 +71,26 @@ install and run it, then understand and customize it.
   reusable `VictimPlacer` places real victims only; decoys come from the study
   layer's `LavaRiskVictimPlacer`.
 - Slide 19 groups six keys by intent. `Tab` does both pickup and rescue on
-  purpose. Note what people will actually see: with no teammate attached, `Alt`
-  replies "Currently, no commands are available." Advice also fires
-  automatically every 50 steps once a teammate is configured.
+  purpose. Note what people will actually see: the runner attaches the keyless
+  `dummy` teammate, so `Alt` replies "Currently, no commands are available."
+  Advice also fires automatically every 50 steps once a real teammate is set.
 - Slide 20 compares three live captures of one frozen frame. The white ring is
   the agent and the dashed box is the room it stands in. Only visibility
   changes; the task state does not. Do not offer `FullviewCamera` or
   `AgentCenteredCamera` — both raise `AttributeError` on env reset.
-- Slide 21 is the five-layer table. Spend the time here; this is what attendees
-  need in order to place their own study.
-- Slide 22 shows the shape of `labs/play.py`, then names
-  `src/experiment/main.py` as this lab's study-specific composition — mention
-  it, do not run it.
-- Slide 23: change one value in the `EDIT ME` block and rerun the slide-13
-  command. Remind people that `VICTIMS_PER_ROOM` is per room, not a total, and
-  that `LOCKED_ROOM_PROB = 1.0` hangs the generator.
-- Slide 24 is the teammate interface. `labs/advisor.py` runs a `ScriptedAdvisor`
-  with tunable `p_correct` and needs no API key — demo it if time allows. The
-  provider swap needs a key and the `llama-index` package; mention it, do not
-  attempt it live.
+- Slide 21 names each directory, the files inside it, and the interface it
+  exposes. Spend the time here; this is what attendees need in order to place
+  their own study. Have the repo open in an editor alongside the slide.
+- Slide 22 is the real `src/experiment/main.py`, including the
+  `configs/experiment.yaml` lookup. Point out that the victim counts come from
+  the config file, not the source.
+- Slide 23: change `num_rows`, `num_cols`, `room_size` or `locked_room_prob` in
+  `src/experiment/main.py` — those four are hardcoded there. Rerun the slide-13
+  command. `LOCKED_ROOM_PROB` at 1.0 hangs the generator.
+- Slide 24 is the teammate interface. The runner already passes
+  `build_llm_client("dummy")`; swapping in `"openai"` or `"google"` is a
+  one-argument change that needs a key and the `llama-index` package. Mention
+  it, do not attempt it live.
 - Slide 25 closes on the real extension seams.
 
 ## Expected problems
@@ -99,13 +100,14 @@ install and run it, then understand and customize it.
 | `ImportError: cannot import name 'DIRECTION_LTR'` | Repeat the pygame uninstall and force-reinstall from slide 11. |
 | `AttributeError: module 'pygame' has no attribute 'surface'` | Step 11 was run without `--force-reinstall`. Rerun with the flag. |
 | `ModuleNotFoundError: No module named 'mosaic'` | Confirm `mosaic_env` is active and `pip install -e .` completed in the `mosaic` directory. |
-| `NameError: name 'LavaRiskVictimPlacer' is not defined` | They ran `python -m experiment.main`. Send them to `python labs/play.py`. |
+| `NameError: name 'LavaRiskVictimPlacer' is not defined` | Their clone predates the import fix. `git pull` in `mosaic`. |
+| `No module named 'experiment'` | Run from the repo root with `PYTHONPATH=src`. |
 | PowerShell cannot load `mosaic_env` | Use `.\mosaic_env\Scripts\Activate.ps1`; the leading `.\` is required. |
 | `ModuleNotFoundError: No module named 'tabulate'` | `python -m pip install tabulate`. |
 | No window or `No available video device` | The GUI needs a local graphical session. Use the fallback laptop. |
-| `Alt` replies "Currently, no commands are available." | Expected — no teammate is attached in `labs/play.py`. |
-| Generation appears to hang after customization | `LOCKED_ROOM_PROB` is at `1.0`. Use `0.9` or less. |
-| More victims than expected | `VICTIMS_PER_ROOM` is per room; a 2×2 building with 2 per room is 8. |
+| `Alt` replies "Currently, no commands are available." | Expected — the runner uses the keyless `dummy` teammate. |
+| Generation appears to hang after customization | `locked_room_prob` is at `1.0`. Use `0.9` or less. |
+| More victims than expected | `num_real_victims` is per room; 12 per room across a 3×3 building is 108. |
 | `AttributeError: 'FullviewCamera' object has no attribute 'reset'` | Known bug, same for `AgentCenteredCamera`. Use `AgentFOVCamera`, `AgentConeCamera`, or the default. |
 
 ## Cut list
@@ -114,8 +116,8 @@ If the session runs long:
 
 1. Explain slides 16–17 in one minute each without pausing on every feature.
 2. Demonstrate the slide-23 parameter change instead of waiting for everyone.
-3. Describe the `labs/advisor.py` demo on slide 24 without running it, and close
-   on the extension points on slide 25.
+3. Describe the teammate swap on slide 24 without running it, and close on the
+   extension points on slide 25.
 
 Do not cut the installation checkpoints, the first run, the controls, the camera
 comparison, or the software-layer table.

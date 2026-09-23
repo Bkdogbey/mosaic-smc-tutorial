@@ -10,8 +10,8 @@ consequential tasks. The deck is three parts:
 1. **What MOSAIC is** — why teaming cannot be studied from isolated prompts, what
    MOSAIC connects, the search-and-rescue task, the teaming loop, and the
    research questions it supports
-2. **Install and run** — `venv` and Conda setup paths, an import checkpoint, and
-   the first mission via `labs/play.py`
+2. **Install and run** — the dependency list, `venv` and Conda setup paths, an
+   import checkpoint, and the first mission via `python -m experiment.main`
 3. **Understand and customize** — read the interface, learn the five software
    layers, change one parameter and rerun, and connect an AI teammate
 
@@ -31,10 +31,10 @@ presentation/
 ├── SETUP.md              # send this to attendees BEFORE the session
 ├── RUNSHEET.md           # facilitator timings, cut list, expected failures
 ├── assets/               # figures used in the deck
-└── labs/                 # code the deck runs
-    ├── play.py           # the tutorial's launch path (slides 13 and 23); EDIT ME block of knobs
-    ├── advisor.py        # runnable ScriptedAdvisor referenced by slide 24; needs no API key
-    └── tweak.py          # all four injection points in one file; optional deep dive
+└── labs/                 # optional side examples; the deck itself runs experiment.main
+    ├── play.py           # a minimal mission with an EDIT ME block of knobs
+    ├── advisor.py        # runnable ScriptedAdvisor with tunable reliability; needs no API key
+    └── tweak.py          # all four injection points in one file
 ```
 
 ## Render
@@ -61,6 +61,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `cam-follow.png`, `cam-room.png`, `cam-cone.png` | The earlier 512px renders, superseded by the live captures and kept for reference |
 | `sprites/*.png` | Single tiles rendered from `minigrid` and MOSAIC's `Victim` / `FakeVictim` classes at 4x supersampling — the world legend on the interface slide |
 | `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
+| `gameplay.gif` | Captured by `tools/capture_gameplay.py` — the real GUI compositor driven by a scripted breadth-first walk to the nearest victim, built from `configs/experiment.yaml` so it matches what `experiment.main` shows |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
@@ -77,6 +78,7 @@ python tools/capture_interface.py        # full interface, vignette mid-flash
 python tools/capture_camera_views.py     # play the mission, grab the three views
 python tools/make_camera_annotations.py  # ring + room outline on those captures
 python tools/make_sprites.py             # single tiles for the interface slide
+python tools/capture_gameplay.py         # the animated clip on the run-the-mission slide
 ```
 
 All three need `minigrid` and a checkout of the MOSAIC repository; the capture
@@ -151,14 +153,14 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    the decoy penalty as `-0.5`; `RescueRewards.fake_victim` defaults to `-1.0`.
 10. **`requires-python = ">=3.8"`** is optimistic given the current dependency set;
    the docs say 3.9+ and we only test 3.10.
-12. **`python -m experiment.main` does not run at all.** `src/experiment/main.py`
-   has `from .llm import build_llm_client` and
+12. ~~**`python -m experiment.main` does not run at all.**~~ **Fixed.**
+   `src/experiment/main.py` had `from .llm import build_llm_client` and
    `from .placers import LavaRiskVictimPlacer, SectorSpreadLavaPlacer` commented
-   out at lines 15–16, but still uses all three names. The script exits with
-   `NameError: name 'LavaRiskVictimPlacer' is not defined` before it builds
-   anything. This is committed on `origin/main`, so every fresh clone hits it.
-   It is why the deck launches `labs/play.py` instead. Fix: uncomment the two
-   imports.
+   out at lines 15–16 while still using all three names, so the script exited
+   with `NameError: name 'LavaRiskVictimPlacer' is not defined` before building
+   anything. The imports are restored, and `build_llm_client` now defaults to
+   the keyless `dummy` provider instead of `openai`, so the runner needs no API
+   key.
 11. **The `cam_*` observation fields are camera-dependent.** `cam_top_x`,
    `cam_top_y`, `cam_view_w` and `cam_view_h` are only written when the camera has
    `_update_position` (i.e. `EdgeFollowCamera`). Analyses written against the

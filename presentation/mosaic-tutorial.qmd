@@ -93,11 +93,11 @@ The AI teammate receives task context and communicates during the task.
 ::::
 
 ::: {.need-core}
-[Human–AI]{.need-core-top}
+[Human–AI teaming]{.need-core-top}
 
-[TEAMING]{.need-core-title}
+[MOSAIC]{.need-core-title}
 
-[one coordinated system]{.need-core-subtitle}
+[one configurable testbed]{.need-core-subtitle}
 :::
 
 :::: {.need-column}
@@ -174,7 +174,9 @@ Receives task context and returns advice.
 :::
 
 ::: {.system-record}
-[Session data]{.system-title} Actions, observations, advice, and outcomes share one timeline.
+[Session data]{.system-title}
+
+Actions, observations, advice, and outcomes share one timeline.
 :::
 :::
 
@@ -329,59 +331,60 @@ Next, we install MOSAIC and [run the mission ourselves]{.accent}.
 ## Before You [Start]{.accent}
 
 ::: {.hook}
-Four things to have ready before we touch the terminal.
+Four prerequisites, and the eight packages MOSAIC pulls in.
 :::
 
-:::: {.cards .cols-2 .fill .short}
+:::: {.columns}
 
-::: {.card}
-[Python 3.10 or 3.11]{.card-title}
-
-```bash
-python3 --version
-```
-
-Use the same supported version throughout the tutorial.
+::: {.column width="46%"}
+::: {.feature-list .compact}
+::: {.feature-row}
+[Python]{.feature-name} 3.10 or 3.11
 :::
-
-::: {.card}
-[Git]{.card-title}
-
-```bash
-git --version
-```
-
-A recent version is enough; no GitHub account is required.
+::: {.feature-row}
+[Git]{.feature-name} Any recent version; no account needed
 :::
-
-::: {.card}
-[PowerShell or a Unix terminal]{.card-title}
-
-Windows PowerShell, macOS Terminal, or any Linux shell.
-
-::: {.card-meta}
-Every command in Part Two is shown for both.
+::: {.feature-row}
+[Terminal]{.feature-name} PowerShell, macOS Terminal, or a Linux shell
+:::
+::: {.feature-row}
+[Display]{.feature-name} A local desktop — the game opens a window
 :::
 :::
 
-::: {.card}
-[A local graphical desktop]{.card-title}
+::: {.note}
+No API key is required for this tutorial.
+:::
+:::
 
-The interface opens a window, so the machine needs a working display.
+::: {.column width="54%"}
+::: {.dep-panel}
+[`pip install -e .` brings in]{.dep-title}
 
-::: {.card-meta}
-No API key is required for the basic tutorial.
+::: {.dep-grid}
+[minigrid]{.dep} [gymnasium]{.dep} [numpy]{.dep} [pandas]{.dep} [pygame_gui]{.dep} [tabulate]{.dep} [pyyaml]{.dep} [python-dotenv]{.dep}
+:::
+
+[then we swap one of them]{.dep-title}
+
+::: {.dep-swap}
+[pygame]{.dep .dep-out} [pygame-ce]{.dep .dep-in}
+:::
 :::
 :::
 
 ::::
+
+::: {.punchline}
+`pygame_gui` needs **pygame-ce**, MOSAIC declares **pygame**, and both own the same `pygame` namespace — [that is the one manual step]{.accent}.
+:::
 
 ---
 
 ## Clone MOSAIC and Create the [Environment]{.accent}
 
 ::: {.hook}
-Two repositories side by side: MOSAIC itself, and today's tutorial materials.
+One repository, one environment. Everything today runs from inside it.
 :::
 
 ::: {.panel-tabset}
@@ -390,7 +393,6 @@ Two repositories side by side: MOSAIC itself, and today's tutorial materials.
 
 ```bash
 git clone https://github.com/iHuman-Lab/mosaic.git
-git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
 cd mosaic
 python3 -m venv mosaic_env
 source mosaic_env/bin/activate
@@ -400,7 +402,6 @@ source mosaic_env/bin/activate
 
 ```powershell
 git clone https://github.com/iHuman-Lab/mosaic.git
-git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
 cd mosaic
 python -m venv mosaic_env
 .\mosaic_env\Scripts\Activate.ps1
@@ -409,6 +410,8 @@ python -m venv mosaic_env
 ### Conda · Any Platform
 
 ```bash
+git clone https://github.com/iHuman-Lab/mosaic.git
+cd mosaic
 conda create -n mosaic_env python=3.11 -y
 conda activate mosaic_env
 ```
@@ -420,9 +423,10 @@ Your prompt begins with `(mosaic_env)`, and `python --version` reports 3.10 or 3
 :::
 
 ::: {.notes}
-Choose either venv or Conda, not both. Ubuntu attendees who see `ensurepip is not
-available` should install `python3-venv`, delete the incomplete `mosaic_env`, and
-repeat the step. PowerShell needs the leading `.\` on the activation script.
+Choose either venv or Conda, not both. Ubuntu attendees who see "ensurepip is not
+available" should install python3-venv, delete the incomplete mosaic_env, and
+repeat the step. PowerShell needs the leading dot-backslash on the activation
+script. Everyone stays in the mosaic directory for the rest of the tutorial.
 :::
 
 ---
@@ -430,7 +434,7 @@ repeat the step. PowerShell needs the leading `.\` on the activation script.
 ## Install [MOSAIC]{.accent}
 
 ::: {.hook}
-Run these commands from the `mosaic` directory, inside the active environment.
+Run these from the `mosaic` directory, inside the active environment.
 :::
 
 ```bash
@@ -440,12 +444,17 @@ python -m pip uninstall -y pygame
 python -m pip install --force-reinstall "pygame-ce>=2.5.2"
 ```
 
-::: {.checkpoint}
-The final environment contains `mosaic`, `minigrid`, `pygame-ce`, and `pygame_gui`.
+::: {.feature-list .compact}
+::: {.feature-row}
+[Line 2]{.feature-name} Installs `mosaic` in editable mode, with the eight dependencies.
+:::
+::: {.feature-row}
+[Lines 3–4]{.feature-name} Swap in `pygame-ce`. `--force-reinstall` is required — a plain install reports "already satisfied" and repairs nothing.
+:::
 :::
 
 ::: {.note}
-The last two commands matter: MOSAIC declares `pygame`, but the interface needs `pygame-ce`, and both claim the same `pygame` namespace — full explanation in the appendix.
+`ERROR: mosaic 0.1.0 requires pygame, which is not installed.` is expected and harmless — `pygame-ce` satisfies it in practice.
 :::
 
 ---
@@ -456,24 +465,13 @@ The last two commands matter: MOSAIC declares `pygame`, but the interface needs 
 Verify that the environment and GUI APIs are available.
 :::
 
-::: {.panel-tabset}
-
-### macOS / Linux
-
 ```bash
 python -c "from mosaic.sar.env import build_sar_env; from mosaic.gui.main import SAREnvGUI; print('MOSAIC ready')"
 ```
 
-### Windows PowerShell
-
-```powershell
-python -c "from mosaic.sar.env import build_sar_env; from mosaic.gui.main import SAREnvGUI; print('MOSAIC ready')"
-```
-
-:::
-
 ::: {.checkpoint}
 ```text
+pygame-ce 2.5.8 (SDL 2.32.10, Python 3.10.20)
 MOSAIC ready
 ```
 :::
@@ -484,85 +482,106 @@ MOSAIC ready
 
 ---
 
-## Run Your First [Mission]{.accent}
+## Run the Included [Mission]{.accent}
 
-::: {.hook}
-The editable install puts `mosaic` on the path, so the mission runs from anywhere.
-:::
+:::: {.columns .run-split}
+
+::: {.column width="50%"}
 
 ::: {.panel-tabset}
 
 ### macOS / Linux
 
 ```bash
-cd ../mosaic-smc-tutorial/presentation
-python labs/play.py
+PYTHONPATH=src python -m experiment.main
 ```
 
 ### Windows PowerShell
 
 ```powershell
-cd ../mosaic-smc-tutorial/presentation
-python labs/play.py
+$env:PYTHONPATH = "src"
+python -m experiment.main
 ```
 
 :::
 
-::: {.feature-list}
+::: {.feature-list .compact}
 ::: {.feature-row}
-[Move]{.feature-name} The arrow keys turn and walk the agent.
+[Move]{.feature-name} Arrow keys turn and walk the agent
 :::
 ::: {.feature-row}
-[Close]{.feature-name} Press `Esc` to end the mission and close the window.
+[Rescue]{.feature-name} `Tab` picks up the victim you face
+:::
+::: {.feature-row}
+[Quit]{.feature-name} `Esc` closes it, `F11` toggles fullscreen
 :::
 :::
 
-::: {.checkpoint}
-A window opens on a 2×2 building, and the information panel reads
-`Rescued: 0 | Remaining: 8`.
 :::
+
+::: {.column width="50%"}
+![](assets/gameplay.gif){fig-alt="The MOSAIC interface during play: the agent walks through a room, rescues two victims, and the information panel counts them"}
+
+::: {.fig-note}
+Rescued and Total Reward climb as each victim is reached.
+:::
+:::
+
+::::
 
 ::: {.notes}
-Keep mosaic_env active. play.py imports only the reusable mosaic package — no
-PYTHONPATH, no config file, and no AI provider. Hold here until most attendees
-have a window open and can move the agent, then ask them to press Esc.
+This is MOSAIC's own study runner from the cloned repository — no extra file is
+needed. It opens fullscreen; F11 gives a window. Hold here until most attendees
+can move the agent, then ask everyone to press Esc.
 :::
 
 ---
 
 ## First [Checkpoint]{.accent}
 
-::: {.hook}
-Four things to confirm before we look inside.
+:::: {.columns}
+
+::: {.column width="38%"}
+::: {.check-card}
+[Confirm]{.check-title}
+
+::: {.check-item}
+The window opened
+:::
+::: {.check-item}
+Arrow keys move the agent
+:::
+::: {.check-item}
+The information panel updates
+:::
+::: {.check-item}
+`Esc` closes it cleanly
+:::
+:::
 :::
 
-::: {.feature-list .compact}
-::: {.feature-row}
-[1]{.feature-name} The MOSAIC window opened.
-:::
-::: {.feature-row}
-[2]{.feature-name} The agent responds to the movement keys.
-:::
-::: {.feature-row}
-[3]{.feature-name} The information panel updates as you move.
-:::
-::: {.feature-row}
-[4]{.feature-name} The mission closes normally when you quit.
-:::
-:::
-
+::: {.column width="62%"}
 ::: {.tight-table}
 
 | Symptom | Recovery |
 |---|---|
-| `No module named 'mosaic'` | Activate `mosaic_env`, rerun `pip install -e .` in `mosaic` |
-| GUI import fails, or a `pygame` error | Repeat the `pygame-ce` force-reinstall |
-| PowerShell cannot activate `mosaic_env` | Use the leading `.\`: `.\mosaic_env\Scripts\Activate.ps1` |
-| No window, or `No available video device` | Run locally, not over SSH or headless |
+| `No module named 'mosaic'` | Activate `mosaic_env`, rerun `pip install -e .` |
+| `No module named 'experiment'` | Run from the repo root with `PYTHONPATH=src` |
+| `DIRECTION_LTR` or `pygame.surface` error | Repeat the `pygame-ce` force-reinstall |
+| PowerShell cannot activate | Use the leading `.\` on `Activate.ps1` |
+| No window, or `No available video device` | Run locally, not over SSH |
 
+:::
+:::
+
+::::
+
+::: {.punchline}
+Everyone with a window open is ready for [Part Three]{.accent}.
 :::
 
 ---
+
 
 <!-- ============ PART 3 ============ -->
 
@@ -596,8 +615,8 @@ Watches the game view and presses keys
 :::
 :::
 
-::: {.arch-link}
-key presses ↓ &nbsp;&nbsp; ↑ rendered frames
+::: {.arch-link .arch-wire}
+[key presses]{.wire-down} [rendered frames]{.wire-up}
 :::
 
 ::: {.arch-row}
@@ -608,8 +627,8 @@ Game view, information panel, chat panel, event feedback
 :::
 :::
 
-::: {.arch-link}
-`env.step(action)` ↓ &nbsp;&nbsp; ↑ observation + events &nbsp;&nbsp;·&nbsp;&nbsp; advice ↑
+::: {.arch-link .arch-wire}
+[env.step(action)]{.wire-down} [observation + events]{.wire-up} [advice]{.wire-side}
 :::
 
 ::: {.arch-row}
@@ -879,23 +898,23 @@ The task state remains unchanged; only [the participant's visibility]{.accent} c
 ## The MOSAIC Software [Layers]{.accent}
 
 ::: {.hook}
-Each layer owns one design responsibility, so a study can vary one without touching the others.
+Each layer owns one responsibility, and each is a directory you can open.
 :::
 
 ::: {.tight-table}
 
-| Layer | Responsibility |
-|---|---|
-| `mosaic.core` | Level generation, placement interfaces, and camera strategies |
-| `mosaic.sar` | Victims, hazards, rescue actions, rewards, and observations |
-| `mosaic.gui` | Player input, information panels, chat, and event feedback |
-| `mosaic.llm` | Provider-independent text-in/text-out teammate interface |
-| `experiment` | Study-specific configuration, calibration, providers, sensors, and logging |
+| Directory | Files | The interface you use |
+|---|---|---|
+| `mosaic/core/` | `level.py` `camera.py` `placers.py` | `SARLevelGen`, `CameraStrategy`, `Placer` |
+| `mosaic/sar/` | `env.py` `objects.py` `actions.py` `placers.py` `observations.py` | `build_sar_env(...)`, `VictimPlacer`, `RescueAction` |
+| `mosaic/gui/` | `main.py` `user.py` `info.py` `chat.py` `feedback.py` | `SAREnvGUI(env, config, llm_client)` |
+| `mosaic/llm/` | `client.py` `parser.py` `prompts.yaml` | `LLMClient.query(prompt) -> str` |
+| `experiment/` | `main.py` `game.py` `placers.py` `llm.py` `sensors/` | your study's composition |
 
 :::
 
 ::: {.punchline}
-`mosaic/` contains reusable software. [`experiment/` composes it for a particular study.]{.accent}
+`mosaic/` is reusable across studies. [`experiment/` composes it for one study.]{.accent}
 :::
 
 ---
@@ -903,70 +922,79 @@ Each layer owns one design responsibility, so a study can vary one without touch
 ## How the Mission Is [Composed]{.accent}
 
 ::: {.hook}
-The runner constructs the environment, attaches the interface, and starts the interaction loop.
+`src/experiment/main.py` constructs the environment, attaches the interface, and starts the interaction loop.
 :::
 
 :::: {.columns .mission-code}
 
-::: {.column width="55%"}
+::: {.column width="56%"}
 ```python
+game_config = yaml.safe_load(open(config_path))["game"]
+
 env = build_sar_env(
     screen_size=800,
-    num_rows=2,
-    num_cols=2,
-    room_size=8,
-    victim_placer=VictimPlacer(num_real_victims=2),
-    lava_placer=LavaPlacer(lava_per_room=2),
-    locked_room_placer=LockedRoomPlacer(
-        locked_room_prob=0.5
-    ),
+    num_rows=3, num_cols=3, room_size=10,
+    victim_placer=LavaRiskVictimPlacer(
+        num_real_victims=game_config["num_real_victims"],
+        num_fake_victims=game_config["num_fake_victims"]),
+    lava_placer=SectorSpreadLavaPlacer(
+        lava_per_room=game_config["lava_per_room"]),
+    locked_room_placer=LockedRoomPlacer(locked_room_prob=0.5),
+    camera_strategy=AgentFOVCamera(),
 )
 env.reset()
 
-SAREnvGUI(env, config={"max_time": 3}).run()
+gui = SAREnvGUI(env, config=config,
+                llm_client=build_llm_client("dummy"))
+gui.run()
 ```
 :::
 
-::: {.column width="45%"}
+::: {.column width="44%"}
 ::: {.code-explain}
-[`build_sar_env(...)`]{.code-label} Task configuration — rooms, victims, hazards, doors.
+[`build_sar_env(...)`]{.code-label} Task configuration — rooms, victims, hazards, doors, camera.
 
-[`SAREnvGUI(...)`]{.code-label} Human interaction — view, panels, and keys.
+[`configs/experiment.yaml`]{.code-label} Where the study's counts live: 12 real and 12 decoy victims per room, 8 lava tiles.
 
-[`llm_client=...`]{.code-label} AI teammate — omitted here, added on the next slide.
+[`SAREnvGUI(...)`]{.code-label} Human interaction — view, panels, keys.
 
-[`.run()`]{.code-label} The interaction loop.
+[`llm_client=`]{.code-label} The AI teammate. `"dummy"` needs no key.
+
+[`gui.run()`]{.code-label} The interaction loop.
+:::
+
+::: {.note}
+`LavaRiskVictimPlacer` and `SectorSpreadLavaPlacer` live in `experiment/placers.py` — this study's subclasses of the reusable ones.
 :::
 :::
 
 ::::
-
-::: {.note}
-`labs/play.py` has this shape, with the values pulled out into the `EDIT ME` block. In the MOSAIC repository, `src/experiment/main.py` composes the same pieces for this lab's own study — it is a study-specific composition file, not the complete reusable API.
-:::
 
 ---
 
 ## Change One Parameter and [Rerun]{.accent}
 
 ::: {.hook}
-Open `labs/play.py` and change one value in the `EDIT ME` block. Predict first.
+Open `src/experiment/main.py`, change one value, and run the same command again.
 :::
 
 :::: {.columns .mission-code}
 
 ::: {.column width="55%"}
 ```bash
-code labs/play.py
+code src/experiment/main.py
 ```
 
 ```python
-NUM_ROWS = 2         # rooms down     -> try 3
-NUM_COLS = 2         # rooms across   -> try 3
-ROOM_SIZE = 8        # tiles per room -> try 12
-VICTIMS_PER_ROOM = 2 # per ROOM, not total
-LAVA_PER_ROOM = 2    # risk pressure  -> try 6
-LOCKED_ROOM_PROB = 0.5  # fraction locked -> try 0.9
+env = build_sar_env(
+    screen_size=800,
+    num_rows=3,      # try 2
+    num_cols=3,      # try 2
+    room_size=10,    # try 6
+    ...
+    locked_room_placer=LockedRoomPlacer(
+        locked_room_prob=0.5),   # try 0.25
+)
 ```
 :::
 
@@ -976,23 +1004,23 @@ LOCKED_ROOM_PROB = 0.5  # fraction locked -> try 0.9
 ::: {.change-card}
 [Building size]{.change-what}
 
-`NUM_ROWS`, `NUM_COLS`
+`num_rows`, `num_cols`
 
 [How many rooms to search]{.change-effect}
 :::
 
 ::: {.change-card}
-[Risk pressure]{.change-what}
+[Room size]{.change-what}
 
-`LAVA_PER_ROOM`
+`room_size`
 
-[How constrained the safe routes are]{.change-effect}
+[How much ground each room costs]{.change-effect}
 :::
 
 ::: {.change-card}
 [Key hunting]{.change-what}
 
-`LOCKED_ROOM_PROB`
+`locked_room_prob`
 
 [How often a room needs a key]{.change-effect}
 :::
@@ -1007,9 +1035,11 @@ Save the file, rerun the same launch command, and [identify how the mission chan
 :::
 
 ::: {.notes}
-VICTIMS_PER_ROOM is per room, not a building-wide total — a 3x3 building with 2
-per room is 18 victims. Keep LOCKED_ROOM_PROB below 1.0; locking every room hangs
-the generator.
+The victim counts come from configs/experiment.yaml, not from main.py, and they
+are per room: 12 real per room across a 3x3 building is 108. The grid size and
+locked_room_prob on this slide are hardcoded in main.py, so they are the safe
+things to change. Keep locked_room_prob below 1.0; locking every room leaves no
+solvable layout and the generator retries forever.
 :::
 
 ---
@@ -1032,10 +1062,8 @@ class LLMClient(ABC):
 ```
 
 ```python
-gui = SAREnvGUI(
-    env,
-    llm_client=my_teammate,
-)
+# experiment/main.py
+gui = SAREnvGUI(env, llm_client=my_teammate)
 ```
 :::
 
@@ -1048,9 +1076,9 @@ gui = SAREnvGUI(
 [Chat panel]{.code-label} → human decision
 :::
 
-::: {.feature-list}
+::: {.feature-list .compact}
 ::: {.feature-row}
-[Researchers can vary]{.feature-name} Reliability · latency · timing · wording · confidence · explanation strategy · provider
+[Vary]{.feature-name} Reliability · latency · timing · wording · confidence · explanation · provider
 :::
 :::
 :::
@@ -1058,8 +1086,9 @@ gui = SAREnvGUI(
 ::::
 
 ::: {.note}
-A complete, runnable teammate with tunable reliability is in `labs/advisor.py` — it needs no API key. Provider setup is in the appendix.
+`build_llm_client("dummy")` needs no key and replies *"Currently, no commands are available."* Swapping in `"openai"` or `"google"` is a one-argument change — see the appendix.
 :::
+
 
 ---
 
