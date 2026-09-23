@@ -1,25 +1,28 @@
 # MOSAIC Tutorial — IEEE SMC 2026
 
-A 90-minute hands-on tutorial introducing MOSAIC to HCI and human-factors
+A two-hour hands-on tutorial introducing MOSAIC to HCI and human-factors
 researchers, built on the iHuman Lab Quarto reveal.js template.
 
-The deck is three parts:
+The narrative thread is human–AI teaming: MOSAIC is a configurable research
+testbed for studying how humans and AI teammates collaborate during dynamic,
+consequential tasks. The deck is three parts:
 
-1. **Understanding MOSAIC** — why a human–AI study needs a platform like this, what
-   MOSAIC connects, the search-and-rescue task, and the research questions it supports
-2. **Install and verify** — `venv` and Conda setup paths, import checkpoints,
-   and a direct launch from the cloned MOSAIC repository
-3. **Using the search-and-rescue testbed** — inspect the interface, compare
-   camera views, and modify the mission already provided in `experiment.main`
+1. **What MOSAIC is** — why teaming cannot be studied from isolated prompts, what
+   MOSAIC connects, the search-and-rescue task, the teaming loop, and the
+   research questions it supports
+2. **Install and run** — `venv` and Conda setup paths, an import checkpoint, and
+   the first mission via `labs/play.py`
+3. **Understand and customize** — read the interface, learn the five software
+   layers, change one parameter and rerun, and connect an AI teammate
 
-Technical details about installation recovery, the observation schema, the
-advisor contract, and the roadmap live in the appendix for Q&A.
+Technical details about installation recovery, the observation schema, the AI
+teammate interface, and future applications live in the appendix for Q&A.
 
 ## Contents
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (30 slides: 25 main + 5 appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (32 slides: 25 main + closing + 6 appendix)
 ├── mosaic-tutorial.ipynb # optional development prototype; not required by attendees
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
@@ -28,10 +31,10 @@ presentation/
 ├── SETUP.md              # send this to attendees BEFORE the session
 ├── RUNSHEET.md           # facilitator timings, cut list, expected failures
 ├── assets/               # figures used in the deck
-└── labs/                 # optional code examples
-    ├── play.py           # play a mission; has an EDIT ME block of knobs
-    ├── tweak.py          # all four injection points in one file
-    └── advisor.py        # optional development example; not used in the main deck
+└── labs/                 # code the deck runs
+    ├── play.py           # the tutorial's launch path (slides 13 and 23); EDIT ME block of knobs
+    ├── advisor.py        # runnable ScriptedAdvisor referenced by slide 24; needs no API key
+    └── tweak.py          # all four injection points in one file; optional deep dive
 ```
 
 ## Render
@@ -62,7 +65,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
 `cam-full.png` introduces the search-and-rescue testbed in Part One.
-`gui-screenshot.png` introduces the complete interface in Part Three.
+`gui-screenshot-live.png` introduces the complete interface in Part Three.
 The annotated `cam-*-annot.png` variants compare the three supported camera
 choices in Part Three; the plain renders are kept as the unmarked originals.
 `victims.png` shows the real and decoy victim shapes.
@@ -131,12 +134,10 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    cap — the process never returns and no window opens. Reproduced on 2×2 at
    seeds 1, 2 and 3; `0.9` is fine. Fix: cap `n_locked` below the room count, or
    bound the retry loop and raise.
-6. **`tabulate` is required but undeclared.** `build_prompt()` →
-   `_build_table()` calls `DataFrame.to_markdown()`, which needs `tabulate`. It
-   appears in neither `pyproject.toml` nor `requirements.txt`, so on a clean
-   install **both** `sparse` and `detailed` prompts raise
-   `ImportError: Missing optional dependency 'tabulate'` — which means the `Alt`
-   key (ask the advisor) does nothing at all. Fix: add `tabulate` to dependencies.
+6. ~~**`tabulate` is required but undeclared.**~~ **Fixed upstream.**
+   `build_prompt()` → `_build_table()` calls `DataFrame.to_markdown()`, which
+   needs `tabulate`; it is now declared in `pyproject.toml`. The deck keeps the
+   explicit install only as an appendix fallback.
 7. **`experiment_main.py` does not exist.** `README.md`, `REFERENCE.md`,
    `docs/getting-started.md`, `docs/architecture.md` and `docs/experiment.md` all
    point at `python -m experiment.experiment_main`; the file is
@@ -150,6 +151,14 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    the decoy penalty as `-0.5`; `RescueRewards.fake_victim` defaults to `-1.0`.
 10. **`requires-python = ">=3.8"`** is optimistic given the current dependency set;
    the docs say 3.9+ and we only test 3.10.
+12. **`python -m experiment.main` does not run at all.** `src/experiment/main.py`
+   has `from .llm import build_llm_client` and
+   `from .placers import LavaRiskVictimPlacer, SectorSpreadLavaPlacer` commented
+   out at lines 15–16, but still uses all three names. The script exits with
+   `NameError: name 'LavaRiskVictimPlacer' is not defined` before it builds
+   anything. This is committed on `origin/main`, so every fresh clone hits it.
+   It is why the deck launches `labs/play.py` instead. Fix: uncomment the two
+   imports.
 11. **The `cam_*` observation fields are camera-dependent.** `cam_top_x`,
    `cam_top_y`, `cam_view_w` and `cam_view_h` are only written when the camera has
    `_update_position` (i.e. `EdgeFollowCamera`). Analyses written against the

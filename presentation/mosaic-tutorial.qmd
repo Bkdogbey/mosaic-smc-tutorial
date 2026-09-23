@@ -2,9 +2,9 @@
 # MOSAIC hands-on tutorial — IEEE SMC 2026
 # Render:  quarto render mosaic-tutorial.qmd
 #          quarto preview mosaic-tutorial.qmd
-title: "MOSAIC<br>A Modular Testbed for<br>[Human–AI Collaboration]{.accent}"
+title: "MOSAIC<br>A Configurable Testbed for<br>[Human–AI Teaming]{.accent}"
 subtitle: "IEEE SMC 2026 · Bellevue, WA<br><span class='title-repo'>github.com/iHuman-Lab/mosaic</span>"
-author: "Bennett Kwaku Dogbey"
+author: "Hemanth Manjunatha · Elahe Oveisi · Bennett Kwaku Dogbey"
 institute: "iHuman Lab · Oklahoma State University"
 date: "2026-10-04"
 date-format: "MMMM D, YYYY"
@@ -30,10 +30,6 @@ title-slide-attributes:
 ---
 
 ## Meet the [iHuman Lab]{.accent}
-
-::: {.hook}
-We study how people and intelligent systems work together.
-:::
 
 ::: {.team}
 
@@ -61,33 +57,17 @@ We study how people and intelligent systems work together.
 :::
 
 ::: {.member-link}
-Our work spans brain–computer interfaces, human–robot interaction, human-AI interaction, and cognitive augmentation.
+We study human interaction with intelligent and robotic systems.
 
 [iHuman Lab · Oklahoma State University](https://ihuman-lab.github.io/lab-website/)
 :::
 
----
-
-<!-- ============ PART 1 ============ -->
-
-::: {.divider}
-[Part One]{.divider-title}
-
-[Understanding MOSAIC]{.divider-subtitle}
-
-[Why it exists → What it connects → What we can study]{.divider-path}
-
-::: {.you-are-here}
-[What it is]{.stop .here} [Install]{.stop} [Use it]{.stop}
-:::
-:::
-
----
+<!-- ============ PART 1 — no divider slide: the deck opens here ============ -->
 
 ## Why Do We Need [MOSAIC]{.accent}?
 
 ::: {.hook}
-A human–AI experiment requires more than an AI model.
+Human–AI teaming cannot be studied from isolated prompts and responses alone.
 :::
 
 ::::: {.need-map}
@@ -99,15 +79,15 @@ A human–AI experiment requires more than an AI model.
 
 [Meaningful decisions]{.need-title}
 
-Assistance should have the opportunity to change what a participant does.
+The participant acts in a task where choices have visible consequences.
 :::
 
 ::: {.need-item}
 [02]{.need-index}
 
-[Repeatable conditions]{.need-title}
+[Interactive AI assistance]{.need-title}
 
-Tasks and study settings should be comparable across participants.
+The AI teammate receives task context and communicates during the task.
 :::
 
 ::::
@@ -115,7 +95,7 @@ Tasks and study settings should be comparable across participants.
 ::: {.need-core}
 [Human–AI]{.need-core-top}
 
-[STUDY]{.need-core-title}
+[TEAMING]{.need-core-title}
 
 [one coordinated system]{.need-core-subtitle}
 :::
@@ -125,17 +105,17 @@ Tasks and study settings should be comparable across participants.
 ::: {.need-item}
 [03]{.need-index}
 
-[Synchronized evidence]{.need-title}
+[Experimental control]{.need-title}
 
-Actions, advice, outcomes, and optional sensors need a common time base.
+Researchers vary reliability, timing, wording, and task conditions.
 :::
 
 ::: {.need-item}
 [04]{.need-index}
 
-[Reconfigurable studies]{.need-title}
+[Synchronized data]{.need-title}
 
-Researchers should vary conditions without rebuilding the core task.
+Actions, observations, advice, and outcomes share one experimental record.
 :::
 
 ::::
@@ -143,7 +123,7 @@ Researchers should vary conditions without rebuilding the core task.
 :::::
 
 ::: {.punchline}
-MOSAIC brings these requirements together in [one research platform]{.accent}.
+MOSAIC brings these requirements together in [one configurable research testbed]{.accent}.
 :::
 
 ---
@@ -151,7 +131,7 @@ MOSAIC brings these requirements together in [one research platform]{.accent}.
 ## What Is [MOSAIC]{.accent}?
 
 ::: {.hook}
-A modular software testbed for controlled, interactive human–AI collaboration research.
+MOSAIC is a configurable research testbed for studying human–AI teaming in interactive environments.
 :::
 
 ::: {.overview-diagram}
@@ -160,7 +140,7 @@ A modular software testbed for controlled, interactive human–AI collaboration 
 ::: {.system-node}
 [Human participant]{.system-title}
 
-Sees the task and chooses each action.
+Sees the task and chooses every action.
 :::
 
 ::: {.system-link .two-way}
@@ -170,21 +150,21 @@ Sees the task and chooses each action.
 :::
 
 ::: {.system-node .system-core}
-[MOSAIC]{.system-title}
+[MOSAIC task]{.system-title}
 
-Task environment, interface, and session control.
+The environment, the interface, and session control.
 :::
 
 ::: {.system-link .two-way}
-[task state]{.link-top}
+[task context]{.link-top}
 
 [advice]{.link-bottom}
 :::
 
 ::: {.system-node}
-[AI advisor]{.system-title}
+[AI teammate]{.system-title}
 
-Receives an observation and returns guidance.
+Receives task context and returns advice.
 :::
 
 :::
@@ -194,21 +174,13 @@ Receives an observation and returns guidance.
 :::
 
 ::: {.system-record}
-[Session record]{.system-title} Participant actions, advice requests, AI responses, task states, and outcomes share one timeline.
+[Session data]{.system-title} Actions, observations, advice, and outcomes share one timeline.
 :::
-:::
-
-::: {.overview-foundation}
-[Gymnasium + MiniGrid]{.foundation-item} [Human-only, human–AI, or programmatic]{.foundation-item} [Optional sensor streams can share the session time base]{.foundation-item}
-:::
-
-::: {.punchline}
-MOSAIC connects the task, the participant, the advisor, and the evidence needed to study their interaction.
 :::
 
 ---
 
-## The First Testbed: [Search and Rescue]{.accent}
+## First Testbed: [Search and Rescue]{.accent}
 
 :::: {.columns .scenario-columns}
 
@@ -219,16 +191,13 @@ MOSAIC connects the task, the participant, the advisor, and the evidence needed 
 ::: {.column width="42%"}
 
 ::: {.scenario-brief}
-[Mission]{.scenario-label}
+[Why this task]{.scenario-label}
 
-Search a multiroom building and rescue the real victims.
-
-[Sources of difficulty]{.scenario-label}
-
-- Locked rooms require the correct key
-- Lava constrains safe routes
-- Configurations can add decoys and health pressure
-- Time and step limits create urgency
+- The participant navigates a multi-room environment
+- Victims, decoys, lava, doors, and keys create tradeoffs
+- Limited visibility creates uncertainty
+- Decisions produce immediate consequences
+- An AI teammate can advise from the current task state
 :::
 
 :::
@@ -236,125 +205,107 @@ Search a multiroom building and rescue the real victims.
 ::::
 
 ::: {.punchline}
-Where should I search? Whom should I rescue? [When should I rely on AI advice?]{.accent}
+Search and rescue provides a controlled but [consequential setting]{.accent} for studying human–AI decisions.
 :::
 
 ---
 
-## How Human–AI [Collaboration]{.accent} Happens
+## The Human–AI [Teaming Loop]{.accent}
 
 ::: {.hook}
-The participant can act independently or ask for advice at any decision point.
+Every decision point runs through the same six steps.
 :::
 
-::: {.collaboration-diagram}
-::: {.decision-main}
+::: {.loop-grid}
 
-::: {.decision-node}
-[1]{.decision-number} [Observe]{.decision-title}
+::: {.loop-step}
+[1]{.loop-number} [Observe]{.loop-title}
 
-Inspect the current room and mission state.
+The participant sees the current room and mission state.
 :::
 
-::: {.decision-arrow}
+::: {.loop-step}
+[2]{.loop-number} [Share context]{.loop-title}
+
+MOSAIC turns the task state into context for the AI teammate.
 :::
 
-::: {.decision-node .decision-point}
-[2]{.decision-number} [Decide]{.decision-title}
+::: {.loop-step}
+[3]{.loop-number} [Advise]{.loop-title}
 
-Act alone or request advice.
+The teammate produces advice and it appears in the chat panel.
 :::
 
-::: {.decision-arrow}
+::: {.loop-step}
+[4]{.loop-number} [Evaluate]{.loop-title}
+
+The participant judges whether the advice fits what they can see.
 :::
 
-::: {.decision-node}
-[3]{.decision-number} [Act]{.decision-title}
+::: {.loop-step .loop-decisive}
+[5]{.loop-number} [Act]{.loop-title}
 
-The participant always chooses the final action.
+The participant chooses the action. The teammate never acts.
 :::
 
-::: {.decision-arrow}
-:::
+::: {.loop-step}
+[6]{.loop-number} [Record]{.loop-title}
 
-::: {.decision-node}
-[4]{.decision-number} [Outcome]{.decision-title}
-
-The environment updates and the cycle repeats.
-:::
-
-:::
-
-::: {.advice-route}
-
-::: {.advice-label}
-Optional advice path
-:::
-
-::: {.advice-step}
-Request guidance
-:::
-
-::: {.advice-arrow}
-:::
-
-::: {.advice-step}
-Evaluate the response
-:::
-
-::: {.advice-return}
-returns to the participant
+MOSAIC records the advice, the action, and the outcome together.
 :::
 
 :::
-:::
 
-::: {.cycle-band}
-[Recorded throughout]{.cycle-title} Task state · advice request · AI response · participant action · outcome
-:::
-
-::: {.punchline}
-The central question is when and how AI advice [changes human decisions]{.accent}.
+::: {.authority-band}
+The AI teammate can influence the decision, but the participant [retains final action authority]{.accent}.
 :::
 
 ---
 
 ## What Can [Researchers]{.accent} Study?
 
-:::: {.research-grid}
+:::: {.research-grid .cols-3}
 
 ::: {.research-question}
-[Reliance]{.research-topic}
+[Reliability]{.research-topic}
 
-When do people request, follow, or reject AI advice?
+How does teammate reliability affect trust and reliance?
 :::
 
 ::: {.research-question}
-[Advice quality]{.research-topic}
+[Timing]{.research-topic}
 
-How do correct, incorrect, or uncertain recommendations affect decisions?
+When should an AI teammate intervene?
 :::
 
 ::: {.research-question}
-[Human state]{.research-topic}
+[Communication]{.research-topic}
 
-How do time pressure and workload affect collaboration?
+How do explanation and confidence affect decisions?
 :::
 
 ::: {.research-question}
-[Interface design]{.research-topic}
+[Workload]{.research-topic}
 
-How do explanations, alerts, and feedback affect performance and trust?
+How does workload influence whether advice is followed?
+:::
+
+::: {.research-question}
+[Recovery]{.research-topic}
+
+How do people respond after incorrect advice?
+:::
+
+::: {.research-question}
+[Team learning]{.research-topic}
+
+How does team performance change over repeated interactions?
 :::
 
 ::::
 
-::: {.research-extension}
-[Extend the question]{.research-extension-label} Compare AI models, advisory strategies, task configurations, or sensing conditions.
-:::
-
 ::: {.punchline}
-Next, we will install MOSAIC, launch a mission, and [change the task ourselves]{.accent}.
+Next, we install MOSAIC and [run the mission ourselves]{.accent}.
 :::
 
 ---
@@ -364,12 +315,12 @@ Next, we will install MOSAIC, launch a mission, and [change the task ourselves]{
 ::: {.divider}
 [Part Two]{.divider-title}
 
-[Install and verify]{.divider-subtitle}
+[Install MOSAIC]{.divider-subtitle}
 
 [Check · Clone · Install · Verify · Run]{.divider-path}
 
 ::: {.you-are-here}
-[What it is]{.stop} [Install]{.stop .here} [Use it]{.stop}
+[What it is]{.stop} [Install and run]{.stop .here} [Understand and customize]{.stop}
 :::
 :::
 
@@ -378,7 +329,7 @@ Next, we will install MOSAIC, launch a mission, and [change the task ourselves]{
 ## Before You [Start]{.accent}
 
 ::: {.hook}
-Four checks before we touch the terminal.
+Four things to have ready before we touch the terminal.
 :::
 
 :::: {.cards .cols-2 .fill .short}
@@ -404,34 +355,34 @@ A recent version is enough; no GitHub account is required.
 :::
 
 ::: {.card}
-[Local graphical session]{.card-title}
+[PowerShell or a Unix terminal]{.card-title}
 
-The GUI needs a machine with a working display.
+Windows PowerShell, macOS Terminal, or any Linux shell.
 
 ::: {.card-meta}
-The environment itself can run headless; today's interface cannot.
+Every command in Part Two is shown for both.
 :::
 :::
 
-::: {.card .secondary}
-[No API key required]{.card-title}
+::: {.card}
+[A local graphical desktop]{.card-title}
 
-The core tutorial runs without contacting an AI provider.
+The interface opens a window, so the machine needs a working display.
 
 ::: {.card-meta}
-AI-advisor setup remains an optional capability covered later.
+No API key is required for the basic tutorial.
 :::
 :::
 
 ::::
 
-::: {.punchline}
-Our shared checkpoint: the core environment and GUI both [import successfully]{.accent}.
-:::
-
 ---
 
-## Step 1 · Get the [Code]{.accent} and Create an Environment
+## Clone MOSAIC and Create the [Environment]{.accent}
+
+::: {.hook}
+Two repositories side by side: MOSAIC itself, and today's tutorial materials.
+:::
 
 ::: {.panel-tabset}
 
@@ -439,6 +390,7 @@ Our shared checkpoint: the core environment and GUI both [import successfully]{.
 
 ```bash
 git clone https://github.com/iHuman-Lab/mosaic.git
+git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
 cd mosaic
 python3 -m venv mosaic_env
 source mosaic_env/bin/activate
@@ -448,6 +400,7 @@ source mosaic_env/bin/activate
 
 ```powershell
 git clone https://github.com/iHuman-Lab/mosaic.git
+git clone https://github.com/Bkdogbey/mosaic-smc-tutorial.git
 cd mosaic
 python -m venv mosaic_env
 .\mosaic_env\Scripts\Activate.ps1
@@ -456,34 +409,28 @@ python -m venv mosaic_env
 ### Conda · Any Platform
 
 ```bash
-git clone https://github.com/iHuman-Lab/mosaic.git
-cd mosaic
-conda create --name mosaic_env python=3.11 -y
+conda create -n mosaic_env python=3.11 -y
 conda activate mosaic_env
 ```
 
 :::
 
 ::: {.checkpoint}
-**Checkpoint**
-
-```bash
-python --version
-```
-
-Your prompt should begin with `(mosaic_env)`, and Python should report version 3.10 or 3.11.
+Your prompt begins with `(mosaic_env)`, and `python --version` reports 3.10 or 3.11.
 :::
 
-::: {.note}
-Choose either `venv` or Conda. Ubuntu users who see `ensurepip is not available` should install `python3-venv`, remove the incomplete `mosaic_env`, and repeat the step.
+::: {.notes}
+Choose either venv or Conda, not both. Ubuntu attendees who see `ensurepip is not
+available` should install `python3-venv`, delete the incomplete `mosaic_env`, and
+repeat the step. PowerShell needs the leading `.\` on the activation script.
 :::
 
 ---
 
-## Step 2 · Install [MOSAIC]{.accent}
+## Install [MOSAIC]{.accent}
 
 ::: {.hook}
-Run these commands inside the active virtual environment.
+Run these commands from the `mosaic` directory, inside the active environment.
 :::
 
 ```bash
@@ -491,89 +438,128 @@ python -m pip install --upgrade pip
 python -m pip install -e .
 python -m pip uninstall -y pygame
 python -m pip install --force-reinstall "pygame-ce>=2.5.2"
-python -m pip install tabulate
 ```
 
 ::: {.checkpoint}
-The final installation should include `mosaic`, `minigrid`, `pygame-ce`, `pygame_gui`, and `tabulate`.
+The final environment contains `mosaic`, `minigrid`, `pygame-ce`, and `pygame_gui`.
 :::
 
 ::: {.note}
-**Temporary development workaround.** The current package metadata installs plain `pygame`, while `pygame_gui` uses `pygame-ce`. Reinstalling `pygame-ce` last gives the GUI the implementation it expects. Pip may still report that MOSAIC declares `pygame`; the readiness check on the next slide verifies the runtime.
-:::
-
-::: {.notes}
-Before the conference release, prefer fixing MOSAIC's package metadata to depend on pygame-ce and to declare tabulate. Once that is merged, reduce this slide to the first two commands.
+The last two commands matter: MOSAIC declares `pygame`, but the interface needs `pygame-ce`, and both claim the same `pygame` namespace — full explanation in the appendix.
 :::
 
 ---
 
-## Step 3 · Verify the [Installation]{.accent}
+## Verify the [Installation]{.accent}
 
 ::: {.hook}
-Check the runtime before building the first mission.
+Verify that the environment and GUI APIs are available.
 :::
 
-```bash
-python -c "import pygame; print('Pygame:', pygame.version.ver)"
-```
+::: {.panel-tabset}
 
-Expected:
-
-```text
-pygame-ce 2.5.x
-Pygame: 2.5.x
-```
-
-Then verify both MOSAIC entry points:
+### macOS / Linux
 
 ```bash
 python -c "from mosaic.sar.env import build_sar_env; from mosaic.gui.main import SAREnvGUI; print('MOSAIC ready')"
 ```
 
+### Windows PowerShell
+
+```powershell
+python -c "from mosaic.sar.env import build_sar_env; from mosaic.gui.main import SAREnvGUI; print('MOSAIC ready')"
+```
+
+:::
+
 ::: {.checkpoint}
 ```text
 MOSAIC ready
 ```
-
-If you see this message, the environment and GUI imports are working.
 :::
 
 ::: {.punchline}
-Installation is complete. Next, we will [see how a MOSAIC mission is built and played]{.accent}.
+`build_sar_env` builds the task. `SAREnvGUI` puts a person in it. [Everything today uses these two.]{.accent}
 :::
 
 ---
 
-## Step 4 · Run [MOSAIC]{.accent}
+## Run Your First [Mission]{.accent}
 
 ::: {.hook}
-Launch the included interactive mission from the MOSAIC repository root.
+The editable install puts `mosaic` on the path, so the mission runs from anywhere.
 :::
 
 ::: {.panel-tabset}
 
-### Windows PowerShell
-
-```powershell
-$env:PYTHONPATH = "src"
-python -m experiment.main
-```
-
 ### macOS / Linux
 
 ```bash
-PYTHONPATH=src python -m experiment.main
+cd ../mosaic-smc-tutorial/presentation
+python labs/play.py
+```
+
+### Windows PowerShell
+
+```powershell
+cd ../mosaic-smc-tutorial/presentation
+python labs/play.py
 ```
 
 :::
 
-::: {.checkpoint}
-The game window opens and the arrow keys move the agent. Press `Esc` to close it.
+::: {.feature-list}
+::: {.feature-row}
+[Move]{.feature-name} The arrow keys turn and walk the agent.
+:::
+::: {.feature-row}
+[Close]{.feature-name} Press `Esc` to end the mission and close the window.
+:::
 :::
 
-::: {.note}
-Keep the environment active and run the command from the cloned `mosaic` directory. No additional repository, notebook, or Python file is required.
+::: {.checkpoint}
+A window opens on a 2×2 building, and the information panel reads
+`Rescued: 0 | Remaining: 8`.
+:::
+
+::: {.notes}
+Keep mosaic_env active. play.py imports only the reusable mosaic package — no
+PYTHONPATH, no config file, and no AI provider. Hold here until most attendees
+have a window open and can move the agent, then ask them to press Esc.
+:::
+
+---
+
+## First [Checkpoint]{.accent}
+
+::: {.hook}
+Four things to confirm before we look inside.
+:::
+
+::: {.feature-list .compact}
+::: {.feature-row}
+[1]{.feature-name} The MOSAIC window opened.
+:::
+::: {.feature-row}
+[2]{.feature-name} The agent responds to the movement keys.
+:::
+::: {.feature-row}
+[3]{.feature-name} The information panel updates as you move.
+:::
+::: {.feature-row}
+[4]{.feature-name} The mission closes normally when you quit.
+:::
+:::
+
+::: {.tight-table}
+
+| Symptom | Recovery |
+|---|---|
+| `No module named 'mosaic'` | Activate `mosaic_env`, rerun `pip install -e .` in `mosaic` |
+| GUI import fails, or a `pygame` error | Repeat the `pygame-ce` force-reinstall |
+| PowerShell cannot activate `mosaic_env` | Use the leading `.\`: `.\mosaic_env\Scripts\Activate.ps1` |
+| No window, or `No available video device` | Run locally, not over SSH or headless |
+
 :::
 
 ---
@@ -583,70 +569,81 @@ Keep the environment active and run the command from the cloned `mosaic` directo
 ::: {.divider}
 [Part Three]{.divider-title}
 
-[Using the search-and-rescue testbed]{.divider-subtitle}
+[Use and Customize MOSAIC]{.divider-subtitle}
 
-[Inspect the interface · Modify the mission · Compare options]{.divider-path}
+[Read the interface · Learn the layers · Change the mission]{.divider-path}
 
 ::: {.you-are-here}
-[What it is]{.stop} [Install]{.stop} [Use it]{.stop .here}
+[What it is]{.stop} [Install and run]{.stop} [Understand and customize]{.stop .here}
 :::
 :::
 
 ---
 
-## How [MOSAIC Fits Together]{.accent}
+## What Just [Ran]{.accent}?
 
 ::: {.hook}
-MOSAIC connects a human-facing interface to a configurable search-and-rescue environment.
+The GUI sends participant actions through the Gymnasium interface and renders the observations returned by the SAR environment.
 :::
 
-::: {.mosaic-map}
+::: {.arch .mission-assembly}
 
-::: {.mosaic-actor}
-[Human participant]{.mosaic-title}
+::: {.arch-row}
+::: {.arch-block}
+[Human participant]{.arch-title}
 
-Observes the task, moves, interacts, and requests advice.
-:::
-
-::: {.mosaic-core}
-::: {.mosaic-layer .gui-layer}
-[MOSAIC GUI]{.mosaic-title}
-
-Game view · mission information · chat · event vignette
-:::
-
-::: {.mosaic-connector}
-actions ↓ · observations + feedback ↑
-:::
-
-::: {.mosaic-layer .sar-layer}
-[SAR environment]{.mosaic-title}
-
-Rooms · victims · hazards · doors and keys · rescue actions
-:::
-
-::: {.mosaic-foundation}
-[Gymnasium]{.foundation-name} episode interface &nbsp;&nbsp;·&nbsp;&nbsp; [MiniGrid]{.foundation-name} grid world
+Watches the game view and presses keys
 :::
 :::
 
-::: {.mosaic-actor .optional}
-[Optional AI advisor]{.mosaic-title}
-
-Receives a task description and returns text advice through `LLMClient`.
+::: {.arch-link}
+key presses ↓ &nbsp;&nbsp; ↑ rendered frames
 :::
 
+::: {.arch-row}
+::: {.arch-block}
+[MOSAIC GUI]{.arch-title} [`mosaic.gui`]{.arch-path}
+
+Game view, information panel, chat panel, event feedback
+:::
 :::
 
-::: {.punchline}
-The interface and the environment are separate pieces, which is why we can [change either one without touching the other]{.accent}.
+::: {.arch-link}
+`env.step(action)` ↓ &nbsp;&nbsp; ↑ observation + events &nbsp;&nbsp;·&nbsp;&nbsp; advice ↑
+:::
+
+::: {.arch-row}
+::: {.arch-block}
+[SAR environment]{.arch-title} [`mosaic.sar`]{.arch-path}
+
+Victims, hazards, rescue actions, rewards, observations
+:::
+::: {.arch-block}
+[AI teammate]{.arch-title} [`mosaic.llm`]{.arch-path}
+
+Receives task context, returns advice to the chat panel
+:::
+:::
+
+::: {.arch-link .arch-link-left}
+the SAR environment is built on
+:::
+
+::: {.arch-row .row-half}
+::: {.arch-block .secondary}
+[Gymnasium + MiniGrid]{.arch-title}
+
+Step interface, grid world, and partial observability
+:::
+:::
+
 :::
 
 ---
 
-## The Game [Interface]{.accent}
+## Game [Interface]{.accent}
 
-::: {.hook .compact}
+::: {.hook}
 What the tiles mean, and where to read the mission.
 :::
 
@@ -654,18 +651,18 @@ What the tiles mean, and where to read the mission.
 
 ::: {.column width="73%"}
 ::: {.annotated}
-![](assets/gui-screenshot-live.png){height="430" fig-alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue"}
+![](assets/gui-screenshot-live.png){height="520" fig-alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue"}
 
 ::: {.anno .fragment .fade-in-then-out .mid style="--x:0.3%; --y:0.4%; --w:66%; --h:99%;"}
-Game view — and its edge flashes on events
+Game viewport — the green flash is rescue feedback
 :::
 
 ::: {.anno .fragment .fade-in-then-out .left style="--x:67.7%; --y:5%; --w:31.5%; --h:9.8%;"}
-Rescued, remaining, steps, inventory
+Information panel — rescued, remaining, steps, inventory
 :::
 
 ::: {.anno .fragment .fade-in-then-out .left style="--x:67.7%; --y:15.2%; --w:31.5%; --h:10.4%;"}
-Reward and the clock
+Mission status and score — reward and the clock
 :::
 
 ::: {.anno .fragment .fade-in-then-out .left style="--x:67.7%; --y:25.8%; --w:31.5%; --h:23.2%;"}
@@ -673,7 +670,7 @@ Controls, always on screen
 :::
 
 ::: {.anno .fragment .fade-in-then-out .left style="--x:67.1%; --y:50.4%; --w:32.5%; --h:49.2%;"}
-Chat — where AI advice arrives
+Chat panel — where AI teammate advice arrives
 :::
 :::
 :::
@@ -691,6 +688,12 @@ Chat — where AI advice arrives
 ![](assets/sprites/victim-real.png)
 
 [Victim]{.world-name}
+:::
+
+::: {.world-item}
+![](assets/sprites/victim-decoy.png)
+
+[Decoy]{.world-name}
 :::
 
 ::: {.world-item}
@@ -717,45 +720,58 @@ Chat — where AI advice arrives
 
 ---
 
-## Victims, Hazards, and [Access]{.accent}
+## Victims, Hazards, Doors, and [Keys]{.accent}
 
 ::: {.hook}
-Not every victim counts, and not every route is passable.
+Real victims and decoys use different cross symbols.
 :::
 
-:::: {.columns .feature-columns}
+:::: {.columns .scenario-columns}
 
-::: {.column width="45%"}
+::: {.column width="42%"}
+::: {.victim-figure}
 ![](assets/victims.png){fig-alt="Four orientations of a symmetric real victim above four orientations of an offset decoy victim"}
 
-::: {.victim-key}
-[Real victim]{.real-key} symmetric cross · counts toward the mission
-
-[Decoy victim]{.decoy-key} offset cross · penalizes a mistaken rescue
+::: {.victim-row-labels}
+[REAL VICTIM]{.vrow .vrow-real}
+[DECOY]{.vrow .vrow-decoy}
 :::
 :::
+:::
 
-::: {.column width="55%"}
+::: {.column width="58%"}
 ::: {.feature-list}
 ::: {.feature-row}
-[Four orientations]{.feature-name} Victims may face up, down, left, or right.
+[Symbols]{.feature-name} The symmetric cross counts; the offset cross is a decoy. Facing direction is not the tell.
 :::
 ::: {.feature-row}
-[Lava]{.feature-name} Orange tiles make parts of the route unsafe.
+[Lava]{.feature-name} Blocks unsafe tiles and constrains the safe routes through a room.
 :::
 ::: {.feature-row}
-[Locked doors]{.feature-name} A matching colored key is required before entry.
+[Doors and keys]{.feature-name} A locked room needs the matching key, found elsewhere in the building.
 :::
-::: {.feature-row}
-[Placement rules]{.feature-name} Placers determine how many objects appear and where they can be placed.
+:::
+
+::: {.stats}
+::: {.stat}
+[+1.0]{.stat-number}
+[Real victim rescued]{.stat-label}
+:::
+::: {.stat .secondary}
+[−1.0]{.stat-number}
+[Decoy rescued]{.stat-label}
+:::
+::: {.stat .secondary}
+[−2.0]{.stat-number}
+[Victim reached too late]{.stat-label}
 :::
 :::
 :::
 
 ::::
 
-::: {.note}
-The default `VictimPlacer` places real victims. A custom placer can add decoys or other placement rules.
+::: {.punchline}
+The reusable default places real victims. [The included study configuration adds decoys.]{.accent}
 :::
 
 ---
@@ -769,10 +785,10 @@ Six keys, grouped by what you are trying to do.
 ::: {.phase-grid}
 
 ::: {.phase}
-[Move]{.phase-name}
+[Navigate]{.phase-name}
 
 ::: {.key-row}
-[↑]{.keycap} [Go forward one tile]{.key-action}
+[↑]{.keycap} [Move forward one tile]{.key-action}
 :::
 
 ::: {.key-row}
@@ -781,37 +797,27 @@ Six keys, grouped by what you are trying to do.
 :::
 
 ::: {.phase}
-[Get in]{.phase-name}
-
-::: {.key-row}
-[Tab]{.keycap} [Pick up the key you are facing]{.key-action}
-:::
+[Open]{.phase-name}
 
 ::: {.key-row}
 [Space]{.keycap .wide} [Open the door you are facing]{.key-action}
 :::
-
-[Carry one key at a time — [Shift]{.keycap .inline} drops it.]{.phase-note}
 :::
 
 ::: {.phase}
-[Rescue]{.phase-name}
+[Pick up or rescue]{.phase-name}
 
 ::: {.key-row}
-[Tab]{.keycap} [Rescue the victim you are facing]{.key-action}
+[Tab]{.keycap} [Take the key, or rescue the victim, you are facing]{.key-action}
 :::
-
-[Check the cross before you press it. A decoy costs you points.]{.phase-note}
 :::
 
 ::: {.phase .optional}
-[Ask]{.phase-name}
+[Request advice]{.phase-name}
 
 ::: {.key-row}
-[Alt]{.keycap} [Request advice from the AI]{.key-action}
+[Alt]{.keycap} [Ask the AI teammate]{.key-action}
 :::
-
-[Silent until an advisor is attached.]{.phase-note}
 :::
 
 :::
@@ -820,11 +826,15 @@ Six keys, grouped by what you are trying to do.
 `Backspace` restart &nbsp;·&nbsp; `F11` fullscreen &nbsp;·&nbsp; `Esc` quit
 :::
 
+::: {.note}
+Check the symbol before rescuing — decoys reduce the score. AI advice is available when a teammate is configured; until then `Alt` replies *"Currently, no commands are available."*
+:::
+
 ---
 
 ## Camera [Views]{.accent}
 
-::: {.hook .compact}
+::: {.hook}
 One seeded world, one agent position, three camera strategies.
 :::
 
@@ -833,7 +843,7 @@ One seeded world, one agent position, three camera strategies.
 ::: {.camera-view}
 ![](assets/cam-follow-annot.png){fig-alt="Live EdgeFollowCamera capture: an eight-by-eight moving crop, the room outline clipped by the window edge"}
 
-[Moving viewport]{.camera-title}
+[Edge-following view]{.camera-title}
 
 `EdgeFollowCamera` follows the agent and may show parts of neighboring rooms.
 :::
@@ -841,15 +851,15 @@ One seeded world, one agent position, three camera strategies.
 ::: {.camera-view}
 ![](assets/cam-room-annot.png){fig-alt="Live AgentFOVCamera capture: the room outline matches the rendered area exactly"}
 
-[Current room]{.camera-title}
+[Room view]{.camera-title}
 
-`AgentFOVCamera` shows the complete room occupied by the agent.
+`AgentFOVCamera` shows the complete room the agent occupies.
 :::
 
 ::: {.camera-view}
 ![](assets/cam-cone-annot.png){fig-alt="Live AgentConeCamera capture: only a forward wedge of the outlined room is lit"}
 
-[Forward visibility]{.camera-title}
+[Forward field of view]{.camera-title}
 
 `AgentConeCamera` blacks out tiles outside MiniGrid's forward field of view.
 :::
@@ -861,213 +871,250 @@ One seeded world, one agent position, three camera strategies.
 :::
 
 ::: {.punchline}
-The task state is identical in all three. Only [what the participant can see]{.accent} changes.
+The task state remains unchanged; only [the participant's visibility]{.accent} changes.
 :::
 
 ---
 
-## The Included [Mission]{.accent}
+## The MOSAIC Software [Layers]{.accent}
 
 ::: {.hook}
-One function call composes the whole mission.
+Each layer owns one design responsibility, so a study can vary one without touching the others.
+:::
+
+::: {.tight-table}
+
+| Layer | Responsibility |
+|---|---|
+| `mosaic.core` | Level generation, placement interfaces, and camera strategies |
+| `mosaic.sar` | Victims, hazards, rescue actions, rewards, and observations |
+| `mosaic.gui` | Player input, information panels, chat, and event feedback |
+| `mosaic.llm` | Provider-independent text-in/text-out teammate interface |
+| `experiment` | Study-specific configuration, calibration, providers, sensors, and logging |
+
+:::
+
+::: {.punchline}
+`mosaic/` contains reusable software. [`experiment/` composes it for a particular study.]{.accent}
+:::
+
+---
+
+## How the Mission Is [Composed]{.accent}
+
+::: {.hook}
+The runner constructs the environment, attaches the interface, and starts the interaction loop.
 :::
 
 :::: {.columns .mission-code}
 
-::: {.column width="65%"}
-```{.python code-line-numbers="|4-6|7-14|15,18-19"}
-# src/experiment/main.py
+::: {.column width="55%"}
+```python
 env = build_sar_env(
     screen_size=800,
-    num_rows=3,
-    num_cols=3,
-    room_size=10,
-    victim_placer=LavaRiskVictimPlacer(
-        num_real_victims=game_config.get("num_real_victims", 6),
-        num_fake_victims=game_config.get("num_fake_victims", 12),
+    num_rows=2,
+    num_cols=2,
+    room_size=8,
+    victim_placer=VictimPlacer(num_real_victims=2),
+    lava_placer=LavaPlacer(lava_per_room=2),
+    locked_room_placer=LockedRoomPlacer(
+        locked_room_prob=0.5
     ),
-    lava_placer=SectorSpreadLavaPlacer(
-        lava_per_room=game_config.get("lava_per_room", 8)
-    ),
-    locked_room_placer=LockedRoomPlacer(locked_room_prob=0.5),
-    camera_strategy=AgentFOVCamera(),
 )
+env.reset()
 
-gui = SAREnvGUI(env, config=config, llm_client=llm_client)
-gui.run()
+SAREnvGUI(env, config={"max_time": 3}).run()
 ```
 :::
 
-::: {.column width="35%"}
+::: {.column width="45%"}
 ::: {.code-explain}
-[World]{.code-label} Rows, columns, and room size define the building.
+[`build_sar_env(...)`]{.code-label} Task configuration — rooms, victims, hazards, doors.
 
-[Task logic]{.code-label} Placers configure the victims, hazards, and access rules.
+[`SAREnvGUI(...)`]{.code-label} Human interaction — view, panels, and keys.
 
-[Interface]{.code-label} The camera selects the view, then `SAREnvGUI` starts the interaction loop.
+[`llm_client=...`]{.code-label} AI teammate — omitted here, added on the next slide.
+
+[`.run()`]{.code-label} The interaction loop.
 :::
 :::
 
 ::::
 
----
-
-## Change the [Task]{.accent}
-
-::: {.hook}
-Edit the included runner, change one setting, and launch the same command again.
+::: {.note}
+`labs/play.py` has this shape, with the values pulled out into the `EDIT ME` block. In the MOSAIC repository, `src/experiment/main.py` composes the same pieces for this lab's own study — it is a study-specific composition file, not the complete reusable API.
 :::
 
-```powershell
-code src\experiment\main.py
+---
+
+## Change One Parameter and [Rerun]{.accent}
+
+::: {.hook}
+Open `labs/play.py` and change one value in the `EDIT ME` block. Predict first.
+:::
+
+:::: {.columns .mission-code}
+
+::: {.column width="55%"}
+```bash
+code labs/play.py
 ```
 
-::: {.change-grid}
-
-::: {.change-card}
-[Smaller building]{.change-what}
-
-`num_rows=2, num_cols=2`
-
-[Four rooms instead of nine]{.change-effect}
-:::
-
-::: {.change-card}
-[Fewer hazards]{.change-what}
-
-`lava_per_room=2`
-
-[More safe routes]{.change-effect}
-:::
-
-::: {.change-card}
-[More locked rooms]{.change-what}
-
-`locked_room_prob=0.9`
-
-[More key and door decisions]{.change-effect}
-:::
-
-::: {.change-card}
-[Fewer rescue targets]{.change-what}
-
-`num_real_victims=2`
-
-[Two per room instead of six]{.change-effect}
-:::
-
-::: {.change-card}
-[Different visibility]{.change-what}
-
-`camera_strategy=AgentConeCamera()`
-
-[Forward visibility only]{.change-effect}
-:::
-
-:::
-
-::: {.checkpoint}
-Change **one** value, save, and rerun the Step 4 command. The building should look different.
-:::
-
-::: {.note}
-Victim and lava counts apply to each room, not to the whole building. Keep `locked_room_prob` below `1.0`.
-:::
-
----
-
-## Add an AI [Advisor]{.accent}
-
-::: {.hook}
-An advisor is anything with `query(prompt) -> str`. No API key required.
-:::
-
-::: {.advisor-pipeline .three-up}
-::: {.advisor-node}
-[Observation]{.advisor-title}
-
-Current task state becomes text
-:::
-::: {.advisor-node .active}
-[`LLMClient`]{.advisor-title}
-
-Any object with `query()`
-:::
-::: {.advisor-node}
-[Chat panel]{.advisor-title}
-
-Participant sees the advice
-:::
-:::
-
-:::: {.columns .advisor-demo}
-
-::: {.column width="62%"}
 ```python
-class ScriptedAdvisor(LLMClient):
-    def query(self, prompt: str) -> str:
-        correct = self.rng.random() < self.p_correct
-        return (f"Head {d} — there's a survivor next door."
-                if correct else f"Nothing {d} of you. Search here.")
-
-advisor = ScriptedAdvisor(p_correct=0.5)
-SAREnvGUI(env, llm_client=advisor).run()
+NUM_ROWS = 2         # rooms down     -> try 3
+NUM_COLS = 2         # rooms across   -> try 3
+ROOM_SIZE = 8        # tiles per room -> try 12
+VICTIMS_PER_ROOM = 2 # per ROOM, not total
+LAVA_PER_ROOM = 2    # risk pressure  -> try 6
+LOCKED_ROOM_PROB = 0.5  # fraction locked -> try 0.9
 ```
 :::
 
-::: {.column width="38%"}
+::: {.column width="45%"}
+::: {.change-grid .cols-1}
+
+::: {.change-card}
+[Building size]{.change-what}
+
+`NUM_ROWS`, `NUM_COLS`
+
+[How many rooms to search]{.change-effect}
+:::
+
+::: {.change-card}
+[Risk pressure]{.change-what}
+
+`LAVA_PER_ROOM`
+
+[How constrained the safe routes are]{.change-effect}
+:::
+
+::: {.change-card}
+[Key hunting]{.change-what}
+
+`LOCKED_ROOM_PROB`
+
+[How often a room needs a key]{.change-effect}
+:::
+
+:::
+:::
+
+::::
+
+::: {.punchline}
+Save the file, rerun the same launch command, and [identify how the mission changed]{.accent}.
+:::
+
+::: {.notes}
+VICTIMS_PER_ROOM is per room, not a building-wide total — a 3x3 building with 2
+per room is 18 victims. Keep LOCKED_ROOM_PROB below 1.0; locking every room hangs
+the generator.
+:::
+
+---
+
+## Connect an [AI Teammate]{.accent}
+
+::: {.hook}
+In MOSAIC, an AI teammate implements a provider-independent text-in/text-out interface.
+:::
+
+:::: {.columns .mission-code}
+
+::: {.column width="52%"}
+```python
+# mosaic/llm/client.py
+class LLMClient(ABC):
+    @abstractmethod
+    def query(self, prompt: str) -> str:
+        ...
+```
+
+```python
+gui = SAREnvGUI(
+    env,
+    llm_client=my_teammate,
+)
+```
+:::
+
+::: {.column width="48%"}
 ::: {.code-explain}
-[Press `Alt`]{.code-label} Advice appears in the chat panel — and half of it is wrong, on purpose.
+[Task observation]{.code-label} → prompt construction
 
-[`p_correct`]{.code-label} Reliability is a dial you set, not a property you inherit from a model.
+[AI teammate]{.code-label} → response processing
 
-[Real models]{.code-label} Same one-argument swap when you want one.
+[Chat panel]{.code-label} → human decision
+:::
+
+::: {.feature-list}
+::: {.feature-row}
+[Researchers can vary]{.feature-name} Reliability · latency · timing · wording · confidence · explanation strategy · provider
+:::
 :::
 :::
 
 ::::
 
 ::: {.note}
-`LlamaIndexLLMClient("openai", "gpt-5-mini")` or `LlamaIndexLLMClient("google", "gemini-2.5-flash")` drops straight into the same `llm_client=` slot — it needs an API key and the matching `llama-index` provider package, so the tutorial itself stays offline.
-:::
-
-::: {.punchline}
-Advice quality becomes [an experimental variable you control]{.accent}.
+A complete, runnable teammate with tunable reliability is in `labs/advisor.py` — it needs no API key. Provider setup is in the appendix.
 :::
 
 ---
 
-## MOSAIC [Extension Points]{.accent}
+## Where to Go [Next]{.accent}
 
 ::: {.hook}
-Start with the defaults, then replace only the behavior your application needs.
+MOSAIC exposes several replaceable components, so a study can vary task mechanics, visibility, interaction, advice, or logging independently.
 :::
 
-:::: {.cards .cols-2 .extension-cards}
+:::: {.cards .cols-2}
+
 ::: {.card}
-[Task world]{.card-title}
+[Task mechanics]{.card-title}
 
-Use placers and actions to change objects, placement rules, hazards, and outcomes.
+New SAR placement rules or reward structures change what the mission asks of a participant.
+
+::: {.card-meta}
+`mosaic.sar` — placers, actions, rewards
 :::
+:::
+
 ::: {.card}
-[Observation]{.card-title}
+[Visibility]{.card-title}
 
-Choose a camera strategy or provide a custom observation processor.
+Alternative camera and observation strategies change what the participant can know.
+
+::: {.card-meta}
+`mosaic.core` — camera strategies
 :::
+:::
+
 ::: {.card}
-[Human interface]{.card-title}
+[Interaction and advice]{.card-title}
 
-Customize user input, information and chat panels, or event feedback.
+Customized information and chat panels, and scripted or provider-backed AI teammates.
+
+::: {.card-meta}
+`mosaic.gui`, `mosaic.llm`
 :::
+:::
+
 ::: {.card}
-[AI support]{.card-title}
+[Instrumentation]{.card-title}
 
-Inject an `LLMClient`, prompt builder, and response processor when advice is needed.
+Study-specific logging and sensing, layered on without editing the task.
+
+::: {.card-meta}
+`experiment/` — sensors, logging, replay
 :::
+:::
+
 ::::
 
 ::: {.punchline}
-The same environment can begin as a playable task and grow into a tailored human–AI application.
+Start with the included mission. [Change one component at a time.]{.accent}
 :::
 
 ---
@@ -1104,111 +1151,165 @@ bennett.dogbey@okstate.edu
 
 ---
 
-## Installation [Troubleshooting]{.accent}
+## Detailed Installation [Recovery]{.accent}
+
+::: {.hook}
+The rarer failures — the four common ones are on the checkpoint slide.
+:::
 
 | Symptom | Recovery |
 |---|---|
-| `cannot import name 'DIRECTION_LTR'` | Reinstall `pygame-ce` using `--force-reinstall` |
-| `module 'pygame' has no attribute 'surface'` | Plain `pygame` removed shared files; force-reinstall `pygame-ce` |
-| `ensurepip is not available` | Install `python3-venv`, delete `mosaic_env`, and create it again |
-| PowerShell cannot load `mosaic_env` | Run `.\mosaic_env\Scripts\Activate.ps1` with the leading `.\` |
-| `No module named 'mosaic'` | Activate `mosaic_env` and rerun `python -m pip install -e .` |
-| `No module named 'experiment'` | Run from the repository root and set `PYTHONPATH=src` for the current shell |
-| GUI opens on no display | Run locally rather than through a headless or SSH-only session |
-| `No module named 'tabulate'` | Run `python -m pip install tabulate` |
+| `DIRECTION_LTR` or `pygame.surface` errors | Force-reinstall `pygame-ce` |
+| `ensurepip is not available` | Install `python3-venv`, recreate `mosaic_env` |
+| `No module named 'tabulate'` | `python -m pip install tabulate` |
+| `python --version` reports 3.9 or older | Recreate `mosaic_env` on Python 3.10 or 3.11 |
 
 ::: {.note}
-The current package metadata installs plain `pygame`, while `pygame_gui` expects `pygame-ce`. Both use the `pygame` namespace, which makes the force-reinstall step necessary.
+**Why pygame-ce.** MOSAIC's package metadata installs plain `pygame`, but `pygame_gui` expects `pygame-ce` — and both claim the same `pygame` namespace, so they cannot coexist. Reinstalling `pygame-ce` last gives the interface the implementation it expects; pip may still report that MOSAIC declares `pygame`, so trust the readiness check instead.
+:::
+
+::: {.notes}
+Before the conference, prefer fixing MOSAIC's package metadata to depend on
+pygame-ce directly. Once that is merged, this workaround goes away. `tabulate` is
+now declared in pyproject.toml, so the explicit install is only a fallback.
 :::
 
 ---
 
 ## Step [Observation]{.accent}
 
-The SAR environment can return an enriched observation at each step:
+::: {.hook}
+Every step returns the full task state as one flat dictionary — this is what a study records.
+:::
 
-```python
-['agent_dir', 'agent_x', 'agent_y', 'cam_top_x', 'cam_top_y',
- 'cam_view_h', 'cam_view_w', 'carrying', 'direction', 'grid',
- 'image', 'max_steps', 'mission', 'mission_status', 'num_cols',
- 'num_rows', 'remaining_victims', 'room_size', 'saved_victims',
- 'step_count', 'victim_health']
-```
+::: {.tight-table}
 
-`grid` contains an integer-encoded snapshot of the world, including walls, hazards, victims, doors, and keys.
+| Group | Keys |
+|---|---|
+| Agent state | `agent_x`, `agent_y`, `agent_dir`, `direction`, `carrying` |
+| Mission state | `mission`, `mission_status`, `saved_victims`, `remaining_victims`, `victim_health` |
+| World state | `grid`, `num_rows`, `num_cols`, `room_size` |
+| Visual state | `image`, and `cam_top_x` / `cam_top_y` / `cam_view_w` / `cam_view_h` |
+| Episode state | `step_count`, `max_steps` |
+
+:::
 
 ::: {.note}
-The four `cam_*` fields come from the default `EdgeFollowCamera`. `AgentConeCamera` and `AgentFOVCamera` do not currently add those fields.
+The groups are a reading aid; the observation itself is flat. `image` is MiniGrid's partial agent view, not the rendered frame, and the four `cam_*` keys are added only by `EdgeFollowCamera`.
 :::
 
-::: {.punchline}
-Applications can store these observations for frame reconstruction and later analysis.
-:::
-
----
-
-## The Advisor [Contract]{.accent}
-
-```python
-class LLMClient(ABC):
-    @abstractmethod
-    def query(self, prompt: str) -> str:
-        """Send text, get text back."""
-```
-
-The base interface knows nothing about SAR, prompts, or GUI panels.
-
-::: {.punchline}
-A custom advisor subclasses `LLMClient` and implements `query`. Provider setup remains outside the reusable game.
+::: {.notes}
+The info dictionary returned alongside the observation carries an events list:
+victim_rescued, wrong_victim, dead_victim_picked, and mission_complete. That is
+where the semantic outcomes live, not in the observation.
 :::
 
 ---
 
-## Where You Could [Take It]{.accent}
+## AI Teammate [Interface]{.accent}
 
 ::: {.hook}
-Every piece you have seen today is an argument you can replace.
+Provider configuration lives outside the reusable task environment.
+
 :::
 
-:::: {.cards .cols-2 .fill}
+```python
+from mosaic.llm.client import LLMClient, DummyLLMClient, ask
+```
+
+```bash
+pip install llama-index-llms-openai
+pip install llama-index-llms-google-genai
+```
+
+```python
+from experiment.llm import LlamaIndexLLMClient
+
+teammate = LlamaIndexLLMClient("openai", "gpt-4o-mini")
+# or: LlamaIndexLLMClient("google", "gemini-1.5-flash")
+
+SAREnvGUI(env, llm_client=teammate).run()
+```
+
+::: {.note}
+`LLMClient` and `DummyLLMClient` live in the reusable `mosaic.llm.client` module; `build_llm_client` and `LlamaIndexLLMClient` live in the study layer at `src/experiment/llm.py`. A provider needs the matching key in the environment (`OPENAI_API_KEY` or `GOOGLE_API_KEY`); without one, the chat panel shows the provider error and the mission keeps running.
+:::
+
+---
+
+## Instrumentation and [Replay]{.accent}
+
+::: {.hook}
+Record the session on one clock, then play it back.
+:::
+
+::: {.resource-list}
+[Eye tracking]{.resource-label} `experiment/sensors/eye_tracker/` streams gaze from a Tobii device.
+
+[Shared clock]{.resource-label} Sensor streams synchronize through Lab Streaming Layer (LSL), via the lab's `ixp` package.
+
+[Trial capture]{.resource-label} `SARGameTrial` records enough of the session to fully reconstruct it.
+:::
+
+```bash
+python src/experiment/replay.py path/to/recording.jsonl
+```
+
+::: {.note}
+Each line of the recording is one game state from the LSL stream; replay renders them back as video for review or stimulus-locked analysis.
+:::
+
+::: {.punchline}
+Actions, advice, outcomes, and gaze land on [one timeline]{.accent} — that is what makes the session analyzable.
+:::
+
+---
+
+## Future [Applications]{.accent}
+
+::: {.hook}
+The extension seams that actually exist today.
+:::
+
+:::: {.cards .cols-2}
 
 ::: {.card}
-[Another task]{.card-title}
+[Task mechanics]{.card-title}
 
-The GUI, camera, advisor, and logging layers know nothing about search and rescue. A different collaborative task reuses them unchanged.
+Placers, actions, and rewards are constructor arguments on the SAR environment, so a condition is a configuration rather than a fork.
 
 ::: {.card-meta}
-Swap the environment, keep the study machinery
+Verified seam: `build_sar_env(...)`
 :::
 :::
 
 ::: {.card}
-[Another advisor]{.card-title}
+[Observations and presentation]{.card-title}
 
-Vary reliability, latency, phrasing, or confidence. `p_correct` was one dial; a real study turns several.
+Camera strategies and the observation processor decide what the participant sees and what the study records.
 
 ::: {.card-meta}
-Advice as the manipulated variable
+Use `EdgeFollowCamera`, `AgentFOVCamera`, or `AgentConeCamera`
 :::
 :::
 
 ::: {.card}
-[Another signal]{.card-title}
+[Teammate backend]{.card-title}
 
-Eye tracking, EEG, or physiological streams can share the session time base alongside actions and advice.
+Anything implementing `query(prompt) -> str` can be the teammate — a script, a provider, or an experimental manipulation.
+
+::: {.card-meta}
+Reliability as a manipulated variable
+:::
+:::
+
+::: {.card}
+[Study instrumentation]{.card-title}
+
+Sensors, logging, and replay live in `experiment/`, layered onto the reusable package rather than edited into it.
 
 ::: {.card-meta}
 One clock across every measure
-:::
-:::
-
-::: {.card .secondary}
-[Your condition]{.card-title}
-
-Placers, cameras, rewards, and advisors are all constructor arguments — so an experimental condition is a config entry, not a fork.
-
-::: {.card-meta}
-What makes it a testbed rather than a demo
 :::
 :::
 

@@ -2,10 +2,16 @@
 
     python labs/play.py
 
+Needs MOSAIC installed (`python -m pip install -e .` in the mosaic repo). No
+PYTHONPATH, no config file, and no AI provider key.
+
 Controls:  arrows = turn / move forward,  Space = open door,
-           Tab (or Page Up) = rescue,  Left Shift (or Page Down) = drop,
-           Alt = ask the AI advisor,  Backspace = restart,
+           Tab = pick up a key or rescue a victim,  Left Shift = drop,
+           Alt = request advice from the AI teammate,  Backspace = restart,
            F11 = fullscreen,  Esc = quit.
+
+No teammate is attached below, so Alt replies "Currently, no commands are
+available." See advisor.py for a teammate that gives real advice without a key.
 """
 import random
 
@@ -19,7 +25,7 @@ from mosaic.sar.placers import LavaPlacer, LockedRoomPlacer, VictimPlacer
 SEED = None          # set to an int (e.g. 42) for the same building every time
 NUM_ROWS = 2         # building is NUM_ROWS x NUM_COLS rooms      -> try 3
 NUM_COLS = 2         #                                            -> try 3
-ROOM_SIZE = 8        # tiles per room (interior = ROOM_SIZE - 2)
+ROOM_SIZE = 8        # tiles per room (interior = ROOM_SIZE - 2)  -> try 12
 VICTIMS_PER_ROOM = 2 # NOTE: per ROOM, not total. 2x2 x 2 = 8 victims
 LAVA_PER_ROOM = 2    # risk pressure                              -> try 6
 LOCKED_ROOM_PROB = 0.5   # fraction of rooms locked               -> try 0.9

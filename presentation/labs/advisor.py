@@ -2,7 +2,7 @@
 
     python labs/advisor.py
 
-An advisor is anything with `query(prompt) -> str`. That means the quality,
+A teammate is anything with `query(prompt) -> str`. That means the quality,
 timing, and correctness of AI advice is an experimental variable you control
 in ~10 lines of Python, with no changes to the environment.
 """
@@ -12,7 +12,7 @@ from mosaic.llm.client import LLMClient, ask
 
 
 class ScriptedAdvisor(LLMClient):
-    """A rule-free advisor whose advice is CORRECT with probability p.
+    """A rule-free teammate whose advice is CORRECT with probability p.
 
     Set p = 1.0 for a reliable teammate, p = 0.0 for an unreliable one,
     or vary p across trials to study trust repair / reliance calibration.
