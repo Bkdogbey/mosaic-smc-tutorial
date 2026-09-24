@@ -4,37 +4,57 @@
 
 A teammate is anything with `query(prompt) -> str`. That means the quality,
 timing, and correctness of AI advice is an experimental variable you control
-in ~10 lines of Python, with no changes to the environment.
+in a few lines of Python, with no changes to the environment.
+
+ReliableTeammate is grounded in the real game state: it points the participant
+at the nearest survivor they can actually reach. With probability
+1 - reliability it points at the nearest decoy instead, so reliability is a
+single number you can vary across trials to study trust and reliance.
+
+It needs the whole observation rather than MOSAIC's text prompt, so pass
+`prompt_builder=json.dumps` and the GUI hands it the observation as JSON.
 """
+import json
 import random
 
 from mosaic.llm.client import LLMClient, ask
+from mosaic.llm.pathfinding import query_all_objects
+from mosaic.sar.observations import FAKE_VICTIM, VICTIM
 
 
-class ScriptedAdvisor(LLMClient):
-    """A rule-free teammate whose advice is CORRECT with probability p.
+def describe(obs, x, y, steps):
+    """Radio-style sentence pointing the participant at tile (x, y)."""
+    if steps == 0:
+        return "There is a survivor right next to you."
+    dx, dy = x - obs["agent_x"], y - obs["agent_y"]
+    ns = "south" if dy > 0 else "north" if dy < 0 else ""
+    ew = "east" if dx > 0 else "west" if dx < 0 else ""
+    heading = "-".join(filter(None, [ns, ew]))
+    unit = "step" if steps == 1 else "steps"
+    return f"Survivor to the {heading}, about {steps} {unit} away."
 
-    Set p = 1.0 for a reliable teammate, p = 0.0 for an unreliable one,
-    or vary p across trials to study trust repair / reliance calibration.
-    """
 
-    DIRECTIONS = ["north", "south", "east", "west"]
+class ReliableTeammate(LLMClient):
+    """Points to the nearest reachable survivor — or, with probability
+    1 - reliability, to the nearest decoy instead."""
 
-    def __init__(self, p_correct: float = 1.0, seed: int = 0):
-        self.p_correct = p_correct
+    def __init__(self, reliability=0.8, seed=None):
+        self.reliability = reliability
         self.rng = random.Random(seed)
-        self.log = []          # every piece of advice, for post-hoc analysis
+        self.log = []  # one row per piece of advice, for analysis
 
-    def query(self, prompt: str) -> str:
-        correct = self.rng.random() < self.p_correct
-        heading = self.rng.choice(self.DIRECTIONS)
-        advice = (
-            f"Head {heading} — there's a survivor in the next room."
-            if correct
-            else f"Nothing {heading} of you. Hold position and search here."
-        )
-        self.log.append({"correct": correct, "advice": advice})
-        return advice
+    def query(self, prompt):
+        obs = json.loads(prompt)  # prompt_builder=json.dumps
+        honest = self.rng.random() < self.reliability
+        target = VICTIM if honest else FAKE_VICTIM
+        options = [(p.path_length, x, y)
+                   for (x, y), p in query_all_objects(obs).items()
+                   if p.reachable and obs["grid"][y][x] == target]
+        if not options:
+            return "No survivor in reach. Try the next room."
+        steps, x, y = min(options)
+        self.log.append({"honest": honest, "target": (x, y), "steps": steps})
+        return describe(obs, x, y, steps)
 
 
 if __name__ == "__main__":
@@ -45,14 +65,15 @@ if __name__ == "__main__":
                         victim_placer=VictimPlacer(num_real_victims=2))
     obs, _ = env.reset(seed=0)
 
-    advisor = ScriptedAdvisor(p_correct=0.7, seed=42)
+    teammate = ReliableTeammate(reliability=0.7, seed=42)
     for _ in range(5):
         obs, reward, terminated, truncated, info = env.step(2)   # 2 = move forward
-        print(ask(obs, advisor, prompt_type="sparse"))
+        print(ask(obs, teammate, prompt_builder=json.dumps))
 
-    n_ok = sum(a["correct"] for a in advisor.log)
-    print(f"\n{n_ok}/{len(advisor.log)} pieces of advice were correct")
+    n_ok = sum(a["honest"] for a in teammate.log)
+    print(f"\n{n_ok}/{len(teammate.log)} pieces of advice pointed at a real survivor")
 
     # To use it in the live game instead:
     #   from mosaic.gui.main import SAREnvGUI
-    #   SAREnvGUI(env, config={"fullscreen": False}, llm_client=advisor).run()
+    #   SAREnvGUI(env, config={"fullscreen": False},
+    #             llm_client=teammate, prompt_builder=json.dumps).run()

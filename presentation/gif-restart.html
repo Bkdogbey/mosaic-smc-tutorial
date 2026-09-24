@@ -1,0 +1,15 @@
+<script>
+// Restart a slide's clips when it is shown, so each starts at its first frame
+// and the three camera clips on the Camera Views slide play in step.
+(function () {
+  function restart(slide) {
+    slide.querySelectorAll('.camera-view img, .phase img, .run-split img').forEach(function (img) {
+      var src = img.getAttribute('src');
+      if (!src || !/\.gif(\?|$)/.test(src)) return;
+      img.setAttribute('src', src.split('?')[0] + '?t=' + Date.now());
+    });
+  }
+  function hook() { Reveal.on('slidechanged', function (e) { restart(e.currentSlide); }); }
+  if (window.Reveal && Reveal.on) hook(); else window.addEventListener('load', hook);
+})();
+</script>

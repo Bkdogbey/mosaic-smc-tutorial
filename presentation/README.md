@@ -12,17 +12,19 @@ consequential tasks. The deck is three parts:
    research questions it supports
 2. **Install and run** — the dependency list, `venv` and Conda setup paths, an
    import checkpoint, and the first mission via `python -m experiment.main`
-3. **Understand and customize** — read the interface, learn the five software
-   layers, change one parameter and rerun, and connect an AI teammate
+3. **Understand and customize** — relaunch the game, see each part of it
+   (architecture, interface, animated controls and cameras), read the code map,
+   then customize one component per slide: config, world, scoring, view,
+   teammate, feedback, and data, each with a "Try it" line
 
 Technical details about installation recovery, the observation schema, the AI
-teammate interface, and future applications live in the appendix for Q&A.
+teammate provider setup live in the appendix for Q&A.
 
 ## Contents
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (32 slides: 25 main + closing + 6 appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (35 slides: 30 main + closing + 4 appendix)
 ├── mosaic-tutorial.ipynb # optional development prototype; not required by attendees
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
@@ -33,7 +35,8 @@ presentation/
 ├── assets/               # figures used in the deck
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
-    ├── advisor.py        # runnable ScriptedAdvisor with tunable reliability; needs no API key
+    ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
+    │                     #   Slide 28 shows lines 46–57 — keep them in step if you edit it
     └── tweak.py          # all four injection points in one file
 ```
 
@@ -59,9 +62,11 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `cam-*-live.png` | Captured from the running game by `tools/capture_camera_views.py` — one mission, one frozen frame, re-rendered through each camera with `env.switch_camera()` |
 | `cam-*-annot.png` | The live captures with a white ring on the agent and a dashed outline of its room, so the camera difference is readable from the back of the room |
 | `cam-follow.png`, `cam-room.png`, `cam-cone.png` | The earlier 512px renders, superseded by the live captures and kept for reference |
-| `sprites/*.png` | Single tiles rendered from `minigrid` and MOSAIC's `Victim` / `FakeVictim` classes at 4x supersampling — the world legend on the interface slide |
+| `sprites/*.png` | Single tiles rendered from `minigrid` and MOSAIC's `Victim` / `FakeVictim` classes at 4x supersampling — the world legend on the interface slide, and `health-*.png`, a real victim with its health bar at 100/60/25/0% |
 | `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
-| `gameplay.gif` | Captured by `tools/capture_gameplay.py` — the real GUI compositor driven by a scripted breadth-first walk to the nearest victim, built from `configs/experiment.yaml` so it matches what `experiment.main` shows |
+| `gameplay.gif` | Captured by `tools/capture_gameplay.py` — the real GUI compositor driven by a scripted breadth-first walk (a real victim with a green flash, a decoy with a red flash, then another real victim; `SEED=9`, paced slower than live play), built from `configs/experiment.yaml` so it matches what `experiment.main` shows |
+| `controls-*.gif`, `chat-advice.png` | Captured by `tools/capture_controls.py` — one clip per control (arrows, Space, Tab, Alt) with a keycap strip that lights on the pressed key; the advice clip and chat still use `ReliableTeammate` from `labs/advisor.py` |
+| `cam-*-walk.gif` | Captured by `tools/capture_camera_gifs.py` — one walk through a door rendered through all three cameras frame by frame, with the ring and room outline recomputed per frame; equal frame timing so the three play in step |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
@@ -79,7 +84,13 @@ python tools/capture_camera_views.py     # play the mission, grab the three view
 python tools/make_camera_annotations.py  # ring + room outline on those captures
 python tools/make_sprites.py             # single tiles for the interface slide
 python tools/capture_gameplay.py         # the animated clip on the run-the-mission slide
+python tools/capture_controls.py         # one clip per control + the chat still
+python tools/capture_camera_gifs.py      # the three synced camera walks
 ```
+
+The capture scripts share `tools/_capture_common.py` (MOSAIC path, grid codes,
+breadth-first routing, the study env builder, GIF writing). `gif-restart.html`
+is included after the deck body and restarts a slide's clips when it opens.
 
 All three need `minigrid` and a checkout of the MOSAIC repository; the capture
 script additionally needs MOSAIC's runtime deps (`pygame-ce`, `pygame_gui`,
@@ -99,9 +110,9 @@ Two things to know before regenerating:
 ## Before presenting
 
 1. Send `SETUP.md` to registrants at least a week out.
-2. Re-verify every command in Part 2 against the current `main`. The whole
-   pygame-ce section should be **deleted** once the PyPI release fixes the
-   dependency.
+2. Re-verify every command in Part 2 against the current `main`. Part 2 now
+   assumes MOSAIC depends on `pygame-ce` (issue 1 below) — **that fix must be
+   merged before the tutorial**, or attendees hit `DIRECTION_LTR` on first run.
 3. Read `RUNSHEET.md`.
 
 ## Repo issues this tutorial exposed
@@ -113,7 +124,8 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    requires `pygame-ce`. `pip install -e .` installs **both**, and `pygame` lands
    last, so the GUI dies with
    `ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'`.
-   Fix: depend on `pygame-ce>=2.5.2`.
+   Fix: depend on `pygame-ce>=2.5.2`. **Required before the tutorial:** the deck
+   no longer teaches a workaround.
 2. **The obvious workaround for issue 1 does not work.**
    `pip uninstall -y pygame && pip install "pygame-ce>=2.5.2"` leaves pygame-ce
    *broken* — uninstalling `pygame` removes shared files from the namespace, and
@@ -138,8 +150,8 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    bound the retry loop and raise.
 6. ~~**`tabulate` is required but undeclared.**~~ **Fixed upstream.**
    `build_prompt()` → `_build_table()` calls `DataFrame.to_markdown()`, which
-   needs `tabulate`; it is now declared in `pyproject.toml`. The deck keeps the
-   explicit install only as an appendix fallback.
+   needs `tabulate`; it is now declared in `pyproject.toml`, so the deck does
+   not install it separately.
 7. **`experiment_main.py` does not exist.** `README.md`, `REFERENCE.md`,
    `docs/getting-started.md`, `docs/architecture.md` and `docs/experiment.md` all
    point at `python -m experiment.experiment_main`; the file is

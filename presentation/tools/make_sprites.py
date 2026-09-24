@@ -47,6 +47,15 @@ def _object(obj, name):
     _save(img, name)
 
 
+def _health(level, name):
+    """A real victim with its health bar showing, as the study reveals it while
+    advice is on screen: the white bar's height is the victim's health."""
+    victim = sar.Victim("up")
+    victim.health = level
+    victim.show_battery(3600)
+    _object(victim, name)
+
+
 def _agent(name):
     """MiniGrid draws the agent itself, so reproduce its triangle here."""
     img = _blank()
@@ -63,4 +72,6 @@ if __name__ == "__main__":
     _object(Door("blue", is_locked=True), "door-locked")
     _object(Door("green"), "door-closed")
     _object(Key("blue"), "key")
+    for level in (1.0, 0.6, 0.25, 0.0):
+        _health(level, f"health-{int(level * 100)}")
     print(f"wrote sprites to {OUT}")
