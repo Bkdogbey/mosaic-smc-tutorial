@@ -1,0 +1,37 @@
+# Render the deck and publish it to GitHub Pages (the gh-pages branch) on
+# every push to main that touches the presentation. The deck needs only
+# Quarto: it has no executable cells, and every image in assets/ is committed.
+name: Publish deck
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "presentation/**"
+      - ".github/workflows/publish.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-deck
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.9.36
+
+      - name: Render and publish to gh-pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          path: presentation/mosaic-tutorial.qmd
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
