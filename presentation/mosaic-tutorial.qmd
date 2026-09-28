@@ -160,32 +160,6 @@ People make a sequence of decisions, and each outcome changes what happens next.
 ::: {.need-item .has-visual}
 ::: {.need-visual .icon}
 ```{=html}
-<svg viewBox="0 0 64 64" role="img" aria-label="Icon: an advice bubble with a setting inside">
-  <path d="M9 8 H55 a5 5 0 0 1 5 5 V38 a5 5 0 0 1 -5 5 H27 L15 54 V43 H9 a5 5 0 0 1 -5 -5 V13 a5 5 0 0 1 5 -5 Z"
-        fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/>
-  <line x1="14" y1="26" x2="50" y2="26" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
-  <line x1="14" y1="26" x2="36" y2="26" stroke="#EC672C" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="36" cy="26" r="5.5" fill="#EC672C"/>
-</svg>
-```
-:::
-
-::: {.need-text}
-[02]{.need-index}
-
-[A controllable AI teammate]{.need-title}
-
-Researchers need to vary what the AI knows, how reliable it is, and when and how it communicates.
-:::
-:::
-
-::::
-
-:::: {.need-column}
-
-::: {.need-item .has-visual}
-::: {.need-visual .icon}
-```{=html}
 <svg viewBox="0 0 64 64" role="img" aria-label="Icon: three sliders set to different values">
   <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.8">
     <line x1="6" y1="14" x2="58" y2="14"/><line x1="6" y1="32" x2="58" y2="32"/><line x1="6" y1="50" x2="58" y2="50"/>
@@ -203,6 +177,32 @@ Researchers need to vary what the AI knows, how reliable it is, and when and how
 [Configurable task conditions]{.need-title}
 
 Researchers need to vary information access, uncertainty, time pressure, and the consequences of mistakes.
+:::
+:::
+
+::::
+
+:::: {.need-column}
+
+::: {.need-item .has-visual}
+::: {.need-visual .icon}
+```{=html}
+<svg viewBox="0 0 64 64" role="img" aria-label="Icon: an advice bubble with a setting inside">
+  <path d="M9 8 H55 a5 5 0 0 1 5 5 V38 a5 5 0 0 1 -5 5 H27 L15 54 V43 H9 a5 5 0 0 1 -5 -5 V13 a5 5 0 0 1 5 -5 Z"
+        fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/>
+  <line x1="14" y1="26" x2="50" y2="26" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
+  <line x1="14" y1="26" x2="36" y2="26" stroke="#EC672C" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="36" cy="26" r="5.5" fill="#EC672C"/>
+</svg>
+```
+:::
+
+::: {.need-text}
+[02]{.need-index}
+
+[A controllable AI teammate]{.need-title}
+
+Researchers need to vary what the AI knows, how reliable it is, and when and how it communicates.
 :::
 :::
 
@@ -265,16 +265,16 @@ A search-and-rescue mission where each move changes what the participant can do 
 :::
 
 ::: {.need-item .has-visual}
-::: {.need-visual .thumb}
-![](assets/chat-advice.png){fig-alt="The chat panel with the teammate's reply: Survivor to the north-east, about 3 steps away."}
+::: {.need-visual .thumb .pair}
+![](assets/cam-room.png){fig-alt="A room shown with the room camera."} ![](assets/cam-cone.png){fig-alt="The same room shown with the cone camera."}
 :::
 
 ::: {.need-text}
-[02]{.need-index}
+[03]{.need-index}
 
-[Controllable AI teammate]{.need-title}
+[Configurable conditions]{.need-title}
 
-Scripted or LLM teammates behind one interface. Set what it sees, how reliable it is, and when it speaks.
+Map, hazards, camera view, scoring, and feedback are set per study, without changing the package.
 :::
 :::
 
@@ -296,16 +296,16 @@ Scripted or LLM teammates behind one interface. Set what it sees, how reliable i
 :::: {.need-column}
 
 ::: {.need-item .has-visual}
-::: {.need-visual .thumb .pair}
-![](assets/cam-room.png){fig-alt="A room shown with the room camera."} ![](assets/cam-cone.png){fig-alt="The same room shown with the cone camera."}
+::: {.need-visual .thumb}
+![](assets/chat-advice.png){fig-alt="The chat panel with the teammate's reply: Survivor to the north-east, about 3 steps away."}
 :::
 
 ::: {.need-text}
-[03]{.need-index}
+[02]{.need-index}
 
-[Configurable conditions]{.need-title}
+[Controllable AI teammate]{.need-title}
 
-Map, hazards, camera view, scoring, and feedback are set per study, without changing the package.
+Scripted or LLM teammates behind one interface. Set what it sees, how reliable it is, and when it speaks.
 :::
 :::
 
@@ -339,7 +339,7 @@ Game events, AI advice, and sensor streams such as gaze share one clock through 
 :::::
 
 ::: {.punchline}
-MOSAIC brings these capabilities together in [one reproducible experimental platform]{.accent}.
+MOSAIC brings these capabilities together in [one configurable experimental platform]{.accent}.
 :::
 
 ::: {.notes}
@@ -441,8 +441,8 @@ Here is MOSAIC. You're the participant on the left. You act, the task updates, a
 when you ask, the teammate reads the task context and answers. Everything the
 researcher varies sits in configuration, and everything that happens, including gaze
 and physiology, lands on one clock. Underneath, the reusable parts live in the
-`mosaic` package and each study's choices live in `experiment/`; the code map later
-shows that split.
+`mosaic` package and each study's choices live in `experiment/`; the code map at
+the end shows that split.
 :::
 
 ---
@@ -581,9 +581,9 @@ Next, we will install MOSAIC, launch a mission, and change the task ourselves.
 <!-- ============ PART 2 ============ -->
 
 ::: {.divider}
-[Part Two]{.divider-title}
+[Part Two]{.divider-kicker}
 
-[Install MOSAIC]{.divider-subtitle}
+[Install MOSAIC]{.divider-title}
 
 [Check the system, install MOSAIC, and run the mission]{.divider-path}
 
@@ -741,21 +741,20 @@ script. Everyone stays in the mosaic directory for the rest of the tutorial.
 ## Install [MOSAIC]{.accent}
 
 ::: {.hook}
-Two commands, run from the `mosaic` folder with `mosaic_env` active.
+Three commands, run from the `mosaic` folder with `mosaic_env` active.
 :::
 
 :::: {.columns .install-split}
 
 ::: {.column width="60%"}
-::: {.install-code .roomy}
 ```bash
 python -m pip install --upgrade pip
 python -m pip install -e .
+python -c "import mosaic.sar.env, mosaic.gui.main; print('MOSAIC ready')"
 ```
-:::
 
 ::: {.checkpoint}
-pip ends with `Successfully installed ... mosaic-0.1.0`.
+pip ends with `Successfully installed ... mosaic-0.1.0`, and the check prints a `pygame-ce` banner, then `MOSAIC ready`.
 :::
 :::
 
@@ -769,40 +768,17 @@ Avoids install errors from an old installer
 ::: {.line-step}
 [2]{.line-num} [Install MOSAIC]{.line-title}
 
-Adds MOSAIC and every package on the previous slide
+Adds MOSAIC and every package on the previous slide. `-e` (editable) means your edits take effect without reinstalling; Part Four relies on this.
 :::
 ::: {.line-step}
-[-e]{.line-num} [Editable mode]{.line-title}
+[3]{.line-num} [Check it]{.line-title}
 
-Your edits to the source take effect without reinstalling. Part Four relies on this.
+Imports the task (`mosaic.sar`) and the participant's interface (`mosaic.gui`)
 :::
 :::
 :::
 
 ::::
-
----
-
-## Verify the [Installation]{.accent}
-
-::: {.hook}
-Verify that the environment and GUI APIs are available.
-:::
-
-```bash
-python -c "from mosaic.sar.env import build_sar_env; from mosaic.gui.main import SAREnvGUI; print('MOSAIC ready')"
-```
-
-::: {.checkpoint}
-```text
-pygame-ce 2.5.8 (SDL 2.32.10, Python 3.10.20)
-MOSAIC ready
-```
-:::
-
-::: {.punchline}
-`build_sar_env` constructs the task. `SAREnvGUI` provides the [human-facing interface]{.accent}.
-:::
 
 ---
 
@@ -831,23 +807,23 @@ python -m experiment.main
 
 ::: {.feature-list .compact}
 ::: {.feature-row}
+[Window]{.feature-name} It opens fullscreen. Press `F11` for a window beside the slides.
+:::
+::: {.feature-row}
 [Move]{.feature-name} Arrow keys turn and walk the agent
 :::
 ::: {.feature-row}
-[Rescue]{.feature-name} `Tab` rescues the victim you face
-:::
-::: {.feature-row}
-[Window]{.feature-name} `F11` toggles fullscreen and `Esc` closes the mission
+[Terminal]{.feature-name} Font warnings and `connect_all failed` lines are normal
 :::
 :::
 
 :::
 
 ::: {.column width="50%"}
-![](assets/gameplay.gif){fig-alt="The MOSAIC interface during play: the agent rescues a real victim with a green flash, rescues a decoy with a red flash, then rescues another real victim"}
+![](assets/gui-first-frame.png){fig-alt="The MOSAIC window at launch: a room crowded with victims and lava on the left; the mission, controls, and chat panels on the right"}
 
 ::: {.fig-note}
-Real victim: green flash, +1. Decoy: red flash, −1.
+You should see this: the room on the left, the panels on the right.
 :::
 :::
 
@@ -855,8 +831,10 @@ Real victim: green flash, +1. Decoy: red flash, −1.
 
 ::: {.notes}
 This is MOSAIC's own study runner from the cloned repository — no extra file is
-needed. It opens fullscreen; F11 gives a window. Hold here until most attendees
-can move the agent, then ask everyone to press Esc.
+needed. Hold here until most attendees can move the agent. Ask everyone to keep
+the game open: Part Three walks through it live. The terminal fills with
+pygame_gui font warnings and "Timeout during mission generation: connect_all
+failed" lines on every launch; both are harmless (the level generator retries).
 :::
 
 ---
@@ -879,7 +857,7 @@ Arrow keys move the agent
 The information panel updates
 :::
 ::: {.check-item}
-`Esc` closes it cleanly
+It stays open for Part Three
 :::
 :::
 :::
@@ -900,7 +878,7 @@ The information panel updates
 ::::
 
 ::: {.punchline}
-Everyone with a window open is ready for [Part Three]{.accent}.
+Everyone with a window open is ready for [Part Three]{.accent}. Leave it open.
 :::
 
 ---
@@ -908,11 +886,11 @@ Everyone with a window open is ready for [Part Three]{.accent}.
 <!-- ============ PART 3 ============ -->
 
 ::: {.divider}
-[Part Three]{.divider-title}
+[Part Three]{.divider-kicker}
 
-[Experience the SAR Mission]{.divider-subtitle}
+[Experience the SAR Mission]{.divider-title}
 
-[Play one mission · read the screen]{.divider-path}
+[Play one mission and learn to read the screen]{.divider-path}
 
 ::: {.you-are-here}
 [Why]{.stop} [Install]{.stop} [Experience]{.stop .here} [Configure]{.stop}
@@ -938,11 +916,11 @@ Explore the building, tell real victims from decoys, and decide who to rescue be
 ::: {.scenario-brief}
 [Explore]{.scenario-label}
 
-Move room to room. A locked door needs the key of the same colour.
+Move room to room. A locked door needs the key of the same color.
 
 [Identify]{.scenario-label}
 
-A centered cross is a real victim; an offset cross is a decoy.
+Both are red T shapes. A real victim's stem is centered; a decoy's is off-center.
 
 [Decide]{.scenario-label}
 
@@ -961,69 +939,6 @@ Every choice has [a consequence you can see and score]{.accent}.
 No code in this part: the goal is to know the mission the way a participant
 does. The clip is the real interface: a real victim (green flash, +1), a decoy
 (red flash, -1), then another real victim.
-:::
-
----
-
-## Launch the [Mission]{.accent}
-
-::: {.hook}
-Everyone runs the same baseline mission. Keep the game open beside the slides.
-:::
-
-:::: {.columns .install-split}
-
-::: {.column width="55%"}
-::: {.panel-tabset .install-code}
-
-### macOS / Linux
-
-```bash
-PYTHONPATH=src python -m experiment.main
-```
-
-### Windows PowerShell
-
-```powershell
-$env:PYTHONPATH = "src"
-python -m experiment.main
-```
-
-:::
-
-::: {.line-steps}
-::: {.line-step}
-[1]{.line-num} [Launch]{.line-title}
-
-From the `mosaic` folder, with `mosaic_env` active
-:::
-::: {.line-step}
-[2]{.line-num} [Press F11]{.line-title}
-
-Leave fullscreen so the slides stay visible
-:::
-::: {.line-step}
-[3]{.line-num} [Keep it open]{.line-title}
-
-Try each control as we reach it; `Esc` closes it at the end
-:::
-:::
-:::
-
-::: {.column width="45%"}
-![](assets/gui-screenshot-live.png){fig-alt="The MOSAIC window: the game view on the left, the information, controls and chat panels on the right"}
-
-::: {.fig-note}
-You should see this: the room on the left, the panels on the right.
-:::
-:::
-
-::::
-
-::: {.notes}
-Same command as slide 14. Most attendees closed the game at the checkpoint; this
-gets everyone back into it before the walkthrough. Wait for most windows to be
-open before moving on.
 :::
 
 ---
@@ -1098,7 +1013,7 @@ Chat panel — where AI teammate advice arrives
 ::: {.world-item}
 ![](assets/sprites/door-locked.png)
 
-[Locked door]{.world-name} [needs the key of its colour]{.world-note}
+[Locked door]{.world-name} [needs the key of its color]{.world-note}
 :::
 
 ::: {.world-item}
@@ -1116,7 +1031,7 @@ Chat panel — where AI teammate advice arrives
 ## Victims and [Decoys]{.accent}
 
 ::: {.hook}
-Real victims and decoys use different cross symbols, and real victims have health.
+Real victims and decoys are both red T shapes, and real victims have health.
 :::
 
 :::: {.columns .scenario-columns}
@@ -1144,7 +1059,7 @@ Real victims and decoys use different cross symbols, and real victims have healt
 ::: {.column width="58%"}
 ::: {.feature-list}
 ::: {.feature-row}
-[Symbols]{.feature-name} A centered cross marks a real victim. An offset cross marks a decoy.
+[Symbols]{.feature-name} A real victim's stem sits in the middle of the bar. A decoy's is off-center.
 :::
 ::: {.feature-row}
 [Health]{.feature-name} Drains while the victim is in view, faster near lava. At zero the victim dies.
@@ -1190,7 +1105,7 @@ advice is on screen (the study reveals it on each reply). In the tutorial's
 ## Controls and [Gameplay]{.accent}
 
 ::: {.hook}
-Four actions, one key each. Each clip shows what the key does.
+Four actions. Each clip shows what its keys do.
 :::
 
 ::: {.phase-grid .phase-clips}
@@ -1247,14 +1162,14 @@ Four actions, one key each. Each clip shows what the key does.
 [Alt]{.keycap} [Ask the AI teammate]{.key-action}
 :::
 
-[The reply appears in the chat panel, which blinks: “Survivor to the north-east, about 3 steps away.”]{.phase-note}
+[The reply appears in the chat panel. Today's placeholder teammate answers “Currently, no commands are available.” Part Four gives it a real one.]{.phase-note}
 :::
 :::
 
 :::
 
 ::: {.notes}
-The advice clip uses the grounded teammate from slide 32, so the reply is true
+The advice clip uses the grounded teammate from the Swap the AI Teammate slide, so the reply is true
 for that building. In the attendees' own run the runner attaches the keyless
 dummy teammate, so Alt replies "Currently, no commands are available."
 :::
@@ -1264,9 +1179,11 @@ dummy teammate, so Alt replies "Currently, no commands are available."
 <!-- ============ PART 4 ============ -->
 
 ::: {.divider}
-[Part Four]{.divider-title}
+[Part Four]{.divider-kicker}
 
-[Configure MOSAIC]{.divider-subtitle}
+[Configure MOSAIC]{.divider-title}
+
+[Change one setting, relaunch, and see what the participant gets]{.divider-path}
 
 ::: {.you-are-here}
 [Why]{.stop} [Install]{.stop} [Experience]{.stop} [Configure]{.stop .here}
@@ -1396,7 +1313,7 @@ The step API and the grid world.
 ::: {.notes}
 Point at the attendee's own window: the keys they press, the GUI that draws it,
 the environment that decides what happens. The chat image is a real reply from
-the teammate on slide 32. Sensing is study-layer only — the tutorial run has no
+the teammate on the Swap the AI Teammate slide. Sensing is study-layer only — the tutorial run has no
 sensors attached. Sensors never talk to the game directly: each one streams into
 Lab Streaming Layer, which puts game and sensor samples on one clock.
 :::
@@ -1488,7 +1405,7 @@ Step through the highlights; each number on the right is one highlight. Each par
 is changed in one of the task slides that follow. The one thing not in this call is scoring, which
 is a keyword argument you add. This is main.py as the tutorial needs it: imports
 enabled and the provider defaulting to "dummy". Upstream MOSAIC must carry that
-fix before the session (as of commit 1b16527 the imports are commented out and
+fix before the session (as of upstream main 1ba2268 the imports are commented out and
 the default is "openai").
 :::
 
@@ -1501,7 +1418,7 @@ the default is "openai").
 :::
 
 ::: {.task-what}
-Set how many real victims, decoys, and lava tiles each room gets. The counts live in the YAML, so no code changes.
+Set how many victims, decoys, and lava tiles each room gets. Only the YAML changes.
 :::
 
 :::: {.task-split}
@@ -1522,9 +1439,15 @@ Set how many real victims, decoys, and lava tiles each room gets. The counts liv
 ```
 :::
 
-[Run]{.task-label} Save the file and relaunch the mission.
+[Run]{.task-label} Save and relaunch the mission.
 
 [What will the building look like?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/experiment/placers.py` · `LavaRiskVictimPlacer`
+
+Edit its `place_all()` to change *where* victims and lava go, not just how many.
+:::
 :::
 
 ::: {.result-col .fragment}
@@ -1567,7 +1490,7 @@ the room what they expect before revealing the result.
 :::
 
 ::: {.task-what}
-Set the chance that a room sits behind a locked door: `0.5` locks about half the rooms, `0.9` most of them.
+Set the chance that a room is locked: `0.5` locks about half the rooms, `0.9` most.
 :::
 
 :::: {.task-split}
@@ -1587,6 +1510,12 @@ Set the chance that a room sits behind a locked door: `0.5` locks about half the
 [Run]{.task-label} Save and relaunch. Walk to the nearest door.
 
 [How much of the building can you still reach?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/sar/placers.py` · `LockedRoomPlacer`
+
+Its `place_all()` picks which rooms lock and hides each key in an unlocked room.
+:::
 :::
 
 ::: {.result-col .fragment}
@@ -1622,33 +1551,48 @@ pluggable interface: `Placer` in src/mosaic/core/placers.py has one method,
 
 ---
 
-## Rewards and Time [Limit]{.accent}
+## Rescue [Rewards]{.accent}
 
 ::: {.custom-strip}
 [SAR]{.stop .here} [GUI]{.stop} [Teammate]{.stop} [Sensing]{.stop}
 :::
 
-:::: {.more-settings}
+::: {.task-what}
+Make rescuing a decoy cost 5 points instead of 1.
+:::
 
-::: {.more-row}
-::: {.more-text}
-[Rescue rewards]{.more-title}
+:::: {.task-split}
 
-[What each rescue adds or costs. Here a decoy costs 5 points instead of 1.]{.more-what}
+::: {.task-col}
+[Change]{.task-label}
 
-::: {.code-card .mini}
-[`src/experiment/main.py`]{.code-file} [add to `build_sar_env(...)`]{.code-where}
+::: {.code-card}
+[`src/experiment/main.py`]{.code-file} [an import, then a new argument]{.code-where}
 
-```{.python code-line-numbers="false"}
-action=RescueAction(
-    rewards=RescueRewards(fake_victim=-5.0)),
+```{.diff code-line-numbers="false"}
++from mosaic.sar.actions import RescueAction, RescueRewards
+@@ inside build_sar_env(...) @@
+         camera_strategy=AgentFOVCamera(),
++        action=RescueAction(
++            rewards=RescueRewards(fake_victim=-5.0)),
 ```
 :::
 
-[Interpret]{.var-label} the cost of a false alarm
+[Run]{.task-label} Relaunch and rescue a decoy.
+
+[What will the reward panel read?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/sar/actions.py` · `RescueRewards`
+
+Also `real_victim_alive` (+1) and `real_victim_dead` (−2). The lab's study uses 10, −10, −20.
+:::
 :::
 
-::: {.result-pair}
+::: {.result-col .fragment}
+[Observe]{.task-label} [the reward panel right after a decoy]{.src-cap}
+
+::: {.result-stack}
 ::: {.result-img}
 ![](assets/results/scoring-before.png){fig-alt="Reward panel reading minus 1.0 after a decoy."}
 
@@ -1661,26 +1605,63 @@ action=RescueAction(
 [After · a decoy costs 5]{.result-label}
 :::
 :::
+
+[Interpret]{.var-label} the cost of a false alarm
+
+[Undo · `git checkout -- src/experiment/main.py`]{.undo}
 :::
 
-::: {.more-row}
-::: {.more-text}
-[Time limit]{.more-title}
+::::
 
-[Minutes until the mission ends.]{.more-what}
+::: {.notes}
+`action=` goes inside the `build_sar_env(...)` call, after `camera_strategy=`.
+The defaults in `RescueRewards` (src/mosaic/sar/actions.py) are +1 / -1 / -2; the
+lab's study passes 10 / -10 / -20 (src/experiment/game.py line 86). Every rescue
+also reports an event in `info["events"]`.
+:::
 
-::: {.code-card .mini}
+---
+
+## Time [Limit]{.accent}
+
+::: {.custom-strip}
+[SAR]{.stop .here} [GUI]{.stop} [Teammate]{.stop} [Sensing]{.stop}
+:::
+
+::: {.task-what}
+Give the mission 2 minutes instead of 5.
+:::
+
+:::: {.task-split}
+
+::: {.task-col}
+[Change]{.task-label}
+
+::: {.code-card}
 [`configs/experiment.yaml`]{.code-file} [a new top-level line]{.code-where}
 
-```{.yaml code-line-numbers="false"}
-max_time: 2
+```{.diff code-line-numbers="false"}
+ display: &display 0
+ fullscreen: &fullscreen true
++max_time: 2
 ```
 :::
 
-[Interpret]{.var-label} time pressure
+[Run]{.task-label} Relaunch and watch the timer.
+
+[How will people play with 2 minutes left?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/gui/main.py` · `SAREnvGUI`
+
+Reads `max_time`, in minutes, from the top of the YAML. The one under `game:` is for the study runner.
+:::
 :::
 
-::: {.result-pair}
+::: {.result-col .fragment}
+[Observe]{.task-label} [the timer at launch]{.src-cap}
+
+::: {.result-stack}
 ::: {.result-img}
 ![](assets/results/time-before.png){fig-alt="The timer at the start reads 5:00."}
 
@@ -1693,17 +1674,18 @@ max_time: 2
 [After · 2 minutes]{.result-label}
 :::
 :::
+
+[Interpret]{.var-label} time pressure
+
+[Undo · `git checkout -- configs/experiment.yaml`]{.undo}
 :::
 
 ::::
 
 ::: {.notes}
-Rewards: import `RescueAction, RescueRewards` from `mosaic.sar.actions`. The
-defaults in `RescueRewards` (src/mosaic/sar/actions.py) are +1 / -1 / -2; the
-lab's study passes 10 / -10 / -20 (src/experiment/game.py line 86). Every rescue
-also reports an event in `info["events"]`. Time: main.py passes the whole YAML
-to `SAREnvGUI`, which reads `max_time` (minutes) from the top level. The
-`max_time` under `game:` configures the lab's full study runner, not this run.
+main.py passes the whole YAML to `SAREnvGUI`, which reads `max_time` (minutes)
+from the top level. The `max_time` under `game:` configures the lab's full study
+runner, not this run. When the timer reaches zero the mission ends.
 :::
 
 ---
@@ -1721,11 +1703,11 @@ One walk through a door, rendered through three camera strategies.
 ::: {.camera-grid}
 
 ::: {.camera-view}
-![](assets/cam-follow-walk.gif){fig-alt="EdgeFollowCamera: an eight-by-eight window that scrolls with the agent and shows parts of neighbouring rooms"}
+![](assets/cam-follow-walk.gif){fig-alt="EdgeFollowCamera: an eight-by-eight window that scrolls with the agent and shows parts of neighboring rooms"}
 
 [Edge-following view]{.camera-title}
 
-`EdgeFollowCamera` scrolls with the agent and can show neighbouring rooms.
+`EdgeFollowCamera` scrolls with the agent and can show neighboring rooms.
 :::
 
 ::: {.camera-view}
@@ -1763,7 +1745,7 @@ The task state does not change. The camera changes [what the participant can see
 :::
 
 ::: {.task-what}
-Swap the camera strategy, which decides how much of the room the participant sees.
+Swap the camera strategy: how much of the room the participant sees.
 :::
 
 :::: {.task-split}
@@ -1786,6 +1768,12 @@ Swap the camera strategy, which decides how much of the room the participant see
 [Run]{.task-label} Save and relaunch. Turn on the spot with `←` and `→`.
 
 [What can the participant no longer see?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/core/camera.py` · `CameraStrategy`
+
+Subclass it and return your own view from `get_crop()`.
+:::
 :::
 
 ::: {.result-col .fragment}
@@ -1829,7 +1817,7 @@ reset because they have no reset() method.
 :::
 
 ::: {.task-what}
-Restyle the red flash after a decoy rescue: colour `(200, 0, 0)`, strength `200` of 255 (default 165), length `1.5` s (default 0.6), fading out.
+Make the red flash after a decoy rescue stronger and longer.
 :::
 
 :::: {.task-split}
@@ -1838,11 +1826,11 @@ Restyle the red flash after a decoy rescue: colour `(200, 0, 0)`, strength `200`
 [Change]{.task-label}
 
 ::: {.code-card}
-[`src/experiment/main.py`]{.code-file} [an import, then line 50]{.code-where}
+[`src/experiment/main.py`]{.code-file} [an import, then the `gui =` line]{.code-where}
 
 ```{.diff code-line-numbers="false"}
 +from mosaic.gui.feedback import EdgeVignette, VignetteStyle
-@@ line 50 @@
+@@ further down @@
 -    gui = SAREnvGUI(env, config=config, llm_client=llm_client)
 +    gui = SAREnvGUI(env, config=config, llm_client=llm_client,
 +        vignette=EdgeVignette(800, styles={"wrong_victim":
@@ -1853,6 +1841,12 @@ Restyle the red flash after a decoy rescue: colour `(200, 0, 0)`, strength `200`
 [Run]{.task-label} Relaunch and rescue a decoy.
 
 [How will the mistake feel different?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/gui/feedback.py` · `DEFAULT_VIGNETTE_STYLES`
+
+One style per event: color, strength (0–255, default 165), seconds (default 0.6), fade or pulse.
+:::
 :::
 
 ::: {.result-col .fragment}
@@ -1881,7 +1875,7 @@ Restyle the red flash after a decoy rescue: colour `(200, 0, 0)`, strength `200`
 
 ::: {.notes}
 One style per event in `DEFAULT_VIGNETTE_STYLES` (src/mosaic/gui/feedback.py):
-colour, strength, length, and fade or pulse. Your styles override the defaults.
+color, strength, length, and fade or pulse. Your styles override the defaults.
 `SAREnvGUI(info_panel=..., chat_panel=...)` replaces the side panels, and
 `gui.set_advice_callbacks(...)` runs code when advice arrives.
 :::
@@ -1895,20 +1889,21 @@ colour, strength, length, and fade or pulse. Your styles override the defaults.
 :::
 
 ::: {.task-what}
-Replace the info panel with one that no longer shows how many victims remain.
+Replace the info panel with one that hides how many victims remain.
 :::
 
 :::: {.task-split}
 
 ::: {.task-col}
-[Change]{.task-label} First, save `labs/panel.py` as `src/experiment/panel.py`.
+[Change]{.task-label} Save `panel.py` into `src/experiment/`, from\
+[github.com/Bkdogbey/mosaic-smc-tutorial]{.dl-src} · `presentation/labs/`
 
 ::: {.code-card}
-[`src/experiment/main.py`]{.code-file} [an import, then line 50]{.code-where}
+[`src/experiment/main.py`]{.code-file} [an import, then the `gui =` line]{.code-where}
 
 ```{.diff code-line-numbers="false"}
 +from .panel import NoProgressPanel
-@@ line 50 @@
+@@ further down @@
 -    gui = SAREnvGUI(env, config=config, llm_client=llm_client)
 +    gui = SAREnvGUI(env, config=config, llm_client=llm_client,
 +                    info_panel=NoProgressPanel(800, 400, 400))
@@ -1918,6 +1913,12 @@ Replace the info panel with one that no longer shows how many victims remain.
 [Run]{.task-label} Relaunch and look at the mission box.
 
 [What does the participant no longer know?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/gui/info.py` · `InfoPanel`
+
+`panel.py` overrides one method, `_mission_html()`. `chat_panel=` swaps the chat the same way.
+:::
 :::
 
 ::: {.result-col .fragment}
@@ -1960,21 +1961,22 @@ offset, width, and height in the 800-px window. `chat_panel=` accepts a
 :::
 
 ::: {.task-what}
-Replace the keyless placeholder teammate with one that reads the map. At `0.7`, about 7 in 10 replies point at a real survivor; the rest point at a decoy.
+Replace the placeholder teammate with one that reads the map and is right 7 times in 10.
 :::
 
 :::: {.task-split}
 
 ::: {.task-col}
-[Change]{.task-label} First, save `labs/advisor.py` as `src/experiment/advisor.py`.
+[Change]{.task-label} Save `advisor.py` into `src/experiment/`, from\
+[github.com/Bkdogbey/mosaic-smc-tutorial]{.dl-src} · `presentation/labs/`
 
 ::: {.code-card}
-[`src/experiment/main.py`]{.code-file} [imports, then line 50]{.code-where}
+[`src/experiment/main.py`]{.code-file} [imports, then the `gui =` line]{.code-where}
 
 ```{.diff code-line-numbers="false"}
 +import json
 +from .advisor import ReliableTeammate
-@@ line 50 @@
+@@ further down @@
 -    gui = SAREnvGUI(env, config=config, llm_client=llm_client)
 +    gui = SAREnvGUI(env, config=config,
 +                    llm_client=ReliableTeammate(0.7),
@@ -1982,9 +1984,15 @@ Replace the keyless placeholder teammate with one that reads the map. At `0.7`, 
 ```
 :::
 
-[Run]{.task-label} Relaunch, press `Alt`, check the advice against the map, and decide whether to follow it.
+[Run]{.task-label} Relaunch, press `Alt`, and check the advice against the map.
 
 [What does the teammate say now?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/llm/client.py` · `LLMClient.query(prompt)`
+
+[Hosted LLM]{.task-label} `provider:` and `model:` in `configs/experiment.yaml`, key in `.env`; built in `src/experiment/llm.py`
+:::
 :::
 
 ::: {.result-col .fragment}
@@ -2006,7 +2014,7 @@ Replace the keyless placeholder teammate with one that reads the map. At `0.7`, 
 
 [Interpret]{.var-label} advice content and reliability (`0.7` = 70% honest)
 
-[Undo · `git checkout -- src/experiment/main.py`]{.undo}
+[Keep this change · the next slide uses this teammate]{.undo}
 :::
 
 ::::
@@ -2018,6 +2026,7 @@ presentation/labs/). Any teammate implements one method of `LLMClient`,
 config sets unprompted advice every N steps (default 50). Hosted providers need a
 key and the llama-index package; mention them, do not attempt them live. The
 "after" image was captured at reliability 1.0; at 0.7 some replies point at a decoy.
+Do not undo this one: advice timing needs a teammate with something to say.
 :::
 
 ---
@@ -2029,7 +2038,7 @@ key and the llama-index package; mention them, do not attempt them live. The
 :::
 
 ::: {.task-what}
-Make the teammate speak on its own every 10 steps, without anyone pressing `Alt` (the default is every 50).
+Keep that teammate, and have it speak every 10 steps without `Alt` (default: every 50).
 :::
 
 :::: {.task-split}
@@ -2050,6 +2059,12 @@ Make the teammate speak on its own every 10 steps, without anyone pressing `Alt`
 [Run]{.task-label} Relaunch and turn on the spot ten times with `←`. Do not press `Alt`.
 
 [When will the teammate speak?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/gui/main.py` · `SAREnvGUI`
+
+Reads `llm_nudge_interval` and counts steps since the last advice.
+:::
 :::
 
 ::: {.result-col .fragment}
@@ -2071,7 +2086,7 @@ Make the teammate speak on its own every 10 steps, without anyone pressing `Alt`
 
 [Interpret]{.var-label} when advice arrives: on request or unprompted
 
-[Undo · `git checkout -- configs/experiment.yaml`]{.undo}
+[Undo both · `git checkout -- configs/experiment.yaml src/experiment/main.py`]{.undo}
 :::
 
 ::::
@@ -2079,95 +2094,9 @@ Make the teammate speak on its own every 10 steps, without anyone pressing `Alt`
 ::: {.notes}
 `SAREnvGUI` reads `llm_nudge_interval` from the top level of the YAML (main.py
 passes the whole file); the key under `game:` is for the lab's study runner.
-With the keyless dummy teammate the unprompted message is "Currently, no
-commands are available."; with `ReliableTeammate` or a hosted model it is real
-advice.
-:::
-
----
-
-## What the Teammate Knows and [Says]{.accent}
-
-::: {.custom-strip}
-[SAR]{.stop} [GUI]{.stop} [Teammate]{.stop .here} [Sensing]{.stop}
-:::
-
-:::: {.more-settings}
-
-::: {.more-row}
-::: {.more-text}
-[What it knows]{.more-title}
-
-[The function that turns the game state into the teammate's prompt. The default lists every object, even ones out of view.]{.more-what}
-
-::: {.code-card .mini}
-[`src/experiment/main.py`]{.code-file} [line 50]{.code-where}
-
-```{.python code-line-numbers="false"}
-SAREnvGUI(..., prompt_builder=my_builder)
-```
-:::
-
-[Interpret]{.var-label} the teammate sees objects the participant cannot (`Visible No`)
-:::
-
-::: {.result-terminal}
-```{.text code-line-numbers="false"}
-Agent: room (0,1) facing West | Carrying: nothing | …
-
-Object       Direction  Visible  Reachable  PathLength
-Victim4      East       Yes      Yes        9
-Victim2      South      Yes      Yes        0
-RedKey1      East       Yes      Yes        5
-PurpleKey1   East       Yes      Yes        6
-PurpleDoor1  South      Yes      Yes        34
-RedDoor1     East       No       Yes        10
-```
-:::
-:::
-
-::: {.more-row}
-::: {.more-text}
-[How it speaks]{.more-title}
-
-[`sparse` asks for one short instruction; `detailed`, the default, for a short briefing.]{.more-what}
-
-::: {.code-card .mini}
-[`configs/experiment.yaml`]{.code-file} [a new top-level line]{.code-where}
-
-```{.yaml code-line-numbers="false"}
-prompt_type: sparse
-```
-:::
-
-[Interpret]{.var-label} how much advice per message
-:::
-
-::: {.speech-pair}
-::: {.speech}
-[detailed · the default, up to 40 words]{.result-label}
-
-“Survivor to your South — get there fast, then swing North for the second one. The locked door East needs the yellow key first.”
-:::
-
-::: {.speech}
-[sparse · one sentence, up to 20 words]{.result-label}
-
-“Survivor to your South — pick them up now, then head North for the next one.”
-:::
-:::
-:::
-
-::::
-
-::: {.notes}
-The table is the start of what MOSAIC's default prompt builder (`build_obs` in
-src/mosaic/llm/process_prompts.py) sends, trimmed to five of its columns; it
-lists every object, including ones outside the participant's view. A
-`prompt_builder=` function replaces it with whatever you choose to send. The two
-quotes are the example replies in MOSAIC's prompt templates
-(src/mosaic/llm/prompts.yaml); `prompt_type` applies to LLM teammates. A
-`response_processor=` function rewrites every reply before it is shown.
+Both images use `ReliableTeammate` from the last slide. Anyone who undid it gets
+the keyless dummy's "Currently, no commands are available." instead: same timing,
+empty content.
 :::
 
 ---
@@ -2179,7 +2108,7 @@ quotes are the example replies in MOSAIC's prompt templates
 :::
 
 ::: {.task-what}
-Print the fields MOSAIC records at every step: the same fields the study runner streams to LSL.
+Print the fields MOSAIC records at every step, the same ones the study streams to LSL.
 :::
 
 :::: {.task-split}
@@ -2199,6 +2128,12 @@ Print the fields MOSAIC records at every step: the same fields the study runner 
 [Run]{.task-label} Relaunch and look at the terminal.
 
 [What does MOSAIC record at every step?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/mosaic/sar/observations.py` · `GameObservation`
+
+Subclass `ObservationProcessor` and pass `observation=` to `build_sar_env` to record other fields.
+:::
 :::
 
 ::: {.result-col .fragment}
@@ -2234,20 +2169,20 @@ do not run it.
 
 ---
 
-## Add an Eye [Tracker]{.accent}
+## Live Demo: Eye [Tracking]{.accent}
 
 ::: {.custom-strip}
 [SAR]{.stop} [GUI]{.stop} [Teammate]{.stop} [Sensing]{.stop .here}
 :::
 
 ::: {.task-what}
-Register a Tobii eye tracker with the lab's study runner, so gaze streams on the same clock as the game.
+We attach a Tobii eye tracker to the lab's study runner, and a volunteer plays.
 :::
 
 :::: {.task-split}
 
 ::: {.task-col}
-[Change]{.task-label}
+[What we added]{.task-label}
 
 ::: {.code-card}
 [`src/experiment/experiment.py`]{.code-file} [the study runner]{.code-where}
@@ -2264,36 +2199,47 @@ Register a Tobii eye tracker with the lab's study runner, so gaze streams on the
 ```
 :::
 
-[Run]{.task-label} The instructor calibrates the tracker, and a volunteer plays a short mission.
-
 [What lands next to the game data?]{.predict}
+
+::: {.lives-in}
+[Lives in]{.task-label} `src/experiment/sensors/eye_tracker/tobii.py`
+
+`TobiiEyeTracker` is one sensor; any sensor that streams to LSL registers the same way.
+:::
 :::
 
-::: {.result-col .fragment}
-[Observe]{.task-label} [on the presenter's machine]{.src-cap}
+::: {.result-col}
+[Watch for]{.task-label}
 
-::: {.stream-list}
-[TobiiEyeTracker]{.stream-name} Gaze · 60 Hz · 9 channels
-
-[SAR game trial]{.stream-name} one JSON line per step
+::: {.watch-list}
+::: {.watch-item}
+[1]{.watch-num} [Calibration]{.watch-title} The volunteer follows five dots; the tracker checks each point.
 :::
 
-Both streams share the Lab Streaming Layer clock, so each gaze sample lines up
-with the game step and advice around it.
+::: {.watch-item}
+[2]{.watch-num} [Play]{.watch-title} A short mission, with advice on `Alt`.
+:::
+
+::: {.watch-item .fragment}
+[3]{.watch-num} [Two streams, one clock]{.watch-title} LabRecorder lists `TobiiEyeTracker` (gaze, 60 Hz, 9 channels) and the SAR game trial (one JSON line per step).
+:::
+:::
 
 [Interpret]{.var-label} attention: where people look before and after advice
 
-[Nothing to undo · this runs only on the presenter's machine]{.undo}
+[Presenter only · needs the lab's `ixp` package and a Tobii]{.demo-note}
 :::
 
 ::::
 
 ::: {.notes}
-Presenter only: needs the lab's `ixp` package, `tobii_research`, PsychoPy, and
-pylsl. The two calls are the ones the full study block uses (experiment.py lines
-83–88). Set up at rehearsal: add them to the main-game block, switch that block
-to "run" and the others to "skip", then `python -m experiment.experiment`. Keep a
-screenshot of LabRecorder's stream list from rehearsal as the fallback.
+Presenter only: the lab's `ixp` package (not on PyPI), `tobii_research`,
+PsychoPy, pylsl, ray, and LabRecorder, set up at rehearsal (RUNSHEET.md). The
+two calls are the ones the full study block uses (experiment.py lines 83–88);
+the `tobii_test` block in the same file is the sensor-only version. Calibration
+is five points (center and four at 0.2 from the edges); SPACE accepts, R redoes.
+Reveal the third item once LabRecorder is on screen. If the device fails, show
+the rehearsal screenshot of LabRecorder's stream list and move on.
 :::
 
 ---
@@ -2345,38 +2291,10 @@ placeholder.
 
 ---
 
-## {background-image="assets/background.jpg" background-opacity="0.25"}
-
-::: {style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:80vh; text-align:center;"}
-
-![](assets/logo.png){style="max-height:110px; border-radius:0 !important; box-shadow:none !important;"}
-
-::: {style="font-family:'Rubik',sans-serif; font-size:2.8rem; font-weight:900; color:#ffffff; margin-top:0.8rem;"}
-Thanks!
-:::
-
-::: {style="font-size:1.5rem; color:#EC672C; margin-top:1.2rem; font-weight:700;"}
-Questions?
-:::
-
-:::
-
----
-
-<!-- ============ APPENDIX ============ -->
-
-::: {.divider}
-[Appendix]{.divider-title}
-
-[Technical notes and troubleshooting]{.divider-subtitle}
-:::
-
----
-
-## The Code [Map]{.accent}
+## Where to Go [Next]{.accent}
 
 ::: {.hook}
-Where each part lives in the repository, and the API you use to change it.
+Everything you changed today, and where it lives in the repository.
 :::
 
 ::: {.code-map}
@@ -2400,7 +2318,7 @@ Where each part lives in the repository, and the API you use to change it.
 `sensors/`
 :::
 
-[API]{.pkg-label} `build_llm_client` · `LavaRiskVictimPlacer` · `SARGameTrial` [Customize]{.pkg-label .pkg-label-gap} Counts · Timing · Records
+[API]{.pkg-label} `build_llm_client` · `LavaRiskVictimPlacer` · `SARGameTrial` [Customize]{.pkg-label .pkg-label-gap} Counts · LLM provider · Records
 :::
 
 ::: {.record-drop .compose-drop}
@@ -2425,7 +2343,7 @@ Where each part lives in the repository, and the API you use to change it.
 [API]{.pkg-label .pkg-label-block}
 `Placer` · `CameraStrategy`
 
-[Customize]{.pkg-label} Locked rooms · Camera
+[Customize]{.pkg-label} Camera
 :::
 
 ::: {.pkg-card}
@@ -2448,7 +2366,7 @@ Where each part lives in the repository, and the API you use to change it.
 [API]{.pkg-label .pkg-label-block}
 `build_sar_env` · `RescueAction`
 
-[Customize]{.pkg-label} Victims · Rewards · Records
+[Customize]{.pkg-label} Locked rooms · Rewards · Records
 :::
 
 ::: {.pkg-card}
@@ -2471,7 +2389,7 @@ Where each part lives in the repository, and the API you use to change it.
 [API]{.pkg-label .pkg-label-block}
 `SAREnvGUI` · `EdgeVignette`
 
-[Customize]{.pkg-label} Feedback · Info panel
+[Customize]{.pkg-label} Feedback · Info panel · Timing
 :::
 
 ::: {.pkg-card}
@@ -2505,8 +2423,37 @@ Where each part lives in the repository, and the API you use to change it.
 Have the repository open in an editor beside this slide. `mosaic/` is the
 reusable package; `experiment/` is one study built on it, and it is the folder
 attendees copy and change for their own work. Every file named here exists in
-the MOSAIC repository; the API names are the classes and functions the next
-slides change.
+the MOSAIC repository; the API names are the classes and functions the Part Four
+slides changed, and each card's "Customize" line names those slides.
+:::
+
+---
+
+## {background-image="assets/background.jpg" background-opacity="0.25"}
+
+::: {.closing}
+[Thanks!]{.closing-title}
+
+[Questions?]{.closing-sub}
+
+::: {.closing-links}
+[MOSAIC]{.closing-label}
+[github.com/iHuman-Lab/mosaic]{.closing-link}
+[Tutorial materials]{.closing-label}
+[github.com/Bkdogbey/mosaic-smc-tutorial]{.closing-link}
+[iHuman Lab]{.closing-label}
+[ihuman-lab.github.io/lab-website]{.closing-link}
+:::
+:::
+
+---
+
+<!-- ============ APPENDIX ============ -->
+
+::: {.divider}
+[Appendix]{.divider-title}
+
+[Technical notes and troubleshooting]{.divider-subtitle}
 :::
 
 ---
@@ -2524,6 +2471,88 @@ Additional recovery steps for less common installation failures.
 | `pip install -e .` fails to build a wheel | Rerun `python -m pip install --upgrade pip`, then retry |
 | `conda activate` does nothing in PowerShell | Run `conda init powershell` once, reopen the terminal |
 | Mission window opens on the wrong monitor | Press `F11` to leave fullscreen and drag it |
+
+---
+
+## What the Teammate Knows and [Says]{.accent}
+
+:::: {.more-settings}
+
+::: {.more-row}
+::: {.more-text}
+[What it knows]{.more-title}
+
+[The function that turns the game state into the teammate's prompt. The default lists every object, even ones out of view.]{.more-what}
+
+::: {.code-card .mini}
+[`src/experiment/main.py`]{.code-file} [the `gui =` line]{.code-where}
+
+```{.python code-line-numbers="false"}
+SAREnvGUI(..., prompt_builder=my_builder)
+```
+:::
+
+[Interpret]{.var-label} the teammate sees objects the participant cannot (`Visible No`)
+:::
+
+::: {.result-terminal}
+```{.text code-line-numbers="false"}
+Agent: room (0,1) facing West | Carrying: nothing | …
+
+Object       Direction  Visible  Reachable  PathLength
+Victim4      East       Yes      Yes        9
+Victim2      South      Yes      Yes        0
+RedKey1      East       Yes      Yes        5
+PurpleKey1   East       Yes      Yes        6
+PurpleDoor1  South      Yes      Yes        34
+RedDoor1     East       No       Yes        10
+```
+:::
+:::
+
+::: {.more-row}
+::: {.more-text}
+[How it speaks]{.more-title}
+
+[`sparse` asks for one short instruction; `detailed`, the default, for a short briefing. LLM teammates only: it needs a hosted model and an API key.]{.more-what}
+
+::: {.code-card .mini}
+[`configs/experiment.yaml`]{.code-file} [a new top-level line]{.code-where}
+
+```{.yaml code-line-numbers="false"}
+prompt_type: sparse
+```
+:::
+
+[Interpret]{.var-label} how much advice per message
+:::
+
+::: {.speech-pair}
+::: {.speech}
+[detailed · the default, up to 40 words]{.result-label}
+
+“Survivor to your South — get there fast, then swing North for the second one. The locked door East needs the yellow key first.”
+:::
+
+::: {.speech}
+[sparse · one sentence, up to 20 words]{.result-label}
+
+“Survivor to your South — pick them up now, then head North for the next one.”
+:::
+:::
+:::
+
+::::
+
+::: {.notes}
+The table is the start of what MOSAIC's default prompt builder (`build_obs` in
+src/mosaic/llm/process_prompts.py) sends, trimmed to five of its columns; it
+lists every object, including ones outside the participant's view. A
+`prompt_builder=` function replaces it with whatever you choose to send. The two
+quotes are the example replies in MOSAIC's prompt templates
+(src/mosaic/llm/prompts.yaml); `prompt_type` applies to LLM teammates. A
+`response_processor=` function rewrites every reply before it is shown.
+:::
 
 ---
 
@@ -2546,8 +2575,8 @@ pip install llama-index-llms-google-genai
 ```python
 from experiment.llm import LlamaIndexLLMClient
 
-teammate = LlamaIndexLLMClient("openai", "gpt-4o-mini")
-# or: LlamaIndexLLMClient("google", "gemini-1.5-flash")
+teammate = LlamaIndexLLMClient("openai", "gpt-5-mini-2025-08-07")
+# or: LlamaIndexLLMClient("google", "gemini-2.5-flash")
 
 SAREnvGUI(env, llm_client=teammate).run()
 ```

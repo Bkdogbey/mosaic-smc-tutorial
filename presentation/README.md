@@ -17,24 +17,22 @@ consequential tasks. The deck is four parts:
 4. **Configure MOSAIC** — the runtime architecture and the starting code in
    `main.py`, then one slide per setting across four systems: the mission
    (victims, decoys, lava, locked rooms, rewards, time limit), the interface
-   (camera, feedback flashes, info panel), the AI teammate (reliability, advice
-   timing, what it knows and says), and sensing (what each step records, a live
+   (camera, feedback flashes, info panel), the AI teammate (reliability and
+   advice timing), and sensing (what each step records, a live
    eye tracker, the synchronized record). Each task slide follows Change → Run →
    Observe → Interpret: the edit in an editor-style code card, a question for
    the room, and a before/after result rendered from real MOSAIC. The
    synchronized-record slide is a placeholder until the rehearsal recording
-   exists
+   exists. The part closes on the code map ("Where to Go Next")
 
-The code map is in the appendix.
-
-Technical details about installation recovery, the observation schema, the AI
-teammate provider setup live in the appendix for Q&A.
+Installation recovery, what the teammate knows and says (prompt contents and
+`prompt_type`), and the AI teammate provider setup live in the appendix for Q&A.
 
 ## Contents
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (35 slides: 30 main + closing + 4 appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (41 slides: 36 main + closing + 4 appendix)
 ├── mosaic-tutorial.ipynb # optional development prototype; not required by attendees
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
@@ -45,9 +43,9 @@ presentation/
 ├── assets/               # figures used in the deck
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
-    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (slide 31)
+    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (slide 30)
     ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
-    │                     #   Slide 32's task uses it; its result image is assets/chat-advice.png
+    │                     #   Slides 31–32 use it; its result image is assets/chat-advice.png
     └── tweak.py          # all four injection points in one file
 ```
 
@@ -68,7 +66,8 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 
 | File | Source |
 | --- | --- |
-| `gui-screenshot-live.png` | Captured by `tools/capture_interface.py` with the edge vignette frozen mid-flash — the green perimeter glow is the one part of the interface a normal screenshot misses |
+| `gui-screenshot-live.png` | Captured by `tools/capture_interface.py` with the edge vignette frozen mid-flash — the green perimeter glow is the one part of the interface a normal screenshot misses. A sparse room, used on the interface slide |
+| `gui-first-frame.png` | Captured by `tools/capture_first_frame.py` — the stock mission's first frame (crowded room, full "Remaining" count, no flash), the "you should see this" image on the run-the-mission slide |
 | `gui-screenshot.png`, `game-view.png` | MOSAIC docs; superseded by the live capture, kept for reference |
 | `cam-*-live.png` | Captured from the running game by `tools/capture_camera_views.py` — one mission, one frozen frame, re-rendered through each camera with `env.switch_camera()` |
 | `cam-*-annot.png` | The live captures with a white ring on the agent and a dashed outline of its room, so the camera difference is readable from the back of the room |
@@ -77,7 +76,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
 | `gameplay.gif` | Captured by `tools/capture_gameplay.py` — the real GUI compositor driven by a scripted breadth-first walk (a real victim with a green flash, a decoy with a red flash, then another real victim; `SEED=9`, paced slower than live play), built from `configs/experiment.yaml` so it matches what `experiment.main` shows |
 | `controls-*.gif`, `chat-advice.png` | Captured by `tools/capture_controls.py` — one clip per control (arrows, Space, Tab, Alt) with a keycap strip that lights on the pressed key; the advice clip and chat still use `ReliableTeammate` from `labs/advisor.py` |
-| `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed (the view and teammate slides reuse `cam-*-live.png` and `chat-advice.png`) |
+| `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed (the view and teammate slides reuse `cam-*-live.png` and `chat-advice.png`; the advice-timing pair uses `ReliableTeammate`, as the slide keeps it attached) |
 | `cam-*-walk.gif` | Captured by `tools/capture_camera_gifs.py` — one walk through a door rendered through all three cameras frame by frame, with the ring and room outline recomputed per frame; equal frame timing so the three play in step |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
@@ -92,10 +91,11 @@ Regenerate everything with the scripts in `tools/`, in this order:
 
 ```bash
 python tools/capture_interface.py        # full interface, vignette mid-flash
+python tools/capture_first_frame.py      # the stock first frame for the run slide
 python tools/capture_camera_views.py     # play the mission, grab the three views
 python tools/make_camera_annotations.py  # ring + room outline on those captures
 python tools/make_sprites.py             # single tiles for the interface slide
-python tools/capture_gameplay.py         # the animated clip on the run-the-mission slide
+python tools/capture_gameplay.py         # the animated clip on the mission slide
 python tools/capture_controls.py         # one clip per control + the chat still
 python tools/capture_camera_gifs.py      # the three synced camera walks
 python tools/capture_config_results.py   # before/after pairs for the customize series
@@ -127,9 +127,12 @@ Two things to know before regenerating:
 
 1. Send `SETUP.md` to registrants at least a week out.
 2. Re-verify every command in Part 2 against the current `main`. Part 2 now
-   assumes MOSAIC depends on `pygame-ce` (issue 1 below) — **that fix must be
-   merged before the tutorial**, or attendees hit `DIRECTION_LTR` on first run.
-3. Read `RUNSHEET.md`.
+   assumes MOSAIC depends on `pygame-ce` (issue 1 below) and that `Esc` exits
+   cleanly (issue 13) — **both fixes must be merged before the tutorial**, or
+   attendees hit `DIRECTION_LTR` on first run and a traceback on every `Esc`.
+3. Merge this branch so `presentation/labs/` on `main` has `panel.py` and
+   `advisor.py`; slides 30–31 send attendees to the repo for them.
+4. Read `RUNSHEET.md`.
 
 ## Repo issues this tutorial exposed
 
@@ -140,8 +143,9 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    requires `pygame-ce`. `pip install -e .` installs **both**, and `pygame` lands
    last, so the GUI dies with
    `ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'`.
-   Fix: depend on `pygame-ce>=2.5.2`. **Required before the tutorial:** the deck
-   no longer teaches a workaround.
+   Fix: depend on `pygame-ce>=2.5.2` (done in the local checkout, not yet
+   upstream). **Required before the tutorial:** the deck no longer teaches a
+   workaround.
 2. **The obvious workaround for issue 1 does not work.**
    `pip uninstall -y pygame && pip install "pygame-ce>=2.5.2"` leaves pygame-ce
    *broken* — uninstalling `pygame` removes shared files from the namespace, and
@@ -181,7 +185,8 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    the decoy penalty as `-0.5`; `RescueRewards.fake_victim` defaults to `-1.0`.
 10. **`requires-python = ">=3.8"`** is optimistic given the current dependency set;
    the docs say 3.9+ and we only test 3.10.
-12. ~~**`python -m experiment.main` does not run at all.**~~ **Fixed.**
+12. ~~**`python -m experiment.main` does not run at all.**~~ **Fixed locally, not
+   yet upstream** (upstream `main` 1ba2268 still has the imports commented out).
    `src/experiment/main.py` had `from .llm import build_llm_client` and
    `from .placers import LavaRiskVictimPlacer, SectorSpreadLavaPlacer` commented
    out at lines 15–16 while still using all three names, so the script exited
@@ -193,3 +198,8 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    `cam_top_y`, `cam_view_w` and `cam_view_h` are only written when the camera has
    `_update_position` (i.e. `EdgeFollowCamera`). Analyses written against the
    default camera break silently under `AgentConeCamera`.
+13. **`Esc` ends `experiment.main` in a traceback.** After the first mission
+   closes, `main.py` runs a second block, `skip_run("run", "tutorial")`, which
+   calls `pygame.display.Info()` after the GUI has called `pygame.quit()`:
+   `pygame.error: video system not initialized`. Fix: set that block to
+   `skip_run("skip", "tutorial")`. Done in the local checkout, not yet upstream.

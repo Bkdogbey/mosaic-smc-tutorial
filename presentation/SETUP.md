@@ -173,6 +173,14 @@ extra repository, notebook, or Python file is required.
 > commented out in `src/experiment/main.py`, which made the runner exit with
 > `NameError: name 'LavaRiskVictimPlacer' is not defined`.
 
+## 6 · Get the two tutorial files
+
+Two Part Four tasks use small files from the tutorial repository. Download
+`panel.py` and `advisor.py` from
+<https://github.com/Bkdogbey/mosaic-smc-tutorial/tree/main/presentation/labs>
+and save both into `src/experiment/` in your `mosaic` folder. Nothing else
+needs them, and the session shows where they go when you reach those slides.
+
 ## Troubleshooting
 
 | Symptom | Cause and fix |
@@ -200,4 +208,5 @@ pre-built environment on a spare machine.
 ## Links
 
 - Repository — <https://github.com/iHuman-Lab/mosaic>
+- Tutorial materials — <https://github.com/Bkdogbey/mosaic-smc-tutorial>
 - Documentation — <https://ihuman-lab.github.io/mosaic/>

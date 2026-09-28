@@ -22,7 +22,9 @@ assets/results/:
 - panel-before/after.png     mission box, InfoPanel -> labs/panel.py's
                              NoProgressPanel (no "Remaining" count)
 - nudge-before/after.png     chat panel after 10 turns and no Alt,
-                             llm_nudge_interval 50 -> 10
+                             llm_nudge_interval 50 -> 10, with the
+                             ReliableTeammate from labs/advisor.py attached
+                             (the slide before keeps it)
 - *-msg.png                  the chat pairs cropped to the message box
 - prompt-excerpt.txt         the start of what the teammate receives
                              (build_obs), trimmed to five columns
@@ -37,6 +39,7 @@ changes how the building is generated (no seed in 1-59 kept the same doors at
 0.5 and 0.9), so its two halves are two buildings. The slide quotes their
 locked-door counts, so re-check them after re-running.
 """
+import json
 import os
 import pathlib
 import random
@@ -230,13 +233,16 @@ def panel_pair():
 
 
 def nudge_pair():
+    sys.path.insert(0, os.path.join(HERE, "..", "labs"))
+    from advisor import ReliableTeammate
     for name, every in [("before", 50), ("after", 10)]:
         clock = FrozenClock()
         pygame.time.get_ticks = clock
         env = build(**STOCK_COUNTS)
         gui = gui_for(env, config={"fullscreen": False, "max_time": 5,
                                    "llm_nudge_interval": every},
-                      vignette=EdgeVignette(GAME, clock_ms=clock))
+                      vignette=EdgeVignette(GAME, clock_ms=clock),
+                      llm_client=ReliableTeammate(1.0), prompt_builder=json.dumps)
         for _ in range(10):                   # ten turns on the spot, no Alt
             gui.handle_user_input(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_LEFT))
             while gui.user.llm_thread is not None and gui.user.llm_thread.is_alive():
