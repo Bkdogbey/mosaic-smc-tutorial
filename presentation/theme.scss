@@ -1152,7 +1152,7 @@ $heading-font: "Rubik", sans-serif !default;
    an optional-advice decision loop, and research questions use an editorial
    grid instead of repeating the generic card layout. */
 
-/* Why MOSAIC: four requirements arranged around one coordinated study. */
+/* What Is MOSAIC (slide 5): four capabilities arranged around one coordinated study. */
 .need-map {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 210px minmax(0, 1fr);
@@ -1263,7 +1263,95 @@ $heading-font: "Rubik", sans-serif !default;
     line-height: 1.25;
 }
 
-/* What MOSAIC is: presentation-native system map. The diagram remains stable
+/* Why is this hard to study (slide 4): the same two columns with no core
+   between them. The core joins them on slide 5. */
+.need-map.no-core {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Slides 4–5: a picture in each box, on the outer side so the text stays next
+   to the centre. Slide 4 uses line icons; slide 5 uses real MOSAIC images. */
+.need-item.has-visual {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.need-column:last-child .need-item.has-visual {
+    flex-direction: row-reverse;
+}
+
+.need-text {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.need-visual {
+    flex: 0 0 auto;
+}
+
+.need-item .need-visual p {
+    display: flex;
+    gap: 6px;
+    line-height: 0;
+}
+
+.need-visual svg {
+    display: block;
+}
+
+.need-visual.icon svg {
+    width: 64px;
+    height: 64px;
+}
+
+.need-visual.thumb svg,
+.reveal .slides section .need-item .need-visual img {
+    display: block;
+    width: 132px;
+    height: 96px;
+    margin: 0;
+    object-fit: contain;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 4px;
+    background: rgba(0,0,0,0.3);
+    box-shadow: none;
+}
+
+.reveal .slides section .need-item .need-visual.pair img {
+    width: 63px;
+    height: 63px;
+}
+
+/* Slide 5: lines from the MOSAIC core to each of the four boxes. The links
+   share the core's grid cell and reach across the column gaps to the boxes'
+   orange edges. */
+.need-map.linked > .need-column:first-child { grid-column: 1; grid-row: 1; }
+.need-map.linked > .need-links { grid-column: 2; grid-row: 1; position: relative; }
+.need-map.linked > .need-core { grid-column: 2; grid-row: 1; position: relative; z-index: 1; }
+
+/* The core's fill is translucent; an opaque base stops the links at its edge. */
+.need-map.linked > .need-core {
+    background-color: $body-bg;
+}
+.need-map.linked > .need-column:last-child { grid-column: 3; grid-row: 1; }
+
+.need-links svg {
+    position: absolute;
+    top: 0;
+    left: -1.1rem;
+    width: calc(100% + 2.2rem);
+    height: 100%;
+    overflow: visible;
+}
+
+.need-links line {
+    stroke: rgba(236,103,44,0.72);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+}
+
+/* How MOSAIC works (slide 6): presentation-native system map. The diagram remains stable
    when the deck is viewed offline because it does not depend on Mermaid. */
 .overview-diagram {
     width: 100%;
@@ -2461,7 +2549,7 @@ $heading-font: "Rubik", sans-serif !default;
     font-size: 0.72em;
 }
 
-/* Change cards — ::: {.change-grid} of ::: {.change-card} (slide 22) */
+/* Change cards — ::: {.change-grid} of ::: {.change-card} (slide 23) */
 .change-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2736,7 +2824,7 @@ $heading-font: "Rubik", sans-serif !default;
     font-weight: 800;
 }
 
-/* ── Teaming loop (slide 6) ──────────────────────────────────────────────────
+/* ── Teaming loop (slide 8) ──────────────────────────────────────────────────
    Six ordered steps. Three across, two down: six columns would leave each step
    ~150px wide, which is below the readable limit for body text on a projector. */
 .loop-grid {
@@ -2800,7 +2888,7 @@ $heading-font: "Rubik", sans-serif !default;
     min-height: 155px;
 }
 
-/* ── Victim / decoy row labels (slide 18) ─────────────────────────────────────
+/* ── Victim / decoy row labels (slide 19) ─────────────────────────────────────
    assets/victims.png has real victims on the top row and decoys on the bottom;
    nothing in tools/ regenerates it, so the rows are labelled beside the image. */
 .victim-figure {
@@ -2849,7 +2937,7 @@ $heading-font: "Rubik", sans-serif !default;
     justify-content: flex-start;
 }
 
-/* Layer table (slide 21): five rows of two-line cells overflow the slide at the
+/* Layer table (slide 22): five rows of two-line cells overflow the slide at the
    default table scale. */
 .tight-table table {
     font-size: 0.78em;
@@ -2879,7 +2967,7 @@ $heading-font: "Rubik", sans-serif !default;
     font-size: 0.78em;
 }
 
-/* ── Dependency panel (slide 9) ────────────────────────────────────────────── */
+/* ── Dependency panel (slide 10) ────────────────────────────────────────────── */
 .dep-panel {
     padding: 0.85rem 1rem 1rem;
     border-top: 2px solid rgba(255,255,255,0.22);
@@ -2942,7 +3030,7 @@ $heading-font: "Rubik", sans-serif !default;
     text-decoration: none;
 }
 
-/* ── Checkpoint card (slide 14) ────────────────────────────────────────────── */
+/* ── Checkpoint card (slide 15) ────────────────────────────────────────────── */
 .check-card {
     height: 100%;
     padding: 0.9rem 1.1rem;
@@ -2978,7 +3066,7 @@ $heading-font: "Rubik", sans-serif !default;
     border-bottom: none;
 }
 
-/* ── Named wires on the runtime diagram (slide 16) ─────────────────────────── */
+/* ── Named wires on the runtime diagram (slide 17) ─────────────────────────── */
 .arch-wire p {
     display: flex;
     justify-content: center;
@@ -3093,7 +3181,7 @@ $heading-font: "Rubik", sans-serif !default;
     height: 250px;
 }
 
-/* ── Slide 4: two drops under the system row ───────────────────────────────
+/* ── Slide 6: two drops under the system row ───────────────────────────────
    Same five-column grid as .system-row, so each arrow lands under its node:
    participant → study sensors, MOSAIC task → LSL. */
 .drop-row {
@@ -3107,7 +3195,7 @@ $heading-font: "Rubik", sans-serif !default;
 .drop-row .record-drop:first-child { grid-column: 1; }
 .drop-row .record-drop:nth-child(2) { grid-column: 3; }
 
-/* ── Slide 6: teaming loop ─────────────────────────────────────────────────
+/* ── Slide 8: teaming loop ─────────────────────────────────────────────────
    Four decision nodes on one row (part-one style), a return rail above from
    Outcome to Observe, and the optional advice branch below that leaves Decide
    and rejoins at Act. Both rows share one seven-column grid so the vertical
@@ -3312,7 +3400,7 @@ $loop-gap: 84px;
 
 /* ── Part Two: installation slides sized for the back of the room ──────────── */
 
-/* Slide 9: roomier prerequisite rows. */
+/* Slide 10: roomier prerequisite rows. */
 .prereq-split {
     align-items: stretch;
     margin-top: 0.6rem;
@@ -3330,7 +3418,7 @@ $loop-gap: 84px;
     margin-left: -165px;
 }
 
-/* Slide 9: dependencies grouped by what they are for. */
+/* Slide 10: dependencies grouped by what they are for. */
 .dep-panel.dep-groups {
     height: 100%;
     padding: 1rem 1.2rem;
@@ -3370,7 +3458,7 @@ $loop-gap: 84px;
     font-size: 0.64em;
 }
 
-/* Slides 10–11: code on the left, what each line does on the right. */
+/* Slides 11–12: code on the left, what each line does on the right. */
 .install-split {
     align-items: flex-start;
     margin-top: 0.5rem;
@@ -3425,7 +3513,7 @@ $loop-gap: 84px;
     font-size: 0.88em;
 }
 
-/* Slide 11 has only two commands: give them the room. */
+/* Slide 12 has only two commands: give them the room. */
 .reveal .install-code.roomy pre {
     font-size: 0.9em;
 }
@@ -3438,8 +3526,8 @@ $loop-gap: 84px;
 
 /* ── Part Three: run first, then see each part, then customize each one ──── */
 
-/* Slide 17 — runtime architecture with a picture in every block. Reuses slide
-   4's five-column system row, so every arrow lands on a node centre. */
+/* Slide 18 — runtime architecture with a picture in every block. Reuses slide
+   6's five-column system row, so every arrow lands on a node centre. */
 .arch-visual .system-node {
     justify-content: flex-start;
     padding-top: 0.6rem;
@@ -3551,7 +3639,7 @@ $loop-gap: 84px;
     white-space: normal;
 }
 
-/* Slide 20 — each control with its own clip beside the keys. */
+/* Slide 21 — each control with its own clip beside the keys. */
 .phase-clips {
     gap: 0.8rem 1.1rem;
     margin-top: 0.6rem;
@@ -3579,7 +3667,7 @@ $loop-gap: 84px;
     font-size: 0.6em;
 }
 
-/* Slide 22 — the code map: the study folder composing four package cards. */
+/* Slide 23 — the code map: the study folder composing four package cards. */
 .code-map {
     margin-top: 0.5rem;
 }
@@ -3638,7 +3726,7 @@ $loop-gap: 84px;
     text-align: center;
 }
 
-/* Slide 23 — the real composition code beside a map of what each part is. */
+/* Slide 24 — the real composition code beside a map of what each part is. */
 .compose-split {
     align-items: flex-start;
     margin-top: 0.3rem;
@@ -3684,7 +3772,7 @@ $loop-gap: 84px;
     font-weight: 700;
 }
 
-/* Slides 24–30 — one template per component: where it lives, the real API,
+/* Slides 25–31 — one template per component: where it lives, the real API,
    what to change, and one thing to try. */
 .custom-strip p {
     display: flex;
@@ -3746,7 +3834,7 @@ $loop-gap: 84px;
     text-transform: uppercase;
 }
 
-/* ── Slide 19: victim health strip under the victim symbols ────────────────── */
+/* ── Slide 20: victim health strip under the victim symbols ────────────────── */
 .health-strip {
     margin-top: 0.9rem;
     padding-top: 0.7rem;
@@ -3783,7 +3871,7 @@ $loop-gap: 84px;
     font-size: 0.58em;
 }
 
-/* Slide 17: caption under the exact env.step line. */
+/* Slide 18: caption under the exact env.step line. */
 .support-visual.code-visual {
     flex-direction: column;
     gap: 0.25rem;
@@ -3844,7 +3932,7 @@ $loop-gap: 84px;
     overflow-wrap: anywhere;
 }
 
-/* ── Slide 22: the code map as real folder trees ───────────────────────────── */
+/* ── Slide 23: the code map as real folder trees ───────────────────────────── */
 .code-map .pkg-card {
     display: flex;
     flex-direction: column;
@@ -3919,7 +4007,7 @@ $loop-gap: 84px;
     color: #ffffff;
 }
 
-/* ── Slide 23: numbered steps that match the code highlights ───────────────── */
+/* ── Slide 24: numbered steps that match the code highlights ───────────────── */
 .compose-row {
     padding: 0.4rem 0.75rem 0.45rem;
     border-left: none;
@@ -3978,17 +4066,23 @@ $loop-gap: 84px;
     font-size: 0.62em;
 }
 
-/* Slide 7: four research areas, one clear question each. */
-.research-areas .research-question {
-    justify-content: center;
-    min-height: 200px;
-    padding: 1rem 1.4rem;
+/* Slide 3: six research questions as compact cards, two across and three down. */
+.research-grid.question-cards {
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+    border: none;
 }
-.research-areas .research-topic {
-    font-size: 1.2em;
-    margin-bottom: 0.45rem;
+.question-cards .research-question {
+    justify-content: flex-start;
+    min-height: 95px;
+    padding: 0.55rem 1rem;
+    border: 1px solid rgba(255,255,255,0.13);
 }
-.research-areas .research-question > p {
-    font-size: 0.9em;
+.question-cards .research-topic {
+    font-size: 0.95em;
+    margin-bottom: 0.2rem;
+}
+.question-cards .research-question > p {
+    font-size: 0.74em;
     line-height: 1.4;
 }

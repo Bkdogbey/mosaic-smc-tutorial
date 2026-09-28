@@ -7,9 +7,9 @@ The narrative thread is human–AI teaming: MOSAIC is a configurable research
 testbed for studying how humans and AI teammates collaborate during dynamic,
 consequential tasks. The deck is three parts:
 
-1. **What MOSAIC is** — why teaming cannot be studied from isolated prompts, what
-   MOSAIC connects, the search-and-rescue task, the teaming loop, and the
-   research questions it supports
+1. **What MOSAIC is** — the questions human–AI teaming research asks, why they
+   need a configurable testbed, what MOSAIC is and how it works, the search-and-rescue
+   task, and the teaming loop
 2. **Install and run** — the dependency list, `venv` and Conda setup paths, an
    import checkpoint, and the first mission via `python -m experiment.main`
 3. **Understand and customize** — relaunch the game, see each part of it
@@ -36,7 +36,7 @@ presentation/
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
     ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
-    │                     #   Slide 28 shows lines 46–57 — keep them in step if you edit it
+    │                     #   Slide 29 shows lines 46–57 — keep them in step if you edit it
     └── tweak.py          # all four injection points in one file
 ```
 

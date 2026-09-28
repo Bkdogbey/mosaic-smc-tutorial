@@ -67,66 +67,175 @@ Our work spans brain–computer interfaces, human–robot interaction, human-AI 
 
 <!-- ============ PART 1 — no divider slide: the deck opens here ============ -->
 
-## Why Do We Need [MOSAIC]{.accent}?
+## When People Decide with [AI]{.accent}
 
 ::: {.hook}
-Human–AI teaming unfolds through decisions, advice, and consequences over time.
+When an AI teammate advises people in dynamic, high-stakes tasks, human–AI teaming research asks:
 :::
 
-::::: {.need-map}
+:::: {.research-grid .question-cards}
 
-:::: {.need-column}
+::: {.research-question}
+[Trust and reliance]{.research-topic}
 
-::: {.need-item}
-[01]{.need-index}
-
-[Interactive task]{.need-title}
-
-The participant acts and sees the consequences of each decision.
+When do people follow AI advice, and when is that reliance appropriate?
 :::
 
-::: {.need-item}
-[02]{.need-index}
+::: {.research-question}
+[Decisions under pressure]{.research-topic}
 
-[AI teammate]{.need-title}
+How do uncertainty and time constraints affect reliance?
+:::
 
-The teammate receives task context and offers guidance during play.
+::: {.research-question}
+[Situation awareness]{.research-topic}
+
+What happens when the person and AI have access to different information?
+:::
+
+::: {.research-question}
+[Cognitive state]{.research-topic}
+
+How does AI advice affect attention and workload?
+:::
+
+::: {.research-question}
+[AI teammate design]{.research-topic}
+
+Which teammate behaviors and communication strategies improve team performance?
+:::
+
+::: {.research-question}
+[Adaptive assistance]{.research-topic}
+
+When should assistance change with task demands or human performance?
 :::
 
 ::::
 
-::: {.need-core}
-[Human–AI]{.need-core-top}
-
-[TEAMNG]{.need-core-title}
-
-[one configurable testbed]{.need-core-subtitle}
+::: {.punchline}
+Answering these questions requires observing the interaction [as it unfolds over time]{.accent}.
 :::
+
+::: {.notes}
+These are the field's core questions. Each one plays out during the interaction,
+as decisions, advice, and consequences build on each other.
+:::
+
+---
+
+## Why Do We Need a Configurable [Testbed]{.accent}?
+
+::: {.hook}
+Observing teaming as it unfolds takes four capabilities in one experiment. Existing tools rarely offer all four together.
+:::
+
+::::: {.need-map .no-core}
 
 :::: {.need-column}
 
-::: {.need-item}
-[03]{.need-index}
-
-[Experimental control]{.need-title}
-
-Researchers vary the task and the teammate's behavior.
+::: {.need-item .has-visual}
+::: {.need-visual .icon}
+```{=html}
+<svg viewBox="0 0 80 64" role="img" aria-label="Icon: one decision branching into the next">
+  <circle cx="8" cy="32" r="5" fill="#EC672C"/>
+  <line x1="13" y1="32" x2="26" y2="32" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="6" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <path d="M37 28 L61 13 M37 36 L61 51" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="67" cy="10" r="5.5" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="67" cy="54" r="5.5" fill="#EC672C"/>
+</svg>
+```
 :::
 
-::: {.need-item}
+::: {.need-text}
+[01]{.need-index}
+
+[Interactive decision making]{.need-title}
+
+People make a sequence of decisions, and each outcome changes what happens next.
+:::
+:::
+
+::: {.need-item .has-visual}
+::: {.need-visual .icon}
+```{=html}
+<svg viewBox="0 0 64 64" role="img" aria-label="Icon: an advice bubble with a setting inside">
+  <path d="M9 8 H55 a5 5 0 0 1 5 5 V38 a5 5 0 0 1 -5 5 H27 L15 54 V43 H9 a5 5 0 0 1 -5 -5 V13 a5 5 0 0 1 5 -5 Z"
+        fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/>
+  <line x1="14" y1="26" x2="50" y2="26" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
+  <line x1="14" y1="26" x2="36" y2="26" stroke="#EC672C" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="36" cy="26" r="5.5" fill="#EC672C"/>
+</svg>
+```
+:::
+
+::: {.need-text}
+[02]{.need-index}
+
+[A controllable AI teammate]{.need-title}
+
+Researchers need to vary what the AI knows, how reliable it is, and when and how it communicates.
+:::
+:::
+
+::::
+
+:::: {.need-column}
+
+::: {.need-item .has-visual}
+::: {.need-visual .icon}
+```{=html}
+<svg viewBox="0 0 64 64" role="img" aria-label="Icon: three sliders set to different values">
+  <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.8">
+    <line x1="6" y1="14" x2="58" y2="14"/><line x1="6" y1="32" x2="58" y2="32"/><line x1="6" y1="50" x2="58" y2="50"/>
+  </g>
+  <g fill="#252525" stroke="#EC672C" stroke-width="3">
+    <circle cx="20" cy="14" r="6"/><circle cx="44" cy="32" r="6"/><circle cx="30" cy="50" r="6"/>
+  </g>
+</svg>
+```
+:::
+
+::: {.need-text}
+[03]{.need-index}
+
+[Configurable task conditions]{.need-title}
+
+Researchers need to vary information access, uncertainty, time pressure, and the consequences of mistakes.
+:::
+:::
+
+::: {.need-item .has-visual}
+::: {.need-visual .icon}
+```{=html}
+<svg viewBox="0 0 64 64" role="img" aria-label="Icon: three signals aligned on one timeline">
+  <g fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M4 14 Q10 5 16 14 T28 14 T40 14 T52 14 T60 14"/>
+    <path d="M4 36 H14 V28 H24 V36 H34 V28 H46 V36 H60"/>
+    <polyline points="4,52 12,52 16,44 21,60 26,47 30,56 34,52 60,52"/>
+  </g>
+  <line x1="40" y1="2" x2="40" y2="62" stroke="#EC672C" stroke-width="3" stroke-linecap="round"/>
+</svg>
+```
+:::
+
+::: {.need-text}
 [04]{.need-index}
 
 [Synchronized data]{.need-title}
 
-LSL aligns game activity with behavioral and physiological measures such as gaze and pupil diameter.
+Task events, human actions, AI advice, physiological signals, and sensor measurements must share a common timeline.
+:::
 :::
 
 ::::
 
 :::::
 
-::: {.punchline}
-MOSAIC brings these requirements together in [one configurable research testbed]{.accent}.
+::: {.notes}
+The field's big questions all happen over time. To study them you need these four
+things in one session, and that's rarely available.
 :::
 
 ---
@@ -134,7 +243,119 @@ MOSAIC brings these requirements together in [one configurable research testbed]
 ## What Is [MOSAIC]{.accent}?
 
 ::: {.hook}
-MOSAIC connects the participant, task, AI teammate, and study sensors in one synchronized session.
+MOSAIC (Modular System for Adaptive Human–AI Collaboration) is an open-source Python platform for studying human–AI teaming through configurable tasks.
+:::
+
+::::: {.need-map .linked}
+
+:::: {.need-column}
+
+::: {.need-item .has-visual}
+::: {.need-visual .thumb}
+![](assets/game-view.png){fig-alt="One room of the search-and-rescue task: lava, a victim, and doors."}
+:::
+
+::: {.need-text}
+[01]{.need-index}
+
+[Interactive task]{.need-title}
+
+A search-and-rescue mission where each move changes what the participant can do next.
+:::
+:::
+
+::: {.need-item .has-visual}
+::: {.need-visual .thumb}
+![](assets/chat-advice.png){fig-alt="The chat panel with the teammate's reply: Survivor to the north-east, about 3 steps away."}
+:::
+
+::: {.need-text}
+[02]{.need-index}
+
+[Controllable AI teammate]{.need-title}
+
+Scripted or LLM teammates behind one interface. Set what it sees, how reliable it is, and when it speaks.
+:::
+:::
+
+::::
+
+```{=html}
+<div class="need-links" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none">
+  <line x1="50" y1="50" x2="0" y2="24"/><line x1="50" y1="50" x2="0" y2="76"/>
+  <line x1="50" y1="50" x2="100" y2="24"/><line x1="50" y1="50" x2="100" y2="76"/>
+</svg></div>
+```
+
+::: {.need-core}
+[MOSAIC]{.need-core-title}
+
+[one configurable testbed]{.need-core-subtitle}
+:::
+
+:::: {.need-column}
+
+::: {.need-item .has-visual}
+::: {.need-visual .thumb .pair}
+![](assets/cam-room.png){fig-alt="A room shown with the room camera."} ![](assets/cam-cone.png){fig-alt="The same room shown with the cone camera."}
+:::
+
+::: {.need-text}
+[03]{.need-index}
+
+[Configurable conditions]{.need-title}
+
+Map, hazards, camera view, scoring, and feedback are set per study, without changing the package.
+:::
+:::
+
+::: {.need-item .has-visual}
+::: {.need-visual .thumb}
+```{=html}
+<svg viewBox="0 0 132 96" role="img" aria-label="An eye tracker and an EEG trace streaming into Lab Streaming Layer">
+  <path d="M8 28 Q26 12 44 28 Q26 44 8 28 Z" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+  <circle cx="26" cy="28" r="6.5" fill="#EC672C"/>
+  <circle cx="26" cy="28" r="2.5" fill="#252525"/>
+  <polyline points="8,70 14,70 18,58 23,82 28,62 32,76 36,66 40,70 46,70"
+            fill="none" stroke="#EC672C" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M52 30 L72 43 M52 68 L72 55" fill="none" stroke="#EC672C" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="76" y="31" width="48" height="34" rx="6" fill="rgba(236,103,44,0.18)" stroke="#EC672C" stroke-width="2"/>
+  <text x="100" y="54" text-anchor="middle" font-family="Rubik, sans-serif" font-size="16" font-weight="800" fill="#ffffff">LSL</text>
+</svg>
+```
+:::
+
+::: {.need-text}
+[04]{.need-index}
+
+[Synchronized data]{.need-title}
+
+Game events, AI advice, and sensor streams such as gaze share one clock through LSL.
+:::
+:::
+
+::::
+
+:::::
+
+::: {.punchline}
+MOSAIC brings these capabilities together in [one reproducible experimental platform]{.accent}.
+:::
+
+::: {.notes}
+MOSAIC stands for Modular System for Adaptive Human–AI Collaboration. Like a mosaic
+built from tiles, it assembles separate parts (task, teammate, interface, sensing)
+into one study. Each box answers the need in the same position on the last slide:
+the task, a teammate you can control, conditions you set per study, and one
+synchronized record.
+:::
+
+---
+
+## How [MOSAIC]{.accent} Works
+
+::: {.hook}
+Each part is a separate module: the participant acts on the task, the AI teammate advises from task context, and LSL aligns every stream into one session record.
 :::
 
 ::: {.overview-diagram}
@@ -215,9 +436,18 @@ Ready for analysis and replay
 :::
 :::
 
+::: {.notes}
+Here is MOSAIC. You're the participant on the left. You act, the task updates, and
+when you ask, the teammate reads the task context and answers. Everything the
+researcher varies sits in configuration, and everything that happens, including gaze
+and physiology, lands on one clock. Underneath, the reusable parts live in the
+`mosaic` package and each study's choices live in `experiment/`; the code map later
+shows that split.
+:::
+
 ---
 
-## First Testbed: [Search and Rescue]{.accent}
+## The Task: [Search and Rescue]{.accent}
 
 :::: {.columns .scenario-columns}
 
@@ -342,40 +572,8 @@ Compare it with what the participant can see.
 The central question is when and how AI advice [changes human decisions]{.accent}.
 :::
 
----
-
-## What Can [Researchers]{.accent} Study?
-
-:::: {.research-grid .research-areas}
-
-::: {.research-question}
-[Trust and reliance]{.research-topic}
-
-When do people trust and follow an AI teammate?
-:::
-
-::: {.research-question}
-[Evaluating AI teammates]{.research-topic}
-
-Which AI actually makes the team better?
-:::
-
-::: {.research-question}
-[Workload and cognitive state]{.research-topic}
-
-How does mental load change teamwork?
-:::
-
-::: {.research-question}
-[Situation awareness]{.research-topic}
-
-How do people work with an AI that sees more than they do?
-:::
-
-::::
-
-::: {.punchline}
-Next, we will install MOSAIC, launch a mission, and [change the task ourselves]{.accent}.
+::: {.notes}
+Next, we will install MOSAIC, launch a mission, and change the task ourselves.
 :::
 
 ---
@@ -780,7 +978,7 @@ You should see this: the room on the left, the panels on the right.
 ::::
 
 ::: {.notes}
-Same command as slide 13. Most attendees closed the game at the checkpoint; this
+Same command as slide 14. Most attendees closed the game at the checkpoint; this
 gets everyone back into it before the walkthrough. Wait for most windows to be
 open before moving on.
 :::
@@ -908,7 +1106,7 @@ The step API and the grid world.
 ::: {.notes}
 Point at the attendee's own window: the keys they press, the GUI that draws it,
 the environment that decides what happens. The chat image is a real reply from
-the teammate on slide 28. Sensing is study-layer only — the tutorial run has no
+the teammate on slide 29. Sensing is study-layer only — the tutorial run has no
 sensors attached. Sensors never talk to the game directly: each one streams into
 Lab Streaming Layer, which puts game and sensor samples on one clock.
 :::
@@ -1138,7 +1336,7 @@ Four actions, one key each. Each clip shows what the key does.
 :::
 
 ::: {.notes}
-The advice clip uses the grounded teammate from slide 28, so the reply is true
+The advice clip uses the grounded teammate from slide 29, so the reply is true
 for that building. In the attendees' own run the runner attaches the keyless
 dummy teammate, so Alt replies "Currently, no commands are available."
 :::

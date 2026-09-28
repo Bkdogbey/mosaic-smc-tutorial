@@ -6,8 +6,8 @@
 <script src="mosaic-tutorial_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="mosaic-tutorial_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="mosaic-tutorial_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="mosaic-tutorial_files/libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.36">
+<link href="mosaic-tutorial_files/libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
 
   <meta name="dcterms.date" content="2026-10-04">
   <title>MOSAICModular System for Adaptive Human–AI Collaboration</title>
@@ -98,7 +98,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-3cbb1b0ad16463e773561b0aba056618.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-2db874f12b2329498dec68f4eb8f6b70.css">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -229,50 +229,233 @@
 </div>
 <!-- ============ PART 1 — no divider slide: the deck opens here ============ -->
 </section>
-<section id="why-do-we-need-mosaic" class="slide level2">
-<h2>Why Do We Need <span class="accent">MOSAIC</span>?</h2>
+<section id="when-people-decide-with-ai" class="slide level2">
+<h2>When People Decide with <span class="accent">AI</span></h2>
 <div class="hook">
-<p>Human–AI teaming unfolds through decisions, advice, and consequences over time.</p>
+<p>When an AI teammate advises people in dynamic, high-stakes tasks, human–AI teaming research asks:</p>
 </div>
-<div class="need-map">
-<div class="need-column">
-<div class="need-item">
-<p><span class="need-index">01</span></p>
-<p><span class="need-title">Interactive task</span></p>
-<p>The participant acts and sees the consequences of each decision.</p>
+<div class="research-grid question-cards">
+<div class="research-question">
+<p><span class="research-topic">Trust and reliance</span></p>
+<p>When do people follow AI advice, and when is that reliance appropriate?</p>
 </div>
-<div class="need-item">
-<p><span class="need-index">02</span></p>
-<p><span class="need-title">AI teammate</span></p>
-<p>The teammate receives task context and offers guidance during play.</p>
+<div class="research-question">
+<p><span class="research-topic">Decisions under pressure</span></p>
+<p>How do uncertainty and time constraints affect reliance?</p>
 </div>
+<div class="research-question">
+<p><span class="research-topic">Situation awareness</span></p>
+<p>What happens when the person and AI have access to different information?</p>
 </div>
-<div class="need-core">
-<p><span class="need-core-top">Human–AI</span></p>
-<p><span class="need-core-title">TEAMNG</span></p>
-<p><span class="need-core-subtitle">one configurable testbed</span></p>
+<div class="research-question">
+<p><span class="research-topic">Cognitive state</span></p>
+<p>How does AI advice affect attention and workload?</p>
 </div>
-<div class="need-column">
-<div class="need-item">
-<p><span class="need-index">03</span></p>
-<p><span class="need-title">Experimental control</span></p>
-<p>Researchers vary the task and the teammate’s behavior.</p>
+<div class="research-question">
+<p><span class="research-topic">AI teammate design</span></p>
+<p>Which teammate behaviors and communication strategies improve team performance?</p>
 </div>
-<div class="need-item">
-<p><span class="need-index">04</span></p>
-<p><span class="need-title">Synchronized data</span></p>
-<p>LSL aligns game activity with behavioral and physiological measures such as gaze and pupil diameter.</p>
-</div>
+<div class="research-question">
+<p><span class="research-topic">Adaptive assistance</span></p>
+<p>When should assistance change with task demands or human performance?</p>
 </div>
 </div>
 <div class="punchline">
-<p>MOSAIC brings these requirements together in <span class="accent">one configurable research testbed</span>.</p>
+<p>Answering these questions requires observing the interaction <span class="accent">as it unfolds over time</span>.</p>
 </div>
+<aside class="notes">
+<p>These are the field’s core questions. Each one plays out during the interaction, as decisions, advice, and consequences build on each other.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-do-we-need-a-configurable-testbed" class="slide level2">
+<h2>Why Do We Need a Configurable <span class="accent">Testbed</span>?</h2>
+<div class="hook">
+<p>Observing teaming as it unfolds takes four capabilities in one experiment. Existing tools rarely offer all four together.</p>
+</div>
+<div class="need-map no-core">
+<div class="need-column">
+<div class="need-item has-visual">
+<div class="need-visual icon">
+<svg viewbox="0 0 80 64" role="img" aria-label="Icon: one decision branching into the next">
+  <circle cx="8" cy="32" r="5" fill="#EC672C"></circle>
+  <line x1="13" y1="32" x2="26" y2="32" stroke="#ffffff" stroke-width="3" stroke-linecap="round"></line>
+  <circle cx="32" cy="32" r="6" fill="none" stroke="#ffffff" stroke-width="3"></circle>
+  <path d="M37 28 L61 13 M37 36 L61 51" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"></path>
+  <circle cx="67" cy="10" r="5.5" fill="none" stroke="#ffffff" stroke-width="3"></circle>
+  <circle cx="67" cy="54" r="5.5" fill="#EC672C"></circle>
+</svg>
+</div>
+<div class="need-text">
+<p><span class="need-index">01</span></p>
+<p><span class="need-title">Interactive decision making</span></p>
+<p>People make a sequence of decisions, and each outcome changes what happens next.</p>
+</div>
+</div>
+<div class="need-item has-visual">
+<div class="need-visual icon">
+<svg viewbox="0 0 64 64" role="img" aria-label="Icon: an advice bubble with a setting inside">
+  <path d="M9 8 H55 a5 5 0 0 1 5 5 V38 a5 5 0 0 1 -5 5 H27 L15 54 V43 H9 a5 5 0 0 1 -5 -5 V13 a5 5 0 0 1 5 -5 Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"></path>
+  <line x1="14" y1="26" x2="50" y2="26" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.45"></line>
+  <line x1="14" y1="26" x2="36" y2="26" stroke="#EC672C" stroke-width="3" stroke-linecap="round"></line>
+  <circle cx="36" cy="26" r="5.5" fill="#EC672C"></circle>
+</svg>
+</div>
+<div class="need-text">
+<p><span class="need-index">02</span></p>
+<p><span class="need-title">A controllable AI teammate</span></p>
+<p>Researchers need to vary what the AI knows, how reliable it is, and when and how it communicates.</p>
+</div>
+</div>
+</div>
+<div class="need-column">
+<div class="need-item has-visual">
+<div class="need-visual icon">
+<svg viewbox="0 0 64 64" role="img" aria-label="Icon: three sliders set to different values">
+  <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.8">
+    <line x1="6" y1="14" x2="58" y2="14"></line><line x1="6" y1="32" x2="58" y2="32"></line><line x1="6" y1="50" x2="58" y2="50"></line>
+  </g>
+  <g fill="#252525" stroke="#EC672C" stroke-width="3">
+    <circle cx="20" cy="14" r="6"></circle><circle cx="44" cy="32" r="6"></circle><circle cx="30" cy="50" r="6"></circle>
+  </g>
+</svg>
+</div>
+<div class="need-text">
+<p><span class="need-index">03</span></p>
+<p><span class="need-title">Configurable task conditions</span></p>
+<p>Researchers need to vary information access, uncertainty, time pressure, and the consequences of mistakes.</p>
+</div>
+</div>
+<div class="need-item has-visual">
+<div class="need-visual icon">
+<svg viewbox="0 0 64 64" role="img" aria-label="Icon: three signals aligned on one timeline">
+  <g fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M4 14 Q10 5 16 14 T28 14 T40 14 T52 14 T60 14"></path>
+    <path d="M4 36 H14 V28 H24 V36 H34 V28 H46 V36 H60"></path>
+    <polyline points="4,52 12,52 16,44 21,60 26,47 30,56 34,52 60,52"></polyline>
+  </g>
+  <line x1="40" y1="2" x2="40" y2="62" stroke="#EC672C" stroke-width="3" stroke-linecap="round"></line>
+</svg>
+</div>
+<div class="need-text">
+<p><span class="need-index">04</span></p>
+<p><span class="need-title">Synchronized data</span></p>
+<p>Task events, human actions, AI advice, physiological signals, and sensor measurements must share a common timeline.</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The field’s big questions all happen over time. To study them you need these four things in one session, and that’s rarely available.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-is-mosaic" class="slide level2">
 <h2>What Is <span class="accent">MOSAIC</span>?</h2>
 <div class="hook">
-<p>MOSAIC connects the participant, task, AI teammate, and study sensors in one synchronized session.</p>
+<p>MOSAIC (Modular System for Adaptive Human–AI Collaboration) is an open-source Python platform for studying human–AI teaming through configurable tasks.</p>
+</div>
+<div class="need-map linked">
+<div class="need-column">
+<div class="need-item has-visual">
+<div class="need-visual thumb">
+<p><img data-src="assets/game-view.png" alt="One room of the search-and-rescue task: lava, a victim, and doors."></p>
+</div>
+<div class="need-text">
+<p><span class="need-index">01</span></p>
+<p><span class="need-title">Interactive task</span></p>
+<p>A search-and-rescue mission where each move changes what the participant can do next.</p>
+</div>
+</div>
+<div class="need-item has-visual">
+<div class="need-visual thumb">
+<p><img data-src="assets/chat-advice.png" alt="The chat panel with the teammate's reply: Survivor to the north-east, about 3 steps away."></p>
+</div>
+<div class="need-text">
+<p><span class="need-index">02</span></p>
+<p><span class="need-title">Controllable AI teammate</span></p>
+<p>Scripted or LLM teammates behind one interface. Set what it sees, how reliable it is, and when it speaks.</p>
+</div>
+</div>
+</div>
+<div class="need-links" aria-hidden="true"><svg viewbox="0 0 100 100" preserveaspectratio="none">
+  <line x1="50" y1="50" x2="0" y2="24"></line><line x1="50" y1="50" x2="0" y2="76"></line>
+  <line x1="50" y1="50" x2="100" y2="24"></line><line x1="50" y1="50" x2="100" y2="76"></line>
+</svg></div>
+<div class="need-core">
+<p><span class="need-core-title">MOSAIC</span></p>
+<p><span class="need-core-subtitle">one configurable testbed</span></p>
+</div>
+<div class="need-column">
+<div class="need-item has-visual">
+<div class="need-visual thumb pair">
+<p><img data-src="assets/cam-room.png" alt="A room shown with the room camera."> <img data-src="assets/cam-cone.png" alt="The same room shown with the cone camera."></p>
+</div>
+<div class="need-text">
+<p><span class="need-index">03</span></p>
+<p><span class="need-title">Configurable conditions</span></p>
+<p>Map, hazards, camera view, scoring, and feedback are set per study, without changing the package.</p>
+</div>
+</div>
+<div class="need-item has-visual">
+<div class="need-visual thumb">
+<svg viewbox="0 0 132 96" role="img" aria-label="An eye tracker and an EEG trace streaming into Lab Streaming Layer">
+  <path d="M8 28 Q26 12 44 28 Q26 44 8 28 Z" fill="none" stroke="#ffffff" stroke-width="2.5"></path>
+  <circle cx="26" cy="28" r="6.5" fill="#EC672C"></circle>
+  <circle cx="26" cy="28" r="2.5" fill="#252525"></circle>
+  <polyline points="8,70 14,70 18,58 23,82 28,62 32,76 36,66 40,70 46,70" fill="none" stroke="#EC672C" stroke-width="2.5" stroke-linejoin="round"></polyline>
+  <path d="M52 30 L72 43 M52 68 L72 55" fill="none" stroke="#EC672C" stroke-width="2.5" stroke-linecap="round"></path>
+  <rect x="76" y="31" width="48" height="34" rx="6" fill="rgba(236,103,44,0.18)" stroke="#EC672C" stroke-width="2"></rect>
+  <text x="100" y="54" text-anchor="middle" font-family="Rubik, sans-serif" font-size="16" font-weight="800" fill="#ffffff">LSL</text>
+</svg>
+</div>
+<div class="need-text">
+<p><span class="need-index">04</span></p>
+<p><span class="need-title">Synchronized data</span></p>
+<p>Game events, AI advice, and sensor streams such as gaze share one clock through LSL.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="punchline">
+<p>MOSAIC brings these capabilities together in <span class="accent">one reproducible experimental platform</span>.</p>
+</div>
+<aside class="notes">
+<p>MOSAIC stands for Modular System for Adaptive Human–AI Collaboration. Like a mosaic built from tiles, it assembles separate parts (task, teammate, interface, sensing) into one study. Each box answers the need in the same position on the last slide: the task, a teammate you can control, conditions you set per study, and one synchronized record.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-mosaic-works" class="slide level2">
+<h2>How <span class="accent">MOSAIC</span> Works</h2>
+<div class="hook">
+<p>Each part is a separate module: the participant acts on the task, the AI teammate advises from task context, and LSL aligns every stream into one session record.</p>
 </div>
 <div class="overview-diagram">
 <div class="system-row">
@@ -326,9 +509,22 @@
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Here is MOSAIC. You’re the participant on the left. You act, the task updates, and when you ask, the teammate reads the task context and answers. Everything the researcher varies sits in configuration, and everything that happens, including gaze and physiology, lands on one clock. Underneath, the reusable parts live in the <code>mosaic</code> package and each study’s choices live in <code>experiment/</code>; the code map later shows that split.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="first-testbed-search-and-rescue" class="slide level2">
-<h2>First Testbed: <span class="accent">Search and Rescue</span></h2>
+<section id="the-task-search-and-rescue" class="slide level2">
+<h2>The Task: <span class="accent">Search and Rescue</span></h2>
 <div class="columns scenario-columns">
 <div class="column" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
@@ -418,30 +614,19 @@
 <div class="punchline">
 <p>The central question is when and how AI advice <span class="accent">changes human decisions</span>.</p>
 </div>
-</section>
-<section id="what-can-researchers-study" class="slide level2">
-<h2>What Can <span class="accent">Researchers</span> Study?</h2>
-<div class="research-grid research-areas">
-<div class="research-question">
-<p><span class="research-topic">Trust and reliance</span></p>
-<p>When do people trust and follow an AI teammate?</p>
-</div>
-<div class="research-question">
-<p><span class="research-topic">Evaluating AI teammates</span></p>
-<p>Which AI actually makes the team better?</p>
-</div>
-<div class="research-question">
-<p><span class="research-topic">Workload and cognitive state</span></p>
-<p>How does mental load change teamwork?</p>
-</div>
-<div class="research-question">
-<p><span class="research-topic">Situation awareness</span></p>
-<p>How do people work with an AI that sees more than they do?</p>
-</div>
-</div>
-<div class="punchline">
-<p>Next, we will install MOSAIC, launch a mission, and <span class="accent">change the task ourselves</span>.</p>
-</div>
+<aside class="notes">
+<p>Next, we will install MOSAIC, launch a mission, and change the task ourselves.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -771,7 +956,7 @@
 </div>
 </div></div>
 <aside class="notes">
-<p>Same command as slide 13. Most attendees closed the game at the checkpoint; this gets everyone back into it before the walkthrough. Wait for most windows to be open before moving on.</p>
+<p>Same command as slide 14. Most attendees closed the game at the checkpoint; this gets everyone back into it before the walkthrough. Wait for most windows to be open before moving on.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -867,7 +1052,7 @@
 </div>
 </div>
 <aside class="notes">
-<p>Point at the attendee’s own window: the keys they press, the GUI that draws it, the environment that decides what happens. The chat image is a real reply from the teammate on slide 28. Sensing is study-layer only — the tutorial run has no sensors attached. Sensors never talk to the game directly: each one streams into Lab Streaming Layer, which puts game and sensor samples on one clock.</p>
+<p>Point at the attendee’s own window: the keys they press, the GUI that draws it, the environment that decides what happens. The chat image is a real reply from the teammate on slide 29. Sensing is study-layer only — the tutorial run has no sensors attached. Sensors never talk to the game directly: each one streams into Lab Streaming Layer, which puts game and sensor samples on one clock.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1046,7 +1231,7 @@
 </div>
 </div>
 <aside class="notes">
-<p>The advice clip uses the grounded teammate from slide 28, so the reply is true for that building. In the attendees’ own run the runner attaches the keyless dummy teammate, so Alt replies “Currently, no commands are available.”</p>
+<p>The advice clip uses the grounded teammate from slide 29, so the reply is true for that building. In the attendees’ own run the runner attaches the keyless dummy teammate, so Alt replies “Currently, no commands are available.”</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1935,20 +2120,35 @@
       });
     </script>
     <script>
+
     // Restart a slide's clips when it is shown, so each starts at its first frame
+
     // and the three camera clips on the Camera Views slide play in step.
+
     (function () {
+
       function restart(slide) {
+
         slide.querySelectorAll('.camera-view img, .phase img, .run-split img').forEach(function (img) {
+
           var src = img.getAttribute('src');
+
           if (!src || !/\.gif(\?|$)/.test(src)) return;
+
           img.setAttribute('src', src.split('?')[0] + '?t=' + Date.now());
+
         });
+
       }
+
       function hook() { Reveal.on('slidechanged', function (e) { restart(e.currentSlide); }); }
+
       if (window.Reveal && Reveal.on) hook(); else window.addEventListener('load', hook);
+
     })();
+
     </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
