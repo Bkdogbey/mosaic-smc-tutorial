@@ -14,25 +14,26 @@ consequential tasks. The deck is four parts:
    import checkpoint, and the first mission via `python -m experiment.main`
 3. **Experience the SAR mission** — no code: the mission objective, the
    interface and what each tile means, victims and decoys, and the controls
-4. **Configure MOSAIC** — the runtime architecture and the starting code in
-   `main.py`, then one slide per setting across four systems: the mission
-   (victims, decoys, lava, locked rooms, rewards, time limit), the interface
-   (camera, feedback flashes, info panel), the AI teammate (reliability and
-   advice timing), and sensing (what each step records, a live
-   eye tracker, the synchronized record). Each task slide follows Change → Run →
-   Observe → Interpret: the edit in an editor-style code card, a question for
-   the room, and a before/after result rendered from real MOSAIC. The
-   synchronized-record slide is a placeholder until the rehearsal recording
-   exists. The part closes on the code map ("Where to Go Next")
+4. **Configure MOSAIC** — a walk through `experiment/main.py`, the file
+   attendees launched, in five numbered parts: 4.1 the world, 4.2 the camera,
+   4.3 the teammate, 4.4 the interface, 4.5 sensing. Each part opens with one
+   slide: the exact `main.py` lines and three things to change, each as the
+   setting and what it changes for the participant. One focused example
+   follows: counts and the camera (everyone tries), a real LLM and the decoy
+   flash (presenter demos), and what each step records (everyone tries), then a
+   live eye tracker and the synchronized record (a placeholder until the
+   rehearsal recording exists)
 
-Installation recovery, what the teammate knows and says (prompt contents and
-`prompt_type`), and the AI teammate provider setup live in the appendix for Q&A.
+The appendix holds the other changes named on the part slides (locked rooms,
+rescue rewards, time limit, info panel, what the teammate is told, how it
+talks, and a keyless map-reading teammate), installation recovery, and the AI
+teammate provider setup.
 
 ## Contents
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (41 slides: 36 main + closing + 4 appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (46 slides: 35 main + closing + 10 appendix)
 ├── mosaic-tutorial.ipynb # optional development prototype; not required by attendees
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
@@ -43,9 +44,9 @@ presentation/
 ├── assets/               # figures used in the deck
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
-    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (slide 30)
+    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (appendix slide 41)
     ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
-    │                     #   Slides 31–32 use it; its result image is assets/chat-advice.png
+    │                     #   Appendix slide 44 uses it; its result image is assets/chat-advice.png
     └── tweak.py          # all four injection points in one file
 ```
 
@@ -76,7 +77,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
 | `gameplay.gif` | Captured by `tools/capture_gameplay.py` — the real GUI compositor driven by a scripted breadth-first walk (a real victim with a green flash, a decoy with a red flash, then another real victim; `SEED=9`, paced slower than live play), built from `configs/experiment.yaml` so it matches what `experiment.main` shows |
 | `controls-*.gif`, `chat-advice.png` | Captured by `tools/capture_controls.py` — one clip per control (arrows, Space, Tab, Alt) with a keycap strip that lights on the pressed key; the advice clip and chat still use `ReliableTeammate` from `labs/advisor.py` |
-| `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed (the view and teammate slides reuse `cam-*-live.png` and `chat-advice.png`; the advice-timing pair uses `ReliableTeammate`, as the slide keeps it attached) |
+| `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed (the view and teammate slides reuse `cam-*-live.png` and `chat-advice.png`; the nudge pair uses `ReliableTeammate`) |
 | `cam-*-walk.gif` | Captured by `tools/capture_camera_gifs.py` — one walk through a door rendered through all three cameras frame by frame, with the ring and room outline recomputed per frame; equal frame timing so the three play in step |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
@@ -131,7 +132,7 @@ Two things to know before regenerating:
    cleanly (issue 13) — **both fixes must be merged before the tutorial**, or
    attendees hit `DIRECTION_LTR` on first run and a traceback on every `Esc`.
 3. Merge this branch so `presentation/labs/` on `main` has `panel.py` and
-   `advisor.py`; slides 30–31 send attendees to the repo for them.
+   `advisor.py`; appendix slides 41 and 44 send people to the repo for them.
 4. Read `RUNSHEET.md`.
 
 ## Repo issues this tutorial exposed

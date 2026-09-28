@@ -4484,3 +4484,129 @@ $loop-gap: 84px;
     color: rgba(255,255,255,0.55);
     font-size: 0.9em;
 }
+
+/* Small uppercase label above a card's title (the knob cards use it). */
+.change-when {
+    display: block;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.82em;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Folder names in Part Four headings: code font, so llm/ does not read as IIm/. */
+.reveal .slides section h2 code {
+    color: inherit;
+    font-size: 0.92em;
+    font-weight: 700;
+}
+
+/* Part Four: who does this example, under the task sentence. */
+.reveal .slides section p:has(> .mode-tag) {
+    margin: -0.35rem 0 0.8rem;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.62em;
+}
+.mode-tag {
+    display: inline-block;
+    margin-right: 0.5rem;
+    padding: 0.05em 0.6em;
+    border: 1px solid $primary-color;
+    border-radius: 99px;
+    color: $primary-color;
+    font-size: 0.85em;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+/* Part Four section slides: the real main.py lines (and what they produce) on
+   the left, what can be changed in that section on the right. */
+.section-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 1.6rem;
+    align-items: start;
+}
+.reveal .code-card.section-code pre {
+    font-size: 0.52em;
+}
+.reveal .code-card.section-code pre code {
+    line-height: 1.45;
+}
+.section-left .result-img {
+    margin-top: 0.2rem;
+}
+.reveal .slides section .section-left .section-shot img {
+    width: auto;
+    max-width: 100%;
+    max-height: 285px;
+}
+.section-left .lives-in {
+    margin-top: 0.7rem;
+}
+.reveal .slides section .section-left .section-wide img {
+    width: 100%;
+}
+
+/* A shorter placeholder where a capture is still to come (the LLM reply). */
+.placeholder.short {
+    min-height: 150px;
+    margin: 0.2rem 0 0.6rem;
+}
+
+/* Part Four section slides (4.1–4.5): three numbered knobs, each the setting
+   and what it changes for the participant. */
+.knob-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+.reveal .slides section .knob-list > p {
+    margin: 0 0 0.1rem;
+    font-size: 0.68em;
+}
+.knob-card {
+    padding: 0.6rem 0.95rem;
+    border-left: 4px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.045);
+}
+.knob-card.live {
+    border-left-color: $primary-color;
+    background: rgba(236,103,44,0.12);
+}
+.reveal .slides section .knob-card p {
+    margin: 0;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.66em;
+    line-height: 1.45;
+}
+.reveal .slides section .knob-card p + p {
+    margin-top: 0.2rem;
+}
+.knob-card .change-when {
+    color: $primary-color;
+}
+.knob-num {
+    margin-right: 0.45rem;
+    color: $primary-color;
+    font-weight: 800;
+}
+.knob-name {
+    color: #ffffff;
+    font-size: 1.15em;
+    font-weight: 800;
+}
+.knob-effect {
+    color: rgba(255,255,255,0.65);
+}
+.reveal .slides section .section-left > p {
+    margin: 0.7rem 0 0;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.62em;
+}
+.reveal .section-terminal pre {
+    margin-top: 0.3rem;
+    font-size: 0.52em;
+}

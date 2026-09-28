@@ -175,7 +175,7 @@ extra repository, notebook, or Python file is required.
 
 ## 6 · Get the two tutorial files
 
-Two Part Four tasks use small files from the tutorial repository. Download
+Two optional appendix tasks use small files from the tutorial repository. Download
 `panel.py` and `advisor.py` from
 <https://github.com/Bkdogbey/mosaic-smc-tutorial/tree/main/presentation/labs>
 and save both into `src/experiment/` in your `mosaic` folder. Nothing else

@@ -1,10 +1,10 @@
 # Facilitator Run Sheet — MOSAIC Tutorial (two hours)
 
-The rendered deck has 41 slides: 36 in the main tutorial, a closing slide, and
-four appendix slides (the divider, installation recovery, what the teammate knows
-and says, and the AI teammate interface).
-The main sequence runs in four parts: why MOSAIC exists, install it, experience
-one mission, then configure it.
+The rendered deck has 46 slides: 35 in the main tutorial, a closing slide, and
+10 appendix slides (the divider, seven more changes and details, installation
+recovery, and the AI teammate interface). The main sequence runs in four parts: why MOSAIC exists,
+install it, experience one mission, then configure it by walking through
+`experiment/main.py` one part at a time.
 
 ## Before the room opens
 
@@ -16,18 +16,27 @@ one mission, then configure it.
 - [ ] Send `SETUP.md` to attendees before the conference.
 - [ ] Ask one lab member to help with installation during Part Two.
 - [ ] Confirm `PYTHONPATH=src python -m experiment.main` opens a window.
-- [ ] Merge this branch so `presentation/labs/panel.py` and `advisor.py` are on
-      `main` of the tutorial repo — slides 30–31 send attendees there.
+- [ ] `presentation/labs/panel.py` and `advisor.py` are on `main` of the tutorial
+      repo (appendix slides 41 and 44 send people there).
+- [ ] **LLM demo (slide 28), presenter machine only.** Install
+      `llama-index-llms-openai` in `mosaic_env`, put the lab's key in the
+      presenter's `.env`, and add `provider: openai` / `model:` to the YAML only
+      when you reach slide 28. Test `gpt-4o-mini` and `gpt-5-mini-2025-08-07` and
+      pick the model by reply time; if it is not `gpt-4o-mini`, update the model
+      line on slides 27, 28, and 43. **Never put the key in the repo or the deck: the
+      deck is public on GitHub Pages.**
+- [ ] With the key, capture a real LLM reply for slide 28 (it shows a placeholder
+      until then).
 - [ ] Upstream MOSAIC carries the three fixes: `main.py` imports restored with the
       `dummy` default, the `tutorial` block set to `skip` (else `Esc` ends in
       `pygame.error: video system not initialized`), and `pygame-ce` in
       `pyproject.toml`.
-- [ ] Eye-tracker demo (slide 34), presenter laptop only: install the lab's
+- [ ] Eye-tracker demo (slide 33), presenter laptop only: install the lab's
       `ixp`, `tobii_research`, PsychoPy, and pylsl; connect the Tobii; run the
       main-game block of `src/experiment/experiment.py` with the sensor added
       once end to end; keep a screenshot of the LSL stream list as a fallback.
 - [ ] At that rehearsal, record one short session (LabRecorder) and build the
-      aligned timeline for slide 35, which is a placeholder until then.
+      aligned timeline for slide 34, which is a placeholder until then.
 
 ## Timing
 
@@ -36,12 +45,13 @@ one mission, then configure it.
 | 0:00–0:15 | 1–8 | Part One: why MOSAIC | The field's questions, why they need a configurable testbed, what MOSAIC is, how it works. |
 | 0:15–0:50 | 9–14 | Part Two: install | Prerequisites, clone, install and check, run the included mission. |
 | 0:50–1:08 | 15–19 | Part Three: experience | Play one mission as a participant: objective, interface and tiles, victims, controls. No code. |
-| 1:08–1:14 | 20–22 | Part Four: the map | The runtime, then the starting code every task edits. |
-| 1:14–1:26 | 23–26 | The mission | Victims, decoys, and lava; locked rooms; rewards; the time limit. |
-| 1:26–1:37 | 27–30 | The interface | Cameras, then camera, feedback, and info-panel tasks. |
-| 1:37–1:45 | 31–32 | The teammate | Reliability, then advice timing with the same teammate. |
-| 1:45–1:55 | 33–35 | Sensing | What each step records, the live eye tracker, the synchronized record. |
-| 1:55–2:00 | 36–37 | Wrap-up | Where to go next (the code map), then questions; appendix slides as needed. |
+| 1:08–1:14 | 20–22 | Part Four: the map | The runtime, then `main.py` stepped through part by part (4.1–4.5). |
+| 1:14–1:23 | 23–24 | 4.1 The world | Three things to change; everyone changes the counts. |
+| 1:23–1:31 | 25–26 | 4.2 The camera | Three cameras; everyone swaps the camera. |
+| 1:31–1:40 | 27–28 | 4.3 The teammate | Three things to change; the real LLM, live. |
+| 1:40–1:46 | 29–30 | 4.4 The interface | Three things to change; the decoy flash, demoed. |
+| 1:46–1:57 | 31–34 | 4.5 Sensing | Three things to change; what each step records (everyone), the live eye tracker, the synchronized record. |
+| 1:57–2:00 | 35–36 | Wrap-up | Where to go next, then questions; appendix slides as needed. |
 
 ## Part One notes (slides 1–8)
 
@@ -114,58 +124,47 @@ No code in this part. Attendees play the baseline mission and learn to read it.
   (`TunedPickupVictimEnv`), faster near lava, and the bar is drawn only while
   advice is on screen. In the tutorial's run health stays full — say so if asked.
 - Slide 19: each clip shows one action. `Tab` does both pickup and rescue on
-  purpose. The advice clip uses the grounded teammate from slide 31; the slide
+  purpose. The advice clip uses the keyless map-reading teammate from appendix slide 44; the slide
   tells attendees their own `Alt` gets "Currently, no commands are available."
   from the keyless `dummy` teammate. Let everyone move, open a door, pick up a key, and rescue a
   victim before Part Four.
 
-## Part Four notes (slides 20–35): configure MOSAIC
+## Part Four notes (slides 20–34): configure MOSAIC
 
-- Slide 21 (runtime architecture) is the map: which part of the window is which
-  component. Slide 22 steps through the real `main.py` call (press forward to
-  move the highlight); every task that follows edits this call or
-  `configs/experiment.yaml`.
-- Each section follows the order of that call: the mission (23–26), the
-  interface (27–30), the teammate (31–32), and sensing (33–35). The strip at
-  the top of every slide shows the section.
-- Task slides share one layout. Left: Change (an editor-style card: the file and
-  where in it on the header, the edit as a diff underneath, muted line out and
-  orange line in) and Run (what to do after saving, plus a question for the
-  room). Ask the question and wait for a guess, then press forward: Observe shows
-  before/after images rendered from real MOSAIC, Interpret names the research
-  variable, and the undo command resets the file. Every task starts from stock
-  files, except the advice-timing task (32), which keeps the teammate from 31.
-  Let attendees try 23 and 27 live; for the rest, predict and reveal.
-- Every task slide ends its left column with a "Lives in" card: the package
-  file and class behind the setting, and what you would change there for more
-  than the one knob. Point at it; do not read it out. On slide 31 it also says
-  how to switch to a hosted LLM (`provider:` / `model:` in the YAML, key in
-  `.env`, built in `src/experiment/llm.py`).
-- Slide 25 (rewards): the code includes its import; without it the run fails
-  with `NameError`. Slide 26 (time limit) is a one-line YAML change.
+- Part Four walks through `experiment/main.py`, the file attendees launched in
+  Part Two, in five numbered parts: 4.1 the world, 4.2 the camera, 4.3 the
+  teammate, 4.4 the interface, 4.5 sensing. The strip at the top of each slide
+  shows the part.
+- Slide 21 (runtime architecture) maps the window to its components. Slide 22
+  steps through the real `main.py` call (press forward to move the highlight);
+  each highlight is one numbered part, in order.
+- Each part opens with one slide (23, 25, 27, 29, 31): the exact `main.py` lines
+  on the left, **three things to change** on the right, each as the setting and
+  what it changes for the participant. The highlighted one is the example that
+  follows. Keep each to about a minute: name the three, then move on.
+- Example slides share one layout: Change (an editor-style card with the file
+  and where in it, the edit as a diff), Run, a question for the room, then
+  "What happens" with before/after images from real MOSAIC and the undo
+  command. Every example starts from the stock files.
+- The badge under each example says who does it. **Try it** (24 counts, 26
+  camera, 32 records): everyone, live. **Presenter demo** (28 the LLM, 30 the
+  flash): you, on the projector.
 - Top-level YAML keys: `main.py` passes the whole YAML to `SAREnvGUI`, which
   reads `max_time`, `llm_nudge_interval`, and `prompt_type` from the top level.
-  The same keys under `game:` configure the lab's study runner, not this run —
-  that is why the tasks add them as new top-level lines.
-- Slide 23: the YAML counts are per room; the before/after is the same building.
-  Slide 24: `locked_room_prob` at `1.0` hangs the generator — keep it below. The
-  lock setting changes how the building generates, so its before/after are two
-  buildings; the slide quotes their locked-door counts.
-- Slide 27: the three clips are one walk rendered through three cameras. Do not
-  offer `FullviewCamera` or `AgentCenteredCamera` — both raise `AttributeError`
+  The same keys under `game:` configure the lab's study runner, not this run.
+- Slide 24: the YAML counts are per room; the before/after is the same building.
+- Slide 25: the three clips are one walk rendered through three cameras. Do not
+  offer `FullviewCamera` or `AgentCenteredCamera`; both raise `AttributeError`
   on env reset.
-- Slide 30 uses `labs/panel.py` and slide 31 uses `labs/advisor.py`, both from
-  the tutorial repository (github.com/Bkdogbey/mosaic-smc-tutorial, shown on
-  the slides): attendees download each into `src/experiment/` first. Hosted providers need a key and
-  `llama-index`; mention, do not attempt live.
-- Slide 31 says to keep the teammate change; slide 32 builds on it, so the
-  unprompted message is real advice. Anyone who undid slide 31 gets the dummy's
-  "Currently, no commands are available." — same timing, empty content. Slide
-  32's undo resets both files.
-- Slide 33 prints the observation fields; the list lands among the launch
+- Slide 28 (the real LLM): only the presenter connects. `build_llm_client`
+  connects on the first `Alt`, so a bad key shows as a chat error, not a crash.
+  If the API is down, use the keyless teammate (appendix 44) instead. If asked
+  what the LLM actually sees, appendix 42 shows it: every real victim, even out
+  of view, and **no decoys** (`process_prompts.py` skips them).
+- Slide 32 prints the observation fields; the list lands among the launch
   warnings, above the window. The full study runner that streams them needs the
   lab's `ixp` package and LSL, which are not installed in the tutorial.
-- Slide 34 is the live eye-tracking demo, instructor-only. The slide shows no
+- Slide 33 is the live eye-tracking demo, instructor-only. The slide shows no
   installation on purpose: attendees cannot follow along (the lab's `ixp` is
   not on PyPI, and it needs the hardware). Demo setup on the presenter laptop:
   1. Install `ixp` from the lab's sibling repo (`pip install -e ../ixp`),
@@ -184,16 +183,17 @@ No code in this part. Attendees play the baseline mission and learn to read it.
      (TobiiEyeTracker and the game trial).
 
   If the device fails, show the rehearsal screenshot and move on.
-- Slide 35 is a placeholder until the rehearsal recording exists; with one eye
+- Slide 34 is a placeholder until the rehearsal recording exists; with one eye
   tracker in the room, everyone inspects that prepared recording.
 - The result images come from `tools/capture_config_results.py` (and the
   camera and chat captures). Re-run it if MOSAIC's rendering changes, and
-  re-check the locked-door counts quoted on slide 24.
-- Slide 36 is the wrap-up: the code map, with each card's "Customize" line
-  naming the tasks done today. Point at `src/experiment/` as the folder to copy.
-- Appendix slide 40 (what the teammate knows and says) is for Q&A: the prompt
-  table shows the teammate sees objects the participant cannot; `prompt_type`
-  only matters for hosted LLM teammates.
+  re-check the locked-door counts quoted on appendix slide 38.
+- Slide 35 (where to go next) is the code map. Point at `src/experiment/` as
+  the folder to copy for a new study.
+- Appendix 38–44 hold the other changes from the part slides, in the same
+  layout: locked rooms, rescue rewards, the time limit (at 0:00 the timer stops
+  but the mission keeps going), the info panel, what the teammate is told, how
+  it talks (needs the real LLM), and a keyless map-reading teammate.
 
 ## Expected problems
 
@@ -202,11 +202,15 @@ No code in this part. Attendees play the baseline mission and learn to read it.
 | `ModuleNotFoundError: No module named 'mosaic'` | Confirm `mosaic_env` is active and `pip install -e .` completed in the `mosaic` directory. |
 | `NameError: name 'LavaRiskVictimPlacer' is not defined` | Their clone predates the import fix. `git pull` in `mosaic`. |
 | `pygame.error: video system not initialized` after `Esc` | Their clone predates the `tutorial`-block fix. `git pull` in `mosaic`; the mission itself was fine. |
-| `NameError: name 'RescueAction' is not defined` | The rewards import is missing; it is the first line of the slide 25 code card. |
+| `NameError: name 'RescueAction' is not defined` | The rewards import is missing; it is the first line of the appendix slide 39 code card. |
 | `No module named 'experiment'` | Run from the repo root with `PYTHONPATH=src`. |
 | PowerShell cannot load `mosaic_env` | Use `.\mosaic_env\Scripts\Activate.ps1`; the leading `.\` is required. |
 | No window or `No available video device` | The GUI needs a local graphical session. Use the fallback laptop. |
-| `Alt` replies "Currently, no commands are available." | Expected — the runner uses the keyless `dummy` teammate. |
+| `Alt` replies "Currently, no commands are available." | Expected: the runner uses the keyless `dummy` teammate. In the LLM demo it means the `provider:` line is missing or not at the top level of the YAML. |
+| Chat shows an authentication or 401 error | The key in `.env` is mistyped, has spaces, or the file is not in the `mosaic` folder. |
+| Chat shows `No module named 'llama_index'` | `python -m pip install llama-index-llms-openai` with `mosaic_env` active. |
+| LLM replies are slow or show a rate-limit error | Wait and retry; if it persists, switch to the keyless teammate (appendix 44). |
+
 | Generation appears to hang after customization | `locked_room_prob` is at `1.0`. Use `0.9` or less. |
 | More victims than expected | `num_real_victims` is per room; 12 per room across a 3×3 building is 108. |
 | `AttributeError: 'FullviewCamera' object has no attribute 'reset'` | Known bug, same for `AgentCenteredCamera`. Use `AgentFOVCamera`, `AgentConeCamera`, or the default. |
@@ -217,15 +221,13 @@ No code in this part. Attendees play the baseline mission and learn to read it.
 If the session runs long:
 
 1. In Part Three, explain slides 17–18 in one minute each.
-2. In Part Four, ask the question and reveal the result yourself instead of
-   waiting for everyone; show slides 25–26 in one minute each.
-3. Describe the teammate swap on slide 31 without running it (then slide 32's
-   result comes from the slide, not the room).
-4. Drop the eye-tracker demo (34) if the device is not ready; show the
+2. Keep the part slides (23, 25, 27, 29, 31) to thirty seconds each.
+3. Make the camera swap (26) a presenter demo instead of a live try.
+4. Drop the eye-tracker demo (33) if the device is not ready; show the
    rehearsal screenshot instead.
 
 Do not cut the installation checkpoints, the first run, the controls, the
-camera comparison, or the wrap-up (36).
+`main.py` walkthrough (22), or the LLM demo (28).
 
 ## Closing ask
 
