@@ -11,7 +11,8 @@ import os
 import pathlib
 import sys
 
-MOSAIC_SRC = "/home/bennett/Research/mosaic/src"
+# Set MOSAIC_SRC to point at another checkout (e.g. on Windows).
+MOSAIC_SRC = os.environ.get("MOSAIC_SRC", "/home/bennett/Research/mosaic/src")
 os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
 os.environ.setdefault("SDL_AUDIODRIVER", "dummy")
 sys.path.insert(0, MOSAIC_SRC)
@@ -37,6 +38,8 @@ DIRS = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
 ORANGE = (236, 103, 44)
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+if not os.path.exists(FONT):  # not Linux: the bold sans pygame ships with
+    FONT = os.path.join(os.path.dirname(pygame.__file__), "freesansbold.ttf")
 
 
 class FrozenClock:

@@ -5,17 +5,27 @@ researchers, built on the iHuman Lab Quarto reveal.js template.
 
 The narrative thread is human–AI teaming: MOSAIC is a configurable research
 testbed for studying how humans and AI teammates collaborate during dynamic,
-consequential tasks. The deck is three parts:
+consequential tasks. The deck is four parts:
 
-1. **What MOSAIC is** — the questions human–AI teaming research asks, why they
-   need a configurable testbed, what MOSAIC is and how it works, the search-and-rescue
-   task, and the teaming loop
-2. **Install and run** — the dependency list, `venv` and Conda setup paths, an
+1. **Why MOSAIC** — the questions human–AI teaming research asks, why they need
+   a configurable testbed, what MOSAIC is and how it works, search and rescue as
+   the first testbed, and the teaming loop
+2. **Install MOSAIC** — the dependency list, `venv` and Conda setup paths, an
    import checkpoint, and the first mission via `python -m experiment.main`
-3. **Understand and customize** — relaunch the game, see each part of it
-   (architecture, interface, animated controls and cameras), read the code map,
-   then customize one component per slide: config, world, scoring, view,
-   teammate, feedback, and data, each with a "Try it" line
+3. **Experience the SAR mission** — no code: the mission objective, the
+   interface and what each tile means, victims and decoys, and the controls
+4. **Configure MOSAIC** — the runtime architecture and the starting code in
+   `main.py`, then one slide per setting across four systems: the mission
+   (victims, decoys, lava, locked rooms, rewards, time limit), the interface
+   (camera, feedback flashes, info panel), the AI teammate (reliability, advice
+   timing, what it knows and says), and sensing (what each step records, a live
+   eye tracker, the synchronized record). Each task slide follows Change → Run →
+   Observe → Interpret: the edit in an editor-style code card, a question for
+   the room, and a before/after result rendered from real MOSAIC. The
+   synchronized-record slide is a placeholder until the rehearsal recording
+   exists
+
+The code map is in the appendix.
 
 Technical details about installation recovery, the observation schema, the AI
 teammate provider setup live in the appendix for Q&A.
@@ -35,8 +45,9 @@ presentation/
 ├── assets/               # figures used in the deck
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
+    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (slide 31)
     ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
-    │                     #   Slide 29 shows lines 46–57 — keep them in step if you edit it
+    │                     #   Slide 32's task uses it; its result image is assets/chat-advice.png
     └── tweak.py          # all four injection points in one file
 ```
 
@@ -66,6 +77,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
 | `gameplay.gif` | Captured by `tools/capture_gameplay.py` — the real GUI compositor driven by a scripted breadth-first walk (a real victim with a green flash, a decoy with a red flash, then another real victim; `SEED=9`, paced slower than live play), built from `configs/experiment.yaml` so it matches what `experiment.main` shows |
 | `controls-*.gif`, `chat-advice.png` | Captured by `tools/capture_controls.py` — one clip per control (arrows, Space, Tab, Alt) with a keycap strip that lights on the pressed key; the advice clip and chat still use `ReliableTeammate` from `labs/advisor.py` |
+| `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed (the view and teammate slides reuse `cam-*-live.png` and `chat-advice.png`) |
 | `cam-*-walk.gif` | Captured by `tools/capture_camera_gifs.py` — one walk through a door rendered through all three cameras frame by frame, with the ring and room outline recomputed per frame; equal frame timing so the three play in step |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
@@ -86,6 +98,7 @@ python tools/make_sprites.py             # single tiles for the interface slide
 python tools/capture_gameplay.py         # the animated clip on the run-the-mission slide
 python tools/capture_controls.py         # one clip per control + the chat still
 python tools/capture_camera_gifs.py      # the three synced camera walks
+python tools/capture_config_results.py   # before/after pairs for the customize series
 ```
 
 The capture scripts share `tools/_capture_common.py` (MOSAIC path, grid codes,
@@ -95,7 +108,10 @@ is included after the deck body and restarts a slide's clips when it opens.
 All three need `minigrid` and a checkout of the MOSAIC repository; the capture
 script additionally needs MOSAIC's runtime deps (`pygame-ce`, `pygame_gui`,
 `gymnasium`) and runs headless via SDL's dummy driver. Each script takes the
-MOSAIC path from a constant at the top of the file.
+MOSAIC path from a constant at the top of the file, or from the `MOSAIC_SRC`
+environment variable when it is set (e.g. on Windows). With both `pygame` and
+`pygame-ce` installed, `pygame_gui` fails to import; force-reinstall
+`pygame-ce` as in `SETUP.md`.
 
 Two things to know before regenerating:
 

@@ -17,7 +17,8 @@ import os
 import pathlib
 import sys
 
-MOSAIC_SRC = "/home/bennett/Research/mosaic/src"
+# Set MOSAIC_SRC to point at another checkout (e.g. on Windows).
+MOSAIC_SRC = os.environ.get("MOSAIC_SRC", "/home/bennett/Research/mosaic/src")
 os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
 os.environ.setdefault("SDL_AUDIODRIVER", "dummy")
 sys.path.insert(0, MOSAIC_SRC)
