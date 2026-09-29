@@ -4484,3 +4484,214 @@ $loop-gap: 84px;
     color: rgba(255,255,255,0.55);
     font-size: 0.9em;
 }
+
+
+/* ── Restructured Parts 3–4: run the baseline, then build one study ──────── */
+
+/* The SAR Mission slide: a timer tile beside the sprites in the element rail. */
+.mission-rail {
+    gap: 0.55rem;
+}
+.world-clock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 4px;
+    background: #1e1f26;
+    color: #3fcf5a;
+    font-size: 0.62em;
+    font-weight: 800;
+}
+.world-item .keycap {
+    display: inline-flex;
+    justify-content: center;
+    width: 42px;
+    box-sizing: border-box;
+    font-size: 0.6em;
+}
+
+/* Runtime architecture: the interaction loop (orange), the sensing and
+   recording layer (dashed), and the Gymnasium/MiniGrid foundation (muted). */
+.arch-legend p {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+    margin: -0.35rem 0 0.1rem;
+    font-size: 0.5em;
+}
+.lg {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: rgba(255,255,255,0.78);
+    font-weight: 700;
+}
+.lg::before {
+    content: "";
+    width: 22px;
+    height: 12px;
+    border-radius: 2px;
+}
+.lg-loop::before {
+    border: 2px solid $primary-color;
+    background: rgba(236,103,44,0.22);
+}
+.lg-sense::before {
+    border: 2px dashed rgba(255,255,255,0.75);
+}
+.lg-found::before {
+    border: 2px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.05);
+}
+.arch-visual .system-node.in-loop {
+    border: 2px solid rgba(236,103,44,0.75);
+}
+.support-card.in-loop {
+    border: 2px solid rgba(236,103,44,0.75);
+    background: linear-gradient(135deg, rgba(236,103,44,0.16), rgba(236,103,44,0.03));
+}
+.support-card.layer-sense {
+    border: 2px dashed rgba(255,255,255,0.5);
+}
+.support-card.layer-found {
+    border: 2px solid rgba(255,255,255,0.14);
+    opacity: 0.72;
+}
+
+/* Where Changes Are Made: research decision → MOSAIC area → examples → code. */
+.decision-map table {
+    width: 100%;
+    margin-top: 0.9rem;
+    font-size: 0.7em;
+}
+.decision-map td {
+    vertical-align: middle;
+}
+.decision-map td:first-child {
+    color: #ffffff;
+    font-weight: 700;
+}
+.decision-map td:nth-child(2) {
+    color: $primary-color;
+    font-weight: 800;
+    white-space: nowrap;
+}
+.decision-map td:last-child code {
+    font-size: 0.82em;
+    white-space: nowrap;
+}
+
+/* Part Four activity steps: the Part Three area each step uses. */
+.node-area {
+    display: block;
+    margin-top: 0.3rem;
+    color: $primary-color;
+    font-size: 0.82em;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+.activity-steps .advisor-node {
+    display: flex;
+    flex-direction: column;
+    min-height: 175px;
+    padding-top: 1rem;
+}
+.activity-steps .advisor-node > p:last-child {
+    margin-top: auto;
+}
+
+/* Marks anything that still needs a real capture or a built service. */
+.dev-flag {
+    display: inline-block;
+    margin: 0 0 0.45rem 0.4rem;
+    padding: 0.1rem 0.6rem;
+    border: 1px dashed rgba(255,255,255,0.6);
+    border-radius: 99px;
+    color: rgba(255,255,255,0.78);
+    font-size: 0.72em;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+/* Run the Conditions: A and B side by side. */
+.protocol-sequence.two-up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.6rem;
+    margin: 0.9rem 0;
+}
+.protocol-sequence.two-up .protocol-stage {
+    min-height: 0;
+}
+.protocol-sequence.two-up .protocol-stage + .protocol-stage::before {
+    left: -1.65rem;
+}
+
+/* Conditions table: the manipulated row stands out. */
+.conditions-table table {
+    width: 100%;
+    font-size: 0.8em;
+}
+.conditions-split {
+    align-items: start;
+    margin-top: 0.4rem;
+}
+
+/* What Participants Built: four equal cards. */
+.built-rows {
+    margin-top: 1rem;
+}
+.built-rows .change-row {
+    min-height: 190px;
+    padding: 0.9rem 1rem;
+    border-left: none;
+    border-top: 4px solid $primary-color;
+}
+.built-rows .change-row p {
+    font-size: 0.74em;
+    line-height: 1.45;
+}
+.built-rows .change-row p:first-child {
+    margin-bottom: 0.5rem;
+    font-size: 0.86em;
+    white-space: nowrap;
+}
+
+/* Runtime architecture carries a two-sentence hook and a legend, so its
+   pictures shrink to keep the lower row clear of the footer. */
+.hook.hook-tight p {
+    font-size: 0.8em;
+    line-height: 1.35;
+}
+.arch-tight {
+    margin-top: 0.2rem;
+}
+.arch-tight .system-node {
+    min-height: 0;
+}
+.arch-tight .system-node.system-core {
+    min-height: 0;
+}
+.arch-tight .node-visual {
+    height: 100px;
+    margin-bottom: 0.35rem;
+}
+.reveal .slides section .arch-tight .node-visual img {
+    max-height: 100px;
+}
+.arch-tight .support-visual {
+    height: 70px;
+    margin-bottom: 0.25rem;
+}
+.reveal .slides section .arch-tight .support-visual img {
+    max-height: 70px;
+}
+.arch-tight .support-visual svg {
+    height: 44px;
+}

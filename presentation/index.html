@@ -6,8 +6,8 @@
 <script src="mosaic-tutorial_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="mosaic-tutorial_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="mosaic-tutorial_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="mosaic-tutorial_files/libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="mosaic-tutorial_files/libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
 
   <meta name="dcterms.date" content="2026-10-04">
   <title>MOSAICModular System for Adaptive Human–AI Collaboration</title>
@@ -98,7 +98,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-c3ef586d086eb03641a5f10ecfa60e99.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-7c7aaa6c09225f51bbe37279fbe26547.css">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -615,7 +615,7 @@
 <p>The central question is when and how AI advice <span class="accent">changes human decisions</span>.</p>
 </div>
 <aside class="notes">
-<p>Next, we will install MOSAIC, launch a mission, and change the task ourselves.</p>
+<p>Next, we will install MOSAIC, run the included experiment, and then build one small study with it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -634,9 +634,9 @@
 <div class="divider">
 <p><span class="divider-kicker">Part Two</span></p>
 <p><span class="divider-title">Install MOSAIC</span></p>
-<p><span class="divider-path">Check the system, install MOSAIC, and run the mission</span></p>
+<p><span class="divider-path">Check the system, install MOSAIC, and verify it</span></p>
 <div class="you-are-here">
-<p><span class="stop">Why</span> <span class="stop here">Install</span> <span class="stop">Experience</span> <span class="stop">Configure</span></p>
+<p><span class="stop">Why</span> <span class="stop here">Install</span> <span class="stop">Run</span> <span class="stop">Build</span></p>
 </div>
 </div>
 </section>
@@ -685,7 +685,7 @@
 </div>
 </div></div>
 <div class="punchline">
-<p>Nothing to install by hand: the next two slides <span class="accent">set everything up</span>.</p>
+<p>Nothing else to install: no Jupyter and no API key. Part Four will use <span class="accent">a lab-hosted notebook</span>.</p>
 </div>
 </section>
 <section id="clone-mosaic-and-create-the-environment" class="slide level2">
@@ -776,7 +776,7 @@
 </div>
 <div class="line-step">
 <p><span class="line-num">2</span> <span class="line-title">Install MOSAIC</span></p>
-<p>Adds MOSAIC and every package on the previous slide. <code>-e</code> (editable) means your edits take effect without reinstalling; Part Four relies on this.</p>
+<p>Adds MOSAIC and every package on the previous slide. <code>-e</code> (editable) means your own code edits take effect without reinstalling.</p>
 </div>
 <div class="line-step">
 <p><span class="line-num">3</span> <span class="line-title">Check it</span></p>
@@ -785,70 +785,23 @@
 </div>
 </div></div>
 </section>
-<section id="run-the-included-mission" class="slide level2">
-<h2>Run the Included <span class="accent">Mission</span></h2>
-<div class="columns run-split">
-<div class="column" style="width:50%;">
-<div class="panel-tabset install-code">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">macOS / Linux</a></li><li><a href="#tabset-2-2">Windows PowerShell</a></li></ul>
-<div class="tab-content install-code">
-<div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python</span> <span class="at">-m</span> experiment.main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="installation-checkpoint" class="slide level2">
+<h2>Installation <span class="accent">Checkpoint</span></h2>
+<div class="hook">
+<p>Part Two is done when the check prints <code>MOSAIC ready</code>.</p>
 </div>
-<div id="tabset-2-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href=""></a><span class="va">$env</span><span class="op">:</span><span class="va">PYTHONPATH</span> <span class="op">=</span> <span class="st">"src"</span></span>
-<span id="cb6-2"><a href=""></a>python <span class="op">-</span>m experiment<span class="op">.</span><span class="fu">main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="feature-list compact">
-<div class="feature-row">
-<p><span class="feature-name">Window</span> It opens fullscreen. Press <code>F11</code> for a window beside the slides.</p>
-</div>
-<div class="feature-row">
-<p><span class="feature-name">Move</span> Arrow keys turn and walk the agent</p>
-</div>
-<div class="feature-row">
-<p><span class="feature-name">Terminal</span> Font warnings and <code>connect_all failed</code> lines are normal</p>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><img data-src="assets/gui-first-frame.png" alt="The MOSAIC window at launch: a room crowded with victims and lava on the left; the mission, controls, and chat panels on the right"></p>
-<div class="fig-note">
-<p>You should see this: the room on the left, the panels on the right.</p>
-</div>
-</div></div>
-<aside class="notes">
-<p>This is MOSAIC’s own study runner from the cloned repository — no extra file is needed. Hold here until most attendees can move the agent. Ask everyone to keep the game open: Part Three walks through it live. The terminal fills with pygame_gui font warnings and “Timeout during mission generation: connect_all failed” lines on every launch; both are harmless (the level generator retries).</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="first-checkpoint" class="slide level2">
-<h2>First <span class="accent">Checkpoint</span></h2>
 <div class="columns">
 <div class="column" style="width:38%;">
 <div class="check-card">
 <p><span class="check-title">Confirm</span></p>
 <div class="check-item">
-<p>The window opened</p>
+<p>Your prompt begins with <code>(mosaic_env)</code></p>
 </div>
 <div class="check-item">
-<p>Arrow keys move the agent</p>
+<p>pip ended with <code>Successfully installed ... mosaic-0.1.0</code></p>
 </div>
 <div class="check-item">
-<p>The information panel updates</p>
-</div>
-<div class="check-item">
-<p>It stays open for Part Three</p>
+<p>The import check printed <code>MOSAIC ready</code></p>
 </div>
 </div>
 </div><div class="column" style="width:62%;">
@@ -870,64 +823,145 @@
 <td>Activate <code>mosaic_env</code>, rerun <code>pip install -e .</code></td>
 </tr>
 <tr class="even">
-<td><code>No module named 'experiment'</code></td>
-<td>Run from the repo root with <code>PYTHONPATH=src</code></td>
-</tr>
-<tr class="odd">
 <td><code>python --version</code> shows 3.9 or older</td>
 <td>Recreate <code>mosaic_env</code> with Python 3.10 or 3.11</td>
 </tr>
+<tr class="odd">
+<td>PowerShell will not load <code>mosaic_env</code></td>
+<td>Run <code>.\mosaic_env\Scripts\Activate.ps1</code>; the leading <code>.\</code> is required</td>
+</tr>
 <tr class="even">
-<td>No window, or <code>No available video device</code></td>
-<td>Run locally, not over SSH</td>
+<td><code>ensurepip is not available</code></td>
+<td>Install <code>python3-venv</code>, recreate <code>mosaic_env</code></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div></div>
 <div class="punchline">
-<p>Everyone with a window open is ready for <span class="accent">Part Three</span>. Leave it open.</p>
+<p>Everyone who sees <code>MOSAIC ready</code> is installed. Next, we <span class="accent">run it</span>.</p>
 </div>
+<aside class="notes">
+<p>Part Two ends at verification: nobody launches the game yet. Hold here until most attendees see MOSAIC ready. Less common failures are on the appendix’s installation recovery slide while helpers work with individual machines.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <!-- ============ PART 3 ============ -->
 <div class="divider">
 <p><span class="divider-kicker">Part Three</span></p>
-<p><span class="divider-title">Experience the SAR Mission</span></p>
-<p><span class="divider-path">Play one mission and learn to read the screen</span></p>
+<p><span class="divider-title">Run and Understand MOSAIC</span></p>
+<p><span class="divider-path">Launch the included experiment, then see how it is assembled</span></p>
 <div class="you-are-here">
-<p><span class="stop">Why</span> <span class="stop">Install</span> <span class="stop here">Experience</span> <span class="stop">Configure</span></p>
+<p><span class="stop">Why</span> <span class="stop">Install</span> <span class="stop here">Run</span> <span class="stop">Build</span></p>
 </div>
 </div>
 </section>
-<section id="the-search-and-rescue-mission" class="slide level2">
-<h2>The Search-and-Rescue <span class="accent">Mission</span></h2>
+<section id="run-the-included-experiment" class="slide level2">
+<h2>Run the Included <span class="accent">Experiment</span></h2>
+<div class="columns run-split">
+<div class="column" style="width:50%;">
+<div class="panel-tabset install-code">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">macOS / Linux</a></li><li><a href="#tabset-2-2">Windows PowerShell</a></li></ul>
+<div class="tab-content install-code">
+<div id="tabset-2-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python</span> <span class="at">-m</span> experiment.main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-2-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href=""></a><span class="va">$env</span><span class="op">:</span><span class="va">PYTHONPATH</span> <span class="op">=</span> <span class="st">"src"</span></span>
+<span id="cb6-2"><a href=""></a>python <span class="op">-</span>m experiment<span class="op">.</span><span class="fu">main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="feature-list compact">
+<div class="feature-row">
+<p><span class="feature-name">Window</span> It opens fullscreen. Press <code>F11</code> for a window beside the slides.</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Focus</span> If the keys do nothing, click the game window first</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Move</span> Arrow keys turn and walk the red triangle</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Terminal</span> Font warnings and <code>connect_all failed</code> lines are normal</p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="assets/gui-first-frame.png" alt="The MOSAIC window at launch: a room crowded with victims and lava on the left; the mission, controls, and chat panels on the right"></p>
+<div class="fig-note">
+<p>You should see this: the room on the left, the panels on the right. Keep it open.</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>The first launch belongs to Part Three: this is the included study composition in src/experiment/main.py, run from the cloned repository with no extra file. Hold here until most attendees can move the agent. The terminal fills with pygame_gui font warnings and “Timeout during mission generation: connect_all failed” lines on every launch; both are harmless (the level generator retries). If it fails: <code>No module named 'experiment'</code> means run from the repository root with PYTHONPATH=src; no window or <code>No available video device</code> means a remote session, so use a local laptop; <code>NameError: name 'LavaRiskVictimPlacer'</code> means the clone predates the import fix, so <code>git pull</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-sar-mission" class="slide level2">
+<h2>The SAR <span class="accent">Mission</span></h2>
 <div class="hook">
-<p>Explore the building, tell real victims from decoys, and decide who to rescue before time runs out.</p>
+<p>Rescue the real victims, avoid decoys and lava, and beat the clock.</p>
 </div>
 <div class="columns scenario-columns">
-<div class="column" style="width:58%;">
+<div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/gameplay.gif" class="quarto-figure quarto-figure-center" alt="The real interface: the agent rescues a real victim (green flash), then a decoy (red flash), then another real victim." height="340"></p>
+<p><img data-src="assets/gameplay.gif" class="quarto-figure quarto-figure-center" alt="The real interface: the agent rescues a real victim (green flash), then a decoy (red flash), then another real victim." height="360"></p>
 </figure>
 </div>
-</div><div class="column" style="width:42%;">
-<div class="scenario-brief">
-<p><span class="scenario-label">Explore</span></p>
-<p>Move room to room. A locked door needs the key of the same color.</p>
-<p><span class="scenario-label">Identify</span></p>
-<p>Both are red T shapes. A real victim’s stem is centered; a decoy’s is off-center.</p>
-<p><span class="scenario-label">Decide</span></p>
-<p>A real victim earns a point, a decoy costs one, and the clock keeps running.</p>
+</div><div class="column" style="width:40%;">
+<div class="world-rail mission-rail">
+<div class="world-item">
+<p><img data-src="assets/sprites/victim-real.png"></p>
+<p><span class="world-name">Real victim</span> <span class="world-note">+1 when rescued</span></p>
+</div>
+<div class="world-item">
+<p><img data-src="assets/sprites/victim-decoy.png"></p>
+<p><span class="world-name">Decoy</span> <span class="world-note">−1 when rescued; its stem is off-center</span></p>
+</div>
+<div class="world-item">
+<p><img data-src="assets/sprites/lava.png"></p>
+<p><span class="world-name">Lava</span> <span class="world-note">stepping in ends the mission</span></p>
+</div>
+<div class="world-item">
+<p><img data-src="assets/sprites/door-locked.png"></p>
+<p><span class="world-name">Doors and keys</span> <span class="world-note">a locked door needs the key of its color</span></p>
+</div>
+<div class="world-item">
+<p><span class="world-clock">5:00</span></p>
+<p><span class="world-name">Time and score</span> <span class="world-note">five minutes; the panel keeps the score</span></p>
+</div>
+<div class="world-item">
+<p><span class="keycap">Alt</span></p>
+<p><span class="world-name">AI advice</span> <span class="world-note">on request, in the chat panel</span></p>
+</div>
 </div>
 </div></div>
 <div class="punchline">
 <p>Every choice has <span class="accent">a consequence you can see and score</span>.</p>
 </div>
 <aside class="notes">
-<p>No code in this part: the goal is to know the mission the way a participant does. The clip is the real interface: a real victim (green flash, +1), a decoy (red flash, -1), then another real victim.</p>
+<p>The clip is the real interface: a real victim (green flash, +1), a decoy (red flash, −1), then another real victim. Both are red T shapes; the decoy’s stem is off-center. The clock is the GUI’s default five minutes. In this baseline the teammate is the keyless dummy placeholder, so Alt answers “Currently, no commands are available.” Part Four attaches a controlled teammate. Victim health is a study-layer feature that this run does not activate; it is in the appendix.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -943,26 +977,29 @@
 <section id="game-interface" class="slide level2">
 <h2>Game <span class="accent">Interface</span></h2>
 <div class="hook">
-<p>What each tile means, and where to read the mission.</p>
+<p>What each region of the window shows, and what each tile means.</p>
 </div>
 <div class="columns interface-split">
 <div class="column" style="width:73%;">
 <div class="annotated">
 <p><img data-src="assets/gui-screenshot-live.png" alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue" height="520"></p>
 <div class="anno fragment fade-in-then-out mid" style="--x:0.3%; --y:0.4%; --w:66%; --h:99%;">
-<p>Game viewport — the green flash is rescue feedback</p>
+<p>Game viewport — the room you are in</p>
 </div>
 <div class="anno fragment fade-in-then-out left" style="--x:67.7%; --y:5%; --w:31.5%; --h:9.8%;">
-<p>Information panel — rescued, remaining, steps, inventory</p>
+<p>Mission-information panel — rescued, remaining, steps, inventory</p>
 </div>
 <div class="anno fragment fade-in-then-out left" style="--x:67.7%; --y:15.2%; --w:31.5%; --h:10.4%;">
-<p>Mission status and score — reward and the clock</p>
+<p>Score and time — reward and the clock</p>
 </div>
 <div class="anno fragment fade-in-then-out left" style="--x:67.7%; --y:25.8%; --w:31.5%; --h:23.2%;">
 <p>Controls, always on screen</p>
 </div>
 <div class="anno fragment fade-in-then-out left" style="--x:67.1%; --y:50.4%; --w:32.5%; --h:49.2%;">
-<p>Chat panel — where AI teammate advice arrives</p>
+<p>AI chat panel — where the teammate’s advice arrives</p>
+</div>
+<div class="anno fragment fade-in-then-out mid" style="--x:0.3%; --y:0.4%; --w:66%; --h:99%;">
+<p>Event feedback vignette — green after a rescue, red after a decoy</p>
 </div>
 </div>
 </div><div class="column" style="width:27%;">
@@ -997,6 +1034,1114 @@
 </div>
 </div>
 </div></div>
+</section>
+<section id="controls-and-gameplay" class="slide level2">
+<h2>Controls and <span class="accent">Gameplay</span></h2>
+<div class="hook">
+<p>Four actions. Try each: move, open a door, ask for advice, rescue.</p>
+</div>
+<div class="phase-grid phase-clips">
+<div class="phase">
+<p><img data-src="assets/controls-navigate.gif" alt="The agent walks and turns inside a room while the arrow keycaps light up"></p>
+<div class="phase-body">
+<p><span class="phase-name">Navigate</span></p>
+<div class="key-row">
+<p><span class="keycap">↑</span> <span class="key-action">Move forward one tile</span></p>
+</div>
+<div class="key-row">
+<p><span class="keycap">←</span><span class="keycap">→</span> <span class="key-action">Turn to face a new direction</span></p>
+</div>
+</div>
+</div>
+<div class="phase">
+<p><img data-src="assets/controls-open.gif" alt="The agent walks up to a closed yellow door and Space opens it"></p>
+<div class="phase-body">
+<p><span class="phase-name">Open</span></p>
+<div class="key-row">
+<p><span class="keycap wide">Space</span> <span class="key-action">Open the door you are facing</span></p>
+</div>
+<p><span class="phase-note">Locked doors open only while you carry the matching key.</span></p>
+</div>
+</div>
+<div class="phase">
+<p><img data-src="assets/controls-pickup.gif" alt="Tab picks up a key, then Tab rescues a victim and the view flashes green"></p>
+<div class="phase-body">
+<p><span class="phase-name">Pick up or rescue</span></p>
+<div class="key-row">
+<p><span class="keycap">Tab</span> <span class="key-action">Take the key, or rescue the victim, you are facing</span></p>
+</div>
+</div>
+</div>
+<div class="phase">
+<p><img data-src="assets/controls-advice.gif" alt="Alt asks the teammate; the chat panel shows thinking, then the reply, and blinks"></p>
+<div class="phase-body">
+<p><span class="phase-name">Request advice</span></p>
+<div class="key-row">
+<p><span class="keycap">Alt</span> <span class="key-action">Ask the AI teammate</span></p>
+</div>
+<p><span class="phase-note">In this baseline the teammate is a placeholder: it answers “Currently, no commands are available.”</span></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The advice clip uses the grounded teammate from the appendix’s Swap the AI Teammate slide, so the reply is true for that building. In the attendees’ own run the runner attaches the keyless dummy teammate, so Alt replies “Currently, no commands are available.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="runtime-architecture" class="slide level2">
+<h2>Runtime <span class="accent">Architecture</span></h2>
+<div class="hook hook-tight">
+<p>Human actions, the GUI, the SAR environment, and the AI teammate form the interaction loop. Sensors record the session on a shared clock.</p>
+</div>
+<div class="arch-legend">
+<p><span class="lg lg-loop">Interaction loop</span> <span class="lg lg-sense">Sensing and recording</span> <span class="lg lg-found">Gymnasium/MiniGrid foundation</span></p>
+</div>
+<div class="overview-diagram arch-visual arch-tight">
+<div class="system-row">
+<div class="system-node visual-node in-loop">
+<div class="node-visual keys-visual">
+<p><span class="keycap">↑</span> <span class="keycap">←</span> <span class="keycap">→</span> <span class="keycap wide">Space</span> <span class="keycap">Tab</span> <span class="keycap">Alt</span></p>
+</div>
+<p><span class="system-title">Human participant</span></p>
+<p>Watches the screen and presses keys.</p>
+</div>
+<div class="system-link two-way">
+<p><span class="link-top">keys</span></p>
+<p><span class="link-bottom">frames</span></p>
+</div>
+<div class="system-node system-core visual-node">
+<div class="node-visual">
+<p><img data-src="assets/gui-screenshot-live.png" alt="The MOSAIC interface"></p>
+</div>
+<p><span class="system-title">MOSAIC GUI</span> <span class="node-path"><code>mosaic.gui</code></span></p>
+<p>Game view, panels, chat, and feedback.</p>
+</div>
+<div class="system-link two-way">
+<p><span class="link-top">action</span></p>
+<p><span class="link-bottom">observation</span></p>
+</div>
+<div class="system-node visual-node in-loop">
+<div class="node-visual">
+<p><img data-src="assets/cam-full.png" alt="The whole search-and-rescue building"></p>
+</div>
+<p><span class="system-title">SAR environment</span> <span class="node-path"><code>mosaic.sar</code></span></p>
+<p>Rooms, victims, rules, and rewards.</p>
+</div>
+</div>
+<div class="drop-row arch-drops">
+<div class="record-drop">
+<p><span class="record-drop-label">physiological signals</span></p>
+</div>
+<div class="record-drop two-way-drop">
+<p><span class="record-drop-label">context · advice</span></p>
+</div>
+<div class="record-drop built-on">
+<p><span class="record-drop-label">built on</span></p>
+</div>
+</div>
+<div class="support-row">
+<div class="support-card layer-sense">
+<div class="support-visual">
+<svg viewbox="0 0 330 76" role="img" aria-label="Representative icon: an eye tracker and an EEG trace streaming into Lab Streaming Layer">
+  <path d="M6 38 Q46 8 86 38 Q46 68 6 38 Z" fill="none" stroke="#ffffff" stroke-width="3"></path>
+  <circle cx="46" cy="38" r="12" fill="#EC672C"></circle>
+  <circle cx="46" cy="38" r="4.5" fill="#252525"></circle>
+  <polyline points="100,38 112,38 119,18 127,58 134,26 141,48 147,34 153,38 176,38" fill="none" stroke="#EC672C" stroke-width="3" stroke-linejoin="round"></polyline>
+  <line x1="184" y1="38" x2="226" y2="38" stroke="#EC672C" stroke-width="3"></line>
+  <polygon points="226,31 238,38 226,45" fill="#EC672C"></polygon>
+  <rect x="244" y="14" width="80" height="48" rx="7" fill="rgba(236,103,44,0.18)" stroke="#EC672C" stroke-width="2.5"></rect>
+  <text x="284" y="45" text-anchor="middle" font-family="Rubik, sans-serif" font-size="22" font-weight="800" fill="#ffffff">LSL</text>
+</svg>
+</div>
+<p><span class="system-title">Sensors → LSL</span> <span class="node-path"><code>experiment/</code></span></p>
+<p>Eye tracker and EEG stream through Lab Streaming Layer, time-aligned with the game.</p>
+</div>
+<div class="support-card in-loop">
+<div class="support-visual">
+<p><img data-src="assets/chat-advice.png" alt="The chat panel showing the reply: Survivor to the north-east, about 3 steps away."></p>
+</div>
+<p><span class="system-title">AI teammate</span> <span class="node-path"><code>mosaic.llm</code></span></p>
+<p>Reads the task, replies in the chat.</p>
+</div>
+<div class="support-card layer-found">
+<div class="support-visual code-visual">
+<p><code>self.obs, reward, terminated, truncated, info = self.env.step(action)</code></p>
+<p><span class="code-visual-cap"><code>src/mosaic/gui/user.py:53</code></span></p>
+</div>
+<p><span class="system-title">Gymnasium + MiniGrid</span></p>
+<p>The step API and the grid world.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Three layers: the orange blocks are the interaction loop, the dashed block is sensing and recording, the muted block is the foundation everything is built on. Point at the attendee’s own window: the keys they press, the GUI that draws it, the environment that decides what happens. The chat image is a real reply from the grounded teammate on the appendix’s Swap the AI Teammate slide. Sensing is study-layer only — the tutorial run has no sensors attached. Sensors never talk to the game directly: each one streams into Lab Streaming Layer, which puts game and sensor samples on one clock.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-experiment.main-assembles-the-experiment" class="slide level2">
+<h2>How <code>experiment.main</code> Assembles <span class="accent">the Experiment</span></h2>
+<div class="hook">
+<p><code>src/experiment/main.py</code> is the composition point for the included study.</p>
+</div>
+<div class="columns compose-split">
+<div class="column" style="width:60%;">
+<div class="src">
+<p><span class="src-cap"><code>src/experiment/main.py</code> · simplified: building size and YAML lookups left out</span></p>
+<div class="compose-code">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-code-line-numbers="|1-7|9|11|13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>env <span class="op">=</span> build_sar_env(</span>
+<span id="cb7-2"><a href=""></a>    screen_size<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb7-3"><a href=""></a>    victim_placer<span class="op">=</span>LavaRiskVictimPlacer(...),</span>
+<span id="cb7-4"><a href=""></a>    lava_placer<span class="op">=</span>SectorSpreadLavaPlacer(...),</span>
+<span id="cb7-5"><a href=""></a>    locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
+<span id="cb7-6"><a href=""></a>    camera_strategy<span class="op">=</span>AgentFOVCamera(),</span>
+<span id="cb7-7"><a href=""></a>)</span>
+<span id="cb7-8"><a href=""></a></span>
+<span id="cb7-9"><a href=""></a>teammate <span class="op">=</span> build_llm_client(provider<span class="op">=</span>config.get(<span class="st">"provider"</span>, <span class="st">"dummy"</span>))</span>
+<span id="cb7-10"><a href=""></a></span>
+<span id="cb7-11"><a href=""></a>gui <span class="op">=</span> SAREnvGUI(env, config<span class="op">=</span>config, llm_client<span class="op">=</span>teammate)</span>
+<span id="cb7-12"><a href=""></a></span>
+<span id="cb7-13"><a href=""></a>gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="compose-map">
+<div class="compose-row">
+<p><span class="compose-num">1</span> <span class="compose-what">Task</span></p>
+<p><code>mosaic.sar</code>: building, victims, decoys, lava, locked rooms</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">2</span> <span class="compose-what">Information</span></p>
+<p><code>mosaic.core.camera</code>: the whole-room view</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">3</span> <span class="compose-what">Teammate</span></p>
+<p><code>mosaic.llm</code> client; the keyless <code>dummy</code> by default</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">4</span> <span class="compose-what">Interface</span></p>
+<p><code>mosaic.gui</code>: window, panels, feedback, and the game loop</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">+</span> <span class="compose-what">Scoring</span></p>
+<p>Default <code>RescueRewards</code>; pass <code>action=</code> to change it</p>
+</div>
+</div>
+</div></div>
+<div class="punchline">
+<p><code>experiment.main</code> selects and connects the components. <span class="accent">The reusable implementations remain in <code>mosaic</code>.</span></p>
+</div>
+<aside class="notes">
+<p>This is the included study composition used for the tutorial, not the only way to use MOSAIC: any script can import the same pieces and connect them differently. Step through the highlights; each number on the right is one highlight. The exact lines (31–51, with the building size and the YAML lookups) are on the appendix’s Mission Composition slide. There is no rewards argument in this call: scoring uses RescueRewards’ defaults (+1 / −1 / −2) unless you pass action=RescueAction(rewards=…). This is main.py as the tutorial needs it, imports enabled and the provider defaulting to “dummy”; upstream must carry that fix before the session.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="where-changes-are-made" class="slide level2">
+<h2>Where Changes Are <span class="accent">Made</span></h2>
+<div class="hook">
+<p>Each research decision maps to one area of MOSAIC.</p>
+</div>
+<div class="decision-map">
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Research decision</th>
+<th>MOSAIC area</th>
+<th>Examples</th>
+<th>Lives in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Task performed by the participant</td>
+<td>SAR</td>
+<td>Victims, hazards, rewards, time</td>
+<td><code>mosaic.sar</code> · <code>experiment/placers.py</code></td>
+</tr>
+<tr class="even">
+<td>Information available to the participant</td>
+<td>GUI</td>
+<td>Camera, panels, feedback</td>
+<td><code>mosaic.core.camera</code> · <code>mosaic.gui</code></td>
+</tr>
+<tr class="odd">
+<td>Behavior of the AI teammate</td>
+<td>AI interface</td>
+<td>Provider, reliability, timing, prompt</td>
+<td><code>mosaic.llm</code> · <code>experiment/llm.py</code></td>
+</tr>
+<tr class="even">
+<td>Information recorded by the study</td>
+<td>Sensing and logging</td>
+<td>Actions, advice, gaze, outcomes</td>
+<td><code>mosaic.sar.observations</code> · <code>experiment/sensors/</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="punchline">
+<p>The appendix has a worked change for each area. Part Four uses <span class="accent">all four in one study</span>.</p>
+</div>
+<aside class="notes">
+<p>One map instead of a tour of settings. The time limit is a task decision but is read by the GUI (<code>max_time</code> in <code>SAREnvGUI</code>); advice timing is read there too (<code>llm_nudge_interval</code>). The appendix keeps the one-setting tasks (counts, locked rooms, rewards, time, cameras, feedback, info panel, teammate, timing, prompts, records) for anyone who wants to try them after the session.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="from-baseline-to-study" class="slide level2">
+<h2>From Baseline to <span class="accent">Study</span></h2>
+<div class="study-path">
+<div class="study-stage">
+<p><span class="study-title">Run</span></p>
+<p>You launched the included experiment and played it.</p>
+</div>
+<div class="study-stage">
+<p><span class="study-title">Locate</span></p>
+<p>You found where the task, the view, the teammate, and the record are set.</p>
+</div>
+<div class="study-stage study-active">
+<p><span class="study-title">Combine</span></p>
+<p>Next, use them together to answer one question.</p>
+</div>
+</div>
+<div class="punchline">
+<p>You have run the baseline and identified its configurable components. Next, you will combine them to answer <span class="accent">one human–AI teaming question</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<!-- ============ PART 4 ============ -->
+<div class="divider">
+<p><span class="divider-kicker">Part Four</span></p>
+<p><span class="divider-title">Build a Human–AI Reliability Study</span></p>
+<p><span class="divider-path">One question, two conditions, one behavioral record</span></p>
+<div class="you-are-here">
+<p><span class="stop">Why</span> <span class="stop">Install</span> <span class="stop">Run</span> <span class="stop here">Build</span></p>
+</div>
+</div>
+</section>
+<section id="practical-activity" class="slide level2">
+<h2>Practical <span class="accent">Activity</span></h2>
+<div class="hook">
+<p>Configure and run a small experiment comparing responses to reliable and imperfect AI advice.</p>
+</div>
+<div class="advisor-pipeline activity-steps">
+<div class="advisor-node">
+<p><span class="advisor-title">1 · Mission</span></p>
+<p>Configure a SAR mission</p>
+<p><span class="node-area">SAR</span></p>
+</div>
+<div class="advisor-node">
+<p><span class="advisor-title">2 · View</span></p>
+<p>Control what the participant sees</p>
+<p><span class="node-area">GUI</span></p>
+</div>
+<div class="advisor-node">
+<p><span class="advisor-title">3 · Teammate</span></p>
+<p>Attach an AI teammate</p>
+<p><span class="node-area">AI interface</span></p>
+</div>
+<div class="advisor-node">
+<p><span class="advisor-title">4 · Run</span></p>
+<p>Run two conditions</p>
+<p><span class="node-area">Study</span></p>
+</div>
+<div class="advisor-node active">
+<p><span class="advisor-title">5 · Compare</span></p>
+<p>Compare the recorded behavior</p>
+<p><span class="node-area">Sensing and logging</span></p>
+</div>
+</div>
+<div class="punchline">
+<p>Each step uses a component from Part Three. <span class="accent">Together they make one study.</span></p>
+</div>
+<aside class="notes">
+<p>This is the whole of Part Four in one line. The area under each step is the row of the Part Three map it uses. Everything runs in the lab-hosted notebook, not in the local install.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="research-question-and-conditions" class="slide level2">
+<h2>Research Question and <span class="accent">Conditions</span></h2>
+<div class="hook">
+<p><strong>When AI advice may be wrong, does the participant verify it before acting?</strong></p>
+</div>
+<div class="columns conditions-split">
+<div class="column" style="width:55%;">
+<div class="tight-table conditions-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th style="text-align: right;">Condition A</th>
+<th style="text-align: right;">Condition B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AI reliability</td>
+<td style="text-align: right;"><strong>1.0</strong></td>
+<td style="text-align: right;"><strong>0.7</strong></td>
+</tr>
+<tr class="even">
+<td>Environment seed</td>
+<td style="text-align: right;">Same</td>
+<td style="text-align: right;">Same</td>
+</tr>
+<tr class="odd">
+<td>Mission layout</td>
+<td style="text-align: right;">Same</td>
+<td style="text-align: right;">Same</td>
+</tr>
+<tr class="even">
+<td>Camera</td>
+<td style="text-align: right;">Same</td>
+<td style="text-align: right;">Same</td>
+</tr>
+<tr class="odd">
+<td>Advice timing</td>
+<td style="text-align: right;">Same</td>
+<td style="text-align: right;">Same</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div><div class="column" style="width:45%;">
+<p><span class="check-title">Possible measurements · study outputs, not findings</span></p>
+<div class="feature-list compact">
+<div class="feature-row">
+<p><span class="feature-name">Reliance</span> Advice followed</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Accuracy</span> Correct and incorrect rescues</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Verification</span> Steps or time after receiving advice</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Outcome</span> Final score</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Attention</span> Gaze allocation (optional)</p>
+</div>
+</div>
+</div></div>
+<div class="punchline">
+<p>AI reliability is <span class="accent">the manipulated variable</span>. Everything else is held constant.</p>
+</div>
+<aside class="notes">
+<p>Reliability 0.7 means each recommendation is correct with probability 0.7, set by the experiment. The measurements are what the study can record; nothing here is a result. Gaze needs the eye tracker, so it stays with the instructor demo.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="open-the-hosted-notebook" class="slide level2">
+<h2>Open the Hosted <span class="accent">Notebook</span></h2>
+<div class="hook">
+<p>Part Four runs in a lab-hosted Jupyter notebook that you open in your browser.</p>
+</div>
+<div class="columns notebook-split">
+<div class="column" style="width:50%;">
+<div class="feature-list">
+<div class="feature-row">
+<p><span class="feature-name">No install</span> No local Jupyter; the browser is enough.</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Own session</span> Each participant gets an isolated notebook session.</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Inline view</span> A simplified mission view, drawn in the notebook. The full Pygame GUI was Part Three; it does not open in the browser.</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">No API key</span> The lab-hosted service provides the LLM connection.</p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="dev-flag">Development placeholder</span></p>
+<div class="placeholder">
+<p>Screenshot of the hosted notebook goes here once the lab service is running and tested: the first configuration cell and the inline mission view.</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>The hosted notebook, its address, and the LLM service are not built yet. Do not give out an address until it exists and has been tested. The provider key stays behind a lab-controlled service with rate and cost limits; participants never see or enter it. Provider setup for running MOSAIC with your own key is in the appendix.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="configure-the-sar-mission" class="slide level2">
+<h2>Configure the SAR <span class="accent">Mission</span></h2>
+<div class="custom-strip">
+<p><span class="stop here">SAR</span> <span class="stop">GUI</span> <span class="stop">Teammate</span> <span class="stop">Record</span></p>
+</div>
+<div class="task-what">
+<p>A small building and a short clock, so each condition fits in a few minutes.</p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="task-label">Configure</span> <span class="dev-flag">Proposed defaults · not yet tested</span></p>
+<div class="code-card">
+<p><span class="code-file">Part Four notebook · planned</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"seed"</span>: <span class="dv">7</span>,</span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"num_rows"</span>: <span class="dv">2</span>,</span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"num_cols"</span>: <span class="dv">2</span>,</span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"num_real_victims"</span>: <span class="dv">2</span>,</span>
+<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"num_fake_victims"</span>: <span class="dv">2</span>,</span>
+<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lava_per_room"</span>: <span class="dv">2</span>,</span>
+<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"time_limit"</span>: <span class="dv">180</span>,</span>
+<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="lives-in">
+<p><span class="task-label">Lives in</span> <code>mosaic.sar</code> · <code>build_sar_env</code>, with the placers in <code>src/experiment/placers.py</code></p>
+<p>The same components <code>experiment.main</code> connected in Part Three.</p>
+</div>
+</div>
+<div class="result-col">
+<p><span class="task-label">Read it as</span></p>
+<div class="feature-list compact">
+<div class="feature-row">
+<p><span class="feature-name">Seed</span> One layout, reused in both conditions</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Building</span> Four rooms (2&nbsp;×&nbsp;2); the baseline has nine</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Per room</span> 2 real victims, 2 decoys, 2 lava tiles: 8 of each across the four rooms</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Clock</span> 180 seconds per condition</p>
+</div>
+</div>
+<p><span class="var-label">Interpret</span> a short decision problem with real and false targets</p>
+</div>
+</div>
+<aside class="notes">
+<p>Proposed tutorial defaults, not calibrated values; test them before the session. The keys mirror build_sar_env and the placers; the counts are per room. time_limit is in seconds here, whereas SAREnvGUI’s max_time is in minutes. Reproducibility caveat (README issue 3): env.reset(seed=…) seeds only rooms and doors, because the placers use the global random module. The notebook must also call random.seed(seed), or the placers must be fixed upstream, before “same layout” holds.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="configure-participant-information" class="slide level2">
+<h2>Configure Participant <span class="accent">Information</span></h2>
+<div class="custom-strip">
+<p><span class="stop">SAR</span> <span class="stop here">GUI</span> <span class="stop">Teammate</span> <span class="stop">Record</span></p>
+</div>
+<div class="task-what">
+<p>Use one limited camera, the same in both conditions.</p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="task-label">Configure</span></p>
+<div class="code-card">
+<p><span class="code-file">Part Four notebook · planned</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>study[<span class="st">"camera"</span>] <span class="op">=</span> <span class="st">"cone"</span>   <span class="co"># AgentConeCamera in A and B</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><span class="task-label">Why it matters</span></p>
+<p><span class="predict">The camera controls what evidence the participant can use to verify the teammate’s recommendation.</span></p>
+<div class="lives-in">
+<p><span class="task-label">Lives in</span> <code>src/mosaic/core/camera.py</code> · <code>CameraStrategy</code></p>
+<p><code>AgentConeCamera</code> shows only the forward field of view. Other cameras are in the appendix.</p>
+</div>
+</div>
+<div class="result-col">
+<p><span class="task-label">Observe</span> <span class="src-cap">the same position, two cameras</span></p>
+<div class="result-pair">
+<div class="result-img">
+<p><img data-src="assets/cam-room-live.png" alt="The whole-room view."></p>
+<p><span class="result-label">Baseline · the whole room</span></p>
+</div>
+<div class="result-img">
+<p><img data-src="assets/cam-cone-live.png" alt="The cone view: only tiles in front of the agent."></p>
+<p><span class="result-label">This study · only ahead</span></p>
+</div>
+</div>
+<p><span class="var-label">Interpret</span> a target out of view has to be checked by moving</p>
+</div>
+</div>
+<aside class="notes">
+<p>Both images are real captures of one frame through two camera strategies. With the cone camera a recommendation often points somewhere the participant cannot see, so following it without checking and checking first become different behaviors. The notebook’s inline view renders through the same camera strategy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="add-the-ai-teammate" class="slide level2">
+<h2>Add the AI <span class="accent">Teammate</span></h2>
+<div class="custom-strip">
+<p><span class="stop">SAR</span> <span class="stop">GUI</span> <span class="stop here">Teammate</span> <span class="stop">Record</span></p>
+</div>
+<div class="task-what">
+<p>The experiment controls reliability. The LLM only words the advice.</p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="task-label">Configure</span></p>
+<div class="code-card">
+<p><span class="code-file">Part Four notebook · planned</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>condition_a <span class="op">=</span> {<span class="op">**</span>study, <span class="st">"teammate_reliability"</span>: <span class="fl">1.0</span>}</span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>condition_b <span class="op">=</span> {<span class="op">**</span>study, <span class="st">"teammate_reliability"</span>: <span class="fl">0.7</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="lives-in">
+<p><span class="task-label">Lives in</span> <code>src/mosaic/llm/client.py</code> · <code>LLMClient.query(prompt)</code></p>
+<p>The lab-hosted service provides the LLM connection. Its key never reaches the notebook.</p>
+</div>
+</div>
+<div class="result-col">
+<p><span class="task-label">How each piece of advice is made</span></p>
+<div class="compose-map">
+<div class="compose-row">
+<p><span class="compose-num">1</span> <span class="compose-what">Correct or not</span></p>
+<p>The experiment decides, with probability set by reliability.</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">2</span> <span class="compose-what">Target</span></p>
+<p>The experiment picks it: a real victim, or a decoy.</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">3</span> <span class="compose-what">Message</span></p>
+<p>The LLM phrases that recommendation in natural language.</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">4</span> <span class="compose-what">Record</span></p>
+<p>MOSAIC logs the target, correctness, message, and response.</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>An uncontrolled LLM does not produce a set reliability, so the experiment makes steps 1 and 2 and the LLM only does step 3. Steps 1 and 2 are what labs/advisor.py’s ReliableTeammate already does without an LLM: the nearest reachable real victim, or with probability 1 − reliability the nearest decoy. The provider key stays behind a lab-controlled service with rate and cost limits; detailed provider setup is in the appendix.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="run-the-conditions" class="slide level2">
+<h2>Run the <span class="accent">Conditions</span></h2>
+<div class="hook">
+<p>Two short trials. Only the teammate’s reliability changes.</p>
+</div>
+<div class="protocol-sequence two-up">
+<div class="protocol-stage">
+<p><span class="protocol-title">Condition A</span></p>
+<p><strong>Reliable advice</strong> · <code>teammate_reliability = 1.0</code></p>
+<p>Play one short trial, and decide each time whether to follow the advice.</p>
+</div>
+<div class="protocol-stage secondary">
+<p><span class="protocol-title">Condition B</span></p>
+<p><strong>Imperfect advice</strong> · <code>teammate_reliability = 0.7</code></p>
+<p>Play the same mission again, with the same instructions.</p>
+</div>
+</div>
+<div class="cycle-band">
+<p><span class="cycle-title">Held constant</span> Same mission · same seed · same camera · same advice timing</p>
+</div>
+<div class="punchline">
+<p>A formal experiment would counterbalance condition order. Today <span class="accent">demonstrates the workflow</span>; it is not a completed study.</p>
+</div>
+<aside class="notes">
+<p>Show the procedure, not results. Playing B second on a layout already seen is a learning effect; a real study counterbalances order across participants and usually uses matched layouts. Keep advice timing identical in both conditions, whichever way the notebook delivers advice.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="compare-the-behavioral-record" class="slide level2">
+<h2>Compare the Behavioral <span class="accent">Record</span></h2>
+<div class="custom-strip">
+<p><span class="stop">SAR</span> <span class="stop">GUI</span> <span class="stop">Teammate</span> <span class="stop here">Record</span></p>
+</div>
+<div class="task-what">
+<p>The notebook will summarize one row per piece of advice, for each condition.</p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="task-label">Fields</span> <span class="dev-flag">Summary view in development</span></p>
+<div class="result-terminal">
+<pre class="text"><code>step
+advice message
+recommended target
+advice correct
+participant action
+advice followed
+decision steps
+reward
+task event</code></pre>
+</div>
+</div>
+<div class="result-col">
+<p><span class="task-label">Compare A and B</span></p>
+<div class="feature-list compact">
+<div class="feature-row">
+<p><span class="feature-name">Reliance</span> How often was advice followed?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Calibration</span> Was incorrect advice followed less often than correct advice?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Verification</span> How many decision steps between advice and action?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Outcome</span> Correct and incorrect rescues, and the final reward</p>
+</div>
+</div>
+<p><span class="var-label">Interpret</span> two trials show the pipeline, not an effect</p>
+</div>
+</div>
+<aside class="notes">
+<p>No example values on purpose: there is no collected data yet. Where the fields come from: step, action, reward, and task events are what MOSAIC already records (the observation and info[“events”]); the teammate logs the message, target, and correctness (as ReliableTeammate.log does); advice followed and decision steps are derived by the notebook.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="eye-tracking-extension" class="slide level2">
+<h2>Eye-Tracking <span class="accent">Extension</span></h2>
+<div class="custom-strip">
+<p><span class="stop">SAR</span> <span class="stop">GUI</span> <span class="stop">Teammate</span> <span class="stop here">Record</span></p>
+</div>
+<div class="task-what">
+<p>Instructor demonstration: a Tobii eye tracker on the lab’s study runner, and a volunteer plays.</p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="task-label">What we added</span></p>
+<div class="code-card">
+<p><span class="code-file"><code>src/experiment/experiment.py</code></span> <span class="code-where">the study runner</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment = Experiment(config)</span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.register_sensor(</span></span>
+<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        name="TobiiEyeTracker", sensor_cls=TobiiEyeTracker,</span></span>
+<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        sensor_config={"config": {}})</span></span>
+<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.calibrate_sensor(</span></span>
+<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        "TobiiEyeTracker", screen=config["display"],</span></span>
+<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        fullscreen=config["fullscreen"])</span></span>
+<span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment.add_task(name="main_game", task_cls=SARGame, ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><span class="predict">After receiving advice, does the participant look directly at the recommended target or scan the environment to verify it?</span></p>
+<div class="lives-in">
+<p><span class="task-label">Lives in</span> <code>src/experiment/sensors/eye_tracker/tobii.py</code></p>
+<p><code>TobiiEyeTracker</code> is one sensor; any sensor that streams to LSL registers the same way.</p>
+</div>
+</div>
+<div class="result-col">
+<p><span class="task-label">Watch for</span></p>
+<div class="watch-list">
+<div class="watch-item">
+<p><span class="watch-num">1</span> <span class="watch-title">Calibration</span> The volunteer follows five dots; the tracker checks each point.</p>
+</div>
+<div class="watch-item">
+<p><span class="watch-num">2</span> <span class="watch-title">Play</span> A short mission, with advice on <code>Alt</code>.</p>
+</div>
+<div class="watch-item fragment">
+<p><span class="watch-num">3</span> <span class="watch-title">Two streams, one clock</span> LabRecorder lists <code>TobiiEyeTracker</code> (gaze, 60 Hz, 9 channels) and the SAR game trial (one JSON line per step).</p>
+</div>
+</div>
+<p><span class="var-label">Interpret</span> verification: gaze on the target, or across the room, after advice</p>
+<p><span class="demo-note">Presenter only · needs the lab’s <code>ixp</code> package and a Tobii</span></p>
+</div>
+</div>
+<aside class="notes">
+<p>Presenter only: the lab’s <code>ixp</code> package (not on PyPI), <code>tobii_research</code>, PsychoPy, pylsl, ray, and LabRecorder, set up at rehearsal (RUNSHEET.md). The two calls are the ones the full study block uses (experiment.py lines 83–88); the <code>tobii_test</code> block in the same file is the sensor-only version. Calibration is five points (center and four at 0.2 from the edges); SPACE accepts, R redoes. Reveal the third item once LabRecorder is on screen. If the device fails, show the rehearsal screenshot of LabRecorder’s stream list and move on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-synchronized-record" class="slide level2">
+<h2>The Synchronized <span class="accent">Record</span></h2>
+<div class="custom-strip">
+<p><span class="stop">SAR</span> <span class="stop">GUI</span> <span class="stop">Teammate</span> <span class="stop here">Record</span></p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="task-label">Observe</span> <span class="src-cap">one recording, one clock</span> <span class="dev-flag">Development placeholder</span></p>
+<div class="placeholder">
+<p>Timeline from the rehearsal recording goes here: five lanes on one clock — task events, advice, gaze, participant actions, and outcomes.</p>
+</div>
+</div>
+<div class="result-col">
+<p><span class="task-label">Interpret</span> <span class="src-cap">what to look for</span></p>
+<div class="feature-list">
+<div class="feature-row">
+<p><span class="feature-name">After advice</span> Does gaze go straight to the recommended target, or across the room?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Reliance</span> Does the next action follow the advice?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Mistakes</span> What did the participant look at before following incorrect advice?</p>
+</div>
+</div>
+</div>
+</div>
+<div class="punchline">
+<p>With one eye tracker in the room, everyone inspects <span class="accent">the same prepared recording</span>.</p>
+</div>
+<aside class="notes">
+<p>TODO after rehearsal: record a short session with the Tobii and LabRecorder, then generate the aligned timeline from that recording and replace the placeholder.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-participants-built" class="slide level2">
+<h2>What Participants <span class="accent">Built</span></h2>
+<div class="hook">
+<p>One study, assembled from the four components you located in Part Three.</p>
+</div>
+<div class="change-rows cols-4 built-rows">
+<div class="change-row">
+<p><span class="change-title">SAR</span></p>
+<p>Defined the decision problem: real and false targets on one seeded layout.</p>
+</div>
+<div class="change-row">
+<p><span class="change-title">GUI</span></p>
+<p>Controlled the available information: one limited camera for both conditions.</p>
+</div>
+<div class="change-row">
+<p><span class="change-title">AI teammate</span></p>
+<p>Provided controlled advice: reliability set by the experiment, words by the LLM.</p>
+</div>
+<div class="change-row">
+<p><span class="change-title">Logging and sensing</span></p>
+<p>Recorded the response: advice, actions, outcomes, and optionally gaze.</p>
+</div>
+</div>
+<div class="punchline">
+<p>The same four components support <span class="accent">your own human–AI teaming questions</span>. The repository map shows where to start.</p>
+</div>
+</section>
+<section id="where-to-go-next" class="slide level2">
+<h2>Where to Go <span class="accent">Next</span></h2>
+<div class="hook">
+<p>Where each part of today’s study lives, and where to extend it.</p>
+</div>
+<div class="code-map">
+<div class="pkg-card pkg-study">
+<p><span class="pkg-path"><code>src/experiment/</code></span> <span class="pkg-role">One study built on the package. Copy this folder to start yours.</span></p>
+<div class="pkg-tree tree-row">
+<p><code>main.py</code></p>
+<p><code>placers.py</code></p>
+<p><code>llm.py</code></p>
+<p><code>pacing.py</code></p>
+<p><code>game.py</code></p>
+<p><code>replay.py</code></p>
+<p><code>sensors/</code></p>
+</div>
+<p><span class="pkg-label">API</span> <code>build_llm_client</code> · <code>LavaRiskVictimPlacer</code> · <code>SARGameTrial</code> <span class="pkg-label pkg-label-gap">Customize</span> Composition · Placers · LLM provider</p>
+</div>
+<div class="record-drop compose-drop">
+<p><span class="record-drop-label">composes</span></p>
+</div>
+<div class="pkg-row">
+<div class="pkg-card">
+<p><span class="pkg-path"><code>src/mosaic/core/</code></span></p>
+<p><span class="pkg-role">Level generation and cameras</span></p>
+<div class="pkg-tree">
+<p><code>level.py</code></p>
+<p><code>placers.py</code></p>
+<p><code>camera.py</code></p>
+</div>
+<p><span class="pkg-label pkg-label-block">API</span> <code>Placer</code> · <code>CameraStrategy</code></p>
+<p><span class="pkg-label">Customize</span> Camera</p>
+</div>
+<div class="pkg-card">
+<p><span class="pkg-path"><code>src/mosaic/sar/</code></span></p>
+<p><span class="pkg-role">The search-and-rescue task</span></p>
+<div class="pkg-tree">
+<p><code>env.py</code></p>
+<p><code>placers.py</code></p>
+<p><code>actions.py</code></p>
+<p><code>objects.py</code></p>
+<p><code>observations.py</code></p>
+</div>
+<p><span class="pkg-label pkg-label-block">API</span> <code>build_sar_env</code> · <code>RescueAction</code></p>
+<p><span class="pkg-label">Customize</span> Victims · Hazards · Rewards · Records</p>
+</div>
+<div class="pkg-card">
+<p><span class="pkg-path"><code>src/mosaic/gui/</code></span></p>
+<p><span class="pkg-role">What the participant sees</span></p>
+<div class="pkg-tree">
+<p><code>main.py</code></p>
+<p><code>user.py</code></p>
+<p><code>chat.py</code></p>
+<p><code>info.py</code></p>
+<p><code>feedback.py</code></p>
+</div>
+<p><span class="pkg-label pkg-label-block">API</span> <code>SAREnvGUI</code> · <code>EdgeVignette</code></p>
+<p><span class="pkg-label">Customize</span> Panels · Feedback · Time · Advice timing</p>
+</div>
+<div class="pkg-card">
+<p><span class="pkg-path"><code>src/mosaic/llm/</code></span></p>
+<p><span class="pkg-role">The teammate contract</span></p>
+<div class="pkg-tree">
+<p><code>client.py</code></p>
+<p><code>process_prompts.py</code></p>
+<p><code>prompts.yaml</code></p>
+<p><code>pathfinding.py</code></p>
+<p><code>parser.py</code></p>
+</div>
+<p><span class="pkg-label pkg-label-block">API</span> <code>LLMClient</code> · <code>ask</code></p>
+<p><span class="pkg-label">Customize</span> Teammate · Reliability · Prompts</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Have the repository open in an editor beside this slide. <code>mosaic/</code> is the reusable package; <code>experiment/</code> is one study built on it, and it is the folder attendees copy and change for their own work. Every file named here exists in the MOSAIC repository; the API names are the classes and functions behind today’s study, and each card’s “Customize” line names what that area controls. The appendix has a worked change for most of them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section" class="slide level2" data-background-image="assets/background.jpg" data-background-opacity="0.25">
+<h2></h2>
+<div class="closing">
+<p><span class="closing-title">Thanks!</span></p>
+<p><span class="closing-sub">Questions?</span></p>
+<div class="closing-links">
+<p><span class="closing-label">MOSAIC</span> <span class="closing-link">github.com/iHuman-Lab/mosaic</span> <span class="closing-label">Tutorial materials</span> <span class="closing-link">github.com/Bkdogbey/mosaic-smc-tutorial</span> <span class="closing-label">iHuman Lab</span> <span class="closing-link">ihuman-lab.github.io/lab-website</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<!-- ============ APPENDIX ============ -->
+<div class="divider">
+<p><span class="divider-title">Appendix</span></p>
+<p><span class="divider-subtitle">Customization reference and troubleshooting</span></p>
+</div>
+</section>
+<section id="detailed-installation-recovery" class="slide level2">
+<h2>Detailed Installation <span class="accent">Recovery</span></h2>
+<div class="hook">
+<p>Additional recovery steps for less common installation failures.</p>
+</div>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Recovery</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ensurepip is not available</code></td>
+<td>Install <code>python3-venv</code>, recreate <code>mosaic_env</code></td>
+</tr>
+<tr class="even">
+<td><code>python --version</code> reports 3.9 or older</td>
+<td>Recreate <code>mosaic_env</code> on Python 3.10 or 3.11</td>
+</tr>
+<tr class="odd">
+<td><code>pip install -e .</code> fails to build a wheel</td>
+<td>Rerun <code>python -m pip install --upgrade pip</code>, then retry</td>
+</tr>
+<tr class="even">
+<td><code>conda activate</code> does nothing in PowerShell</td>
+<td>Run <code>conda init powershell</code> once, reopen the terminal</td>
+</tr>
+<tr class="odd">
+<td>Mission window opens on the wrong monitor</td>
+<td>Press <code>F11</code> to leave fullscreen and drag it</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mission-composition-line-by-line" class="slide level2">
+<h2>Mission Composition, <span class="accent">Line by Line</span></h2>
+<div class="columns compose-split">
+<div class="column" style="width:61%;">
+<div class="src">
+<p><span class="src-cap"><code>src/experiment/main.py</code> · lines 31–51, exactly as in the file</span></p>
+<div class="compose-code">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13" data-startfrom="31" data-code-line-numbers="|2-5|6-13|14|17-19|20-21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 30;"><span id="cb13-31"><a href=""></a>    env <span class="op">=</span> build_sar_env(</span>
+<span id="cb13-32"><a href=""></a>        screen_size<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb13-33"><a href=""></a>        num_rows<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb13-34"><a href=""></a>        num_cols<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb13-35"><a href=""></a>        room_size<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb13-36"><a href=""></a>        victim_placer<span class="op">=</span>LavaRiskVictimPlacer(</span>
+<span id="cb13-37"><a href=""></a>            num_real_victims<span class="op">=</span>game_config.get(<span class="st">"num_real_victims"</span>, <span class="dv">6</span>),</span>
+<span id="cb13-38"><a href=""></a>            num_fake_victims<span class="op">=</span>game_config.get(<span class="st">"num_fake_victims"</span>, <span class="dv">12</span>),</span>
+<span id="cb13-39"><a href=""></a>        ),</span>
+<span id="cb13-40"><a href=""></a>        lava_placer<span class="op">=</span>SectorSpreadLavaPlacer(</span>
+<span id="cb13-41"><a href=""></a>            lava_per_room<span class="op">=</span>game_config.get(<span class="st">"lava_per_room"</span>, <span class="dv">8</span>),</span>
+<span id="cb13-42"><a href=""></a>        ),</span>
+<span id="cb13-43"><a href=""></a>        locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
+<span id="cb13-44"><a href=""></a>        camera_strategy<span class="op">=</span>AgentFOVCamera(),</span>
+<span id="cb13-45"><a href=""></a>    )</span>
+<span id="cb13-46"><a href=""></a>    env.reset()</span>
+<span id="cb13-47"><a href=""></a>    llm_client <span class="op">=</span> build_llm_client(</span>
+<span id="cb13-48"><a href=""></a>        provider<span class="op">=</span>config.get(<span class="st">"provider"</span>, <span class="st">"dummy"</span>), model<span class="op">=</span>config.get(<span class="st">"model"</span>)</span>
+<span id="cb13-49"><a href=""></a>    )</span>
+<span id="cb13-50"><a href=""></a>    gui <span class="op">=</span> SAREnvGUI(env, config<span class="op">=</span>config, llm_client<span class="op">=</span>llm_client)</span>
+<span id="cb13-51"><a href=""></a>    gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div><div class="column" style="width:39%;">
+<div class="compose-map">
+<div class="compose-row">
+<p><span class="compose-num">1</span> <span class="compose-what">Building</span></p>
+<p>3 × 3 rooms of 10 tiles, set in code</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">2</span> <span class="compose-what">Placers</span></p>
+<p>Counts come from the YAML</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">3</span> <span class="compose-what">Camera</span></p>
+<p>The whole-room view</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">4</span> <span class="compose-what">Teammate</span></p>
+<p>Provider from the YAML</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">5</span> <span class="compose-what">GUI</span></p>
+<p>Window, panels, and feedback</p>
+</div>
+<div class="compose-row">
+<p><span class="compose-num">+</span> <span class="compose-what">Scoring</span></p>
+<p>Add an <code>action=</code> argument</p>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>Step through the highlights; each number on the right is one highlight. Each part is changed in one of the appendix task slides that follow. The one thing not in this call is scoring, which is a keyword argument you add. This is main.py as the tutorial needs it: imports enabled and the provider defaulting to “dummy”. Upstream MOSAIC must carry that fix before the session (as of upstream main 1ba2268 the imports are commented out and the default is “openai”).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="victims-and-decoys" class="slide level2">
 <h2>Victims and <span class="accent">Decoys</span></h2>
@@ -1058,248 +2203,6 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="controls-and-gameplay" class="slide level2">
-<h2>Controls and <span class="accent">Gameplay</span></h2>
-<div class="hook">
-<p>Four actions. Each clip shows what its keys do.</p>
-</div>
-<div class="phase-grid phase-clips">
-<div class="phase">
-<p><img data-src="assets/controls-navigate.gif" alt="The agent walks and turns inside a room while the arrow keycaps light up"></p>
-<div class="phase-body">
-<p><span class="phase-name">Navigate</span></p>
-<div class="key-row">
-<p><span class="keycap">↑</span> <span class="key-action">Move forward one tile</span></p>
-</div>
-<div class="key-row">
-<p><span class="keycap">←</span><span class="keycap">→</span> <span class="key-action">Turn to face a new direction</span></p>
-</div>
-</div>
-</div>
-<div class="phase">
-<p><img data-src="assets/controls-open.gif" alt="The agent walks up to a closed yellow door and Space opens it"></p>
-<div class="phase-body">
-<p><span class="phase-name">Open</span></p>
-<div class="key-row">
-<p><span class="keycap wide">Space</span> <span class="key-action">Open the door you are facing</span></p>
-</div>
-<p><span class="phase-note">Locked doors open only while you carry the matching key.</span></p>
-</div>
-</div>
-<div class="phase">
-<p><img data-src="assets/controls-pickup.gif" alt="Tab picks up a key, then Tab rescues a victim and the view flashes green"></p>
-<div class="phase-body">
-<p><span class="phase-name">Pick up or rescue</span></p>
-<div class="key-row">
-<p><span class="keycap">Tab</span> <span class="key-action">Take the key, or rescue the victim, you are facing</span></p>
-</div>
-</div>
-</div>
-<div class="phase">
-<p><img data-src="assets/controls-advice.gif" alt="Alt asks the teammate; the chat panel shows thinking, then the reply, and blinks"></p>
-<div class="phase-body">
-<p><span class="phase-name">Request advice</span></p>
-<div class="key-row">
-<p><span class="keycap">Alt</span> <span class="key-action">Ask the AI teammate</span></p>
-</div>
-<p><span class="phase-note">The reply appears in the chat panel. Today’s placeholder teammate answers “Currently, no commands are available.” Part Four gives it a real one.</span></p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>The advice clip uses the grounded teammate from the Swap the AI Teammate slide, so the reply is true for that building. In the attendees’ own run the runner attaches the keyless dummy teammate, so Alt replies “Currently, no commands are available.”</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<!-- ============ PART 4 ============ -->
-<div class="divider">
-<p><span class="divider-kicker">Part Four</span></p>
-<p><span class="divider-title">Configure MOSAIC</span></p>
-<p><span class="divider-path">Change one setting, relaunch, and see what the participant gets</span></p>
-<div class="you-are-here">
-<p><span class="stop">Why</span> <span class="stop">Install</span> <span class="stop">Experience</span> <span class="stop here">Configure</span></p>
-</div>
-</div>
-</section>
-<section id="runtime-architecture" class="slide level2">
-<h2>Runtime <span class="accent">Architecture</span></h2>
-<div class="hook">
-<p>The window you just opened is three parts in a loop, with three more beneath them.</p>
-</div>
-<div class="overview-diagram arch-visual">
-<div class="system-row">
-<div class="system-node visual-node">
-<div class="node-visual keys-visual">
-<p><span class="keycap">↑</span> <span class="keycap">←</span> <span class="keycap">→</span> <span class="keycap wide">Space</span> <span class="keycap">Tab</span> <span class="keycap">Alt</span></p>
-</div>
-<p><span class="system-title">Human participant</span></p>
-<p>Watches the screen and presses keys.</p>
-</div>
-<div class="system-link two-way">
-<p><span class="link-top">keys</span></p>
-<p><span class="link-bottom">frames</span></p>
-</div>
-<div class="system-node system-core visual-node">
-<div class="node-visual">
-<p><img data-src="assets/gui-screenshot-live.png" alt="The MOSAIC interface"></p>
-</div>
-<p><span class="system-title">MOSAIC GUI</span> <span class="node-path"><code>mosaic.gui</code></span></p>
-<p>Game view, panels, chat, and feedback.</p>
-</div>
-<div class="system-link two-way">
-<p><span class="link-top">action</span></p>
-<p><span class="link-bottom">observation</span></p>
-</div>
-<div class="system-node visual-node">
-<div class="node-visual">
-<p><img data-src="assets/cam-full.png" alt="The whole search-and-rescue building"></p>
-</div>
-<p><span class="system-title">SAR environment</span> <span class="node-path"><code>mosaic.sar</code></span></p>
-<p>Rooms, victims, rules, and rewards.</p>
-</div>
-</div>
-<div class="drop-row arch-drops">
-<div class="record-drop">
-<p><span class="record-drop-label">physiological signals</span></p>
-</div>
-<div class="record-drop two-way-drop">
-<p><span class="record-drop-label">context · advice</span></p>
-</div>
-<div class="record-drop built-on">
-<p><span class="record-drop-label">built on</span></p>
-</div>
-</div>
-<div class="support-row">
-<div class="support-card">
-<div class="support-visual">
-<svg viewbox="0 0 330 76" role="img" aria-label="Representative icon: an eye tracker and an EEG trace streaming into Lab Streaming Layer">
-  <path d="M6 38 Q46 8 86 38 Q46 68 6 38 Z" fill="none" stroke="#ffffff" stroke-width="3"></path>
-  <circle cx="46" cy="38" r="12" fill="#EC672C"></circle>
-  <circle cx="46" cy="38" r="4.5" fill="#252525"></circle>
-  <polyline points="100,38 112,38 119,18 127,58 134,26 141,48 147,34 153,38 176,38" fill="none" stroke="#EC672C" stroke-width="3" stroke-linejoin="round"></polyline>
-  <line x1="184" y1="38" x2="226" y2="38" stroke="#EC672C" stroke-width="3"></line>
-  <polygon points="226,31 238,38 226,45" fill="#EC672C"></polygon>
-  <rect x="244" y="14" width="80" height="48" rx="7" fill="rgba(236,103,44,0.18)" stroke="#EC672C" stroke-width="2.5"></rect>
-  <text x="284" y="45" text-anchor="middle" font-family="Rubik, sans-serif" font-size="22" font-weight="800" fill="#ffffff">LSL</text>
-</svg>
-</div>
-<p><span class="system-title">Sensors → LSL</span> <span class="node-path"><code>experiment/</code></span></p>
-<p>Eye tracker and EEG stream through Lab Streaming Layer, time-aligned with the game.</p>
-</div>
-<div class="support-card">
-<div class="support-visual">
-<p><img data-src="assets/chat-advice.png" alt="The chat panel showing the reply: Survivor to the north-east, about 3 steps away."></p>
-</div>
-<p><span class="system-title">AI teammate</span> <span class="node-path"><code>mosaic.llm</code></span></p>
-<p>Reads the task, replies in the chat.</p>
-</div>
-<div class="support-card">
-<div class="support-visual code-visual">
-<p><code>self.obs, reward, terminated, truncated, info = self.env.step(action)</code></p>
-<p><span class="code-visual-cap"><code>src/mosaic/gui/user.py:53</code></span></p>
-</div>
-<p><span class="system-title">Gymnasium + MiniGrid</span></p>
-<p>The step API and the grid world.</p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>Point at the attendee’s own window: the keys they press, the GUI that draws it, the environment that decides what happens. The chat image is a real reply from the teammate on the Swap the AI Teammate slide. Sensing is study-layer only — the tutorial run has no sensors attached. Sensors never talk to the game directly: each one streams into Lab Streaming Layer, which puts game and sensor samples on one clock.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="mission-composition" class="slide level2">
-<h2>Mission <span class="accent">Composition</span></h2>
-<div class="columns compose-split">
-<div class="column" style="width:61%;">
-<div class="src">
-<p><span class="src-cap"><code>src/experiment/main.py</code> · lines 31–51, exactly as in the file</span></p>
-<div class="compose-code">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-startfrom="31" data-code-line-numbers="|2-5|6-13|14|17-19|20-21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 30;"><span id="cb7-31"><a href=""></a>    env <span class="op">=</span> build_sar_env(</span>
-<span id="cb7-32"><a href=""></a>        screen_size<span class="op">=</span><span class="dv">800</span>,</span>
-<span id="cb7-33"><a href=""></a>        num_rows<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb7-34"><a href=""></a>        num_cols<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb7-35"><a href=""></a>        room_size<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb7-36"><a href=""></a>        victim_placer<span class="op">=</span>LavaRiskVictimPlacer(</span>
-<span id="cb7-37"><a href=""></a>            num_real_victims<span class="op">=</span>game_config.get(<span class="st">"num_real_victims"</span>, <span class="dv">6</span>),</span>
-<span id="cb7-38"><a href=""></a>            num_fake_victims<span class="op">=</span>game_config.get(<span class="st">"num_fake_victims"</span>, <span class="dv">12</span>),</span>
-<span id="cb7-39"><a href=""></a>        ),</span>
-<span id="cb7-40"><a href=""></a>        lava_placer<span class="op">=</span>SectorSpreadLavaPlacer(</span>
-<span id="cb7-41"><a href=""></a>            lava_per_room<span class="op">=</span>game_config.get(<span class="st">"lava_per_room"</span>, <span class="dv">8</span>),</span>
-<span id="cb7-42"><a href=""></a>        ),</span>
-<span id="cb7-43"><a href=""></a>        locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
-<span id="cb7-44"><a href=""></a>        camera_strategy<span class="op">=</span>AgentFOVCamera(),</span>
-<span id="cb7-45"><a href=""></a>    )</span>
-<span id="cb7-46"><a href=""></a>    env.reset()</span>
-<span id="cb7-47"><a href=""></a>    llm_client <span class="op">=</span> build_llm_client(</span>
-<span id="cb7-48"><a href=""></a>        provider<span class="op">=</span>config.get(<span class="st">"provider"</span>, <span class="st">"dummy"</span>), model<span class="op">=</span>config.get(<span class="st">"model"</span>)</span>
-<span id="cb7-49"><a href=""></a>    )</span>
-<span id="cb7-50"><a href=""></a>    gui <span class="op">=</span> SAREnvGUI(env, config<span class="op">=</span>config, llm_client<span class="op">=</span>llm_client)</span>
-<span id="cb7-51"><a href=""></a>    gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div><div class="column" style="width:39%;">
-<div class="compose-map">
-<div class="compose-row">
-<p><span class="compose-num">1</span> <span class="compose-what">Building</span></p>
-<p>3 × 3 rooms of 10 tiles, set in code</p>
-</div>
-<div class="compose-row">
-<p><span class="compose-num">2</span> <span class="compose-what">Placers</span></p>
-<p>Counts come from the YAML</p>
-</div>
-<div class="compose-row">
-<p><span class="compose-num">3</span> <span class="compose-what">Camera</span></p>
-<p>The whole-room view</p>
-</div>
-<div class="compose-row">
-<p><span class="compose-num">4</span> <span class="compose-what">Teammate</span></p>
-<p>Provider from the YAML</p>
-</div>
-<div class="compose-row">
-<p><span class="compose-num">5</span> <span class="compose-what">GUI</span></p>
-<p>Window, panels, and feedback</p>
-</div>
-<div class="compose-row">
-<p><span class="compose-num">+</span> <span class="compose-what">Scoring</span></p>
-<p>Add an <code>action=</code> argument</p>
-</div>
-</div>
-</div></div>
-<aside class="notes">
-<p>Step through the highlights; each number on the right is one highlight. Each part is changed in one of the task slides that follow. The one thing not in this call is scoring, which is a keyword argument you add. This is main.py as the tutorial needs it: imports enabled and the provider defaulting to “dummy”. Upstream MOSAIC must carry that fix before the session (as of upstream main 1ba2268 the imports are commented out and the default is “openai”).</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="victims-decoys-and-lava" class="slide level2">
 <h2>Victims, Decoys, and <span class="accent">Lava</span></h2>
 <div class="custom-strip">
@@ -1313,12 +2216,12 @@
 <p><span class="task-label">Change</span></p>
 <div class="code-card">
 <p><span class="code-file"><code>configs/experiment.yaml</code></span> <span class="code-where">lines 15–17</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-  num_fake_victims: 12</span></span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-  num_real_victims: 12</span></span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-  lava_per_room: 8</span></span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+  num_fake_victims: 2</span></span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+  num_real_victims: 2</span></span>
-<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+  lava_per_room: 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-  num_fake_victims: 12</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-  num_real_victims: 12</span></span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-  lava_per_room: 8</span></span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+  num_fake_victims: 2</span></span>
+<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+  num_real_victims: 2</span></span>
+<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+  lava_per_room: 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Save and relaunch the mission.</p>
 <p><span class="predict">What will the building look like?</span></p>
@@ -1370,8 +2273,8 @@
 <p><span class="task-label">Change</span></p>
 <div class="code-card">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">line 43</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-        locked_room_placer=LockedRoomPlacer(locked_room_prob=0.5),</span></span>
-<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        locked_room_placer=LockedRoomPlacer(locked_room_prob=0.9),</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-        locked_room_placer=LockedRoomPlacer(locked_room_prob=0.5),</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        locked_room_placer=LockedRoomPlacer(locked_room_prob=0.9),</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Save and relaunch. Walk to the nearest door.</p>
 <p><span class="predict">How much of the building can you still reach?</span></p>
@@ -1423,11 +2326,11 @@
 <p><span class="task-label">Change</span></p>
 <div class="code-card">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">an import, then a new argument</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from mosaic.sar.actions import RescueAction, RescueRewards</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ inside build_sar_env(...) @@</span></span>
-<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>         camera_strategy=AgentFOVCamera(),</span>
-<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        action=RescueAction(</span></span>
-<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+            rewards=RescueRewards(fake_victim=-5.0)),</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from mosaic.sar.actions import RescueAction, RescueRewards</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ inside build_sar_env(...) @@</span></span>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>         camera_strategy=AgentFOVCamera(),</span>
+<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        action=RescueAction(</span></span>
+<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+            rewards=RescueRewards(fake_victim=-5.0)),</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Relaunch and rescue a decoy.</p>
 <p><span class="predict">What will the reward panel read?</span></p>
@@ -1479,9 +2382,9 @@
 <p><span class="task-label">Change</span></p>
 <div class="code-card">
 <p><span class="code-file"><code>configs/experiment.yaml</code></span> <span class="code-where">a new top-level line</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a> display: &amp;display 0</span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a> fullscreen: &amp;fullscreen true</span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+max_time: 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a> display: &amp;display 0</span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a> fullscreen: &amp;fullscreen true</span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+max_time: 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Relaunch and watch the timer.</p>
 <p><span class="predict">How will people play with 2 minutes left?</span></p>
@@ -1565,11 +2468,11 @@
 <p><span class="task-label">Change</span></p>
 <div class="code-card">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">lines 5 and 44</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-from mosaic.core.camera import AgentFOVCamera</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from mosaic.core.camera import AgentConeCamera, AgentFOVCamera</span></span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ line 44 @@</span></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-        camera_strategy=AgentFOVCamera(),</span></span>
-<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        camera_strategy=AgentConeCamera(),</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-from mosaic.core.camera import AgentFOVCamera</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from mosaic.core.camera import AgentConeCamera, AgentFOVCamera</span></span>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ line 44 @@</span></span>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-        camera_strategy=AgentFOVCamera(),</span></span>
+<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        camera_strategy=AgentConeCamera(),</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Save and relaunch. Turn on the spot with <code>←</code> and <code>→</code>.</p>
 <p><span class="predict">What can the participant no longer see?</span></p>
@@ -1621,12 +2524,12 @@
 <p><span class="task-label">Change</span></p>
 <div class="code-card">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">an import, then the <code>gui =</code> line</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from mosaic.gui.feedback import EdgeVignette, VignetteStyle</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ further down @@</span></span>
-<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-    gui = SAREnvGUI(env, config=config, llm_client=llm_client)</span></span>
-<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    gui = SAREnvGUI(env, config=config, llm_client=llm_client,</span></span>
-<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        vignette=EdgeVignette(800, styles={"wrong_victim":</span></span>
-<span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+            VignetteStyle((200, 0, 0), 200, 1.5, "fade")}))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from mosaic.gui.feedback import EdgeVignette, VignetteStyle</span></span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ further down @@</span></span>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-    gui = SAREnvGUI(env, config=config, llm_client=llm_client)</span></span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    gui = SAREnvGUI(env, config=config, llm_client=llm_client,</span></span>
+<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        vignette=EdgeVignette(800, styles={"wrong_victim":</span></span>
+<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+            VignetteStyle((200, 0, 0), 200, 1.5, "fade")}))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Relaunch and rescue a decoy.</p>
 <p><span class="predict">How will the mistake feel different?</span></p>
@@ -1679,11 +2582,11 @@
 <span class="dl-src">github.com/Bkdogbey/mosaic-smc-tutorial</span> · <code>presentation/labs/</code></p>
 <div class="code-card">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">an import, then the <code>gui =</code> line</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from .panel import NoProgressPanel</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ further down @@</span></span>
-<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-    gui = SAREnvGUI(env, config=config, llm_client=llm_client)</span></span>
-<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    gui = SAREnvGUI(env, config=config, llm_client=llm_client,</span></span>
-<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+                    info_panel=NoProgressPanel(800, 400, 400))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from .panel import NoProgressPanel</span></span>
+<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ further down @@</span></span>
+<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-    gui = SAREnvGUI(env, config=config, llm_client=llm_client)</span></span>
+<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    gui = SAREnvGUI(env, config=config, llm_client=llm_client,</span></span>
+<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+                    info_panel=NoProgressPanel(800, 400, 400))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Relaunch and look at the mission box.</p>
 <p><span class="predict">What does the participant no longer know?</span></p>
@@ -1736,13 +2639,13 @@
 <span class="dl-src">github.com/Bkdogbey/mosaic-smc-tutorial</span> · <code>presentation/labs/</code></p>
 <div class="code-card">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">imports, then the <code>gui =</code> line</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+import json</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from .advisor import ReliableTeammate</span></span>
-<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ further down @@</span></span>
-<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-    gui = SAREnvGUI(env, config=config, llm_client=llm_client)</span></span>
-<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    gui = SAREnvGUI(env, config=config,</span></span>
-<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+                    llm_client=ReliableTeammate(0.7),</span></span>
-<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+                    prompt_builder=json.dumps)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+import json</span></span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+from .advisor import ReliableTeammate</span></span>
+<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ further down @@</span></span>
+<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-    gui = SAREnvGUI(env, config=config, llm_client=llm_client)</span></span>
+<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    gui = SAREnvGUI(env, config=config,</span></span>
+<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+                    llm_client=ReliableTeammate(0.7),</span></span>
+<span id="cb21-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+                    prompt_builder=json.dumps)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Relaunch, press <code>Alt</code>, and check the advice against the map.</p>
 <p><span class="predict">What does the teammate say now?</span></p>
@@ -1794,9 +2697,9 @@
 <p><span class="task-label">Change</span></p>
 <div class="code-card">
 <p><span class="code-file"><code>configs/experiment.yaml</code></span> <span class="code-where">a new top-level line</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a> display: &amp;display 0</span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a> fullscreen: &amp;fullscreen true</span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+llm_nudge_interval: 10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a> display: &amp;display 0</span>
+<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a> fullscreen: &amp;fullscreen true</span>
+<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+llm_nudge_interval: 10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Relaunch and turn on the spot ten times with <code>←</code>. Do not press <code>Alt</code>.</p>
 <p><span class="predict">When will the teammate speak?</span></p>
@@ -1835,6 +2738,85 @@
           display:block!important;
       }</style></aside>
 </section>
+<section id="what-the-teammate-knows-and-says" class="slide level2">
+<h2>What the Teammate Knows and <span class="accent">Says</span></h2>
+<div class="more-settings">
+<div class="more-row">
+<div class="more-text">
+<p><span class="more-title">What it knows</span></p>
+<p><span class="more-what">The function that turns the game state into the teammate’s prompt. The default lists every object, even ones out of view.</span></p>
+<div class="code-card mini">
+<p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">the <code>gui =</code> line</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a>SAREnvGUI(..., prompt_builder<span class="op">=</span>my_builder)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><span class="var-label">Interpret</span> the teammate sees objects the participant cannot (<code>Visible No</code>)</p>
+</div>
+<div class="result-terminal">
+<pre class="text"><code>Agent: room (0,1) facing West | Carrying: nothing | …
+
+Object       Direction  Visible  Reachable  PathLength
+Victim4      East       Yes      Yes        9
+Victim2      South      Yes      Yes        0
+RedKey1      East       Yes      Yes        5
+PurpleKey1   East       Yes      Yes        6
+PurpleDoor1  South      Yes      Yes        34
+RedDoor1     East       No       Yes        10</code></pre>
+</div>
+</div>
+<div class="more-row">
+<div class="more-text">
+<p><span class="more-title">How it speaks</span></p>
+<p><span class="more-what"><code>sparse</code> asks for one short instruction; <code>detailed</code>, the default, for a short briefing. LLM teammates only: it needs a hosted model and an API key.</span></p>
+<div class="code-card mini">
+<p><span class="code-file"><code>configs/experiment.yaml</code></span> <span class="code-where">a new top-level line</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt_type</span><span class="kw">:</span><span class="at"> sparse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><span class="var-label">Interpret</span> how much advice per message</p>
+</div>
+<div class="speech-pair">
+<div class="speech">
+<p><span class="result-label">detailed · the default, up to 40 words</span></p>
+<p>“Survivor to your South — get there fast, then swing North for the second one. The locked door East needs the yellow key first.”</p>
+</div>
+<div class="speech">
+<p><span class="result-label">sparse · one sentence, up to 20 words</span></p>
+<p>“Survivor to your South — pick them up now, then head North for the next one.”</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The table is the start of what MOSAIC’s default prompt builder (<code>build_obs</code> in src/mosaic/llm/process_prompts.py) sends, trimmed to five of its columns; it lists every object, including ones outside the participant’s view. A <code>prompt_builder=</code> function replaces it with whatever you choose to send. The two quotes are the example replies in MOSAIC’s prompt templates (src/mosaic/llm/prompts.yaml); <code>prompt_type</code> applies to LLM teammates. A <code>response_processor=</code> function rewrites every reply before it is shown.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ai-teammate-interface" class="slide level2">
+<h2>AI Teammate <span class="accent">Interface</span></h2>
+<div class="hook">
+<p>Provider configuration lives outside the reusable task environment.</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="im">from</span> mosaic.llm.client <span class="im">import</span> LLMClient, DummyLLMClient, ask</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href=""></a><span class="ex">pip</span> install llama-index-llms-openai</span>
+<span id="cb27-2"><a href=""></a><span class="ex">pip</span> install llama-index-llms-google-genai</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="im">from</span> experiment.llm <span class="im">import</span> LlamaIndexLLMClient</span>
+<span id="cb28-2"><a href=""></a></span>
+<span id="cb28-3"><a href=""></a>teammate <span class="op">=</span> LlamaIndexLLMClient(<span class="st">"openai"</span>, <span class="st">"gpt-5-mini-2025-08-07"</span>)</span>
+<span id="cb28-4"><a href=""></a><span class="co"># or: LlamaIndexLLMClient("google", "gemini-2.5-flash")</span></span>
+<span id="cb28-5"><a href=""></a></span>
+<span id="cb28-6"><a href=""></a>SAREnvGUI(env, llm_client<span class="op">=</span>teammate).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="note">
+<p>The reusable package defines the client contract. The study layer selects the provider and model. A provider needs its matching package and environment key; if advice fails, the mission remains playable and the chat panel reports the error.</p>
+</div>
+</section>
 <section id="what-each-step-records" class="slide level2">
 <h2>What Each Step <span class="accent">Records</span></h2>
 <div class="custom-strip">
@@ -1848,8 +2830,8 @@
 <p><span class="task-label">Change</span></p>
 <div class="code-card">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">line 46</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-    env.reset()</span></span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    obs, _ = env.reset(); print(sorted(obs))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">-    env.reset()</span></span>
+<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    obs, _ = env.reset(); print(sorted(obs))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="task-label">Run</span> Relaunch and look at the terminal.</p>
 <p><span class="predict">What does MOSAIC record at every step?</span></p>
@@ -1885,335 +2867,6 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="live-demo-eye-tracking" class="slide level2">
-<h2>Live Demo: Eye <span class="accent">Tracking</span></h2>
-<div class="custom-strip">
-<p><span class="stop">SAR</span> <span class="stop">GUI</span> <span class="stop">Teammate</span> <span class="stop here">Sensing</span></p>
-</div>
-<div class="task-what">
-<p>We attach a Tobii eye tracker to the lab’s study runner, and a volunteer plays.</p>
-</div>
-<div class="task-split">
-<div class="task-col">
-<p><span class="task-label">What we added</span></p>
-<div class="code-card">
-<p><span class="code-file"><code>src/experiment/experiment.py</code></span> <span class="code-where">the study runner</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment = Experiment(config)</span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.register_sensor(</span></span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        name="TobiiEyeTracker", sensor_cls=TobiiEyeTracker,</span></span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        sensor_config={"config": {}})</span></span>
-<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.calibrate_sensor(</span></span>
-<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        "TobiiEyeTracker", screen=config["display"],</span></span>
-<span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        fullscreen=config["fullscreen"])</span></span>
-<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment.add_task(name="main_game", task_cls=SARGame, ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><span class="predict">What lands next to the game data?</span></p>
-<div class="lives-in">
-<p><span class="task-label">Lives in</span> <code>src/experiment/sensors/eye_tracker/tobii.py</code></p>
-<p><code>TobiiEyeTracker</code> is one sensor; any sensor that streams to LSL registers the same way.</p>
-</div>
-</div>
-<div class="result-col">
-<p><span class="task-label">Watch for</span></p>
-<div class="watch-list">
-<div class="watch-item">
-<p><span class="watch-num">1</span> <span class="watch-title">Calibration</span> The volunteer follows five dots; the tracker checks each point.</p>
-</div>
-<div class="watch-item">
-<p><span class="watch-num">2</span> <span class="watch-title">Play</span> A short mission, with advice on <code>Alt</code>.</p>
-</div>
-<div class="watch-item fragment">
-<p><span class="watch-num">3</span> <span class="watch-title">Two streams, one clock</span> LabRecorder lists <code>TobiiEyeTracker</code> (gaze, 60 Hz, 9 channels) and the SAR game trial (one JSON line per step).</p>
-</div>
-</div>
-<p><span class="var-label">Interpret</span> attention: where people look before and after advice</p>
-<p><span class="demo-note">Presenter only · needs the lab’s <code>ixp</code> package and a Tobii</span></p>
-</div>
-</div>
-<aside class="notes">
-<p>Presenter only: the lab’s <code>ixp</code> package (not on PyPI), <code>tobii_research</code>, PsychoPy, pylsl, ray, and LabRecorder, set up at rehearsal (RUNSHEET.md). The two calls are the ones the full study block uses (experiment.py lines 83–88); the <code>tobii_test</code> block in the same file is the sensor-only version. Calibration is five points (center and four at 0.2 from the edges); SPACE accepts, R redoes. Reveal the third item once LabRecorder is on screen. If the device fails, show the rehearsal screenshot of LabRecorder’s stream list and move on.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-synchronized-record" class="slide level2">
-<h2>The Synchronized <span class="accent">Record</span></h2>
-<div class="custom-strip">
-<p><span class="stop">SAR</span> <span class="stop">GUI</span> <span class="stop">Teammate</span> <span class="stop here">Sensing</span></p>
-</div>
-<div class="task-split">
-<div class="task-col">
-<p><span class="task-label">Observe</span> <span class="src-cap">one recording, one clock</span></p>
-<div class="placeholder">
-<p>Timeline from the rehearsal recording goes here: gaze position over time, with markers for advice requests, advice replies, actions, and rescues.</p>
-</div>
-</div>
-<div class="result-col">
-<p><span class="task-label">Interpret</span> <span class="src-cap">what to look for</span></p>
-<div class="feature-list">
-<div class="feature-row">
-<p><span class="feature-name">After advice</span> Where does gaze go in the second after the reply appears?</p>
-</div>
-<div class="feature-row">
-<p><span class="feature-name">Reliance</span> Does the next action follow the advice?</p>
-</div>
-<div class="feature-row">
-<p><span class="feature-name">Mistakes</span> What did the participant look at before rescuing a decoy?</p>
-</div>
-</div>
-</div>
-</div>
-<div class="punchline">
-<p>With one eye tracker in the room, everyone inspects <span class="accent">the same prepared recording</span>.</p>
-</div>
-<aside class="notes">
-<p>TODO after rehearsal: record a short session with the Tobii and LabRecorder, then generate the aligned timeline from that recording and replace the placeholder.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="where-to-go-next" class="slide level2">
-<h2>Where to Go <span class="accent">Next</span></h2>
-<div class="hook">
-<p>Everything you changed today, and where it lives in the repository.</p>
-</div>
-<div class="code-map">
-<div class="pkg-card pkg-study">
-<p><span class="pkg-path"><code>src/experiment/</code></span> <span class="pkg-role">One study built on the package. Copy this folder to start yours.</span></p>
-<div class="pkg-tree tree-row">
-<p><code>main.py</code></p>
-<p><code>placers.py</code></p>
-<p><code>llm.py</code></p>
-<p><code>pacing.py</code></p>
-<p><code>game.py</code></p>
-<p><code>replay.py</code></p>
-<p><code>sensors/</code></p>
-</div>
-<p><span class="pkg-label">API</span> <code>build_llm_client</code> · <code>LavaRiskVictimPlacer</code> · <code>SARGameTrial</code> <span class="pkg-label pkg-label-gap">Customize</span> Counts · LLM provider · Records</p>
-</div>
-<div class="record-drop compose-drop">
-<p><span class="record-drop-label">composes</span></p>
-</div>
-<div class="pkg-row">
-<div class="pkg-card">
-<p><span class="pkg-path"><code>src/mosaic/core/</code></span></p>
-<p><span class="pkg-role">Level generation and cameras</span></p>
-<div class="pkg-tree">
-<p><code>level.py</code></p>
-<p><code>placers.py</code></p>
-<p><code>camera.py</code></p>
-</div>
-<p><span class="pkg-label pkg-label-block">API</span> <code>Placer</code> · <code>CameraStrategy</code></p>
-<p><span class="pkg-label">Customize</span> Camera</p>
-</div>
-<div class="pkg-card">
-<p><span class="pkg-path"><code>src/mosaic/sar/</code></span></p>
-<p><span class="pkg-role">The search-and-rescue task</span></p>
-<div class="pkg-tree">
-<p><code>env.py</code></p>
-<p><code>placers.py</code></p>
-<p><code>actions.py</code></p>
-<p><code>objects.py</code></p>
-<p><code>observations.py</code></p>
-</div>
-<p><span class="pkg-label pkg-label-block">API</span> <code>build_sar_env</code> · <code>RescueAction</code></p>
-<p><span class="pkg-label">Customize</span> Locked rooms · Rewards · Records</p>
-</div>
-<div class="pkg-card">
-<p><span class="pkg-path"><code>src/mosaic/gui/</code></span></p>
-<p><span class="pkg-role">What the participant sees</span></p>
-<div class="pkg-tree">
-<p><code>main.py</code></p>
-<p><code>user.py</code></p>
-<p><code>chat.py</code></p>
-<p><code>info.py</code></p>
-<p><code>feedback.py</code></p>
-</div>
-<p><span class="pkg-label pkg-label-block">API</span> <code>SAREnvGUI</code> · <code>EdgeVignette</code></p>
-<p><span class="pkg-label">Customize</span> Feedback · Info panel · Timing</p>
-</div>
-<div class="pkg-card">
-<p><span class="pkg-path"><code>src/mosaic/llm/</code></span></p>
-<p><span class="pkg-role">The teammate contract</span></p>
-<div class="pkg-tree">
-<p><code>client.py</code></p>
-<p><code>process_prompts.py</code></p>
-<p><code>prompts.yaml</code></p>
-<p><code>pathfinding.py</code></p>
-<p><code>parser.py</code></p>
-</div>
-<p><span class="pkg-label pkg-label-block">API</span> <code>LLMClient</code> · <code>ask</code></p>
-<p><span class="pkg-label">Customize</span> Teammate · Prompts</p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>Have the repository open in an editor beside this slide. <code>mosaic/</code> is the reusable package; <code>experiment/</code> is one study built on it, and it is the folder attendees copy and change for their own work. Every file named here exists in the MOSAIC repository; the API names are the classes and functions the Part Four slides changed, and each card’s “Customize” line names those slides.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="section" class="slide level2" data-background-image="assets/background.jpg" data-background-opacity="0.25">
-<h2></h2>
-<div class="closing">
-<p><span class="closing-title">Thanks!</span></p>
-<p><span class="closing-sub">Questions?</span></p>
-<div class="closing-links">
-<p><span class="closing-label">MOSAIC</span> <span class="closing-link">github.com/iHuman-Lab/mosaic</span> <span class="closing-label">Tutorial materials</span> <span class="closing-link">github.com/Bkdogbey/mosaic-smc-tutorial</span> <span class="closing-label">iHuman Lab</span> <span class="closing-link">ihuman-lab.github.io/lab-website</span></p>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<!-- ============ APPENDIX ============ -->
-<div class="divider">
-<p><span class="divider-title">Appendix</span></p>
-<p><span class="divider-subtitle">Technical notes and troubleshooting</span></p>
-</div>
-</section>
-<section id="detailed-installation-recovery" class="slide level2">
-<h2>Detailed Installation <span class="accent">Recovery</span></h2>
-<div class="hook">
-<p>Additional recovery steps for less common installation failures.</p>
-</div>
-<table class="caption-top">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Symptom</th>
-<th>Recovery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>ensurepip is not available</code></td>
-<td>Install <code>python3-venv</code>, recreate <code>mosaic_env</code></td>
-</tr>
-<tr class="even">
-<td><code>python --version</code> reports 3.9 or older</td>
-<td>Recreate <code>mosaic_env</code> on Python 3.10 or 3.11</td>
-</tr>
-<tr class="odd">
-<td><code>pip install -e .</code> fails to build a wheel</td>
-<td>Rerun <code>python -m pip install --upgrade pip</code>, then retry</td>
-</tr>
-<tr class="even">
-<td><code>conda activate</code> does nothing in PowerShell</td>
-<td>Run <code>conda init powershell</code> once, reopen the terminal</td>
-</tr>
-<tr class="odd">
-<td>Mission window opens on the wrong monitor</td>
-<td>Press <code>F11</code> to leave fullscreen and drag it</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="what-the-teammate-knows-and-says" class="slide level2">
-<h2>What the Teammate Knows and <span class="accent">Says</span></h2>
-<div class="more-settings">
-<div class="more-row">
-<div class="more-text">
-<p><span class="more-title">What it knows</span></p>
-<p><span class="more-what">The function that turns the game state into the teammate’s prompt. The default lists every object, even ones out of view.</span></p>
-<div class="code-card mini">
-<p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">the <code>gui =</code> line</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a>SAREnvGUI(..., prompt_builder<span class="op">=</span>my_builder)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><span class="var-label">Interpret</span> the teammate sees objects the participant cannot (<code>Visible No</code>)</p>
-</div>
-<div class="result-terminal">
-<pre class="text"><code>Agent: room (0,1) facing West | Carrying: nothing | …
-
-Object       Direction  Visible  Reachable  PathLength
-Victim4      East       Yes      Yes        9
-Victim2      South      Yes      Yes        0
-RedKey1      East       Yes      Yes        5
-PurpleKey1   East       Yes      Yes        6
-PurpleDoor1  South      Yes      Yes        34
-RedDoor1     East       No       Yes        10</code></pre>
-</div>
-</div>
-<div class="more-row">
-<div class="more-text">
-<p><span class="more-title">How it speaks</span></p>
-<p><span class="more-what"><code>sparse</code> asks for one short instruction; <code>detailed</code>, the default, for a short briefing. LLM teammates only: it needs a hosted model and an API key.</span></p>
-<div class="code-card mini">
-<p><span class="code-file"><code>configs/experiment.yaml</code></span> <span class="code-where">a new top-level line</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt_type</span><span class="kw">:</span><span class="at"> sparse</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><span class="var-label">Interpret</span> how much advice per message</p>
-</div>
-<div class="speech-pair">
-<div class="speech">
-<p><span class="result-label">detailed · the default, up to 40 words</span></p>
-<p>“Survivor to your South — get there fast, then swing North for the second one. The locked door East needs the yellow key first.”</p>
-</div>
-<div class="speech">
-<p><span class="result-label">sparse · one sentence, up to 20 words</span></p>
-<p>“Survivor to your South — pick them up now, then head North for the next one.”</p>
-</div>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>The table is the start of what MOSAIC’s default prompt builder (<code>build_obs</code> in src/mosaic/llm/process_prompts.py) sends, trimmed to five of its columns; it lists every object, including ones outside the participant’s view. A <code>prompt_builder=</code> function replaces it with whatever you choose to send. The two quotes are the example replies in MOSAIC’s prompt templates (src/mosaic/llm/prompts.yaml); <code>prompt_type</code> applies to LLM teammates. A <code>response_processor=</code> function rewrites every reply before it is shown.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="ai-teammate-interface" class="slide level2">
-<h2>AI Teammate <span class="accent">Interface</span></h2>
-<div class="hook">
-<p>Provider configuration lives outside the reusable task environment.</p>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="im">from</span> mosaic.llm.client <span class="im">import</span> LLMClient, DummyLLMClient, ask</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href=""></a><span class="ex">pip</span> install llama-index-llms-openai</span>
-<span id="cb24-2"><a href=""></a><span class="ex">pip</span> install llama-index-llms-google-genai</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="im">from</span> experiment.llm <span class="im">import</span> LlamaIndexLLMClient</span>
-<span id="cb25-2"><a href=""></a></span>
-<span id="cb25-3"><a href=""></a>teammate <span class="op">=</span> LlamaIndexLLMClient(<span class="st">"openai"</span>, <span class="st">"gpt-5-mini-2025-08-07"</span>)</span>
-<span id="cb25-4"><a href=""></a><span class="co"># or: LlamaIndexLLMClient("google", "gemini-2.5-flash")</span></span>
-<span id="cb25-5"><a href=""></a></span>
-<span id="cb25-6"><a href=""></a>SAREnvGUI(env, llm_client<span class="op">=</span>teammate).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="note">
-<p>The reusable package defines the client contract. The study layer selects the provider and model. A provider needs its matching package and environment key; if advice fails, the mission remains playable and the chat panel reports the error.</p>
-</div>
 
 </section>
     </div>
@@ -2433,20 +3086,35 @@ RedDoor1     East       No       Yes        10</code></pre>
       });
     </script>
     <script>
+
     // Restart a slide's clips when it is shown, so each starts at its first frame
+
     // and the three camera clips on the Camera Views slide play in step.
+
     (function () {
+
       function restart(slide) {
+
         slide.querySelectorAll('.camera-view img, .phase img, .run-split img').forEach(function (img) {
+
           var src = img.getAttribute('src');
+
           if (!src || !/\.gif(\?|$)/.test(src)) return;
+
           img.setAttribute('src', src.split('?')[0] + '?t=' + Date.now());
+
         });
+
       }
+
       function hook() { Reveal.on('slidechanged', function (e) { restart(e.currentSlide); }); }
+
       if (window.Reveal && Reveal.on) hook(); else window.addEventListener('load', hook);
+
     })();
+
     </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

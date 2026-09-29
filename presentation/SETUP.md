@@ -5,6 +5,17 @@
 Please do this **before you arrive**. It takes about five minutes on conference
 Wi-Fi and under a minute on a good connection.
 
+## What to expect
+
+- **Install MOSAIC on your own laptop.** Part Three of the tutorial runs the
+  full MOSAIC game window locally, so the install below is the only setup you
+  need.
+- **No Jupyter to install.** Part Four uses a lab-hosted notebook that you open
+  in your browser. We will share how to reach it in the room; there is nothing
+  to set up for it in advance.
+- **No API key.** You do not need an account or a key with any AI provider. The
+  lab-hosted service provides the AI teammate's connection.
+
 ## Requirements
 
 - Python **3.10 or 3.11** (`python3 --version`). These are the supported
@@ -13,7 +24,7 @@ Wi-Fi and under a minute on a good connection.
 - PowerShell, macOS Terminal, or any Linux shell
 - A laptop with a real display — the game opens a window, so a remote/SSH-only
   machine or Colab will not work for the GUI
-- No API key is required for the core tutorial. AI-teammate provider setup is optional.
+- A web browser, for the Part Four notebook
 
 ## 1 · Clone and isolate
 
@@ -148,8 +159,9 @@ Lines reading `Timeout during mission generation: connect_all failed` or
 `Sampling rejected: unreachable object at ...` may appear. Both are the level
 generator retrying — warnings, not errors.
 
-## 5 · Run MOSAIC
+## 5 · Optional: try the game
 
+We launch the game together in Part Three, but you can confirm it opens now.
 Keep `mosaic_env` active and stay in the cloned `mosaic` directory.
 
 **macOS / Linux**
@@ -173,13 +185,14 @@ extra repository, notebook, or Python file is required.
 > commented out in `src/experiment/main.py`, which made the runner exit with
 > `NameError: name 'LavaRiskVictimPlacer' is not defined`.
 
-## 6 · Get the two tutorial files
+## 6 · Optional: files for the appendix exercises
 
-Two Part Four tasks use small files from the tutorial repository. Download
+The main tutorial needs nothing else. Two self-study exercises in the deck's
+appendix (a custom info panel and a scripted teammate) use small files from the
+tutorial repository. If you want to try them after the session, download
 `panel.py` and `advisor.py` from
 <https://github.com/Bkdogbey/mosaic-smc-tutorial/tree/main/presentation/labs>
-and save both into `src/experiment/` in your `mosaic` folder. Nothing else
-needs them, and the session shows where they go when you reach those slides.
+and save both into `src/experiment/` in your `mosaic` folder.
 
 ## Troubleshooting
 
@@ -196,7 +209,7 @@ needs them, and the session shows where they go when you reach those slides.
 | Hangs forever with no window, after changing settings | You set `locked_room_prob=1.0`. Every room locked leaves no solvable layout and the generator retries forever. Use `0.9` or less. |
 | `AttributeError: 'FullviewCamera' object has no attribute 'reset'` | Known bug; `AgentCenteredCamera` fails the same way. Use `AgentFOVCamera`, `AgentConeCamera`, or the default `EdgeFollowCamera`. |
 | Nothing renders, or `pygame.error: No available video device` | You are on a headless or remote machine. Use a local laptop. |
-| `Alt` replies `Currently, no commands are available.` | Expected. The runner attaches the keyless `dummy` teammate; a real provider is the optional extension. |
+| `Alt` replies `Currently, no commands are available.` | Expected. The runner attaches the keyless `dummy` placeholder teammate. |
 | `Missing optional dependency 'tabulate'` | `pip install tabulate` — normally installed with the package. |
 | `NameError: name 'LavaRiskVictimPlacer' is not defined` | Your clone predates the fix. `git pull` in the `mosaic` directory. |
 | `No module named 'experiment'` | Run from the repository root with `PYTHONPATH=src`. |

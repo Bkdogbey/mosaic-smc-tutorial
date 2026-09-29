@@ -5,34 +5,65 @@ researchers, built on the iHuman Lab Quarto reveal.js template.
 
 The narrative thread is human–AI teaming: MOSAIC is a configurable research
 testbed for studying how humans and AI teammates collaborate during dynamic,
-consequential tasks. The deck is four parts:
+consequential tasks. The deck is four parts, following one learning arc:
+understand the research need → install the software → experience the baseline
+and locate its extension points → use those extension points to build one study.
 
-1. **Why MOSAIC** — the questions human–AI teaming research asks, why they need
-   a configurable testbed, what MOSAIC is and how it works, search and rescue as
-   the first testbed, and the teaming loop
-2. **Install MOSAIC** — the dependency list, `venv` and Conda setup paths, an
-   import checkpoint, and the first mission via `python -m experiment.main`
-3. **Experience the SAR mission** — no code: the mission objective, the
-   interface and what each tile means, victims and decoys, and the controls
-4. **Configure MOSAIC** — the runtime architecture and the starting code in
-   `main.py`, then one slide per setting across four systems: the mission
-   (victims, decoys, lava, locked rooms, rewards, time limit), the interface
-   (camera, feedback flashes, info panel), the AI teammate (reliability and
-   advice timing), and sensing (what each step records, a live
-   eye tracker, the synchronized record). Each task slide follows Change → Run →
-   Observe → Interpret: the edit in an editor-style code card, a question for
-   the room, and a before/after result rendered from real MOSAIC. The
-   synchronized-record slide is a placeholder until the rehearsal recording
-   exists. The part closes on the code map ("Where to Go Next")
+1. **Why MOSAIC** (slides 1–8) — the questions human–AI teaming research asks,
+   why they need a configurable testbed, what MOSAIC is and how it works, search
+   and rescue as the first testbed, and the teaming loop
+2. **Install MOSAIC** (9–13) — prerequisites, clone and `mosaic_env`, editable
+   install, and an import check that ends at `MOSAIC ready`. Nothing is launched
+3. **Run and Understand MOSAIC** (14–22) — the first run of
+   `python -m experiment.main`, the SAR mission and its elements, the labelled
+   interface, the controls, the runtime architecture (interaction loop, sensing
+   and recording, Gymnasium/MiniGrid foundation), how `src/experiment/main.py`
+   composes the included study, and one map of where each research decision is
+   made
+4. **Build a Human–AI Reliability Study** (23–35) — one activity around one
+   question: *when AI advice may be wrong, does the participant verify it before
+   acting?* Configure a small SAR mission, fix one limited camera, attach a
+   teammate whose reliability the experiment controls (1.0 vs 0.7), run two
+   conditions, and compare the behavioral record, all in a lab-hosted notebook
+   (planned; see "Still to produce"). The part ends with the instructor
+   eye-tracking demo, the synchronized record (a placeholder), what participants
+   built, and the code map ("Where to Go Next")
 
-Installation recovery, what the teammate knows and says (prompt contents and
-`prompt_type`), and the AI teammate provider setup live in the appendix for Q&A.
+The appendix (37–53) holds installation recovery and the customization
+reference: the exact `main.py` listing, victims and health, and the one-setting
+task slides from the earlier deck (counts, locked rooms, rewards, time limit,
+cameras, feedback flashes, info panel, teammate swap, advice timing, prompt
+construction, provider setup, observation fields).
+
+## Still to produce
+
+Part Four describes a workflow whose infrastructure does not exist yet. The
+slides mark each of these with a "Development placeholder" tag; nothing on them
+is a real capture, address, or result.
+
+- **The hosted notebook service**: a lab-hosted Jupyter environment reached
+  through a browser, one isolated session per participant, and a simplified
+  inline mission view. No address appears anywhere until it exists and has been
+  tested.
+- **The LLM connection**: the provider key held behind a lab-controlled service
+  with rate and cost limits, never in this repository, a slide, or a
+  participant-visible notebook cell.
+- **The controlled teammate**: the experiment picks correctness and target, the
+  LLM phrases the recommendation, and MOSAIC records target, correctness,
+  message, and response. `labs/advisor.py` (`ReliableTeammate`) already does
+  the first two steps without an LLM.
+- **Calibrated mission defaults** (slide 27): the proposed values are untested.
+  Same-layout conditions also need `random.seed(seed)` before
+  `env.reset(seed=...)` until issue 3 below is fixed.
+- **Captures**: the notebook screenshot (slide 26), the notebook's summary view
+  of the behavioral record (slide 31), and the synchronized timeline from the
+  rehearsal recording (slide 33).
 
 ## Contents
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (41 slides: 36 main + closing + 4 appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (53 slides: 35 main + closing + 17 appendix)
 ├── mosaic-tutorial.ipynb # optional development prototype; not required by attendees
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
@@ -43,9 +74,10 @@ presentation/
 ├── assets/               # figures used in the deck
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
-    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (slide 30)
+    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (appendix slide 48)
     ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
-    │                     #   Slides 31–32 use it; its result image is assets/chat-advice.png
+    │                     #   Appendix slides 49–50 use it; its result image is assets/chat-advice.png.
+    │                     #   Also the reference for the controlled teammate on slide 29
     └── tweak.py          # all four injection points in one file
 ```
 
@@ -76,16 +108,18 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `victims.png` | Generated from `Victim` / `FakeVictim` render coordinates — top row real, bottom row decoys |
 | `gameplay.gif` | Captured by `tools/capture_gameplay.py` — the real GUI compositor driven by a scripted breadth-first walk (a real victim with a green flash, a decoy with a red flash, then another real victim; `SEED=9`, paced slower than live play), built from `configs/experiment.yaml` so it matches what `experiment.main` shows |
 | `controls-*.gif`, `chat-advice.png` | Captured by `tools/capture_controls.py` — one clip per control (arrows, Space, Tab, Alt) with a keycap strip that lights on the pressed key; the advice clip and chat still use `ReliableTeammate` from `labs/advisor.py` |
-| `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed (the view and teammate slides reuse `cam-*-live.png` and `chat-advice.png`; the advice-timing pair uses `ReliableTeammate`, as the slide keeps it attached) |
+| `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per appendix task slide (41–53), each rendered from the same seed with only the edited setting changed (the view and teammate slides reuse `cam-*-live.png` and `chat-advice.png`; the advice-timing pair uses `ReliableTeammate`, as the slide keeps it attached) |
 | `cam-*-walk.gif` | Captured by `tools/capture_camera_gifs.py` — one walk through a door rendered through all three cameras frame by frame, with the ring and room outline recomputed per frame; equal frame timing so the three play in step |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
 `cam-full.png` introduces the search-and-rescue testbed in Part One.
-`gui-screenshot-live.png` introduces the complete interface in Part Three.
-The annotated `cam-*-annot.png` variants compare the three supported camera
-choices in Part Three; the plain renders are kept as the unmarked originals.
-`victims.png` shows the real and decoy victim shapes.
+`gui-first-frame.png` is the first run (slide 15), `gameplay.gif` and the
+sprites the SAR mission (16), and `gui-screenshot-live.png` the labelled
+interface (17), all in Part Three. `cam-room-live.png` and `cam-cone-live.png`
+show the study's camera choice in Part Four (28). The annotated
+`cam-*-annot.png` variants and `victims.png` are kept for reference; the camera
+walks, `victims.png`, and every `results/*` pair now appear in the appendix.
 
 Regenerate everything with the scripts in `tools/`, in this order:
 
@@ -126,13 +160,15 @@ Two things to know before regenerating:
 ## Before presenting
 
 1. Send `SETUP.md` to registrants at least a week out.
-2. Re-verify every command in Part 2 against the current `main`. Part 2 now
-   assumes MOSAIC depends on `pygame-ce` (issue 1 below) and that `Esc` exits
+2. Re-verify every command in Parts 2 and 3 against the current `main`. They
+   assume MOSAIC depends on `pygame-ce` (issue 1 below) and that `Esc` exits
    cleanly (issue 13) — **both fixes must be merged before the tutorial**, or
    attendees hit `DIRECTION_LTR` on first run and a traceback on every `Esc`.
-3. Merge this branch so `presentation/labs/` on `main` has `panel.py` and
-   `advisor.py`; slides 30–31 send attendees to the repo for them.
-4. Read `RUNSHEET.md`.
+3. Build and test the Part Four infrastructure (see "Still to produce"), or
+   present slides 26–31 as the planned workflow, with their placeholder tags.
+4. Merge this branch so `presentation/labs/` on `main` has `panel.py` and
+   `advisor.py`; appendix slides 48–49 send attendees to the repo for them.
+5. Read `RUNSHEET.md`.
 
 ## Repo issues this tutorial exposed
 
