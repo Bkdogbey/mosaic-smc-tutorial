@@ -98,7 +98,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-dc750e74e0124e2c876593c692c35d3e.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-a788fd7967feb8f405b4ef7f4ab95fd1.css">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -527,22 +527,12 @@
 <h2>The Task: <span class="accent">Search and Rescue</span></h2>
 <div class="columns scenario-columns">
 <div class="column" style="width:58%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="assets/cam-full.png" class="quarto-figure quarto-figure-center" height="430"></p>
-</figure>
-</div>
+<p><img data-src="assets/cam-full.png" alt="The whole search-and-rescue building: nine rooms with victims, lava, keys, and locked doors."></p>
 </div><div class="column" style="width:42%;">
 <div class="scenario-brief">
 <p><span class="scenario-label">Mission</span></p>
 <p>Search a multiroom building and rescue the real victims.</p>
-<p><span class="scenario-label">Sources of difficulty</span></p>
-<ul>
-<li>Locked rooms require the correct key</li>
-<li>Lava constrains safe routes</li>
-<li>Configurations can add decoys and health pressure</li>
-<li>Time and step limits create urgency</li>
-</ul>
+<p>Part Three plays the mission and walks through its rules.</p>
 </div>
 </div></div>
 <div class="punchline">
@@ -904,15 +894,11 @@
 <section id="the-search-and-rescue-mission" class="slide level2">
 <h2>The Search-and-Rescue <span class="accent">Mission</span></h2>
 <div class="hook">
-<p>Explore the building, tell real victims from decoys, and decide who to rescue before time runs out.</p>
+<p>Explore, tell real victims from decoys, and rescue them before time runs out.</p>
 </div>
 <div class="columns scenario-columns">
 <div class="column" style="width:58%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="assets/gameplay.gif" class="quarto-figure quarto-figure-center" alt="The real interface: the agent rescues a real victim (green flash), then a decoy (red flash), then another real victim." height="340"></p>
-</figure>
-</div>
+<p><img data-src="assets/gameplay.gif" alt="The real interface: the agent rescues a real victim (green flash), then a decoy (red flash), then another real victim."></p>
 </div><div class="column" style="width:42%;">
 <div class="scenario-brief">
 <p><span class="scenario-label">Explore</span></p>
@@ -948,7 +934,7 @@
 <div class="columns interface-split">
 <div class="column" style="width:73%;">
 <div class="annotated">
-<p><img data-src="assets/gui-screenshot-live.png" alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue" height="520"></p>
+<p><img data-src="assets/gui-screenshot-live.png" alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue" height="480"></p>
 <div class="anno fragment fade-in-then-out mid" style="--x:0.3%; --y:0.4%; --w:66%; --h:99%;">
 <p>Game viewport — the green flash is rescue feedback</p>
 </div>
@@ -1015,7 +1001,10 @@
 <div class="health-tiles">
 <p><img data-src="assets/sprites/health-100.png" alt="Real victim, full health bar"> <img data-src="assets/sprites/health-60.png" alt="Real victim, 60% health"> <img data-src="assets/sprites/health-25.png" alt="Real victim, 25% health"> <img data-src="assets/sprites/health-0.png" alt="Real victim, no health left"></p>
 </div>
-<p><span class="health-scale">100% · 60% · 25% · 0%</span> <span class="health-caption">The white bar is the victim’s health.</span></p>
+<div class="health-scale">
+<p><span>100%</span> <span>60%</span> <span>25%</span> <span>0%</span></p>
+</div>
+<p><span class="health-caption">The white bar is the victim’s health.</span></p>
 </div>
 </div><div class="column" style="width:58%;">
 <div class="feature-list">
@@ -1866,7 +1855,7 @@
 <section id="where-to-go-next" class="slide level2">
 <h2>Where to Go <span class="accent">Next</span></h2>
 <div class="hook">
-<p>The parts you changed today, and where they live. Copy <code>src/experiment/</code> to start your own study.</p>
+<p>The parts you changed today, and where they live.</p>
 </div>
 <div class="code-map">
 <div class="pkg-card pkg-study">
@@ -2356,41 +2345,19 @@ RedDoor1     East       No       10</code></pre>
 <td>Install <code>python3-venv</code>, recreate <code>mosaic_env</code></td>
 </tr>
 <tr class="even">
-<td><code>python --version</code> reports 3.9 or older</td>
-<td>Recreate <code>mosaic_env</code> on Python 3.10 or 3.11</td>
-</tr>
-<tr class="odd">
 <td><code>pip install -e .</code> fails to build a wheel</td>
 <td>Rerun <code>python -m pip install --upgrade pip</code>, then retry</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>conda activate</code> does nothing in PowerShell</td>
 <td>Run <code>conda init powershell</code> once, reopen the terminal</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Mission window opens on the wrong monitor</td>
 <td>Press <code>F11</code> to leave fullscreen and drag it</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="ai-teammate-interface" class="slide level2">
-<h2>AI Teammate <span class="accent">Interface</span></h2>
-<div class="hook">
-<p>Provider configuration lives outside the reusable task environment.</p>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="im">from</span> mosaic.llm.client <span class="im">import</span> LLMClient, DummyLLMClient, ask</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href=""></a><span class="ex">pip</span> install llama-index-llms-openai</span>
-<span id="cb30-2"><a href=""></a><span class="ex">pip</span> install llama-index-llms-google-genai</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a><span class="im">from</span> experiment.llm <span class="im">import</span> LlamaIndexLLMClient</span>
-<span id="cb31-2"><a href=""></a></span>
-<span id="cb31-3"><a href=""></a>teammate <span class="op">=</span> LlamaIndexLLMClient(<span class="st">"openai"</span>, <span class="st">"gpt-5-mini-2025-08-07"</span>)</span>
-<span id="cb31-4"><a href=""></a><span class="co"># or: LlamaIndexLLMClient("google", "gemini-2.5-flash")</span></span>
-<span id="cb31-5"><a href=""></a></span>
-<span id="cb31-6"><a href=""></a>SAREnvGUI(env, llm_client<span class="op">=</span>teammate).run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="note">
-<p>The reusable package defines the client contract. The study layer selects the provider and model. A provider needs its matching package and environment key; if advice fails, the mission remains playable and the chat panel reports the error.</p>
-</div>
 
 </section>
     </div>
