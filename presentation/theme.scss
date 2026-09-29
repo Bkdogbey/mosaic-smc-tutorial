@@ -9,7 +9,7 @@ $gray-light: #DDDDDD;         // light surface, e.g. card backgrounds (OSU Cool 
 $gray-dark: #757575;          // same value as $secondary-color, used for dark-on-light text
 $body-bg: #252525;
 $body-color: #ffffff;
-$link-color: #EC672C;
+$link-color: $primary-color;
 $presentation-heading-color: #ffffff;
 $presentation-heading-font-weight: bold;
 $presentation-heading-line-height: 1.4;
@@ -30,7 +30,7 @@ $heading-font: "Rubik", sans-serif !default;
     --r-heading-color: #ffffff;
     --r-main-font: "Rubik", sans-serif;
     --r-heading-font: "Rubik", sans-serif;
-    --r-link-color: #EC672C;
+    --r-link-color: #{$primary-color};
 }
 
 .reveal h2 {
@@ -43,11 +43,11 @@ $heading-font: "Rubik", sans-serif !default;
 
 .reveal h2 .accent,
 .accent {
-    color: #EC672C;
+    color: $primary-color;
 }
 
 .reveal h3 {
-    color: #EC672C;
+    color: $primary-color;
     font-style: italic;
     font-weight: normal;
     font-size: 0.95em;
@@ -64,12 +64,12 @@ $heading-font: "Rubik", sans-serif !default;
 .reveal p strong,
 .reveal li strong,
 .reveal td strong {
-    color: #EC672C !important;
+    color: $primary-color !important;
     font-weight: 700;
 }
 
 .reveal a {
-    color: #EC672C;
+    color: $primary-color;
     line-height: 1.5em;
 }
 
@@ -78,7 +78,7 @@ $heading-font: "Rubik", sans-serif !default;
 }
 
 .reveal ul li::marker {
-    color: #EC672C;
+    color: $primary-color;
 }
 
 .reveal ol {
@@ -86,7 +86,7 @@ $heading-font: "Rubik", sans-serif !default;
 }
 
 .reveal ol li::marker {
-    color: #EC672C;
+    color: $primary-color;
 }
 
 /* Angled-block accent motif — a clip-path banner mark that matches the heading's text width.
@@ -210,103 +210,9 @@ $heading-font: "Rubik", sans-serif !default;
 .punchline {
     font-size: 0.95em;
     font-weight: 700;
-    color: #EC672C;
+    color: $primary-color;
     margin-top: 1rem;
     line-height: 1.4;
-}
-
-/* Impact cards — ::: {.impact-grid} containing ::: {.impact-card} fenced divs */
-.impact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
-    margin-top: 0.4rem;
-    width: 100%;
-}
-
-.impact-card {
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    height: 430px;
-}
-
-.impact-card img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    object-fit: cover;
-    display: block;
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0;
-    padding: 0;
-}
-
-/* Gradient overlay — a pseudo-element, so no empty div is needed in the markup */
-.impact-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.75) 30%, rgba(0,0,0,0) 70%);
-}
-
-.impact-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0.8rem 1rem;
-    height: 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.impact-text p {
-    margin: 0;
-}
-
-.impact-label {
-    display: block;
-    font-weight: 700;
-    color: #EC672C;
-    font-size: 0.85em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 0.3rem;
-}
-
-.impact-desc {
-    display: block;
-    font-size: 0.72em;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.4;
-}
-
-.impact-tagline {
-    text-align: center;
-    margin-top: 1.2rem;
-    padding-top: 0.8rem;
-    border-top: 1px solid rgba(236,103,44,0.35);
-}
-
-.impact-tagline-phrase {
-    font-size: 1.2em;
-    font-weight: 700;
-    color: rgba(255,255,255,0.75);
-    letter-spacing: 0.06em;
-
-    span { color: #EC672C; }
-}
-
-.impact-tagline-dot {
-    color: #EC672C;
-    margin: 0 0.6em;
 }
 
 /* Tables */
@@ -349,121 +255,12 @@ $heading-font: "Rubik", sans-serif !default;
 
 .reveal pre code {
     background: rgba(0,0,0,0.35);
-    border-left: 3px solid #EC672C;
+    border-left: 3px solid $primary-color;
     border-radius: 6px;
     padding: 0.8em 1em;
     font-size: 1.25em;
     line-height: 1.5;
     max-height: none;
-}
-
-/* Flow diagram */
-.flow-diagram {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
-    margin-top: 0.6rem;
-}
-
-.flow-step {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(236,103,44,0.4);
-    border-radius: 8px;
-    padding: 0.55rem 1.2rem;
-    font-size: 0.85em;
-    color: #ffffff;
-    text-align: center;
-    width: 100%;
-    max-width: 560px;
-}
-
-.flow-step p {
-    margin: 0;
-}
-
-.flow-step strong {
-    color: $primary-color;
-}
-
-/* Add .secondary for an optional/alternate step in a pipeline: ::: {.flow-step .secondary} */
-.flow-step.secondary {
-    border-color: rgba(117,117,117,0.5);
-}
-
-.flow-step.secondary strong {
-    color: $secondary-color;
-}
-
-.flow-arrow {
-    color: #EC672C;
-    font-size: 1.1em;
-    line-height: 1;
-}
-
-.flow-arrow p {
-    margin: 0;
-}
-
-.flow-branch {
-    display: flex;
-    gap: 1rem;
-    width: 100%;
-    max-width: 560px;
-    justify-content: center;
-}
-
-.flow-branch .flow-step {
-    max-width: 260px;
-}
-
-/* Cards — ::: {.cards} containing ::: {.card} fenced divs */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0.7rem;
-    margin-top: 0.5rem;
-}
-
-/* Add .vertical to stack cards in a single column instead of a grid: ::: {.cards .vertical} */
-.cards.vertical {
-    grid-template-columns: 1fr;
-    max-width: 560px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.card {
-    border-left: 3px solid $primary-color;
-    background: $gray-light;
-    border-radius: 6px;
-    padding: 0.55rem 0.8rem;
-}
-
-/* Add .secondary to de-emphasize a card or group it as an alternate category: ::: {.card .secondary} */
-.card.secondary {
-    border-left-color: $secondary-color;
-}
-
-.card.secondary .card-title {
-    color: $secondary-color;
-}
-
-.card-title {
-    display: block;
-    font-weight: 700;
-    color: $primary-color;
-    font-size: 0.85em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.2rem;
-}
-
-.card p {
-    font-size: 0.72em;
-    color: #333333;
-    line-height: 1.4;
-    margin: 0;
 }
 
 /* Team — ::: {.team} containing ::: {.member} fenced divs, each with a photo,
@@ -478,8 +275,8 @@ $heading-font: "Rubik", sans-serif !default;
 
 /* !important: the generic content-image rule above wins on specificity via its :not() */
 .reveal .slides section .member img {
-    width: 210px;
-    height: 210px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
     border-radius: 50% !important;
     border: 3px solid $primary-color;
@@ -524,285 +321,6 @@ $heading-font: "Rubik", sans-serif !default;
     font-weight: 700;
 }
 
-/* Card grid layouts — ::: {.cards .cols-2} (or .cols-3 / .cols-4) fixes the column count,
-   so six cards never wrap as 4 + 2. */
-.cards.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.cards.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.cards.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-/* Inline code on the light card surface — darker accent for contrast, and allowed to wrap */
-.card code {
-    color: #b4461a;
-    overflow-wrap: anywhere;
-}
-
-/* Fill mode — ::: {.cards .fill} stretches the grid down the slide with larger text.
-   Add .short when a punchline follows, so there is room for it. */
-.cards.fill {
-    min-height: 500px;
-    grid-auto-rows: 1fr;
-    gap: 1rem;
-    margin-top: 0.8rem;
-}
-
-.cards.fill.short {
-    min-height: 400px;
-}
-
-.cards.fill .card {
-    display: flex;
-    flex-direction: column;
-    padding: 0.9rem 1.2rem;
-    border-left-width: 5px;
-}
-
-.cards.fill .card p {
-    font-size: 0.8em;
-    line-height: 1.45;
-}
-
-.cards.fill .card-title {
-    font-size: 1.2em;
-    margin-bottom: 0.2rem;
-}
-
-/* Card footer — ::: {.card-meta} as the last child of a card: where it happens, or which argument */
-.card .card-meta {
-    margin-top: auto;
-    padding-top: 0.45rem;
-    border-top: 1px solid rgba(0,0,0,0.12);
-}
-
-.card .card-meta p {
-    font-size: 0.62em;
-    font-weight: 700;
-    color: #555555;
-    letter-spacing: 0.3px;
-}
-
-/* Horizontal flow — ::: {.flow-diagram .horizontal}: full-width steps joined by arrows.
-   Add .fill to stretch the steps down the slide (.short leaves room for a punchline). */
-.flow-diagram.horizontal {
-    flex-direction: row;
-    align-items: stretch;
-    gap: 0;
-    width: 100%;
-    margin-top: 0.8rem;
-}
-
-.flow-diagram.horizontal.fill { min-height: 460px; }
-.flow-diagram.horizontal.fill.short { min-height: 390px; }
-
-.flow-diagram.horizontal .flow-step {
-    flex: 1;
-    min-width: 0;
-    max-width: none;
-    position: relative;
-    text-align: left;
-    font-size: 0.76em;
-    padding: 0.8rem 0.9rem;
-}
-
-.flow-diagram.horizontal .flow-step p {
-    margin: 0 0 0.45rem;
-    line-height: 1.4;
-}
-
-.flow-diagram.horizontal .flow-step + .flow-step {
-    margin-left: 1.6rem;
-}
-
-.flow-diagram.horizontal .flow-step + .flow-step::before {
-    content: "\25B6";
-    position: absolute;
-    left: -1.35rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: $primary-color;
-    font-size: 0.9em;
-}
-
-.step-num {
-    display: block;
-    font-size: 1.8em;
-    font-weight: 900;
-    color: $primary-color;
-    line-height: 1;
-    margin-bottom: 0.2rem;
-}
-
-.flow-step.secondary .step-num {
-    color: #bdbdbd;
-}
-
-/* Architecture diagram — ::: {.arch} holding ::: {.arch-row} rows of ::: {.arch-block} boxes,
-   with ::: {.arch-link} labels between rows. Wrap a link + row in ::: {.fragment} to reveal them together.
-   Each block: [Name]{.arch-title} [`module`]{.arch-path}, then a line of contents. */
-.arch {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    margin-top: 0.6rem;
-}
-
-.arch-row {
-    display: flex;
-    gap: 1rem;
-}
-
-/* Detached mode — ::: {.arch .detached} draws the same blocks as separate, unjoined
-   pieces: dashed muted borders, no accent bar, wide gaps. For showing components that
-   do NOT yet work together, against a plain .arch showing the same four connected. */
-.arch.detached {
-    gap: 1.1rem;
-}
-
-.arch.detached .arch-row {
-    gap: 1.6rem;
-}
-
-.arch.detached .arch-block {
-    background: none;
-    border: 2px dashed rgba(255,255,255,0.28);
-    border-left: 2px dashed rgba(255,255,255,0.28);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 92px;
-    min-width: 0;
-}
-
-/* smaller than a connected .arch-title, so a long word like MEASUREMENT cannot
-   force its cell wider than its siblings and break the grid */
-.arch.detached .arch-title {
-    font-size: 1em;
-    color: rgba(255,255,255,0.65);
-    margin-right: 0;
-}
-
-.arch-block {
-    flex: 1;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(236,103,44,0.55);
-    border-left: 5px solid $primary-color;
-    border-radius: 8px;
-    padding: 0.75rem 1.1rem;
-}
-
-.arch-block.secondary {
-    border-color: rgba(189,189,189,0.45);
-    border-left-color: $secondary-color;
-}
-
-.arch-block p {
-    margin: 0;
-    font-size: 0.78em;
-    line-height: 1.45;
-    color: rgba(255,255,255,0.8);
-}
-
-.arch-title {
-    font-weight: 700;
-    color: $primary-color;
-    font-size: 1.25em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-right: 0.6em;
-}
-
-.arch-block.secondary .arch-title {
-    color: #bdbdbd;
-}
-
-.arch-path {
-    color: rgba(255,255,255,0.5);
-}
-
-.arch-link p {
-    margin: 0;
-    text-align: center;
-    color: $primary-color;
-    font-size: 0.6em;
-    font-weight: 700;
-    letter-spacing: 1px;
-    line-height: 1.5;
-}
-
-/* Layer band — ::: {.layer} holding a ::: {.layer-label} and a card grid, for stacked software layers.
-   Add .secondary for the lower/optional layer. */
-.layer {
-    display: grid;
-    grid-template-columns: 210px 1fr;
-    gap: 1rem;
-    align-items: stretch;
-    margin-top: 0.7rem;
-}
-
-.layer-label {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: right;
-    padding-right: 0.9rem;
-    border-right: 4px solid $primary-color;
-}
-
-.layer.secondary .layer-label {
-    border-right-color: $secondary-color;
-}
-
-.layer-label p {
-    margin: 0;
-    font-size: 0.66em;
-    line-height: 1.4;
-    color: rgba(255,255,255,0.6);
-}
-
-.layer-label strong {
-    font-size: 1.35em;
-}
-
-.layer.secondary .layer-label strong {
-    color: #bdbdbd !important;
-}
-
-.layer .cards {
-    margin-top: 0;
-}
-
-.layer .card {
-    padding: 0.7rem 0.9rem;
-}
-
-.layer .card p {
-    font-size: 0.74em;
-    line-height: 1.45;
-}
-
-.layer .card-title {
-    font-size: 1.05em;
-    margin-bottom: 0.3rem;
-}
-
-/* Band — ::: {.band} for a narrow full-width note under a diagram, for something that
-   is true throughout the diagram rather than at one step in it. */
-.band {
-    margin-top: 0.4rem;
-    padding: 0.3rem 0.9rem;
-    background: rgba(236,103,44,0.1);
-    border-left: 4px solid $primary-color;
-    border-radius: 4px;
-}
-
-.band p {
-    margin: 0;
-    text-align: center;
-    font-size: 0.66em;
-    line-height: 1.4;
-    color: rgba(255,255,255,0.75);
-}
-
 /* You-are-here strip — ::: {.you-are-here} on a divider: [Stop]{.stop} spans, the current one [Stop]{.stop .here} */
 .you-are-here p {
     display: flex;
@@ -824,118 +342,6 @@ $heading-font: "Rubik", sans-serif !default;
     color: $primary-color;
     font-weight: 700;
     border-bottom-color: $primary-color;
-}
-
-/* Tags — ::: {.tags} holding a row of [Label]{.badge} spans that wraps */
-.tags p {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 0.9rem 0;
-}
-
-.tags .badge {
-    font-size: 0.66em;
-}
-
-/* Caption row — ::: {.caption-row} of [**Name** · what it is]{.cap} spans under a screenshot */
-.caption-row p {
-    display: flex;
-    justify-content: center;
-    gap: 1.6rem;
-    margin: 0.5rem 0 0;
-    font-size: 0.6em;
-    color: rgba(255,255,255,0.65);
-}
-
-/* Annotated screenshot — ::: {.annotated} wraps one image plus ::: {.anno} regions.
-   Each .anno takes --x/--y/--w/--h as percentages of the image and outlines a region
-   with a label. Add .fragment to reveal them one at a time; .below/.left/.right/.mid
-   move the label off its default position above the region, and --lx/--ly nudge it
-   in pixels when two labels would otherwise collide.
-   width: fit-content is what makes the percentages track the image, not the slide. */
-.annotated {
-    position: relative;
-    width: fit-content;
-    margin: 0.4rem auto 0;
-}
-
-/* The wrapper paragraph Quarto puts around the image must collapse onto the image
-   exactly, or every percentage below is measured against the wrong box: reveal adds
-   `margin: 15px 0` to content images and an inline image also carries a descender
-   line-box. Block display plus zero line-height removes both. */
-.annotated > p {
-    margin: 0;
-    line-height: 0;
-    font-size: 0;
-}
-
-.annotated img {
-    display: block;
-    margin: 0 !important;
-    max-width: none;
-}
-
-.annotated p {
-    margin: 0;
-}
-
-.anno {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    width: var(--w);
-    height: var(--h);
-    border: 3px solid $primary-color;
-    border-radius: 6px;
-    pointer-events: none;
-}
-
-.anno p {
-    position: absolute;
-    left: 50%;
-    bottom: calc(100% + 6px);
-    transform: translate(calc(-50% + var(--lx, 0px)), var(--ly, 0px));
-    white-space: nowrap;
-    font-size: 0.5em;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: #ffffff;
-    background: $primary-color;
-    padding: 0.15em 0.6em;
-    border-radius: 4px;
-}
-
-.anno.below p { bottom: auto; top: calc(100% + 6px); }
-.anno.mid   p { bottom: auto; top: 50%; transform: translate(calc(-50% + var(--lx, 0px)), calc(-50% + var(--ly, 0px))); }
-.anno.left  p { left: auto; right: calc(100% + 8px); bottom: auto; top: 50%; transform: translate(var(--lx, 0px), calc(-50% + var(--ly, 0px))); }
-.anno.right p { left: calc(100% + 8px); bottom: auto; top: 50%; transform: translate(var(--lx, 0px), calc(-50% + var(--ly, 0px))); }
-
-.anno.secondary { border-color: rgba(189,189,189,0.8); }
-.anno.secondary p { background: $secondary-color; }
-
-/* Note — ::: {.note} for a smaller, muted supporting paragraph */
-.note p {
-    font-size: 0.72em;
-    line-height: 1.5;
-    color: rgba(255,255,255,0.72);
-}
-
-/* Badges — small inline tags. Default is accent orange; add .secondary for the muted variant. */
-.badge {
-    display: inline-block;
-    background: $primary-color;
-    color: #ffffff;
-    font-size: 0.6em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 0.2em 0.7em;
-    border-radius: 99px;
-}
-
-.badge.secondary {
-    background: $secondary-color;
 }
 
 /* Stats — ::: {.stats} containing ::: {.stat} fenced divs */
@@ -975,38 +381,6 @@ $heading-font: "Rubik", sans-serif !default;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-top: 0.2rem;
-}
-
-/* Quote — ::: {.quote} with a [name]{.quote-attribution} line */
-.quote {
-    font-size: 1.3em;
-    font-style: italic;
-    font-weight: 500;
-    color: #ffffff;
-    line-height: 1.5;
-    max-width: 780px;
-    margin: 1rem auto;
-    text-align: center;
-}
-
-.quote p::before {
-    content: "\201C";
-    color: #EC672C;
-}
-
-.quote p::after {
-    content: "\201D";
-    color: #EC672C;
-}
-
-.quote-attribution {
-    display: block;
-    margin-top: 1rem;
-    font-size: 0.7em;
-    font-style: normal;
-    font-weight: 700;
-    color: #EC672C;
-    letter-spacing: 0.5px;
 }
 
 /* Section divider — ::: {.divider} with [title]{.divider-title} / [subtitle]{.divider-subtitle} */
@@ -1051,18 +425,6 @@ $heading-font: "Rubik", sans-serif !default;
     font-size: 1.05rem;
     color: rgba(255,255,255,0.65);
     margin-top: 1rem;
-}
-
-/* Full-bleed image slide caption — a text overlay pinned to the bottom of the slide */
-.slide-caption {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 1rem;
-    color: rgba(255,255,255,0.9);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
 }
 
 /* ── Checkpoint ─────────────────────────────────────────────────────────────
@@ -1153,14 +515,13 @@ $heading-font: "Rubik", sans-serif !default;
     border-bottom: 3px solid $primary-color !important;
 }
 
-
 /* ── Part One redesign ─────────────────────────────────────────────────────
    These components give each introductory slide a distinct visual grammar:
    research needs orbit a study core, MOSAIC is a system map, collaboration is
    an optional-advice decision loop, and research questions use an editorial
    grid instead of repeating the generic card layout. */
 
-/* What Is MOSAIC (slide 5): four capabilities arranged around one coordinated study. */
+/* What Is MOSAIC: four capabilities arranged around one coordinated study. */
 .need-map {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 210px minmax(0, 1fr);
@@ -1244,15 +605,6 @@ $heading-font: "Rubik", sans-serif !default;
     line-height: 1.12;
 }
 
-.need-core-top {
-    display: block;
-    color: rgba(255,255,255,0.62);
-    font-size: 0.56em;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-
 .need-core-title {
     display: block;
     color: #ffffff;
@@ -1271,14 +623,14 @@ $heading-font: "Rubik", sans-serif !default;
     line-height: 1.25;
 }
 
-/* Why is this hard to study (slide 4): the same two columns with no core
-   between them. The core joins them on slide 5. */
+/* Why Do We Need a Configurable Testbed: the same two columns with no core
+   between them. The core joins them on What Is MOSAIC. */
 .need-map.no-core {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* Slides 4–5: a picture in each box, on the outer side so the text stays next
-   to the centre. Slide 4 uses line icons; slide 5 uses real MOSAIC images. */
+/* Both need-map slides: a picture in each box, on the outer side so the text stays next
+   to the centre. The testbed slide uses line icons; What Is MOSAIC uses real images. */
 .need-item.has-visual {
     flex-direction: row;
     align-items: center;
@@ -1331,18 +683,21 @@ $heading-font: "Rubik", sans-serif !default;
     height: 63px;
 }
 
-/* Slide 5: lines from the MOSAIC core to each of the four boxes. The links
+/* What Is MOSAIC: lines from the MOSAIC core to each of the four boxes. The links
    share the core's grid cell and reach across the column gaps to the boxes'
    orange edges. */
 .need-map.linked > .need-column:first-child { grid-column: 1; grid-row: 1; }
 .need-map.linked > .need-links { grid-column: 2; grid-row: 1; position: relative; }
-.need-map.linked > .need-core { grid-column: 2; grid-row: 1; position: relative; z-index: 1; }
+.need-map.linked > .need-column:last-child { grid-column: 3; grid-row: 1; }
 
 /* The core's fill is translucent; an opaque base stops the links at its edge. */
 .need-map.linked > .need-core {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    z-index: 1;
     background-color: $body-bg;
 }
-.need-map.linked > .need-column:last-child { grid-column: 3; grid-row: 1; }
 
 .need-links svg {
     position: absolute;
@@ -1359,7 +714,7 @@ $heading-font: "Rubik", sans-serif !default;
     vector-effect: non-scaling-stroke;
 }
 
-/* How MOSAIC works (slide 6): presentation-native system map. The diagram remains stable
+/* How MOSAIC Works: presentation-native system map. The diagram remains stable
    when the deck is viewed offline because it does not depend on Mermaid. */
 .overview-diagram {
     width: 100%;
@@ -1577,27 +932,19 @@ $heading-font: "Rubik", sans-serif !default;
     border-left: 9px solid $primary-color;
 }
 
-.overview-foundation p {
-    display: flex;
-    justify-content: center;
-    gap: 0.55rem;
-    margin: 0.35rem 0 0;
-}
-
-.foundation-item {
-    padding: 0.28rem 0.72rem;
-    border-radius: 99px;
-    background: rgba(255,255,255,0.09);
-    color: rgba(255,255,255,0.85);
-    font-size: 0.64em;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-/* SAR scenario: one visual plus a compact mission brief. */
+/* SAR scenario: one visual plus a compact mission brief. The image height is
+   set here, not inline, so both scenario slides show their picture the same size. */
 .scenario-columns {
     align-items: center;
     margin-top: 0.4rem;
+}
+.reveal .slides section .scenario-columns > .column > p > img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: 360px;
+    margin: 0 auto;
+    object-fit: contain;
 }
 
 .scenario-brief {
@@ -1623,42 +970,6 @@ $heading-font: "Rubik", sans-serif !default;
     text-transform: uppercase;
 }
 
-/* Collaboration: a native decision path with an optional advice branch. */
-.collaboration-diagram {
-    width: 100%;
-    margin: 0.55rem auto 0;
-}
-
-.decision-main {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr) 50px) minmax(0, 1fr);
-    align-items: center;
-}
-
-.decision-node {
-    min-height: 126px;
-    padding: 0.65rem 0.75rem;
-    border-top: 2px solid rgba(255,255,255,0.18);
-    border-bottom: 2px solid rgba(255,255,255,0.09);
-    background: rgba(255,255,255,0.045);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.decision-node.decision-point {
-    border-color: $primary-color;
-    background: rgba(236,103,44,0.12);
-}
-
-.decision-node p {
-    margin: 0;
-    color: rgba(255,255,255,0.66);
-    font-size: 0.56em;
-    line-height: 1.35;
-}
-
 .decision-number {
     color: rgba(236,103,44,0.7);
     font-size: 0.65em;
@@ -1670,74 +981,6 @@ $heading-font: "Rubik", sans-serif !default;
     color: #ffffff;
     font-size: 0.94em;
     font-weight: 800;
-}
-
-.decision-arrow {
-    position: relative;
-    height: 2px;
-    background: rgba(236,103,44,0.72);
-}
-
-.decision-arrow::after,
-.advice-arrow::after {
-    content: "";
-    position: absolute;
-    right: -1px;
-    top: -6px;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-left: 10px solid $primary-color;
-}
-
-.advice-route {
-    display: grid;
-    grid-template-columns: 170px minmax(0, 1fr) 60px minmax(0, 1fr) 205px;
-    gap: 0;
-    align-items: center;
-    max-width: 920px;
-    margin: 0.5rem auto 0;
-    padding-top: 0.45rem;
-    border-top: 1px dashed rgba(255,255,255,0.2);
-}
-
-.advice-label p,
-.advice-return p,
-.advice-step p {
-    margin: 0;
-    text-align: center;
-    line-height: 1.3;
-}
-
-.advice-label p {
-    color: $primary-color;
-    font-size: 0.52em;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-}
-
-.advice-step {
-    padding: 0.4rem 0.65rem;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.035);
-}
-
-.advice-step p {
-    color: rgba(255,255,255,0.8);
-    font-size: 0.58em;
-    font-weight: 700;
-}
-
-.advice-arrow {
-    position: relative;
-    height: 2px;
-    background: rgba(236,103,44,0.62);
-}
-
-.advice-return p {
-    color: rgba(255,255,255,0.48);
-    font-size: 0.48em;
-    font-weight: 700;
 }
 
 .cycle-band {
@@ -1804,71 +1047,9 @@ $heading-font: "Rubik", sans-serif !default;
     letter-spacing: 1px;
 }
 
-.research-extension {
-    margin-top: 0.5rem;
-    text-align: center;
-}
-
-.research-extension p {
-    margin: 0;
-    color: rgba(255,255,255,0.62);
-    font-size: 0.62em;
-    line-height: 1.35;
-}
-
-.research-extension-label {
-    margin-right: 0.45rem;
-    color: #ffffff;
-    font-weight: 800;
-}
-
-/* ── Part Three workshop flow ──────────────────────────────────────────────
-   The game is introduced visually before the code is assembled in three
-   short steps. Layouts stay flat and readable from the back of the room. */
-
-.game-intro,
-.feature-columns,
-.control-columns,
-.next-columns {
-    align-items: center;
-    margin-top: 0.45rem;
-}
-
-.mission-summary {
-    padding: 0.25rem 0 0.25rem 1rem;
-    border-left: 4px solid $primary-color;
-}
-
-.mission-summary p {
-    margin: 0 0 0.75rem;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.72em;
-    line-height: 1.4;
-}
-
-.victim-key {
-    margin-top: 0.4rem;
-    text-align: center;
-}
-
-.victim-key p {
-    margin: 0.18rem 0;
-    color: rgba(255,255,255,0.64);
-    font-size: 0.66em;
-}
-
-.real-key,
-.decoy-key {
-    display: inline-block;
-    min-width: 105px;
-    margin-right: 0.4rem;
-    color: #ffffff;
-    font-weight: 800;
-    text-align: right;
-}
-
-.real-key { color: $primary-color; }
-.decoy-key { color: #bdbdbd; }
+/* ── Feature rows and keycaps ──────────────────────────────────────────────
+   Name-and-description rows (prerequisites, run notes, victim rules) and the
+   keyboard keys drawn on the controls and runtime slides. */
 
 .feature-list {
     border-top: 1px solid rgba(255,255,255,0.14);
@@ -1902,13 +1083,6 @@ $heading-font: "Rubik", sans-serif !default;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-}
-
-
-/* Key grid — ::: {.key-grid} of ::: {.key-row} with [Key]{.keycap} [Action]{.key-action} */
-.key-grid {
-    margin-top: 0.2rem;
-    border-top: 1px solid rgba(255,255,255,0.14);
 }
 
 .key-row {
@@ -1950,353 +1124,12 @@ $heading-font: "Rubik", sans-serif !default;
     color: rgba(255,255,255,0.82);
 }
 
-.key-row.optional .keycap {
-    border-style: dashed;
-    border-bottom-width: 1px;
-    color: rgba(255,255,255,0.55);
-}
-
-.key-row.optional .key-action {
-    color: rgba(255,255,255,0.55);
-}
-
-.key-note {
-    margin-left: auto;
-    color: rgba(255,255,255,0.4);
-    font-size: 0.78em;
-    font-style: italic;
-}
-
-.code-explain {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.2rem;
-    margin-top: 0.8rem;
-    padding-top: 0.6rem;
-    border-top: 1px solid rgba(255,255,255,0.14);
-}
-
-.code-explain p {
-    margin: 0;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.59em;
-    line-height: 1.4;
-}
-
-.code-label {
-    display: block;
-    margin-bottom: 0.18rem;
-    color: $primary-color;
-    font-size: 1.05em;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-}
-
-.parameter-line p {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    margin: 0.55rem 0 0;
-    padding: 0.45rem 0;
-    border-top: 1px solid rgba(255,255,255,0.13);
-    border-bottom: 1px solid rgba(255,255,255,0.13);
-}
-
-.parameter-value {
-    color: rgba(255,255,255,0.78);
-    font-size: 0.58em;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.workshop-check {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
-    margin-top: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-
-.workshop-step {
-    min-height: 240px;
-    padding: 0.85rem 1rem;
-    border-right: 1px solid rgba(255,255,255,0.15);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
-
-.workshop-step:last-child { border-right: none; }
-
-.workshop-step p {
-    margin: 0;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.62em;
-    line-height: 1.4;
-}
-
-.workshop-number {
-    display: block;
-    color: rgba(236,103,44,0.62);
-    font-size: 2.2em;
-    font-weight: 900;
-    line-height: 1;
-}
-
-.workshop-title {
-    display: block;
-    margin: 0.25rem 0 0.4rem;
-    color: #ffffff;
-    font-size: 1.35em;
-    font-weight: 800;
-}
-
-.exercise-band {
-    margin-top: 0.75rem;
-    padding: 0.48rem 0.8rem;
-    border-left: 4px solid $primary-color;
-    background: rgba(236,103,44,0.09);
-}
-
-.exercise-band p {
-    margin: 0;
-    color: rgba(255,255,255,0.78);
-    font-size: 0.66em;
-    line-height: 1.35;
-}
-
-.exercise-label {
-    margin-right: 0.55rem;
-    color: $primary-color;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-}
-
-.study-path {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.7rem;
-    margin-top: 1.2rem;
-}
-
-.study-stage {
-    position: relative;
-    min-height: 230px;
-    padding: 0.9rem 1rem;
-    border-top: 3px solid rgba(255,255,255,0.3);
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-    background: linear-gradient(135deg, rgba(255,255,255,0.055), rgba(255,255,255,0.015));
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
-
-.study-stage.study-active {
-    border-top-color: $primary-color;
-    background: linear-gradient(135deg, rgba(236,103,44,0.16), rgba(236,103,44,0.035));
-}
-
-.study-stage + .study-stage::before {
-    content: "";
-    position: absolute;
-    left: -1.7rem;
-    top: 50%;
-    width: 1.7rem;
-    height: 2px;
-    background: rgba(236,103,44,0.7);
-}
-
-.study-stage + .study-stage::after {
-    content: "";
-    position: absolute;
-    left: -10px;
-    top: calc(50% - 6px);
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-left: 10px solid $primary-color;
-}
-
-.study-stage p {
-    margin: 0;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.63em;
-    line-height: 1.4;
-}
-
-.study-title {
-    display: block;
-    margin-bottom: 0.4rem;
-    color: #ffffff;
-    font-size: 1.15em;
-    font-weight: 800;
-}
-
-.study-active .study-title { color: $primary-color; }
-
-/* Part Three: runtime map, annotated interface, gameplay, and extension points */
-.mosaic-map {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2fr) minmax(0, 0.9fr);
-    gap: 1rem;
-    align-items: center;
-    margin-top: 0.35rem;
-}
-
-.mosaic-actor,
-.mosaic-layer,
-.mosaic-foundation {
-    border-radius: 8px;
-    background: rgba(255,255,255,0.055);
-}
-
-.mosaic-actor {
-    min-height: 190px;
-    padding: 1rem 0.8rem;
-    border: 1px solid rgba(255,255,255,0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.mosaic-actor.optional {
-    border-style: dashed;
-    border-color: rgba(236,103,44,0.6);
-}
-
-.mosaic-actor p,
-.mosaic-layer p,
-.mosaic-foundation p {
-    margin: 0;
-    color: rgba(255,255,255,0.75);
-    font-size: 0.72em;
-    line-height: 1.4;
-}
-
-.mosaic-title {
-    display: block;
-    margin-bottom: 0.35rem;
-    color: #ffffff;
-    font-size: 1.2em;
-    font-weight: 800;
-}
-
-.mosaic-core {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.mosaic-layer {
-    padding: 0.7rem 1rem;
-    border-left: 5px solid $primary-color;
-    text-align: center;
-}
-
-.mosaic-layer.sar-layer {
-    border-color: rgba(255,255,255,0.3);
-    border-left-color: $secondary-color;
-}
-
-.mosaic-connector p {
-    margin: 0;
-    color: $primary-color;
-    font-size: 0.6em;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.mosaic-foundation {
-    padding: 0.45rem 0.7rem;
-    border: 1px solid rgba(255,255,255,0.14);
-    text-align: center;
-}
-
-.foundation-name {
-    color: $primary-color;
-    font-weight: 800;
-}
-
-
-.interface-shot {
-    position: relative;
-    width: 100%;
-}
-
-.interface-shot > p {
-    margin: 0;
-}
-
-.reveal .slides section .interface-shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0;
-}
-
-.viewport-frame {
-    position: absolute;
-    z-index: 2;
-    left: 0.8%;
-    top: 1.2%;
-    width: 65%;
-    height: 97.5%;
-    border: 2px dashed rgba(236,103,44,0.9);
-    box-shadow: inset 0 0 22px rgba(236,103,44,0.22);
-    pointer-events: none;
-}
-
-.extension-cards {
-    min-height: 390px;
-    grid-auto-rows: 1fr;
-    gap: 1rem;
-}
-
-.extension-cards .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0.9rem 1.1rem;
-}
-
-.extension-cards .card p {
-    font-size: 0.72em;
-}
-
-.mission-assembly {
-    gap: 0.15rem;
-    margin-top: 0.25rem;
-}
-
-.mission-assembly .arch-row {
-    gap: 0.7rem;
-}
-
-.mission-assembly .arch-block {
-    padding: 0.55rem 0.75rem;
-}
-
-.mission-assembly .arch-block p {
-    font-size: 0.66em;
-    line-height: 1.3;
-}
-
-.mission-assembly .arch-title {
-    display: block;
-    font-size: 1.05em;
-    margin: 0 0 0.2rem;
-}
-
-/* Annotated image — ::: {.annotated} wrapping an image plus ::: {.anno} boxes
-   positioned with --x/--y/--w/--h. Ported from the Part One treatment on main. */
+/* Annotated screenshot — ::: {.annotated} wraps one image plus ::: {.anno} regions.
+   Each .anno takes --x/--y/--w/--h as percentages of the image and outlines a region
+   with a label, dimming everything outside it. Add .fragment to reveal them one
+   at a time; .left/.mid move the label off its default position above the region,
+   and --lx/--ly nudge it in pixels when two labels would otherwise collide.
+   width: fit-content is what makes the percentages track the image, not the slide. */
 .annotated {
     position: relative;
     width: fit-content;
@@ -2350,10 +1183,8 @@ $heading-font: "Rubik", sans-serif !default;
     border-radius: 4px;
 }
 
-.anno.below p { bottom: auto; top: calc(100% + 6px); }
 .anno.mid   p { bottom: auto; top: 50%; transform: translate(calc(-50% + var(--lx, 0px)), calc(-50% + var(--ly, 0px))); }
 .anno.left  p { left: auto; right: calc(100% + 8px); bottom: auto; top: 50%; transform: translate(var(--lx, 0px), calc(-50% + var(--ly, 0px))); }
-.anno.right p { left: calc(100% + 8px); bottom: auto; top: 50%; transform: translate(var(--lx, 0px), calc(-50% + var(--ly, 0px))); }
 
 /* World rail — ::: {.world-rail} of ::: {.world-item}, a vertical tile legend
    sitting beside the interface screenshot so the screenshot keeps the width. */
@@ -2399,7 +1230,7 @@ $heading-font: "Rubik", sans-serif !default;
     font-weight: 800;
 }
 
-/* The rule for each tile, under its name (slide 19). */
+/* The rule for each tile, under its name (Game Interface). */
 .world-note {
     display: block;
     margin-top: 0.1rem;
@@ -2411,13 +1242,13 @@ $heading-font: "Rubik", sans-serif !default;
     align-items: center;
     margin-top: 0.1rem;
 }
-
-/* Screen regions — the three readable areas of the interface */
-
-
-
-
-
+/* Sit the screenshot against the tile rail so the .left labels have room
+   on the slide instead of hanging past its edge. Quarto's own
+   .columns > .column:first-child > * margin rule needs outranking. */
+.reveal .columns.interface-split > .column > .annotated {
+    margin-left: auto;
+    margin-right: 0;
+}
 
 /* Phase grid — controls grouped by what the player is doing */
 .phase-grid {
@@ -2433,7 +1264,6 @@ $heading-font: "Rubik", sans-serif !default;
     background: rgba(255,255,255,0.04);
 }
 
-
 .phase-name {
     display: block;
     margin-bottom: 0.18rem;
@@ -2443,7 +1273,6 @@ $heading-font: "Rubik", sans-serif !default;
     text-transform: uppercase;
     letter-spacing: 0.9px;
 }
-
 
 .phase .key-row {
     border: none;
@@ -2460,13 +1289,6 @@ $heading-font: "Rubik", sans-serif !default;
     color: rgba(255,255,255,0.5);
     font-size: 0.62em;
     line-height: 1.3;
-}
-
-.keycap.inline {
-    min-width: 0;
-    padding: 0.04em 0.34em;
-    border-bottom-width: 1px;
-    font-size: 0.86em;
 }
 
 /* Camera annotation key */
@@ -2532,379 +1354,7 @@ $heading-font: "Rubik", sans-serif !default;
     margin-bottom: 0.15rem;
 }
 
-.workshop-check.compact {
-    min-height: 145px;
-    margin-top: 0.7rem;
-}
-
-.workshop-check.compact .workshop-step {
-    padding: 0.45rem 0.65rem;
-}
-
-.workshop-check.compact .workshop-step p {
-    font-size: 0.65em;
-    line-height: 1.25;
-}
-
-.mission-code pre code {
-    font-size: 1em;
-    line-height: 1.35;
-}
-
-.mission-code .code-explain {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-    margin: 0.25rem 0 0 0.9rem;
-    padding-top: 0;
-    border-top: none;
-}
-
-.mission-code .code-explain p {
-    padding-bottom: 0.65rem;
-    border-bottom: 1px solid rgba(255,255,255,0.14);
-    font-size: 0.72em;
-}
-
-/* Change cards — ::: {.change-grid} of ::: {.change-card} (currently unused) */
-.change-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.7rem 0.9rem;
-    margin: 0.6rem 0 0.2rem;
-}
-
-/* 2x2 variant — ::: {.change-grid .cols-2} for exactly four knobs: taller cards that
-   fill the slide instead of leaving an orphan alone on a second row of three. */
-.change-grid.cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.9rem 1.1rem;
-    margin-top: 0.9rem;
-}
-
-.change-grid.cols-2 .change-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 120px;
-    padding: 0.85rem 1.1rem;
-    border-left-width: 4px;
-}
-
-.change-grid.cols-2 .change-card p {
-    font-size: 0.78em;
-}
-
-.change-card {
-    padding: 0.5rem 0.7rem;
-    border-left: 3px solid $primary-color;
-    background: rgba(255,255,255,0.05);
-}
-
-.change-card p {
-    margin: 0;
-    font-size: 0.7em;
-    line-height: 1.3;
-}
-
-.change-card code {
-    display: inline-block;
-    margin: 0.2rem 0;
-    font-size: 0.92em;
-    word-break: break-word;
-}
-
-.change-what {
-    display: block;
-    color: #ffffff;
-    font-weight: 800;
-}
-
-.change-effect {
-    display: block;
-    color: rgba(255,255,255,0.58);
-    font-size: 0.88em;
-}
-
-.advisor-pipeline {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin: 1.1rem 0 0.8rem;
-}
-
-/* Three-node variant used by the advisor demo slide */
-.advisor-pipeline.three-up {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.6rem;
-    margin: 0.5rem 0 0.7rem;
-}
-
-.advisor-pipeline.three-up .advisor-node {
-    min-height: 0;
-    padding: 0.55rem 0.7rem;
-}
-
-.advisor-demo {
-    align-items: center;
-    margin-top: 0.2rem;
-}
-
-.advisor-demo .code-explain {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-    margin: 0 0 0 0.8rem;
-    padding-top: 0;
-    border-top: none;
-}
-
-.advisor-demo .code-explain p {
-    font-size: 0.66em;
-}
-
-.advisor-demo pre code {
-    font-size: 0.92em;
-    line-height: 1.35;
-}
-
-.advisor-node {
-    position: relative;
-    min-height: 145px;
-    padding: 0.75rem 0.55rem;
-    border-top: 4px solid rgba(255,255,255,0.35);
-    background: rgba(255,255,255,0.05);
-    text-align: center;
-}
-
-.advisor-node.active {
-    border-top-color: $primary-color;
-    background: rgba(236,103,44,0.11);
-}
-
-.advisor-node + .advisor-node::before {
-    content: "\25B6";
-    position: absolute;
-    left: -0.95rem;
-    top: 48%;
-    transform: translateY(-50%);
-    color: $primary-color;
-    font-size: 0.75em;
-}
-
-.advisor-node p {
-    margin: 0.2rem 0;
-    font-size: 0.72em;
-    line-height: 1.35;
-}
-
-.advisor-title {
-    display: block;
-    color: #ffffff;
-    font-size: 1.05em;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-}
-
-.advisor-node.active .advisor-title {
-    color: $primary-color;
-}
-
-.protocol-sequence {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.8rem;
-    margin: 1.4rem 0 1.1rem;
-}
-
-.protocol-stage {
-    position: relative;
-    min-height: 230px;
-    padding: 1.1rem;
-    border: 1px solid rgba(236,103,44,0.55);
-    border-top: 6px solid $primary-color;
-    background: rgba(255,255,255,0.05);
-}
-
-.protocol-stage.secondary {
-    border-color: rgba(189,189,189,0.4);
-    border-top-color: $secondary-color;
-}
-
-.protocol-stage + .protocol-stage::before {
-    content: "\25B6";
-    position: absolute;
-    left: -1.3rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: $primary-color;
-    font-size: 0.85em;
-}
-
-.protocol-stage p {
-    font-size: 0.76em;
-    line-height: 1.45;
-    margin: 0.25rem 0;
-}
-
-.protocol-title {
-    display: block;
-    color: $primary-color;
-    font-size: 1.15em;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.protocol-stage.secondary .protocol-title {
-    color: #bdbdbd;
-}
-
-.experiment-stack {
-    margin-top: 0.5rem;
-}
-
-.experiment-line,
-.record-line {
-    display: block;
-}
-
-.experiment-line > p,
-.record-line > p {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.7rem;
-    align-items: stretch;
-    margin: 0;
-}
-
-.experiment-item,
-.record-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 88px;
-    padding: 0.45rem;
-    border: 1px solid rgba(236,103,44,0.45);
-    border-top: 4px solid $primary-color;
-    background: rgba(255,255,255,0.06);
-    color: #ffffff;
-    font-size: 0.72em;
-    font-weight: 700;
-    text-align: center;
-}
-
-.layer.secondary .experiment-item {
-    border-color: rgba(189,189,189,0.4);
-    border-top-color: $secondary-color;
-}
-
-.record-line {
-    margin: 0.35rem 0 0.45rem 226px;
-}
-
-.record-item {
-    min-height: 62px;
-    border-top-width: 1px;
-    border-color: rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.75);
-    font-size: 0.65em;
-}
-
-.stack-link {
-    margin: 0.25rem 0 0.25rem 226px;
-    color: $primary-color;
-    font-size: 0.55em;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-align: center;
-}
-
-.stack-link p {
-    margin: 0;
-}
-
-.resource-list {
-    padding: 0.35rem 0 0.35rem 1rem;
-    border-left: 4px solid $primary-color;
-}
-
-.resource-list p {
-    margin: 0 0 0.8rem;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.61em;
-    line-height: 1.38;
-}
-
-.resource-label {
-    display: block;
-    margin-bottom: 0.12rem;
-    color: #ffffff;
-    font-weight: 800;
-}
-
-/* ── Teaming loop (slide 8) ──────────────────────────────────────────────────
-   Six ordered steps. Three across, two down: six columns would leave each step
-   ~150px wide, which is below the readable limit for body text on a projector. */
-.loop-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem 0.9rem;
-    margin-top: 0.9rem;
-}
-.loop-step {
-    min-height: 132px;
-    padding: 0.8rem 1rem;
-    border-top: 2px solid rgba(255,255,255,0.18);
-    border-bottom: 2px solid rgba(255,255,255,0.09);
-    background: rgba(255,255,255,0.045);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-/* Step 5 is the claim the whole slide exists to make. */
-.loop-step.loop-decisive {
-    border-color: $primary-color;
-    background: rgba(236,103,44,0.12);
-}
-.loop-step p {
-    margin: 0.3rem 0 0;
-    color: rgba(255,255,255,0.72);
-    font-size: 0.66em;
-    line-height: 1.4;
-}
-.loop-number {
-    color: rgba(236,103,44,0.85);
-    font-size: 0.8em;
-    font-weight: 900;
-    margin-right: 0.4rem;
-}
-.loop-title {
-    color: #ffffff;
-    font-size: 1em;
-    font-weight: 800;
-}
-.authority-band {
-    margin: 1rem auto 0;
-    padding: 0.6rem 1.2rem;
-    max-width: 1000px;
-    border-left: 5px solid $primary-color;
-    background: rgba(236,103,44,0.1);
-}
-.authority-band p {
-    margin: 0;
-    text-align: center;
-    color: #ffffff;
-    font-size: 0.85em;
-    font-weight: 700;
-}
-
-/* ── Research questions, three across (slide 7) ───────────────────────────── */
-.research-grid.cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-.research-grid.cols-3 .research-question {
-    min-height: 155px;
-}
-
-/* ── Victim / decoy row labels (slide 20) ─────────────────────────────────────
+/* ── Victims and Decoys: row labels ────────────────────────────────────────────
    assets/victims.png has real victims on the top row and decoys on the bottom;
    nothing in tools/ regenerates it, so the rows are labelled beside the image. */
 .victim-figure {
@@ -2941,19 +1391,7 @@ $heading-font: "Rubik", sans-serif !default;
     color: rgba(255,255,255,0.62);
 }
 
-/* ── Single-column knob list, for use inside a narrow slide column ─────────── */
-.change-grid.cols-1 {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.6rem;
-}
-
-/* Six research questions wrap to different line counts; centring each one
-   scatters the topic labels, so pin them to the top of their cell. */
-.research-grid.cols-3 .research-question {
-    justify-content: flex-start;
-}
-
-/* Tight tables (slide 15): rows of two-line cells overflow the slide at the
+/* Tight tables (First Checkpoint): rows of two-line cells overflow the slide at the
    default table scale. */
 .tight-table table {
     font-size: 0.78em;
@@ -2965,16 +1403,6 @@ $heading-font: "Rubik", sans-serif !default;
     padding: 0.3em 0.8em 0.45em;
 }
 
-/* Half-width foundation row, so "built on" reads as belonging to the block
-   above it on the left rather than to the whole row. */
-.arch-row.row-half {
-    width: 48%;
-}
-.arch-link.arch-link-left p {
-    text-align: left;
-    padding-left: 1.2rem;
-}
-
 /* Checklist variant: rows sized for a slide that also carries a table. */
 .feature-list.compact .feature-row {
     padding: 0.28rem 0;
@@ -2983,7 +1411,7 @@ $heading-font: "Rubik", sans-serif !default;
     font-size: 0.78em;
 }
 
-/* ── Dependency panel (slide 10) ────────────────────────────────────────────── */
+/* ── Dependency panel (Before You Start) ────────────────────────────────────── */
 .dep-panel {
     padding: 0.85rem 1rem 1rem;
     border-top: 2px solid rgba(255,255,255,0.22);
@@ -3006,8 +1434,7 @@ $heading-font: "Rubik", sans-serif !default;
 .dep-panel p {
     margin: 0;
 }
-.dep-grid p,
-.dep-swap p {
+.dep-grid p {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
@@ -3023,30 +1450,8 @@ $heading-font: "Rubik", sans-serif !default;
     font-size: 0.56em;
     white-space: nowrap;
 }
-/* The one package the install replaces, and what replaces it. */
-.dep-out {
-    border-color: rgba(189,189,189,0.5);
-    color: rgba(255,255,255,0.45);
-    text-decoration: line-through;
-}
-.dep-in {
-    border-color: $primary-color;
-    background: rgba(236,103,44,0.16);
-    color: #ffffff;
-    font-weight: 700;
-}
-.dep-swap p {
-    align-items: center;
-}
-.dep-swap .dep-out + .dep-in::before {
-    content: "\2192";
-    display: inline-block;
-    margin-right: 0.5rem;
-    color: $primary-color;
-    text-decoration: none;
-}
 
-/* ── Checkpoint card (slide 15) ────────────────────────────────────────────── */
+/* ── Checkpoint card (First Checkpoint) ────────────────────────────────────── */
 .check-card {
     height: 100%;
     padding: 0.9rem 1.1rem;
@@ -3082,28 +1487,6 @@ $heading-font: "Rubik", sans-serif !default;
     border-bottom: none;
 }
 
-/* ── Named wires on the runtime diagram (slide 23) ─────────────────────────── */
-.arch-wire p {
-    display: flex;
-    justify-content: center;
-    gap: 2.2rem;
-    margin: 0;
-    padding: 0.3rem 0;
-}
-.wire-down,
-.wire-up,
-.wire-side {
-    font-family: var(--r-code-font, monospace);
-    font-size: 0.78em;
-    font-weight: 700;
-    color: $primary-color;
-    white-space: nowrap;
-}
-.wire-down::before { content: "\2193\00a0"; }
-.wire-up::before   { content: "\2191\00a0"; }
-.wire-side::before { content: "\2192\00a0"; color: rgba(255,255,255,0.6); }
-.wire-side { color: rgba(255,255,255,0.72); }
-
 /* Run slide: the GIF carries the point, so give it the room to be seen. */
 .run-split img {
     width: 100%;
@@ -3121,51 +1504,9 @@ $heading-font: "Rubik", sans-serif !default;
     line-height: 1.35;
 }
 
-/* Give the runtime diagram's blocks room to read as separate stages. */
-.mission-assembly.arch {
-    gap: 0.45rem;
-}
-.mission-assembly .arch-link p {
-    font-size: 0.78em;
-}
-
-/* ── Teaching diagrams: show the relationships before naming the files ───── */
-
-/* Pandoc puts both labels in one <p>; stack them there so the outgoing label
-   sits above the returning one instead of running together inline. */
-
-.foundation-band {
-    padding: 0.58rem 0.9rem;
-    border-left: 6px solid rgba(255,255,255,0.28);
-    background: rgba(255,255,255,0.05);
-}
-.foundation-band p {
-    margin: 0.12rem 0;
-    font-size: 0.57em;
-    line-height: 1.3;
-}
-.layer-name,
-.foundation-name {
-    color: #ffffff;
-    font-weight: 800;
-}
-.foundation-band {
-    border-left-color: $secondary-color;
-    text-align: center;
-}
-
-.code-caption p {
-    margin: 0.35rem 0 0;
-    color: rgba(255,255,255,0.55);
-    font-size: 0.52em;
-    line-height: 1.3;
-}
-
-
-
 /* ── Title slide hierarchy ─────────────────────────────────────────────────
    MOSAIC, then its full name, then the tagline at a clearly lower size. The
-   team is introduced on slide 2, so the title slide carries no author block. */
+   team is introduced on the next slide, so the title slide carries no author block. */
 #title-slide .title .title-fullname {
     display: block;
     margin-top: 0.25em;
@@ -3191,13 +1532,7 @@ $heading-font: "Rubik", sans-serif !default;
     margin-top: 0.3rem;
 }
 
-/* Slide 2: larger portraits so the team fills the slide. */
-.reveal .slides section .member img {
-    width: 250px;
-    height: 250px;
-}
-
-/* ── Slide 6: two drops under the system row ───────────────────────────────
+/* ── How MOSAIC Works: two drops under the system row ─────────────────────────
    Same five-column grid as .system-row, so each arrow lands under its node:
    participant → study sensors, MOSAIC task → LSL. */
 .drop-row {
@@ -3211,7 +1546,7 @@ $heading-font: "Rubik", sans-serif !default;
 .drop-row .record-drop:first-child { grid-column: 1; }
 .drop-row .record-drop:nth-child(2) { grid-column: 3; }
 
-/* ── Slide 8: teaming loop ─────────────────────────────────────────────────
+/* ── The Human–AI Teaming Loop ─────────────────────────────────────────────
    Four decision nodes on one row (part-one style), a return rail above from
    Outcome to Observe, and the optional advice branch below that leaves Decide
    and rejoins at Act. Both rows share one seven-column grid so the vertical
@@ -3416,7 +1751,7 @@ $loop-gap: 84px;
 
 /* ── Part Two: installation slides sized for the back of the room ──────────── */
 
-/* Slide 10: roomier prerequisite rows. */
+/* Before You Start: roomier prerequisite rows. */
 .prereq-split {
     align-items: stretch;
     margin-top: 0.6rem;
@@ -3434,7 +1769,7 @@ $loop-gap: 84px;
     margin-left: -165px;
 }
 
-/* Slide 10: dependencies grouped by what they are for. */
+/* Before You Start: dependencies grouped by what they are for. */
 .dep-panel.dep-groups {
     height: 100%;
     padding: 1rem 1.2rem;
@@ -3474,7 +1809,7 @@ $loop-gap: 84px;
     font-size: 0.64em;
 }
 
-/* Slides 11–12: code on the left, what each line does on the right. */
+/* Clone and Install: code on the left, what each line does on the right. */
 .install-split {
     align-items: flex-start;
     margin-top: 0.5rem;
@@ -3529,27 +1864,20 @@ $loop-gap: 84px;
     font-size: 0.88em;
 }
 
-/* Slide 12 has only two commands: give them the room. */
-.reveal .install-code.roomy pre {
-    font-size: 0.9em;
-}
-.reveal .install-code.roomy pre code {
-    padding: 1.1em 1.2em;
-}
 .run-split .fig-note p {
     font-size: 0.7em;
 }
 
-/* ── Part Three: run first, then see each part, then customize each one ──── */
+/* ── Parts Three and Four: controls, runtime map, and code map ───────────── */
 
-/* Slide 23 — runtime architecture with a picture in every block. Reuses slide
-   6's five-column system row, so every arrow lands on a node centre. */
+/* Runtime Architecture — a picture in every block. Reuses How MOSAIC Works'
+   five-column system row, so every arrow lands on a node centre. */
 .arch-visual .system-node {
     justify-content: flex-start;
     padding-top: 0.6rem;
 }
 .node-visual {
-    height: 132px;
+    height: 116px;
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
@@ -3560,7 +1888,7 @@ $loop-gap: 84px;
     line-height: 0;
 }
 .reveal .slides section .node-visual img {
-    max-height: 132px;
+    max-height: 116px;
     max-width: 100%;
     margin: 0;
     border-radius: 4px;
@@ -3626,7 +1954,7 @@ $loop-gap: 84px;
     line-height: 1.3;
 }
 .support-visual {
-    height: 96px;
+    height: 84px;
     margin-bottom: 0.35rem;
     display: flex;
     align-items: center;
@@ -3640,7 +1968,7 @@ $loop-gap: 84px;
     width: auto;
 }
 .reveal .slides section .support-visual img {
-    max-height: 96px;
+    max-height: 84px;
     max-width: 100%;
     margin: 0;
     border-radius: 3px;
@@ -3655,14 +1983,14 @@ $loop-gap: 84px;
     white-space: normal;
 }
 
-/* Slide 21 — each control with its own clip beside the keys. */
+/* Controls and Gameplay — each control with its own clip beside the keys. */
 .phase-clips {
     gap: 0.8rem 1.1rem;
     margin-top: 0.6rem;
 }
 .phase-clips .phase {
     display: grid;
-    grid-template-columns: 236px minmax(0, 1fr);
+    grid-template-columns: 200px minmax(0, 1fr);
     column-gap: 0.9rem;
     align-items: center;
     padding: 0.55rem 0.8rem 0.55rem 0.55rem;
@@ -3672,8 +2000,10 @@ $loop-gap: 84px;
     line-height: 0;
 }
 .reveal .slides section .phase-clips .phase img {
-    width: 236px;
-    height: auto;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    background: #000000;
     margin: 0;
     border-radius: 4px;
     box-shadow: none;
@@ -3683,12 +2013,15 @@ $loop-gap: 84px;
     font-size: 0.6em;
 }
 
-/* Slide 40 (appendix) — the code map: the study folder composing four package cards. */
+/* Where to Go Next — the code map: the study folder composing four package
+   cards, each a real folder tree with its API and what to customize there. */
 .code-map {
     margin-top: 0.5rem;
 }
 .pkg-card {
-    padding: 0.6rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0.65rem 0.9rem;
     border-top: 3px solid rgba(255,255,255,0.28);
     background: rgba(255,255,255,0.05);
 }
@@ -3701,6 +2034,9 @@ $loop-gap: 84px;
 .pkg-card p:last-child {
     margin-bottom: 0;
 }
+.pkg-card > p:nth-last-child(2) {
+    margin-top: auto;
+}
 .pkg-card.pkg-study {
     border-top-color: $primary-color;
     background: rgba(236,103,44,0.12);
@@ -3711,17 +2047,66 @@ $loop-gap: 84px;
     align-items: baseline;
     gap: 0.3rem 0.9rem;
 }
-.pkg-path code {
+.code-map .pkg-card code {
     color: $primary-color;
-    font-size: 1.2em;
+}
+.pkg-path code {
+    font-size: 1.12em;
     font-weight: 800;
 }
 .pkg-role {
     display: block;
-    color: rgba(255,255,255,0.85);
+    margin-top: 0.1rem;
+    color: rgba(255,255,255,0.7);
 }
 .pkg-study .pkg-role {
     display: inline;
+}
+.pkg-tree {
+    margin: 0.35rem 0 0.45rem;
+}
+.pkg-card .pkg-tree p {
+    margin: 0;
+    font-size: 0.66em;
+    line-height: 1.45;
+}
+.code-map .pkg-tree p code {
+    color: #ffffff;
+    font-size: 1em;
+}
+.pkg-tree p::before {
+    content: "├── ";
+    color: rgba(255,255,255,0.35);
+    font-family: var(--r-code-font, monospace);
+    white-space: pre;
+}
+.pkg-tree p:last-child::before {
+    content: "└── ";
+}
+.pkg-tree.tree-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.4rem;
+    margin: 0.3rem 0 0.35rem;
+}
+.pkg-tree.tree-row p::before {
+    content: "";
+}
+.pkg-label {
+    display: inline-block;
+    min-width: 5.2em;
+    color: $primary-color;
+    font-size: 0.82em;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+.pkg-label-block {
+    display: block;
+    margin-bottom: 0.05rem;
+}
+.pkg-label-gap {
+    margin-left: 1.6rem;
 }
 .record-drop.compose-drop {
     height: 38px;
@@ -3734,21 +2119,16 @@ $loop-gap: 84px;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0.75rem;
 }
-.code-map .foundation-band {
-    margin-top: 0.6rem;
-    padding: 0.45rem 0.9rem;
-    border-left: 6px solid $secondary-color;
-    background: rgba(255,255,255,0.05);
-    text-align: center;
-}
 
-/* Slide 24 — the real composition code beside a map of what each part is. */
+/* Mission Composition — the real main.py call beside numbered rows that match
+   the code highlights, one row per Part Four section. */
 .compose-split {
     align-items: flex-start;
     margin-top: 0.3rem;
 }
-.reveal .compose-code pre {
-    font-size: 0.56em;
+/* .src.compose-code outranks the generic .src pre size set further down. */
+.reveal .src .compose-code pre {
+    font-size: 0.54em;
 }
 .reveal .compose-code pre code {
     line-height: 1.36;
@@ -3757,38 +2137,48 @@ $loop-gap: 84px;
 .compose-map {
     display: flex;
     flex-direction: column;
-    gap: 0.45rem;
-    margin-top: 1.9rem;
+    gap: 0.4rem;
+    margin-top: 1.55rem;
 }
 .compose-row {
-    padding: 0.45rem 0.75rem;
-    border-left: 4px solid rgba(255,255,255,0.25);
-    background: rgba(255,255,255,0.045);
+    padding: 0.4rem 0.75rem 0.45rem;
+    border-top: 2px solid rgba(255,255,255,0.22);
+    background: rgba(255,255,255,0.05);
 }
 .compose-row p {
     margin: 0;
     color: rgba(255,255,255,0.72);
-    font-size: 0.62em;
+    font-size: 0.64em;
     line-height: 1.35;
 }
+.compose-row p:first-child {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.1rem;
+}
+.compose-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.45em;
+    height: 1.45em;
+    padding: 0 0.35em;
+    border-radius: 99px;
+    background: $primary-color;
+    color: #ffffff;
+    font-size: 0.92em;
+    font-weight: 900;
+    flex: none;
+}
 .compose-what {
-    display: block;
+    display: inline;
     color: #ffffff;
     font-size: 1.12em;
     font-weight: 800;
 }
-.compose-slide {
-    display: inline-block;
-    margin-left: 0.35rem;
-    padding: 0.02em 0.55em;
-    border: 1px solid $primary-color;
-    border-radius: 99px;
-    color: $primary-color;
-    font-size: 0.85em;
-    font-weight: 700;
-}
 
-/* Slides 25–37 (Part Four) — one component per slide. The strip at the top shows where you
+/* Part Four — one component per section. The strip at the top shows where you
    are; the slide body is a task → predict → result pair (.task-split below). */
 .custom-strip p {
     display: flex;
@@ -3807,17 +2197,12 @@ $loop-gap: 84px;
     font-size: 0.78em;
     line-height: 1.4;
 }
-.more-what {
-    display: block;
-    margin-bottom: 0.1rem;
-    color: rgba(255,255,255,0.78);
-}
 
 /* Task → predict → result. Left: the one edit as a diff, what to do, and a
    question for the room. Right, revealed on the next click: before/after
    images rendered from real MOSAIC (tools/capture_config_results.py), the
    research variable the edit moves, and how to undo it. The split leaves the
-   task column just wide enough for the longest diff line (slide 26). */
+   task column just wide enough for the longest diff line (Change the Camera). */
 .task-split {
     display: grid;
     grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
@@ -3958,72 +2343,13 @@ $loop-gap: 84px;
     font-size: 0.62em;
     font-weight: 600;
 }
-.var-label {
-    margin-right: 0.5rem;
-    color: $primary-color;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
+
 .undo {
     display: block;
     color: rgba(255,255,255,0.5);
     font-size: 0.9em;
 }
-.stream-list {
-    margin: 0.2rem 0 0.6rem;
-    padding: 0.5rem 0.9rem;
-    border: 1px solid rgba(255,255,255,0.14);
-    border-left: 4px solid $primary-color;
-    background: rgba(255,255,255,0.04);
-}
-.stream-list p {
-    margin: 0.25rem 0;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.68em;
-}
-.stream-name {
-    margin-right: 0.6rem;
-    color: #ffffff;
-    font-weight: 800;
-}
 
-/* Two-setting slides (27 and 34): no diff column. Two rows, each the
-   setting on the left (name, the one-line change, Interpret) and what it does
-   on the right (a before/after pair, a text excerpt, or two quotes). */
-.more-settings {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    margin-top: 0.3rem;
-}
-.more-row {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 1.2rem;
-    align-items: center;
-    padding-top: 0.8rem;
-    border-top: 1px solid rgba(255,255,255,0.13);
-}
-.more-row .result-pair {
-    margin: 0;
-}
-.more-text p {
-    margin: 0 0 0.4rem;
-    color: rgba(255,255,255,0.85);
-    font-size: 0.68em;
-    line-height: 1.45;
-}
-.more-title {
-    display: block;
-    color: #ffffff;
-    font-size: 1.35em;
-    font-weight: 800;
-}
-.reveal .more-row .result-terminal pre {
-    margin: 0;
-    font-size: 0.46em;
-}
 .speech-pair {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4048,7 +2374,7 @@ $loop-gap: 84px;
     font-size: 0.85em;
 }
 
-/* Slide 37: stands in for the rehearsal timeline until it is recorded. */
+/* The Synchronized Record: stands in for the rehearsal timeline until it is recorded. */
 .placeholder {
     display: flex;
     align-items: center;
@@ -4065,58 +2391,7 @@ $loop-gap: 84px;
     line-height: 1.5;
 }
 
-.custom-split {
-    align-items: flex-start;
-}
-.change-rows {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-}
-.change-row {
-    padding: 0.45rem 0.8rem;
-    border-left: 4px solid rgba(255,255,255,0.25);
-    background: rgba(255,255,255,0.045);
-}
-.change-row p {
-    margin: 0;
-    color: rgba(255,255,255,0.72);
-    font-size: 0.6em;
-    line-height: 1.35;
-}
-.change-row p:first-child {
-    margin-bottom: 0.12rem;
-    color: #ffffff;
-    font-size: 0.66em;
-}
-.change-title {
-    display: block;
-    color: $primary-color;
-    font-weight: 800;
-    font-size: 1.05em;
-}
-.try-it {
-    margin-top: 0.7rem;
-    padding: 0.5rem 1rem;
-    border-left: 4px solid $primary-color;
-    border-radius: 6px;
-    background: rgba(236,103,44,0.1);
-}
-.try-it p {
-    margin: 0;
-    color: rgba(255,255,255,0.9);
-    font-size: 0.68em;
-    line-height: 1.45;
-}
-.try-label {
-    margin-right: 0.6rem;
-    color: $primary-color;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-/* ── Slide 20: victim health strip under the victim symbols ────────────────── */
+/* ── Victims and Decoys: health strip under the victim symbols ─────────────── */
 .health-strip {
     margin-top: 0.9rem;
     padding-top: 0.7rem;
@@ -4139,8 +2414,15 @@ $loop-gap: 84px;
     margin: 0.35rem 0 0;
     line-height: 1.35;
 }
-.health-scale {
-    display: block;
+.health-scale p {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.3rem 0 0;
+    line-height: 1.35;
+}
+.health-scale span {
+    width: 64px;
+    text-align: center;
     color: $primary-color;
     font-family: var(--r-code-font, monospace);
     font-size: 0.56em;
@@ -4153,7 +2435,7 @@ $loop-gap: 84px;
     font-size: 0.58em;
 }
 
-/* Slide 23: caption under the exact env.step line. */
+/* Runtime Architecture: caption under the exact env.step line. */
 .support-visual.code-visual {
     flex-direction: column;
     gap: 0.25rem;
@@ -4188,167 +2470,8 @@ $loop-gap: 84px;
     line-height: 1.42;
     padding: 0.55em 0.9em;
 }
-.src-pair {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2fr);
-    gap: 1rem;
-    align-items: start;
-}
 
-/* The "what to change" notes sit in one row under the code. */
-.change-rows.cols-3,
-.change-rows.cols-4 {
-    display: grid;
-    gap: 0.6rem;
-    margin-top: 0.2rem;
-}
-.change-rows.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.change-rows.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.change-rows.cols-3 .change-row,
-.change-rows.cols-4 .change-row {
-    border-left: none;
-    border-top: 3px solid $primary-color;
-    padding: 0.45rem 0.7rem 0.5rem;
-}
-.change-row p code {
-    overflow-wrap: anywhere;
-}
-
-/* ── Slide 40: the code map as real folder trees ───────────────────────────── */
-.code-map .pkg-card {
-    display: flex;
-    flex-direction: column;
-    padding: 0.65rem 0.9rem;
-}
-.pkg-path code {
-    font-size: 1.12em;
-}
-.pkg-role {
-    margin-top: 0.1rem;
-    color: rgba(255,255,255,0.7);
-}
-.pkg-tree {
-    margin: 0.35rem 0 0.45rem;
-}
-.pkg-tree p {
-    margin: 0;
-    font-size: 0.62em;
-    line-height: 1.55;
-}
-.pkg-tree p code {
-    color: #ffffff;
-    font-size: 1em;
-}
-.pkg-tree p::before {
-    content: "├── ";
-    color: rgba(255,255,255,0.35);
-    font-family: var(--r-code-font, monospace);
-    white-space: pre;
-}
-.pkg-tree p:last-child::before {
-    content: "└── ";
-}
-.pkg-tree.tree-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 1.4rem;
-    margin: 0.3rem 0 0.35rem;
-}
-.pkg-tree.tree-row p::before {
-    content: "";
-}
-.code-map .pkg-card > p {
-    font-size: 0.6em;
-}
-.pkg-card > p:nth-last-child(2) {
-    margin-top: auto;
-}
-.pkg-label {
-    display: inline-block;
-    min-width: 5.2em;
-    color: $primary-color;
-    font-size: 0.82em;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-}
-.pkg-label-gap {
-    margin-left: 1.6rem;
-}
-.code-map .pkg-card code {
-    color: $primary-color;
-}
-.code-map .pkg-tree code,
-.code-map .pkg-path code {
-    color: inherit;
-}
-.code-map .pkg-path code {
-    color: $primary-color;
-}
-.code-map .pkg-tree p code {
-    color: #ffffff;
-}
-
-/* ── Slide 24: numbered steps that match the code highlights ───────────────── */
-.compose-row {
-    padding: 0.4rem 0.75rem 0.45rem;
-    border-left: none;
-    border-top: 2px solid rgba(255,255,255,0.22);
-    background: rgba(255,255,255,0.05);
-}
-.compose-row p {
-    font-size: 0.64em;
-}
-.compose-row p:first-child {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    margin-bottom: 0.1rem;
-}
-.compose-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.45em;
-    height: 1.45em;
-    border-radius: 50%;
-    background: $primary-color;
-    color: #ffffff;
-    font-size: 0.92em;
-    font-weight: 900;
-    flex: none;
-}
-.compose-what {
-    display: inline;
-    font-size: 1.12em;
-}
-.compose-lines {
-    margin-left: auto;
-    color: rgba(255,255,255,0.5);
-    font-family: var(--r-code-font, monospace);
-    font-size: 0.85em;
-}
-.compose-map {
-    margin-top: 1.55rem;
-    gap: 0.4rem;
-}
-.reveal .compose-code pre {
-    font-size: 0.54em;
-}
-
-/* Code map: API names on their own line under the label, larger trees. */
-.pkg-label-block {
-    display: block;
-    margin-bottom: 0.05rem;
-}
-.pkg-tree p {
-    font-size: 0.66em;
-}
-.code-map .pkg-card > p {
-    font-size: 0.62em;
-}
-
-/* Slide 3: six research questions as compact cards, two across and three down. */
+/* When People Decide with AI: six research questions as compact cards, two across and three down. */
 .research-grid.question-cards {
     gap: 0.6rem;
     margin-top: 0.6rem;
@@ -4444,13 +2567,6 @@ $loop-gap: 84px;
 .lives-in code {
     color: #ffffff;
 }
-.more-text .lives-in {
-    margin-top: 0.5rem;
-    padding: 0.4rem 0.75rem;
-}
-.more-text .lives-in p {
-    font-size: 0.6em;
-}
 
 /* The live eye-tracking demo: three numbered things to watch for. */
 .watch-list {
@@ -4493,13 +2609,6 @@ $loop-gap: 84px;
     font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
-}
-
-/* Folder names in Part Four headings: code font, so llm/ does not read as IIm/. */
-.reveal .slides section h2 code {
-    color: inherit;
-    font-size: 0.92em;
-    font-weight: 700;
 }
 
 /* Part Four: who does this example, under the task sentence. */

@@ -452,7 +452,7 @@ the end shows that split.
 :::: {.columns .scenario-columns}
 
 ::: {.column width="58%"}
-![](assets/cam-full.png){height="430" fig-align="center"}
+![](assets/cam-full.png){fig-alt="The whole search-and-rescue building: nine rooms with victims, lava, keys, and locked doors."}
 :::
 
 ::: {.column width="42%"}
@@ -462,12 +462,7 @@ the end shows that split.
 
 Search a multiroom building and rescue the real victims.
 
-[Sources of difficulty]{.scenario-label}
-
-- Locked rooms require the correct key
-- Lava constrains safe routes
-- Configurations can add decoys and health pressure
-- Time and step limits create urgency
+Part Three plays the mission and walks through its rules.
 :::
 
 :::
@@ -902,13 +897,13 @@ Everyone with a window open is ready for [Part Three]{.accent}. Leave it open.
 ## The Search-and-Rescue [Mission]{.accent}
 
 ::: {.hook}
-Explore the building, tell real victims from decoys, and decide who to rescue before time runs out.
+Explore, tell real victims from decoys, and rescue them before time runs out.
 :::
 
 :::: {.columns .scenario-columns}
 
 ::: {.column width="58%"}
-![](assets/gameplay.gif){fig-alt="The real interface: the agent rescues a real victim (green flash), then a decoy (red flash), then another real victim." height="340" fig-align="center"}
+![](assets/gameplay.gif){fig-alt="The real interface: the agent rescues a real victim (green flash), then a decoy (red flash), then another real victim."}
 :::
 
 ::: {.column width="42%"}
@@ -953,7 +948,7 @@ What each tile means, and where to read the mission.
 
 ::: {.column width="73%"}
 ::: {.annotated}
-![](assets/gui-screenshot-live.png){height="520" fig-alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue"}
+![](assets/gui-screenshot-live.png){height="480" fig-alt="MOSAIC interface caught mid-flash: a green edge vignette rings the game view after a rescue"}
 
 ::: {.anno .fragment .fade-in-then-out .mid style="--x:0.3%; --y:0.4%; --w:66%; --h:99%;"}
 Game viewport — the green flash is rescue feedback
@@ -1051,7 +1046,10 @@ Real victims and decoys are both red T shapes, and real victims have health.
 ![](assets/sprites/health-100.png){fig-alt="Real victim, full health bar"} ![](assets/sprites/health-60.png){fig-alt="Real victim, 60% health"} ![](assets/sprites/health-25.png){fig-alt="Real victim, 25% health"} ![](assets/sprites/health-0.png){fig-alt="Real victim, no health left"}
 :::
 
-[100% · 60% · 25% · 0%]{.health-scale}
+::: {.health-scale}
+[100%]{} [60%]{} [25%]{} [0%]{}
+:::
+
 [The white bar is the victim’s health.]{.health-caption}
 :::
 :::
@@ -2186,7 +2184,7 @@ placeholder.
 ## Where to Go [Next]{.accent}
 
 ::: {.hook}
-The parts you changed today, and where they live. Copy `src/experiment/` to start your own study.
+The parts you changed today, and where they live.
 :::
 
 ::: {.code-map}
@@ -2820,38 +2818,6 @@ Additional recovery steps for less common installation failures.
 | Symptom | Recovery |
 |---|---|
 | `ensurepip is not available` | Install `python3-venv`, recreate `mosaic_env` |
-| `python --version` reports 3.9 or older | Recreate `mosaic_env` on Python 3.10 or 3.11 |
 | `pip install -e .` fails to build a wheel | Rerun `python -m pip install --upgrade pip`, then retry |
 | `conda activate` does nothing in PowerShell | Run `conda init powershell` once, reopen the terminal |
 | Mission window opens on the wrong monitor | Press `F11` to leave fullscreen and drag it |
-
----
-
-## AI Teammate [Interface]{.accent}
-
-::: {.hook}
-Provider configuration lives outside the reusable task environment.
-
-:::
-
-```python
-from mosaic.llm.client import LLMClient, DummyLLMClient, ask
-```
-
-```bash
-pip install llama-index-llms-openai
-pip install llama-index-llms-google-genai
-```
-
-```python
-from experiment.llm import LlamaIndexLLMClient
-
-teammate = LlamaIndexLLMClient("openai", "gpt-5-mini-2025-08-07")
-# or: LlamaIndexLLMClient("google", "gemini-2.5-flash")
-
-SAREnvGUI(env, llm_client=teammate).run()
-```
-
-::: {.note}
-The reusable package defines the client contract. The study layer selects the provider and model. A provider needs its matching package and environment key; if advice fails, the mission remains playable and the chat panel reports the error.
-:::
