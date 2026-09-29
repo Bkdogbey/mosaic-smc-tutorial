@@ -1207,7 +1207,9 @@ $heading-font: "Rubik", sans-serif !default;
 }
 
 .reveal .slides section .world-item img {
+    flex: none;
     width: 42px;
+    max-width: none;
     height: 42px;
     margin: 0;
     border-radius: 4px;
@@ -2120,7 +2122,7 @@ $loop-gap: 84px;
     gap: 0.75rem;
 }
 
-/* Mission Composition — the real main.py call beside numbered rows that match
+/* One File, Four Parts — the real main.py call beside numbered rows that match
    the code highlights, one row per Part Four section. */
 .compose-split {
     align-items: flex-start;
@@ -2128,7 +2130,7 @@ $loop-gap: 84px;
 }
 /* .src.compose-code outranks the generic .src pre size set further down. */
 .reveal .src .compose-code pre {
-    font-size: 0.54em;
+    font-size: 0.52em;
 }
 .reveal .compose-code pre code {
     line-height: 1.36;
@@ -2192,9 +2194,9 @@ $loop-gap: 84px;
 
 /* Part Four: what the slide changes, in one plain sentence under the strip. */
 .task-what p {
-    margin: 0 0 0.8rem;
+    margin: 0 0 0.9rem;
     color: #ffffff;
-    font-size: 0.78em;
+    font-size: 0.86em;
     line-height: 1.4;
 }
 
@@ -2205,15 +2207,15 @@ $loop-gap: 84px;
    task column just wide enough for the longest diff line (Change the Camera). */
 .task-split {
     display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
     gap: 1.6rem;
     align-items: start;
 }
 .task-col > p,
 .result-col > p {
-    margin: 0 0 0.55rem;
+    margin: 0 0 0.6rem;
     color: rgba(255,255,255,0.85);
-    font-size: 0.68em;
+    font-size: 0.74em;
     line-height: 1.45;
 }
 .task-label {
@@ -2252,7 +2254,7 @@ $loop-gap: 84px;
     padding: 0.35rem 0.8rem;
     background: rgba(255,255,255,0.07);
     border-bottom: 1px solid rgba(255,255,255,0.12);
-    font-size: 0.56em;
+    font-size: 0.6em;
     line-height: 1.4;
 }
 .code-file code {
@@ -2270,7 +2272,7 @@ $loop-gap: 84px;
 }
 .reveal .code-card pre {
     margin: 0;
-    font-size: 0.56em;
+    font-size: 0.6em;
 }
 .reveal .code-card pre code {
     border-radius: 0;
@@ -2282,7 +2284,7 @@ $loop-gap: 84px;
     margin: 0.3rem 0 0.45rem;
 }
 .reveal .code-card.mini pre {
-    font-size: 0.52em;
+    font-size: 0.6em;
 }
 
 /* Diff lines: what you remove is muted, what you add is the accent, and the
@@ -2328,7 +2330,7 @@ $loop-gap: 84px;
 .result-img p {
     margin: 0;
 }
-.reveal .slides section .result-img img {
+.reveal .slides section .result-img img:not(.slide-logo img) {
     display: block;
     width: 100%;
     height: auto;
@@ -2340,38 +2342,8 @@ $loop-gap: 84px;
     display: block;
     margin-top: 0.3rem;
     color: rgba(255,255,255,0.8);
-    font-size: 0.62em;
+    font-size: 0.66em;
     font-weight: 600;
-}
-
-.undo {
-    display: block;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.9em;
-}
-
-.speech-pair {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.6rem;
-}
-.speech {
-    padding: 0.5rem 0.8rem;
-    border-left: 4px solid $primary-color;
-    background: rgba(255,255,255,0.045);
-}
-.speech p {
-    margin: 0;
-    color: rgba(255,255,255,0.85);
-    font-size: 0.6em;
-    line-height: 1.45;
-}
-.speech p + p {
-    margin-top: 0.3rem;
-    font-style: italic;
-}
-.speech .result-label {
-    font-size: 0.85em;
 }
 
 /* The Synchronized Record: stands in for the rehearsal timeline until it is recorded. */
@@ -2471,7 +2443,7 @@ $loop-gap: 84px;
     padding: 0.55em 0.9em;
 }
 
-/* When People Decide with AI: six research questions as compact cards, two across and three down. */
+/* Studying Human–AI Teaming: six research questions as compact cards, two across and three down. */
 .research-grid.question-cards {
     gap: 0.6rem;
     margin-top: 0.6rem;
@@ -2533,7 +2505,7 @@ $loop-gap: 84px;
 }
 .closing-label {
     text-align: right;
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -2542,29 +2514,7 @@ $loop-gap: 84px;
 .closing-link {
     text-align: left;
     font-family: var(--r-code-font, monospace);
-    font-size: 1.05rem;
-    color: #ffffff;
-}
-
-/* Part Four: where the setting lives in the package and what you would change
-   there, under the task. Answers "and if I want more than this knob?" */
-.lives-in {
-    margin-top: 0.9rem;
-    padding: 0.55rem 0.85rem;
-    border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 6px;
-    background: rgba(255,255,255,0.04);
-}
-.reveal .slides section .lives-in p {
-    margin: 0;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.62em;
-    line-height: 1.5;
-}
-.reveal .slides section .lives-in p + p {
-    margin-top: 0.25rem;
-}
-.lives-in code {
+    font-size: 1.5rem;
     color: #ffffff;
 }
 
@@ -2583,7 +2533,7 @@ $loop-gap: 84px;
 .reveal .slides section .watch-item p {
     margin: 0;
     color: rgba(255,255,255,0.82);
-    font-size: 0.66em;
+    font-size: 0.74em;
     line-height: 1.45;
 }
 .watch-title {
@@ -2595,12 +2545,6 @@ $loop-gap: 84px;
     color: $primary-color;
     font-weight: 800;
 }
-.demo-note {
-    display: block;
-    color: rgba(255,255,255,0.55);
-    font-size: 0.9em;
-}
-
 /* Small uppercase label above a card's title (the knob cards use it). */
 .change-when {
     display: block;
@@ -2611,12 +2555,7 @@ $loop-gap: 84px;
     text-transform: uppercase;
 }
 
-/* Part Four: who does this example, under the task sentence. */
-.reveal .slides section p:has(> .mode-tag) {
-    margin: -0.35rem 0 0.8rem;
-    color: rgba(255,255,255,0.75);
-    font-size: 0.62em;
-}
+/* Part Four: who does this example, a pill at the start of the task sentence. */
 .mode-tag {
     display: inline-block;
     margin-right: 0.5rem;
@@ -2624,10 +2563,14 @@ $loop-gap: 84px;
     border: 1px solid $primary-color;
     border-radius: 99px;
     color: $primary-color;
-    font-size: 0.85em;
+    font-size: 0.72em;
     font-weight: 800;
     letter-spacing: 0.8px;
     text-transform: uppercase;
+    vertical-align: 0.12em;
+}
+.mode-tag + * {
+    margin-left: 0;
 }
 
 /* Part Four section slides: the real main.py lines (and what they produce) on
@@ -2647,26 +2590,18 @@ $loop-gap: 84px;
 .section-left .result-img {
     margin-top: 0.2rem;
 }
-.reveal .slides section .section-left .section-shot img {
+.reveal .slides section .section-left .section-shot img:not(.slide-logo img) {
     width: auto;
     max-width: 100%;
     max-height: 285px;
-}
-.section-left .lives-in {
-    margin-top: 0.7rem;
 }
 .reveal .slides section .section-left .section-wide img {
     width: 100%;
 }
 
-/* A shorter placeholder where a capture is still to come (the LLM reply). */
-.placeholder.short {
-    min-height: 150px;
-    margin: 0.2rem 0 0.6rem;
-}
-
-/* Part Four section slides (4.1–4.5): three numbered knobs, each the setting
-   and what it changes for the participant. */
+/* Part Four section slides (4.1–4.4): three numbered knobs, each the setting
+   and what it changes for the participant; the tag on the right says where
+   it is shown (next slide, notebook, appendix). */
 .knob-list {
     display: flex;
     flex-direction: column;
@@ -2688,13 +2623,19 @@ $loop-gap: 84px;
 .reveal .slides section .knob-card p {
     margin: 0;
     color: rgba(255,255,255,0.85);
-    font-size: 0.66em;
+    font-size: 0.7em;
     line-height: 1.45;
 }
 .reveal .slides section .knob-card p + p {
     margin-top: 0.2rem;
 }
 .knob-card .change-when {
+    float: right;
+    margin-top: 0.3em;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.78em;
+}
+.knob-card.live .change-when {
     color: $primary-color;
 }
 .knob-num {
@@ -2718,4 +2659,51 @@ $loop-gap: 84px;
 .reveal .section-terminal pre {
     margin-top: 0.3rem;
     font-size: 0.52em;
+}
+
+/* Crops of the real GUI (captured at 2x by tools/capture_config_results.py):
+   the panel's own background is extended as padding and the widget gets a thin
+   frame, so a metric or a chat message reads as a piece of the interface. */
+.reveal .slides section .ui-crop img:not(.slide-logo img) {
+    box-sizing: border-box;
+    padding: 0.55rem 0.8rem;
+    background: #1e1e28;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 6px;
+    box-shadow: none;
+}
+.ui-pair {
+    gap: 1rem;
+}
+.ui-stack {
+    gap: 0.9rem;
+}
+.ui-crop .result-label {
+    margin-top: 0.4rem;
+}
+.result-note {
+    display: block;
+    color: rgba(255,255,255,0.65);
+    font-size: 0.95em;
+}
+
+/* Part number next to a block or folder name (Runtime Architecture, Where to
+   Go Next), matching the 4.1–4.4 strip. */
+.part-badge {
+    display: inline-block;
+    margin-right: 0.3em;
+    padding: 0.02em 0.45em;
+    border-radius: 99px;
+    background: $primary-color;
+    color: #ffffff;
+    font-size: 0.8em;
+    font-weight: 900;
+    letter-spacing: 0;
+    vertical-align: 0.08em;
+}
+.pkg-path + .part-badge {
+    margin-left: 0.35em;
+}
+.pkg-row .pkg-card > p:last-child {
+    margin-top: auto;
 }

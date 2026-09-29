@@ -8,7 +8,8 @@ Wi-Fi and under a minute on a good connection.
 ## Requirements
 
 - Python **3.10 or 3.11** (`python3 --version`). These are the supported
-  tutorial versions.
+  tutorial versions; 3.12 and newer are not, so create your environment with
+  3.11 if that is what your laptop ships.
 - Git
 - PowerShell, macOS Terminal, or any Linux shell
 - A laptop with a real display — the game opens a window, so a remote/SSH-only
@@ -166,7 +167,8 @@ python -m experiment.main
 ```
 
 The Pygame interface opens fullscreen. Use the arrow keys to move, `Tab` to
-rescue the victim you are facing, `F11` for a window, and `Esc` to quit. No
+rescue the victim you are facing, `F11` for a window (`fn`+`F11` on macOS, or set `fullscreen: false` in
+`configs/experiment.yaml`), and `Esc` to quit. No
 extra repository, notebook, or Python file is required.
 
 > If you cloned before the fix landed, `git pull` first. Two imports were
@@ -175,11 +177,12 @@ extra repository, notebook, or Python file is required.
 
 ## 6 · Get the two tutorial files
 
-Two optional appendix tasks use small files from the tutorial repository. Download
-`panel.py` and `advisor.py` from
+The session uses two small files from the tutorial repository: `advisor.py`
+(in Part Four, when everyone swaps in a teammate that needs no key) and
+`panel.py` (an optional appendix task). Download both from
 <https://github.com/Bkdogbey/mosaic-smc-tutorial/tree/main/presentation/labs>
-and save both into `src/experiment/` in your `mosaic` folder. Nothing else
-needs them, and the session shows where they go when you reach those slides.
+and save them into `src/experiment/` in your `mosaic` folder. The session shows
+where they go when you reach those slides.
 
 ## Troubleshooting
 
