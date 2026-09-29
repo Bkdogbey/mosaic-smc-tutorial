@@ -4,6 +4,10 @@
 #          quarto preview mosaic-tutorial.qmd
 title: "MOSAIC<span class='title-fullname'>Modular System for Adaptive<br>[Human–AI Collaboration]{.accent}</span>"
 subtitle: "<span class='title-tagline'>A Configurable Testbed for Human–AI Teaming</span><span class='title-venue'>IEEE SMC 2026 · Bellevue, WA</span><span class='title-repo'>github.com/iHuman-Lab/mosaic</span>"
+author: "Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha"
+description: "A hands-on introduction to MOSAIC: install it, play a search-and-rescue mission, and change the task, the interface, the AI teammate, and the sensing."
+image: assets/gui-screenshot-live.png
+event_type: "Tutorial"
 date: "2026-10-04"
 date-format: "MMMM D, YYYY"
 format:
@@ -47,7 +51,7 @@ We study how people and intelligent systems work together.
 ![](assets/team/elahe.jpg)
 
 [Elahe Oveisi]{.member-name}
-[PhD Student]{.member-role}
+[PhD Candidate]{.member-role}
 :::
 
 ::: {.member}

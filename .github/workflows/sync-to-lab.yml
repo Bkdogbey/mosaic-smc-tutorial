@@ -1,0 +1,77 @@
+# Keep the deck in the iHuman Lab presentations site up to date.
+#
+# On every push to main that touches presentation/, copy the deck into
+# iHuman-Lab/presentations as mosaic-tutorial/ (tools/sync_to_lab.py does the
+# copy and the conversions the lab site needs) and open or update ONE pull
+# request from the fork Bkdogbey/presentations. A lab maintainer merges it, and
+# the lab site rebuilds. This workflow never pushes to the lab's main branch.
+#
+# One-time setup: add a repository secret named LAB_SYNC_TOKEN, a personal
+# access token that can push to the fork Bkdogbey/presentations and open pull
+# requests on iHuman-Lab/presentations (a classic token with the `public_repo`
+# scope does both; a fine-grained token only works if the iHuman-Lab org allows
+# it). Nothing else is needed, and the token is never written to the repository.
+name: Sync to lab presentations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "presentation/**"
+      - ".github/workflows/sync-to-lab.yml"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      LAB_SYNC_TOKEN: ${{ secrets.LAB_SYNC_TOKEN }}
+    steps:
+      - name: Check the token is set
+        run: |
+          if [ -z "$LAB_SYNC_TOKEN" ]; then
+            echo "::error::Add the LAB_SYNC_TOKEN repository secret (see the comment at the top of this workflow)."
+            exit 1
+          fi
+
+      - name: Check out the tutorial
+        uses: actions/checkout@v4
+        with:
+          path: tutorial
+
+      - name: Check out the lab presentations repo
+        uses: actions/checkout@v4
+        with:
+          repository: iHuman-Lab/presentations
+          path: lab
+
+      - name: Copy the deck into mosaic-tutorial/
+        run: python3 tutorial/presentation/tools/sync_to_lab.py lab
+
+      - name: Open or update the pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          path: lab
+          token: ${{ secrets.LAB_SYNC_TOKEN }}
+          push-to-fork: Bkdogbey/presentations
+          branch: sync-mosaic-tutorial
+          commit-message: "Update MOSAIC tutorial"
+          title: "Update MOSAIC tutorial"
+          body: |
+            ## Presentation
+
+            - **Title:** MOSAIC tutorial (hands-on)
+            - **Where/when presented:** IEEE SMC 2026, Bellevue, WA
+            - **Folder:** `mosaic-tutorial/`
+
+            Synced from https://github.com/Bkdogbey/mosaic-smc-tutorial by
+            `presentation/tools/sync_to_lab.py`. Only `mosaic-tutorial/` changes.
+
+            ## Checklist
+
+            - [x] The deck is at `mosaic-tutorial/mosaic-tutorial.qmd`
+            - [x] The front matter has `title`, `author`, `date`, `description`, `image` and `event_type`
+            - [x] `quarto render` runs on the whole site
+            - [x] All images and media are inside the folder; no build output (`*.html`, `*_files/`) is committed
+            - [x] No unpublished data, private links or confidential material
+            - [x] Media is small (about 3.6 MB)
