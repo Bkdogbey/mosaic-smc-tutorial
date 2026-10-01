@@ -337,7 +337,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 <div class="need-text">
 <p><span class="need-index">02</span></p>
-<p><span class="need-title">A controllable AI teammate</span></p>
+<p><span class="need-title">A customizable AI teammate</span></p>
 <p>Researchers need to vary what the AI knows, how reliable it is, and when and how it communicates.</p>
 </div>
 </div>
@@ -361,7 +361,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 <aside class="notes">
-<p>To study the interaction over time, researchers need an interactive task, a controllable teammate, conditions they can vary, and synchronized data. The next slide shows how MOSAIC brings them together.</p>
+<p>To study the interaction over time, researchers need an interactive task, a customizable teammate, conditions they can vary, and synchronized data. The next slide shows how MOSAIC brings them together.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -388,7 +388,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="need-text">
 <p><span class="need-index">01</span></p>
 <p><span class="need-title">Interactive task</span></p>
-<p>Search and rescue, move by move</p>
+<p>Search and rescue, one decision at a time</p>
 </div>
 </div>
 <div class="need-item has-visual">
@@ -398,7 +398,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="need-text">
 <p><span class="need-index">03</span></p>
 <p><span class="need-title">Configurable conditions</span></p>
-<p>Map, hazards, view, and scoring</p>
+<p>Map, view, timing, and scoring per study</p>
 </div>
 </div>
 </div>
@@ -417,8 +417,8 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 <div class="need-text">
 <p><span class="need-index">02</span></p>
-<p><span class="need-title">Controllable AI teammate</span></p>
-<p>Scripted and LLM teammates, one interface</p>
+<p><span class="need-title">Customizable AI teammate</span></p>
+<p>Scripted or LLM, with behavior you set</p>
 </div>
 </div>
 <div class="need-item has-visual">
@@ -436,7 +436,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="need-text">
 <p><span class="need-index">04</span></p>
 <p><span class="need-title">Synchronized data</span></p>
-<p>Task, advice, and sensors on one timeline</p>
+<p>Actions, advice, and signals on one clock</p>
 </div>
 </div>
 </div>
@@ -445,7 +445,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p>MOSAIC lets researchers <span class="accent">vary the task and AI teammate, then record the interaction</span>.</p>
 </div>
 <aside class="notes">
-<p>MOSAIC stands for Modular System for Adaptive Human–AI Collaboration: an open-source Python platform for studying human–AI teaming through configurable tasks, built on MiniGrid. Like a mosaic built from tiles, it assembles separate parts (task, teammate, interface, sensing) into one study. Each box answers the need in the same position on the last slide: the task, a teammate you can control, conditions you set per study, and one synchronized record. Modular: the environment, AI teammate, interface, sensing, and analytics are separate components, so you replace one without touching the others. Configurable: map, hazards, view, scoring, and the teammate are set per study, not hard-coded. Search and rescue is the first testbed; the same pieces can support other collaborative tasks (ihuman-lab.github.io/mosaic).</p>
+<p>MOSAIC stands for Modular System for Adaptive Human–AI Collaboration: an open-source Python platform for studying human–AI teaming through configurable tasks, built on MiniGrid. Like a mosaic built from tiles, it assembles separate parts (task, teammate, interface, sensing) into one study. Each box answers the need in the same position on the last slide: the task, a teammate you can customize, conditions you set per study, and one synchronized record. Modular: the environment, AI teammate, interface, sensing, and analytics are separate components, so you replace one without touching the others. Configurable: map, hazards, view, scoring, and the teammate are set per study, not hard-coded. Search and rescue is the first testbed; the same pieces can support other collaborative tasks (ihuman-lab.github.io/mosaic).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -676,7 +676,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="dep-group">
 <p><span class="dep-group-name">Study tools</span></p>
 <div class="dep-grid">
-<p><span class="dep">pandas</span> <span class="dep">pyyaml</span> <span class="dep">python-dotenv</span> <span class="dep">tabulate</span></p>
+<p><span class="dep">pandas</span> <span class="dep">pyyaml</span> <span class="dep">python-dotenv</span></p>
 </div>
 </div>
 </div>
@@ -755,32 +755,51 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <section id="install-mosaic" class="slide level2">
 <h2>Install <span class="accent">MOSAIC</span></h2>
 <div class="hook">
-<p>Three commands, run from the <code>mosaic</code> folder with <code>mosaic_env</code> active.</p>
+<p>Five commands, run from the <code>mosaic</code> folder with <code>mosaic_env</code> active.</p>
 </div>
 <div class="columns install-split">
 <div class="column" style="width:63%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
 <span id="cb4-2"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span>
-<span id="cb4-3"><a href=""></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import mosaic.sar.env, mosaic.gui.main; print('MOSAIC ready')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip uninstall <span class="at">-y</span> pygame</span>
+<span id="cb4-4"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
+<span id="cb4-5"><a href=""></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import mosaic.sar.env, mosaic.gui.main; print('MOSAIC ready')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="checkpoint">
-<p>pip ends with <code>Successfully installed ... mosaic-0.1.0</code>, and the check prints a <code>pygame-ce</code> banner, then <code>MOSAIC ready</code>.</p>
+<p>The check prints a <code>pygame-ce</code> banner, then <code>MOSAIC ready</code>. If it says <code>cannot import name 'DIRECTION_LTR'</code>, rerun lines 3 and 4.</p>
 </div>
 </div><div class="column" style="width:37%;">
 <div class="line-steps">
 <div class="line-step">
 <p><span class="line-num">1</span> <span class="line-title">Update pip</span></p>
-<p>Avoids install errors from an old installer</p>
+<p>Avoids old-installer errors</p>
 </div>
 <div class="line-step">
 <p><span class="line-num">2</span> <span class="line-title">Install MOSAIC</span></p>
-<p>Adds MOSAIC and every package on the previous slide. <code>-e</code> (editable) means your edits take effect without reinstalling; Part Four relies on this.</p>
+<p><code>-e</code> means your Part Four edits apply without reinstalling</p>
 </div>
 <div class="line-step">
-<p><span class="line-num">3</span> <span class="line-title">Check it</span></p>
-<p>Imports the task (<code>mosaic.sar</code>) and the participant’s interface (<code>mosaic.gui</code>)</p>
+<p><span class="line-num" style="width: auto; padding-right: 0.5em;">3–4</span> <span class="line-title">Switch to pygame-ce</span></p>
+<p>The interface needs it; plain <code>pygame</code> hides it</p>
+</div>
+<div class="line-step">
+<p><span class="line-num">5</span> <span class="line-title">Check it</span></p>
+<p>Imports the task and the interface</p>
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>Lines 3 and 4 work around a packaging gap: MOSAIC’s <code>pyproject.toml</code> declares <code>pygame</code>, but <code>pygame_gui</code> needs <code>pygame-ce</code>, and both install into the same <code>pygame</code> folder. Skipping them ends in <code>ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'</code> (reproduced on a clean clone of iHuman-Lab/mosaic main, 1018587, Python 3.11). <code>--force-reinstall</code> is required: uninstalling <code>pygame</code> deletes files <code>pygame-ce</code> shares. <code>pip check</code> then reports “mosaic 0.1.0 requires pygame”; that is harmless. Once upstream depends on <code>pygame-ce</code> the two lines do nothing harmful and can come off the slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="run-the-included-mission" class="slide level2">
 <h2>Run the Included <span class="accent">Mission</span></h2>
@@ -863,18 +882,22 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </thead>
 <tbody>
 <tr class="odd">
+<td><code>cannot import name 'DIRECTION_LTR'</code></td>
+<td>Rerun install lines 3 and 4 (<code>pygame-ce</code>)</td>
+</tr>
+<tr class="even">
 <td><code>No module named 'mosaic'</code></td>
 <td>Activate <code>mosaic_env</code>, rerun <code>pip install -e .</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>No module named 'experiment'</code></td>
 <td>Run from the repo root with <code>PYTHONPATH=src</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>python --version</code> shows 3.9 or older, or 3.12 and newer</td>
 <td>Recreate <code>mosaic_env</code> with Python 3.10 or 3.11</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>No window, or <code>No available video device</code></td>
 <td>Run locally, not over SSH</td>
 </tr>
@@ -920,7 +943,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p>Every choice has <span class="accent">a consequence you can see and score</span>.</p>
 </div>
 <aside class="notes">
-<p>No code in this part: the goal is to know the mission the way a participant does. The clip is the real interface: a real victim (green flash, +1), a decoy (red flash, -1), then another real victim.</p>
+<p>No code in this part: the goal is to know the mission the way a participant does. The clip is the real interface: a real victim (green flash, +1), a decoy (red flash, -1), then another real victim. In today’s run the clock only counts down: at 0:00 the timer stops and the mission keeps going (appendix slide “Time Limit”); the lab’s study runner is what ends a trial.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1118,6 +1141,28 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </section>
 <section class="slide level2">
 
+<!-- ============ BREAK ============ -->
+<div class="divider">
+<p><span class="divider-kicker">Break · 15 minutes</span></p>
+<p><span class="divider-title">Take a Break</span></p>
+<p><span class="divider-path">Next · Part Four: Configure MOSAIC</span></p>
+</div>
+<aside class="notes">
+<p>Fifteen minutes. Leave this slide up for the whole break. Helpers use the time to finish any install that is still stuck. Before starting Part Four, check that everyone can move the agent; anyone who closed the game relaunches it with the command on “Run the Included Mission”. Part Four edits the file that window was launched from, so the game has to be working first.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
 <!-- ============ PART 4 ============ -->
 <div class="divider">
 <p><span class="divider-kicker">Part Four</span></p>
@@ -1277,7 +1322,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div></div>
 <aside class="notes">
-<p>This is the file attendees launched. Step through the highlights; each one is a section of Part Four, in this order: SAR (the building, what fills it, the camera), GUI (the window), LLM (who answers <code>Alt</code>), and Sensing (what every step records). Rewards are a keyword argument you add to the SAR call. This is main.py as the tutorial needs it: imports enabled and the provider defaulting to “dummy”. Upstream MOSAIC must carry that fix before the session (iHuman-Lab/mosaic main, c571f94, still defaults the provider to “openai”).</p>
+<p>This is the file attendees launched. Step through the highlights; each one is a section of Part Four, in this order: SAR (the building, what fills it, the camera), GUI (the window), LLM (who answers <code>Alt</code>), and Sensing (what every step records). Rewards are a keyword argument you add to the SAR call. This is main.py as the tutorial needs it: imports enabled and the provider defaulting to “dummy”. Upstream MOSAIC must carry that default before the session (iHuman-Lab/mosaic main, 1018587, has the imports but still defaults the provider to “openai”, so <code>Alt</code> replies “Import tabulate failed”). If it has not landed, have everyone add <code>provider: dummy</code> as a top-level line in <code>configs/experiment.yaml</code> before Part Three.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1296,7 +1341,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p><span class="stop">Map</span> <span class="stop here">4.1 SAR</span> <span class="stop">4.2 GUI</span> <span class="stop">4.3 LLM</span> <span class="stop">4.4 Sensing</span></p>
 </div>
 <div class="task-what">
-<p>Lines 31–44 build the search-and-rescue task.</p>
+<p>Lines 31–44 build the task. Notebook: <code>notebooks/02_mosaic_human_ai.ipynb</code></p>
 </div>
 <div class="section-grid">
 <div class="section-left">
@@ -1338,7 +1383,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 <aside class="notes">
-<p>Lines 31–44 are the whole SAR task: building size, the placers that fill it, and the camera. Counts are per room (12 real victims across a 3×3 building is 108). The building settings are cells in the notebook; the camera and rewards get the next two slides. Code lives in src/mosaic/sar/, src/mosaic/core/, and src/experiment/placers.py.</p>
+<p>Lines 31–44 are the whole SAR task: building size, the placers that fill it, and the camera. Counts are per room (12 real victims across a 3×3 building is 108). The building settings are Step 6 of the notebook, which is in the repository attendees cloned (notebooks/02_mosaic_human_ai.ipynb; it also needs matplotlib, scipy, pylsl, and pyxdf). Its building uses the plain <code>VictimPlacer</code>, so it has no decoys. The camera and rewards get the next two slides. Code lives in src/mosaic/sar/, src/mosaic/core/, and src/experiment/placers.py.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1574,7 +1619,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p><span class="knob-effect">How reliable the advice is</span></p>
 </div>
 <div class="knob-card live">
-<p><span class="knob-num">2</span> <span class="knob-name">Real LLM</span> <span class="change-when">Demo</span></p>
+<p><span class="knob-num">2</span> <span class="knob-name">Real LLM</span> <span class="change-when">On your own</span></p>
 <p><code>provider:</code> in the YAML, key in <code>.env</code></p>
 <p><span class="knob-effect">Who answers <code>Alt</code></span></p>
 </div>
@@ -1638,7 +1683,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 <aside class="notes">
-<p>labs/advisor.py is in the tutorial repository (github.com/Bkdogbey/mosaic-smc-tutorial, presentation/labs/). Any teammate implements one method of <code>LLMClient</code>, <code>query(prompt) -&gt; str</code> (src/mosaic/llm/client.py). At 0.7, about three replies in ten point at a decoy: ask the room whether anyone noticed. That is the reliance question from the start of the tutorial. The “after” image was captured at reliability 1.0. It is also the fallback for the LLM demo if the API is down: grounded advice, no key.</p>
+<p>labs/advisor.py is in the tutorial repository (github.com/Bkdogbey/mosaic-smc-tutorial, presentation/labs/). Any teammate implements one method of <code>LLMClient</code>, <code>query(prompt) -&gt; str</code> (src/mosaic/llm/client.py). At 0.7, about three replies in ten point at a decoy: ask the room whether anyone noticed. That is the reliance question from the start of the tutorial. The “after” image was captured at reliability 1.0. No API key is used in this session, so this is the one teammate attendees see give grounded advice.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1657,13 +1702,13 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p><span class="stop">Map</span> <span class="stop">4.1 SAR</span> <span class="stop">4.2 GUI</span> <span class="stop here">4.3 LLM</span> <span class="stop">4.4 Sensing</span></p>
 </div>
 <div class="task-what">
-<p><span class="mode-tag">Presenter demo</span> One package, one key, two lines of YAML.</p>
+<p><span class="mode-tag">On your own</span> With your own key: two packages, one key, two lines of YAML.</p>
 </div>
 <div class="task-split">
 <div class="task-col">
 <div class="code-card mini">
 <p><span class="code-file">terminal</span> <span class="code-where">once, with <code>mosaic_env</code> active</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install llama-index-llms-openai</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install llama-index-llms-openai tabulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="code-card mini">
 <p><span class="code-file"><code>.env</code></span> <span class="code-where">a new file in the <code>mosaic</code> folder</span></p>
@@ -1692,7 +1737,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 <aside class="notes">
-<p>Presenter demo: the key lives only in the presenter’s <code>.env</code>. It is never in the repository or this deck, which is public on GitHub Pages. <code>main.py</code> already reads <code>provider</code> and <code>model</code> from the top of the YAML and loads <code>.env</code> (<code>load_dotenv()</code>); <code>build_llm_client</code> connects on the first <code>Alt</code>, not at launch, so no key or a typo shows as an error in the chat and the game keeps running. Model: confirm on key day by measured latency; the package must recognize the model name. What the model is told is on the appendix slide “What the Teammate Is Told”.</p>
+<p>Not run live: no API key is used in this session. Walk through the three cards so attendees can do it afterwards with their own key, then reveal how the reply is produced. A key belongs only in a local <code>.env</code>, never in a repository. <code>main.py</code> already reads <code>provider</code> and <code>model</code> from the top of the YAML and loads <code>.env</code> (<code>load_dotenv()</code>); <code>build_llm_client</code> connects on the first <code>Alt</code>, not at launch, so no key or a typo shows as an error in the chat and the game keeps running. The model name must be one the package recognizes. <code>tabulate</code> builds the prompt’s table (<code>DataFrame.to_markdown()</code>); MOSAIC does not declare it yet, and without it <code>Alt</code> replies “Import tabulate failed”. What the model is told is on the appendix slide “What the Teammate Is Told”.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1747,7 +1792,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 <aside class="notes">
-<p>Observations are built in src/mosaic/sar/observations.py; the study runner is in src/experiment/. <code>read_data()</code> is in src/experiment/game.py (lines 111–124, <code>SARGameTrial</code>). Change what each step records by subclassing <code>ObservationProcessor</code> and passing it as <code>observation=</code>. <code>replay.py</code> plays a recording back. The full study runner needs the lab’s <code>ixp</code> package and LSL, which this tutorial does not install.</p>
+<p>Observations are built in src/mosaic/sar/observations.py; the study runner is in src/experiment/. <code>read_data()</code> is in src/experiment/game.py (lines 108–124, <code>SARGameTrial</code>). The notebook (notebooks/02_mosaic_human_ai.ipynb) prints the fields in Step 4 and records them with gaze in Steps 8–9. Change what each step records by subclassing <code>ObservationProcessor</code> and passing it as <code>observation=</code>. <code>replay.py</code> plays a recording back. The full study runner needs the lab’s <code>ixp</code> package and LSL, which this tutorial does not install.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1790,7 +1835,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p><span class="watch-num">1</span> <span class="watch-title">Calibration</span> Five dots</p>
 </div>
 <div class="watch-item">
-<p><span class="watch-num">2</span> <span class="watch-title">Play</span> A short mission, advice on <code>Alt</code></p>
+<p><span class="watch-num">2</span> <span class="watch-title">Play</span> A short mission</p>
 </div>
 <div class="watch-item fragment">
 <p><span class="watch-num">3</span> <span class="watch-title">Two streams, one clock</span> <code>TobiiEyeTracker</code> (60 Hz) and the game steps, side by side in LabRecorder</p>
@@ -1799,7 +1844,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 <aside class="notes">
-<p>Presenter only: the lab’s <code>ixp</code> package (not on PyPI), <code>tobii_research</code>, PsychoPy, pylsl, ray, and LabRecorder, set up at rehearsal (RUNSHEET.md). The two calls are the ones the full study block uses (experiment.py lines 83–88); the <code>tobii_test</code> block in the same file is the sensor-only version. Calibration is five points (center and four at 0.2 from the edges); SPACE accepts, R redoes. Reveal the third item once LabRecorder is on screen: TobiiEyeTracker is gaze at 60 Hz, 9 channels; the game trial is one JSON line per step. Gaze and game land on one clock, so you can see where the volunteer looked before and after advice. If the device fails, show the rehearsal screenshot of LabRecorder’s stream list and move on.</p>
+<p>Presenter only: the lab’s <code>ixp</code> package (not on PyPI), <code>tobii_research</code>, PsychoPy, pylsl, ray, and LabRecorder, set up at rehearsal (RUNSHEET.md). The two calls are the ones the full study block uses (experiment.py lines 85–90); the <code>tobii_test</code> block in the same file is the sensor-only version. Calibration is five points (center and four at 0.2 from the edges); SPACE accepts, R redoes. Reveal the third item once LabRecorder is on screen: TobiiEyeTracker is gaze at 60 Hz, 9 channels; the game trial is one JSON line per step. Gaze and game land on one clock, so you can see where the volunteer looked before and after each rescue. No API key is used, so the study’s OpenAI and Gemini trials have no advice: <code>Alt</code> shows an error in the chat and the mission carries on. If the device fails, show the rehearsal screenshot of LabRecorder’s stream list and move on.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1946,7 +1991,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 <aside class="notes">
-<p>Keep locked_room_prob below 1.0: at 1.0 generation never finishes. Counts come from one generated building each and can differ run to run. <code>LockedRoomPlacer</code> lives in src/mosaic/sar/placers.py; its <code>place_all()</code> picks which rooms lock and hides each key in an unlocked room. Placement is a pluggable interface: <code>Placer</code> in src/mosaic/core/placers.py has one method, <code>place_all</code>.</p>
+<p>Keep locked_room_prob below 1.0: at 1.0 generation never finishes. The count is <code>max(1, int(rooms × prob))</code>, so a 3×3 building always locks 4 rooms at 0.5 and 8 at 0.9; which rooms changes run to run. <code>LockedRoomPlacer</code> lives in src/mosaic/sar/placers.py; its <code>place_all()</code> picks which rooms lock and hides each key in an unlocked room. Placement is a pluggable interface: <code>Placer</code> in src/mosaic/core/placers.py has one method, <code>place_all</code>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
