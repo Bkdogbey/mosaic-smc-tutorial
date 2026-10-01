@@ -1,6 +1,6 @@
 # MOSAIC Tutorial — IEEE SMC 2026
 
-A two-hour hands-on tutorial introducing MOSAIC to HCI and human-factors
+A two-hour hands-on tutorial (plus a 15-minute break) introducing MOSAIC to HCI and human-factors
 researchers, built on the iHuman Lab Quarto reveal.js template.
 
 The narrative thread is human–AI teaming: MOSAIC is a configurable research
@@ -13,16 +13,19 @@ consequential tasks. The deck is four parts:
 2. **Install MOSAIC** — the dependency list, `venv` and Conda setup paths, an
    import checkpoint, and the first mission via `python -m experiment.main`
 3. **Experience the SAR mission** — no code: the mission objective, the
-   interface and what each tile means, victims and decoys, and the controls
+   interface and what each tile means, victims and decoys, and the controls.
+   A 15-minute break slide follows, before any code
 4. **Configure MOSAIC** — a walk through `experiment/main.py`, the file
    attendees launched, in four parts: 4.1 SAR (the building, the camera,
    rewards), 4.2 GUI (the window and its feedback), 4.3 LLM (who answers `Alt`),
    4.4 Sensing (what every step records). Each part opens with one slide: the
    exact `main.py` lines and three things to change. One focused example
    follows: rewards and a keyless teammate (everyone tries), then the decoy
-   flash, a real LLM, and a live eye tracker (presenter demos). Building
-   settings and the observation-field print move to a notebook server (not
-   built yet)
+   flash and a live eye tracker (presenter demos). No API key is used in the
+   session: the real-LLM slide is shown as "on your own", not run. Building
+   settings and the observation-field print are in the lab's notebook,
+   `notebooks/02_mosaic_human_ai.ipynb` in the MOSAIC repository (Steps 6 and
+   4), which is take-home unless time is cut for it (see `RUNSHEET.md`)
 
 The appendix holds the other changes named on the part slides: locked rooms,
 time limit, info panel, and what the teammate is told. A *Synchronized Record*
@@ -32,8 +35,7 @@ slide stays hidden until the eye-tracker rehearsal recording exists.
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (39 slides: 33 main + closing + 5 appendix; one more hidden)
-├── mosaic-tutorial.ipynb # optional development prototype; not required by attendees
+├── mosaic-tutorial.qmd   # the deck — edit this (40 slides: 34 main, one of them the break + closing + 5 appendix; one more hidden)
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
 │                         #   screenshots, .band notes, layer bands, you-are-here strip,
@@ -43,9 +45,9 @@ presentation/
 ├── assets/               # figures used in the deck
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
-    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (appendix slide 38)
+    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (appendix slide 39)
     ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
-    │                     #   Slide 29 uses it; its result image is assets/chat-advice.png
+    │                     #   Slide 30 uses it; its result image is assets/chat-advice.png
     └── tweak.py          # all four injection points in one file
 ```
 
@@ -126,26 +128,29 @@ Two things to know before regenerating:
 ## Before presenting
 
 1. Send `SETUP.md` to registrants at least a week out.
-2. Re-verify every command in Part 2 against the current `main`. Part 2 now
-   assumes MOSAIC depends on `pygame-ce` (issue 1 below) and that `Esc` exits
-   cleanly (issue 13) — **both fixes must be merged before the tutorial**, or
-   attendees hit `DIRECTION_LTR` on first run and a traceback on every `Esc`.
+2. Re-verify every command in Part 2 against the current `main`. Last checked
+   on a clean clone of `1018587` (Python 3.11): the `Esc` fix (issue 13) has
+   landed, and Part 2 carries the `pygame-ce` workaround on the install slide
+   (issue 1), so the install works as upstream ships it. **One fix must still
+   be merged before the tutorial:** the `dummy` provider default (issue 12), or
+   `Alt` shows an error instead of the placeholder reply on slides 19, 29, 30.
 3. Merge this branch so `presentation/labs/` on `main` has `panel.py` and
-   `advisor.py`; slides 29 and 38 send people to the repo for them.
+   `advisor.py`; slides 30 and 39 send people to the repo for them.
 4. Read `RUNSHEET.md`.
 
 ## Repo issues this tutorial exposed
 
 Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
-3.10.20. The deck currently teaches around all of these.
+3.10.20; issues 1, 6 and 12 re-checked against `1018587` on Python 3.11.15.
+The deck currently teaches around all of these.
 
 1. **`pygame` vs `pygame-ce`.** `pyproject.toml` declares `pygame`; `pygame_gui`
    requires `pygame-ce`. `pip install -e .` installs **both**, and `pygame` lands
    last, so the GUI dies with
    `ImportError: cannot import name 'DIRECTION_LTR' from 'pygame'`.
-   Fix: depend on `pygame-ce>=2.5.2` (done in the local checkout, not yet
-   upstream). **Required before the tutorial:** the deck no longer teaches a
-   workaround.
+   Fix: depend on `pygame-ce>=2.5.2`. Not upstream as of `1018587`, so the
+   install slide teaches the workaround from issue 2 (lines 3–4). Remove those
+   two lines from the slide once the fix is merged.
 2. **The obvious workaround for issue 1 does not work.**
    `pip uninstall -y pygame && pip install "pygame-ce>=2.5.2"` leaves pygame-ce
    *broken* — uninstalling `pygame` removes shared files from the namespace, and
@@ -168,10 +173,12 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    cap — the process never returns and no window opens. Reproduced on 2×2 at
    seeds 1, 2 and 3; `0.9` is fine. Fix: cap `n_locked` below the room count, or
    bound the retry loop and raise.
-6. ~~**`tabulate` is required but undeclared.**~~ **Fixed upstream.**
+6. **`tabulate` is required but undeclared.**
    `build_prompt()` → `_build_table()` calls `DataFrame.to_markdown()`, which
-   needs `tabulate`; it is now declared in `pyproject.toml`, so the deck does
-   not install it separately.
+   needs `tabulate`. It is declared only in the fork `Bkdogbey/mosaic`, not in
+   upstream `pyproject.toml` (`1018587`), so the real-LLM slide lists it.
+   Without it `Alt` replies "`Import tabulate` failed" for any non-dummy
+   provider.
 7. **`experiment_main.py` does not exist.** `README.md`, `REFERENCE.md`,
    `docs/getting-started.md`, `docs/architecture.md` and `docs/experiment.md` all
    point at `python -m experiment.experiment_main`; the file is
@@ -185,15 +192,16 @@ Verified against a clean clone of `iHuman-Lab/mosaic` (`c571f94`) on Python
    the decoy penalty as `-0.5`; `RescueRewards.fake_victim` defaults to `-1.0`.
 10. **`requires-python = ">=3.8"`** is optimistic given the current dependency set;
    the docs say 3.9+ and we only test 3.10.
-12. ~~**`python -m experiment.main` does not run at all.**~~ **Fixed locally, not
-   yet upstream** (upstream `main` 1ba2268 still has the imports commented out).
+12. **`python -m experiment.main` needs the imports and a keyless default.**
    `src/experiment/main.py` had `from .llm import build_llm_client` and
    `from .placers import LavaRiskVictimPlacer, SectorSpreadLavaPlacer` commented
    out at lines 15–16 while still using all three names, so the script exited
    with `NameError: name 'LavaRiskVictimPlacer' is not defined` before building
-   anything. The imports are restored, and `build_llm_client` now defaults to
-   the keyless `dummy` provider instead of `openai`, so the runner needs no API
-   key.
+   anything. **The imports are restored upstream (`1018587`).** Still open:
+   line 48 defaults the provider to `openai`, not the keyless `dummy`, so
+   without a top-level `provider: dummy` in `configs/experiment.yaml` the first
+   `Alt` shows an error in the chat. The fork `Bkdogbey/mosaic` `main` has
+   regressed here: its `main.py` has the two imports commented out again.
 11. **The `cam_*` observation fields are camera-dependent.** `cam_top_x`,
    `cam_top_y`, `cam_view_w` and `cam_view_h` are only written when the camera has
    `_update_position` (i.e. `EdgeFollowCamera`). Analyses written against the
