@@ -69,7 +69,8 @@ parts: **SAR**, **GUI**, **LLM**, and **Sensing**.
       mirrors the settings of `main.py` lines 31–44 and has them; and it
       draws off-screen, so it runs on the tutorial hub (kernel "Python (smc)")
       or locally (its Step 0).
-      Confirm the hub address with Hemanth and write it here: ____________.
+      Hub address: `https://jupyter.ihuman-lab.work`. Attendees have
+      access and sign in with their own password.
 - [ ] **Notebook release.** Which revision goes where; fill in and tick:
       - Laptop attendees clone `iHuman-Lab/mosaic` `main` (`1018587` when
         last checked), as the slides say. Nothing else is needed to play or to
@@ -145,11 +146,14 @@ finish a little early; keep that for install overruns.
 
 ## Part Two notes (slides 9–14)
 
-- Slide 9 (the divider) carries a QR code to the companion notebook, and slide
-  10 names its address under the punchline. Say what it is for: the setup
-  commands to copy and paste, and a take-home version of Part Four. Nobody
-  needs it to follow the session. The same code is on the Part Four divider
-  (slide 21). To point the codes elsewhere, edit `tools/make_qr.py` and rerun.
+- Slide 9 (the divider) carries a QR code to the tutorial's Jupyter server,
+  where the companion notebook runs, and slide 10 names the address under the
+  punchline. Attendees sign in with their password and open
+  `02_mosaic_human_ai.ipynb`. Say what it is for: the setup commands to copy
+  and paste, the mission with nothing to install, and a take-home version of
+  Part Four. Nobody needs it to follow the session. The same code is on the
+  Part Four divider (slide 21). To point the codes elsewhere, edit
+  `tools/make_qr.py` and rerun.
 - Ask attendees to use Python 3.10 or 3.11 for a shared troubleshooting baseline.
   MOSAIC's `pyproject.toml` claims 3.8+, but the code needs 3.10. Laptops that
   ship 3.12 or newer are common; slide 14 tells them to recreate `mosaic_env`
@@ -293,8 +297,9 @@ No code in this part. Attendees play the baseline mission and learn to read it.
 - Slide 36 (*MOSAIC in a Study*) invites attendees to the lab's paper, MoA10.3:
   Monday October 5, 14:00–14:15, Grand C. It is the application of what they
   just configured: the search-and-rescue task with LLM teammates and eye
-  tracking. The QR code opens its program entry. Check the time and room
-  against the final program on the day.
+  tracking. The slide says what the study did, not what it found; leave the
+  results for the talk. The QR code opens the talk's slides. Check the time
+  and room against the final program on the day.
 - Appendix 39–42 hold the other changes from the part slides, in the same
   layout: locked rooms, the time limit (at 0:00 the timer stops but the mission
   keeps going, which is expected), the info panel, and what the teammate is

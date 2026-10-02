@@ -194,6 +194,10 @@ lets you play the mission inside the notebook, and records game state together
 with (synthetic) eye gaze. The session points to it but does not depend on it.
 It draws off-screen, so it needs no window.
 
+Attendees can run it with nothing to install on the tutorial's Jupyter server,
+<https://jupyter.ihuman-lab.work>: sign in with your password and open
+`02_mosaic_human_ai.ipynb`. To run it on your own laptop instead:
+
 Save these two files into the `notebooks` folder, replacing the files of the
 same name:
 [02_mosaic_human_ai.ipynb](https://github.com/Bkdogbey/mosaic/raw/smc2026/notebooks/02_mosaic_human_ai.ipynb)

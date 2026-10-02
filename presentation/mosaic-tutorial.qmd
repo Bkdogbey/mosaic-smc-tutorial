@@ -600,11 +600,12 @@ Next, we will install MOSAIC, launch a mission, and change the task ourselves.
 :::
 
 ::: {.qr-card}
-![](assets/qr-notebook.png){fig-alt="QR code that opens the companion notebook on GitHub"}
+![](assets/qr-notebook.png){fig-alt="QR code that opens the tutorial's Jupyter server"}
 
 [Companion notebook]{.qr-title}
-[Every setup command on the next slides, ready to copy and paste]{.qr-line}
-[github.com/Bkdogbey/mosaic/tree/smc2026/notebooks]{.qr-url}
+[On the tutorial server: every setup command to copy, and the mission with nothing to install]{.qr-line}
+[Sign in with your password, then open `02_mosaic_human_ai.ipynb`]{.qr-line}
+[jupyter.ihuman-lab.work]{.qr-url}
 :::
 :::
 
@@ -672,7 +673,7 @@ Nothing to install by hand: the next two slides [set everything up]{.accent}.
 :::
 
 ::: {.fig-note}
-Prefer to copy and paste? The companion notebook has the same commands: `github.com/Bkdogbey/mosaic/tree/smc2026/notebooks`
+No install, or prefer to copy and paste? The companion notebook is on the tutorial server: `jupyter.ihuman-lab.work`
 :::
 
 ---
@@ -1256,11 +1257,12 @@ from, so the game has to be working first.
 :::
 
 ::: {.qr-card}
-![](assets/qr-notebook.png){fig-alt="QR code that opens the companion notebook on GitHub"}
+![](assets/qr-notebook.png){fig-alt="QR code that opens the tutorial's Jupyter server"}
 
 [Companion notebook]{.qr-title}
-[Every change in this part, as the edit and as a cell you can run]{.qr-line}
-[github.com/Bkdogbey/mosaic/tree/smc2026/notebooks]{.qr-url}
+[On the tutorial server: every change in this part, as the edit and as a cell you can run]{.qr-line}
+[Sign in with your password, then open `02_mosaic_human_ai.ipynb`]{.qr-line}
+[jupyter.ihuman-lab.work]{.qr-url}
 :::
 :::
 
@@ -2345,7 +2347,7 @@ the four parts of Part Four.
 ## MOSAIC in a [Study]{.accent}
 
 ::: {.hook}
-The testbed from today, used to ask how expertise changes what people look at.
+What you configured today, put to work in a study of people and an LLM teammate.
 :::
 
 :::: {.task-split}
@@ -2356,44 +2358,49 @@ The testbed from today, used to ask how expertise changes what people look at.
 
 ::: {.feature-list}
 ::: {.feature-row}
-[Efficiency]{.feature-name} LLM guidance raised rewards and victims per step, but not the total saved.
+[Task]{.feature-name} The search-and-rescue mission, with victims whose health runs down.
 :::
 ::: {.feature-row}
-[Attention]{.feature-name} Gaze moved to the chat, and pupil size varied more.
+[Teammate]{.feature-name} Two LLM teammates and a no-LLM baseline, three trials per participant.
 :::
 ::: {.feature-row}
-[Expertise]{.feature-name} Novices relied on the AI. Experts kept checking the scene.
+[Sensing]{.feature-name} A Tobii eye tracker and the game on one clock, through LSL.
+:::
+::: {.feature-row}
+[Question]{.feature-name} Does guidance change where people look, and does expertise matter?
 :::
 :::
 :::
 
 ::: {.result-col}
 ::: {.qr-card .qr-stack}
-![](assets/qr-paper.png){fig-alt="QR code that opens the paper's entry in the SMC 2026 program"}
+![](assets/qr-paper.png){fig-alt="QR code that opens the slides of the paper's talk"}
 
 [Monday, October 5 · 14:00–14:15]{.qr-title}
 [Grand C · Session MoA10]{.qr-line}
+[Scan for the talk's slides]{.qr-line}
 :::
 :::
 
 ::::
 
 ::: {.punchline}
-Come and see it: [Monday at 14:00, Grand C]{.accent}.
+Come and hear what they found: [Monday at 14:00, Grand C]{.accent}.
 :::
 
 ::: {.notes}
-An invitation, and an application of what attendees just configured. Paper
-MoA10.3 in the regular session Decision Support System I, Monday October 5,
-14:00 to 14:15, room Grand C. The study compares two LLM-guided conditions
-with a no-LLM baseline in the search-and-rescue task, with eye tracking and
-planning measures: the three trials and the gaze stream from Part Four. The
-three rows are the abstract's findings: guidance improved efficiency (higher
-rewards and victims per step) without raising the total saved; attention moved
-to the chat, with more pupil-size variability; novices relied passively on the
-AI while experts kept a "verification loop" of scanning the environment. The
-code opens the program entry. Check the time and room against the final
-program on the day.
+An invitation, and an application of what attendees just configured: say what
+the study did, and leave the results for the talk. Paper MoA10.3 in the regular
+session Decision Support System I, Monday October 5, 14:00 to 14:15, room
+Grand C. Thirteen participants each played three trials in random order: two
+with an LLM teammate and one no-LLM baseline, up to 15 minutes or 1,000 moves.
+Victim health deteriorates, and `Alt` asks for advice and reveals victim health
+for five seconds. Gaze and pupil data came from a Tobii eye tracker, on one
+clock with the game through LSL: the same pieces as Part Four. Participants
+were grouped into experts and novices. The code opens the talk's slides
+(ihuman-lab.github.io/presentations/ieee-smc-eo/); the program entry is
+conf.papercept.net, SMC26 program, Monday, MoA10.3. Check the time and room
+against the final program on the day.
 :::
 
 ---

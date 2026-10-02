@@ -84,7 +84,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed. The reward, time, mission-box, and chat crops (`scoring`, `time`, `panel`, `chatpair`) render the GUI at twice its size and crop inside each widget's frame, so they stay sharp at slide size |
 | `results/gaze-record.png` | Drawn by `tools/make_gaze_figure.py` from the rehearsal recording of the slide 33 eye-tracker demo (LabRecorder `.xdf`): fixations on the screen's three areas, and one timeline of rescues and gaze area. Redraw it from the venue recording |
 | `cam-*-walk.gif` | Captured by `tools/capture_camera_gifs.py` — one walk through a door rendered through all three cameras frame by frame, with the ring and room outline recomputed per frame; equal frame timing so the three play in step |
-| `qr-notebook.png`, `qr-paper.png` | Drawn by `tools/make_qr.py` (needs `segno`): the companion notebook, on the Part Two and Part Four dividers, and the SMC 2026 program entry of the lab's paper, on the *MOSAIC in a Study* slide. The addresses are at the top of the script |
+| `qr-notebook.png`, `qr-paper.png` | Drawn by `tools/make_qr.py` (needs `segno`): the tutorial's Jupyter server, where the companion notebook runs, on the Part Two and Part Four dividers, and the slides of the lab's SMC 2026 paper, on the *MOSAIC in a Study* slide. The addresses are at the top of the script |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
