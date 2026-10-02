@@ -1819,7 +1819,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="task-split">
 <div class="task-col">
 <div class="code-card">
-<p><span class="code-file"><code>src/experiment/eye_demo.py</code></span> <span class="code-where">the study runner, one mission</span></p>
+<p><span class="code-file"><code>src/experiment/eye_demo.py</code></span> <span class="code-where">the study runner</span></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment = Experiment(config)</span>
 <span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.register_sensor(</span></span>
 <span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        name="TobiiEyeTracker", sensor_cls=TobiiEyeTracker,</span></span>
@@ -1867,7 +1867,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 <div class="task-split">
 <div class="task-col">
-<p><span class="task-label">Observe</span> <span class="src-cap">rehearsal recording · 33 s · 3 rescues · one clock</span></p>
+<p><span class="task-label">One recorded mission</span> <span class="src-cap">gaze and game on the same clock</span></p>
 <div class="result-img">
 <p><img data-src="assets/results/gaze-record.png" alt="Fixations drawn on the screen's three areas, almost all on the game view, above a timeline of three rescues and a strip showing the gaze stayed on the game view, with gaps where the tracker lost the eyes."></p>
 </div>
@@ -1876,22 +1876,22 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p><span class="task-label">What to look for</span></p>
 <div class="feature-list">
 <div class="feature-row">
-<p><span class="feature-name">Where</span> Which area holds the gaze: the game view, the info panel, or the chat?</p>
+<p><span class="feature-name">Where</span> Which part of the screen holds the gaze?</p>
 </div>
 <div class="feature-row">
-<p><span class="feature-name">Rescue</span> Does gaze go to the info panel in the second after a rescue?</p>
+<p><span class="feature-name">When</span> What do the eyes do in the second after a rescue?</p>
 </div>
 <div class="feature-row">
-<p><span class="feature-name">Advice</span> Where does gaze go once a real teammate replies? This keyless run has no advice.</p>
+<p><span class="feature-name">Advice</span> Where does gaze go when the teammate replies?</p>
 </div>
 </div>
 </div>
 </div>
 <div class="punchline">
-<p>With one eye tracker in the room, everyone inspects <span class="accent">the same prepared recording</span>.</p>
+<p>Gaze and game share one clock, so <span class="accent">every look lines up with what happened</span>.</p>
 </div>
 <aside class="notes">
-<p>The figure is real: tools/make_gaze_figure.py drew it from the rehearsal recording, the LabRecorder file of the slide 33 demo, with the same code as notebook Step 9. Top: each circle is a fixation, bigger for longer, on the screen’s three areas. Bottom: one clock, the victims saved and under it the area the gaze was in; dark gaps are moments the tracker lost the eyes. In this recording the gaze stayed on the game view (99%) and did not go to the info panel after any of the three rescues. The third row is the study’s own question and needs a real LLM teammate; the demo runs keyless, so the recording has no advice. This slide is also the fallback: if the tracker fails, skip the live demo and show this. Rehearsal calibration was rough, so the gaze sits low on the screen; after the venue rehearsal redraw it with <code>python tools/make_gaze_figure.py &lt;recording.xdf&gt;</code> and render again.</p>
+<p>The figure is real: tools/make_gaze_figure.py drew it from the rehearsal recording, the LabRecorder file of the slide 33 demo, with the same code as notebook Step 9. Top: each circle is a fixation, bigger for longer, on the screen’s three areas. Bottom: one clock, the victims saved and under it the area the gaze was in; dark gaps are moments the tracker lost the eyes. In this recording the gaze stayed on the game view (99%) and did not go to the info panel after any of the three rescues. The three rows are the questions a researcher asks of a record like this. Say that the third needs a real LLM teammate: this mission ran with the keyless one, so it has no advice in it. This slide is also the fallback: if the tracker fails, skip the live demo and show this. Rehearsal calibration was rough, so the gaze sits low on the screen; after the venue rehearsal redraw it with <code>python tools/make_gaze_figure.py &lt;recording.xdf&gt;</code> and render again.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

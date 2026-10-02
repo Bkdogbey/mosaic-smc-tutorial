@@ -116,7 +116,7 @@ def main():
     for when in rescues:
         strip.axvline(when, color=INK, linewidth=0.8, zorder=3)
     strip.set_ylim(0, 1); strip.set_yticks([]); strip.set_ylabel("gaze", fontsize=10, rotation=0, ha="right", va="center")
-    strip.set_xlabel("seconds  ·  dark gaps = no valid gaze", fontsize=10); strip.tick_params(length=2, labelsize=10)
+    strip.set_xlabel("seconds  ·  gaps = eyes not tracked", fontsize=10); strip.tick_params(length=2, labelsize=10)
     for side in ("top", "right", "left"):
         strip.spines[side].set_visible(False)
 

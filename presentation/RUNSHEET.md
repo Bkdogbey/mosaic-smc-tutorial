@@ -254,8 +254,9 @@ No code in this part. Attendees play the baseline mission and learn to read it.
   fixations on the screen's three areas, and one timeline with the rescues and
   the area the gaze was in. Keep it to a minute. It is drawn by
   `tools/make_gaze_figure.py` and is also the fallback when the tracker
-  fails. The third row on it (gaze after advice) is the study's question and
-  is not in the keyless recording; say so.
+  fails. Its three rows are questions a researcher asks of such a record; the
+  third (gaze after advice) needs a real LLM teammate, so say that this
+  mission has no advice in it.
 - The result images come from `tools/capture_config_results.py` (and the
   camera captures). The reward, time, mission-box, and chat crops are rendered
   at twice the window size so they stay sharp on the projector:

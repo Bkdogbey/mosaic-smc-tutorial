@@ -2079,7 +2079,7 @@ which this tutorial does not install.
 
 ::: {.task-col}
 ::: {.code-card}
-[`src/experiment/eye_demo.py`]{.code-file} [the study runner, one mission]{.code-where}
+[`src/experiment/eye_demo.py`]{.code-file} [the study runner]{.code-where}
 
 ```{.diff code-line-numbers="false"}
      experiment = Experiment(config)
@@ -2144,7 +2144,7 @@ fails, go to the next slide, which shows the rehearsal recording.
 :::: {.task-split}
 
 ::: {.task-col}
-[Observe]{.task-label} [rehearsal recording · 33 s · 3 rescues · one clock]{.src-cap}
+[One recorded mission]{.task-label} [gaze and game on the same clock]{.src-cap}
 
 ::: {.result-img}
 ![](assets/results/gaze-record.png){fig-alt="Fixations drawn on the screen's three areas, almost all on the game view, above a timeline of three rescues and a strip showing the gaze stayed on the game view, with gaps where the tracker lost the eyes."}
@@ -2156,13 +2156,13 @@ fails, go to the next slide, which shows the rehearsal recording.
 
 ::: {.feature-list}
 ::: {.feature-row}
-[Where]{.feature-name} Which area holds the gaze: the game view, the info panel, or the chat?
+[Where]{.feature-name} Which part of the screen holds the gaze?
 :::
 ::: {.feature-row}
-[Rescue]{.feature-name} Does gaze go to the info panel in the second after a rescue?
+[When]{.feature-name} What do the eyes do in the second after a rescue?
 :::
 ::: {.feature-row}
-[Advice]{.feature-name} Where does gaze go once a real teammate replies? This keyless run has no advice.
+[Advice]{.feature-name} Where does gaze go when the teammate replies?
 :::
 :::
 :::
@@ -2170,7 +2170,7 @@ fails, go to the next slide, which shows the rehearsal recording.
 ::::
 
 ::: {.punchline}
-With one eye tracker in the room, everyone inspects [the same prepared recording]{.accent}.
+Gaze and game share one clock, so [every look lines up with what happened]{.accent}.
 :::
 
 ::: {.notes}
@@ -2180,9 +2180,9 @@ notebook Step 9. Top: each circle is a fixation, bigger for longer, on the
 screen's three areas. Bottom: one clock, the victims saved and under it the
 area the gaze was in; dark gaps are moments the tracker lost the eyes. In this
 recording the gaze stayed on the game view (99%) and did not go to the info
-panel after any of the three rescues. The third row is the study's own
-question and needs a real LLM teammate; the demo runs keyless, so the recording
-has no advice. This slide is also the fallback: if the tracker fails, skip the
+panel after any of the three rescues. The three rows are the questions a
+researcher asks of a record like this. Say that the third needs a real LLM
+teammate: this mission ran with the keyless one, so it has no advice in it. This slide is also the fallback: if the tracker fails, skip the
 live demo and show this. Rehearsal calibration was rough, so the gaze sits low
 on the screen; after the venue rehearsal redraw it with
 `python tools/make_gaze_figure.py <recording.xdf>` and render again.
