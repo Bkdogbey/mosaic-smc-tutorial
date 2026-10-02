@@ -1769,7 +1769,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
       saved_victims, remaining_victims,
       victim_health, step_count, …
     + action, reward, llm_response
-    → study runner: one JSON line per step on LSL</code></pre>
+    → study runner: one JSON line per frame on LSL</code></pre>
 </div>
 </div>
 <div class="knob-list">
@@ -1816,15 +1816,15 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="task-split">
 <div class="task-col">
 <div class="code-card">
-<p><span class="code-file"><code>src/experiment/experiment.py</code></span> <span class="code-where">the study runner</span></p>
+<p><span class="code-file"><code>src/experiment/eye_demo.py</code></span> <span class="code-where">the study runner, one mission</span></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment = Experiment(config)</span>
 <span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.register_sensor(</span></span>
 <span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        name="TobiiEyeTracker", sensor_cls=TobiiEyeTracker,</span></span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        sensor_config={"config": {}})</span></span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        sensor_config={})</span></span>
 <span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.calibrate_sensor(</span></span>
 <span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        "TobiiEyeTracker", screen=config["display"],</span></span>
 <span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        fullscreen=config["fullscreen"])</span></span>
-<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment.add_task(name="main_game", task_cls=SARGame, ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment.add_task(task_cls=SARGameDemo, ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="predict">What lands next to the game data?</span></p>
 </div>
@@ -1838,13 +1838,13 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p><span class="watch-num">2</span> <span class="watch-title">Play</span> A short mission</p>
 </div>
 <div class="watch-item fragment">
-<p><span class="watch-num">3</span> <span class="watch-title">Two streams, one clock</span> <code>TobiiEyeTracker</code> (60 Hz) and the game steps, side by side in LabRecorder</p>
+<p><span class="watch-num">3</span> <span class="watch-title">Two streams, one clock</span> <code>TobiiEyeTracker</code> (gaze, 60 Hz) and <code>SARGame</code> (game state, every frame), side by side in LabRecorder</p>
 </div>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>Presenter only: the lab’s <code>ixp</code> package (not on PyPI), <code>tobii_research</code>, PsychoPy, pylsl, ray, and LabRecorder, set up at rehearsal (RUNSHEET.md). The two calls are the ones the full study block uses (experiment.py lines 85–90); the <code>tobii_test</code> block in the same file is the sensor-only version. Calibration is five points (center and four at 0.2 from the edges); SPACE accepts, R redoes. Reveal the third item once LabRecorder is on screen: TobiiEyeTracker is gaze at 60 Hz, 9 channels; the game trial is one JSON line per step. Gaze and game land on one clock, so you can see where the volunteer looked before and after each rescue. No API key is used, so the study’s OpenAI and Gemini trials have no advice: <code>Alt</code> shows an error in the chat and the mission carries on. If the device fails, show the rehearsal screenshot of LabRecorder’s stream list and move on.</p>
+<p>Presenter only: the lab’s <code>ixp</code> package (not on PyPI), <code>tobii_research</code>, PsychoPy, pylsl, ray, and LabRecorder. Machine setup and the rehearsed steps are in EYETRACKER_SETUP.md. Run <code>PYTHONPATH=src python -m experiment.eye_demo</code> from the <code>mosaic</code> folder. The two calls on the slide are the same ones the lab’s full study uses (experiment.py); <code>eye_demo.py</code> adds them to a single two-minute mission with the keyless teammate, so no API key is used and the study files are not edited. Seat the volunteer 60 to 65 cm from the screen. Calibration is five points (center and four at 0.2 from the edges): look at each dot until it disappears; SPACE accepts, R redoes. <code>Esc</code> ends the mission. Reveal the third item once LabRecorder is on screen: TobiiEyeTracker is gaze at 60 Hz, 9 channels; SARGame is one JSON state per frame, about 30 a second. Gaze and game land on one clock, so you can see where the volunteer looked before and after each rescue; notebook Step 9 reads the saved recording. If the device fails, go to the next slide, which shows the rehearsal recording.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1857,7 +1857,50 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
           display:block!important;
       }</style></aside>
 </section>
-
+<section id="the-synchronized-record" class="slide level2">
+<h2>The Synchronized <span class="accent">Record</span></h2>
+<div class="custom-strip">
+<p><span class="stop">Map</span> <span class="stop">4.1 SAR</span> <span class="stop">4.2 GUI</span> <span class="stop">4.3 LLM</span> <span class="stop here">4.4 Sensing</span></p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="task-label">Observe</span> <span class="src-cap">rehearsal recording · 33 s · 3 rescues · one clock</span></p>
+<div class="result-img">
+<p><img data-src="assets/results/gaze-record.png" alt="Fixations drawn on the screen's three areas, almost all on the game view, above a timeline of three rescues and a strip showing the gaze stayed on the game view, with gaps where the tracker lost the eyes."></p>
+</div>
+</div>
+<div class="result-col">
+<p><span class="task-label">What to look for</span></p>
+<div class="feature-list">
+<div class="feature-row">
+<p><span class="feature-name">Where</span> Which area holds the gaze: the game view, the info panel, or the chat?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Rescue</span> Does gaze go to the info panel in the second after a rescue?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Advice</span> Where does gaze go once a real teammate replies? This keyless run has no advice.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="punchline">
+<p>With one eye tracker in the room, everyone inspects <span class="accent">the same prepared recording</span>.</p>
+</div>
+<aside class="notes">
+<p>The figure is real: tools/make_gaze_figure.py drew it from the rehearsal recording, the LabRecorder file of the slide 33 demo, with the same code as notebook Step 9. Top: each circle is a fixation, bigger for longer, on the screen’s three areas. Bottom: one clock, the victims saved and under it the area the gaze was in; dark gaps are moments the tracker lost the eyes. In this recording the gaze stayed on the game view (99%) and did not go to the info panel after any of the three rescues. The third row is the study’s own question and needs a real LLM teammate; the demo runs keyless, so the recording has no advice. This slide is also the fallback: if the tracker fails, skip the live demo and show this. Rehearsal calibration was rough, so the gaze sits low on the screen; after the venue rehearsal redraw it with <code>python tools/make_gaze_figure.py &lt;recording.xdf&gt;</code> and render again.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="where-to-go-next" class="slide level2">
 <h2>Where to Go <span class="accent">Next</span></h2>
 <div class="hook">
