@@ -1,9 +1,8 @@
 # Facilitator Run Sheet — MOSAIC Tutorial (two hours, plus a 15-minute break)
 
-The rendered deck has 40 slides: 34 in the main tutorial (one of them the break
+The rendered deck has 41 slides: 35 in the main tutorial (one of them the break
 slide after Part Three), a closing slide, and
-5 appendix slides (the divider and four more changes). One more slide, *The Synchronized Record*, is hidden until the
-rehearsal recording exists (see below); it is not counted.
+5 appendix slides (the divider and four more changes).
 
 The main sequence runs in four parts: why MOSAIC exists, install it, experience
 one mission, then configure it by walking through `experiment/main.py` in four
@@ -23,7 +22,7 @@ parts: **SAR**, **GUI**, **LLM**, and **Sensing**.
 - [ ] `presentation/labs/advisor.py` is on `main` of the tutorial repo. **Slide 30
       (everyone) sends people there**, so test the download and the
       `ReliableTeammate(0.7)` edit on a clean clone. `panel.py` (appendix slide
-      39) is the same.
+      40) is the same.
 - [ ] **No API keys in this session.** Nothing in the tutorial connects to a
       hosted model, on the presenter machine or anyone else's. Slide 31 (the
       real LLM) is walked through as "on your own", not run. The teammate
@@ -43,14 +42,18 @@ parts: **SAR**, **GUI**, **LLM**, and **Sensing**.
         the slide once upstream depends on `pygame-ce`.
       - **Not landed: `tabulate` in `pyproject.toml`.** Only a real LLM needs
         it; slide 31 lists it.
-- [ ] Eye-tracker demo (slide 33), presenter laptop only: install the lab's
-      `ixp`, `tobii_research`, PsychoPy, and pylsl; connect the Tobii; run the
-      main-game block of `src/experiment/experiment.py` with the sensor added
-      once end to end; keep a screenshot of the LSL stream list as a fallback.
-- [ ] At that rehearsal, record one short session (LabRecorder) and build the
-      aligned timeline. Then **unhide** the *Synchronized Record* slide in
-      `mosaic-tutorial.qmd` (delete `{visibility="hidden"}` from its heading) and
-      replace its placeholder with the timeline. It would become slide 34.
+- [ ] Eye-tracker demo (slide 33), presenter laptop only: follow
+      [EYETRACKER_SETUP.md](EYETRACKER_SETUP.md). At the venue, with the
+      projector attached, run `python tools/check_eyetracker.py` (both eyes
+      seen, 90% valid gaze) and then the demo once end to end:
+      `PYTHONPATH=src python -m experiment.eye_demo` from the `mosaic` folder.
+      Seating and the tracker's screen position decide the accuracy, so settle
+      them there, not before.
+- [ ] Keep one rehearsal recording (LabRecorder `.xdf`) on the laptop. Slide
+      34 (*The Synchronized Record*) shows a figure drawn from it, and notebook
+      Step 9 reads the same file. After the venue rehearsal, redraw the figure
+      from that recording and render again:
+      `python tools/make_gaze_figure.py <recording.xdf>`.
 - [ ] **Notebook.** The slides point at a notebook for the building settings
       (counts, size, locked rooms) and for printing the observation fields
       (slides 24 and 32). It is `notebooks/02_mosaic_human_ai.ipynb` in the
@@ -78,11 +81,11 @@ parts: **SAR**, **GUI**, **LLM**, and **Sensing**.
 | 1:26–1:36 | 24–26 | 4.1 SAR | The task, the three cameras, then everyone changes a reward. |
 | 1:36–1:43 | 27–28 | 4.2 GUI | The window; the decoy flash, demoed. |
 | 1:43–1:58 | 29–31 | 4.3 LLM | The teammate; everyone swaps in the keyless `ReliableTeammate`; how to connect a real LLM afterwards (shown, not run). |
-| 1:58–2:08 | 32–33 | 4.4 Sensing | What every step records; the live eye tracker. |
-| 2:08–2:15 | 34–35 | Wrap-up | Where to go next, then questions; appendix slides as needed. |
+| 1:58–2:09 | 32–34 | 4.4 Sensing | What every step records; the live eye tracker; the recording it leaves. |
+| 2:09–2:15 | 35–36 | Wrap-up | Where to go next, then questions; appendix slides as needed. |
 
 The session runs 2:15 on the clock: two hours of content and the break. The
-2:08–2:15 wrap-up is the only slack, and the notebook does not fit in it:
+2:09–2:15 wrap-up is the only slack, and the notebook does not fit in it:
 its nine steps include a 40-second recording. Treat it as take-home: name it at
 slides 24 and 32 and again in the wrap-up. To run part of it live, cut first
 (cut-list items 3 and 4). Slide 31 is no longer a live demo, so 4.3 should
@@ -181,7 +184,7 @@ No code in this part. Attendees play the baseline mission and learn to read it.
   game relaunches it with the slide 13 command. Restart on time: Part Four
   has no slack to absorb a long break.
 
-## Part Four notes (slides 21–34): configure MOSAIC
+## Part Four notes (slides 21–35): configure MOSAIC
 
 - Part Four walks through `experiment/main.py`, the file attendees launched in
   Part Two, in four parts: 4.1 SAR (the building, its contents, the camera,
@@ -227,51 +230,46 @@ No code in this part. Attendees play the baseline mission and learn to read it.
   later with their own key, then reveal how the reply is produced.
   `build_llm_client` connects on the first `Alt`, so a missing or bad key
   shows as a chat error, not a crash. If asked
-  what the LLM actually sees, appendix slide 40 shows it: every real victim, even out
+  what the LLM actually sees, appendix slide 41 shows it: every real victim, even out
   of view, and **no decoys** (`process_prompts.py` skips them).
 - Slide 32 prints nothing itself: the field list on it is what the study runner
   streams. The full study runner needs the lab's `ixp` package and LSL, which
   are not installed in the tutorial.
 - Slide 33 is the live eye-tracking demo, instructor-only. The slide shows no
   installation on purpose: attendees cannot follow along (the lab's `ixp` is
-  not on PyPI, and it needs the hardware). Demo setup on the presenter laptop:
-  1. Install `ixp` from the lab's sibling repo (`pip install -e ../ixp`),
-     `tobii-research`, PsychoPy, pylsl, and ray; open LabRecorder.
-  2. In `src/experiment/experiment.py`, add the two calls shown on the slide
-     (`register_sensor`, `calibrate_sensor`) to the `sar_experiment_test`
-     block, set that block to `"run"` and every other block to `"skip"`.
-     (`tobii_test` is the sensor-only version, if the game part fails.)
-  3. `SARGame` runs three trials in random order (OpenAI, dummy, Gemini), each
-     up to `game: max_time` (15 minutes in the stock YAML). For the demo, set
-     `max_time: 2` under `game:`, and press `Esc` to end a trial early; `Esc`
-     ends the current trial. No API keys are used, so in the OpenAI and Gemini
-     trials `Alt` (and the automatic request every 50 steps) shows an error in
-     the chat instead of advice; the game and both streams carry on. That is
-     read from the code, not run here: confirm it at the rehearsal. The demo
-     is about gaze next to game steps, so say that advice is off.
-  4. `python -m experiment.experiment` from the `mosaic` folder. Calibration is
-     five dots; SPACE accepts, R redoes. Then the volunteer plays.
-  5. Press forward to reveal item 3 once LabRecorder shows both streams
-     (TobiiEyeTracker and the game trial).
+  not on PyPI, and it needs the hardware). Setup is in
+  [EYETRACKER_SETUP.md](EYETRACKER_SETUP.md). On the day:
+  1. Seat the volunteer 60 to 65 cm from the screen the tracker sits under.
+     Open LabRecorder on the projector side.
+  2. `PYTHONPATH=src python -m experiment.eye_demo` from the `mosaic` folder.
+     Nothing is edited: `eye_demo.py` adds the two calls on the slide to one
+     two-minute mission with the keyless teammate, so no API key is used.
+  3. Calibration is five dots; the volunteer looks at each until it
+     disappears. SPACE accepts, R redoes.
+  4. The volunteer plays; `Esc` ends the mission. Press forward to reveal item
+     3 once LabRecorder (press *Update*) lists `TobiiEyeTracker` and `SARGame`.
 
-  If the device fails, show the rehearsal screenshot and move on.
-- The hidden *Synchronized Record* slide (would be 34) stays out of the deck
-  until the rehearsal recording exists. With one eye tracker in the room,
-  everyone inspects that prepared recording.
+  If the device fails, go straight to slide 34.
+- Slide 34 (*The Synchronized Record*) shows the rehearsal recording: the
+  fixations on the screen's three areas, and one timeline with the rescues and
+  the area the gaze was in. Keep it to a minute. It is drawn by
+  `tools/make_gaze_figure.py` and is also the fallback when the tracker
+  fails. The third row on it (gaze after advice) is the study's question and
+  is not in the keyless recording; say so.
 - The result images come from `tools/capture_config_results.py` (and the
   camera captures). The reward, time, mission-box, and chat crops are rendered
   at twice the window size so they stay sharp on the projector:
   `python tools/capture_config_results.py scoring chatpair time panel`. Re-run
   it if MOSAIC's rendering changes, and re-check the locked-door counts quoted
-  on appendix slide 37.
-- Slide 34 (where to go next) is the code map. Point at `src/experiment/` as
+  on appendix slide 38.
+- Slide 35 (where to go next) is the code map. Point at `src/experiment/` as
   the folder to copy for a new study.
-- Appendix 37–40 hold the other changes from the part slides, in the same
+- Appendix 38–41 hold the other changes from the part slides, in the same
   layout: locked rooms, the time limit (at 0:00 the timer stops but the mission
   keeps going, which is expected), the info panel, and what the teammate is
   told (the "Prompt" card on slide 29 points there). `prompt_type: sparse` and
   `llm_nudge_interval` no longer have a slide; they are in the slide 29 notes.
-- The closing slide (35) carries only the MOSAIC repository link.
+- The closing slide (36) carries only the MOSAIC repository link.
 
 ## Expected problems
 
@@ -307,8 +305,8 @@ If the session runs long:
 2. Keep the part slides (24, 27, 29, 32) to a minute each.
 3. Skip slide 10 (dependency list) in Part Two.
 4. Make the keyless-teammate swap (30) a presenter demo instead of a live try.
-5. Drop the eye-tracker demo (33) if the device is not ready; show the
-   rehearsal screenshot instead.
+5. Drop the eye-tracker demo (33) if the device is not ready; show slide 34
+   instead.
 
 Do not cut the installation checkpoints, the first run, the controls, the
 `main.py` walkthrough (23), or the keyless teammate (30): with no API key in

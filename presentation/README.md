@@ -28,24 +28,25 @@ consequential tasks. The deck is four parts:
    4), which is take-home unless time is cut for it (see `RUNSHEET.md`)
 
 The appendix holds the other changes named on the part slides: locked rooms,
-time limit, info panel, and what the teammate is told. A *Synchronized Record*
-slide stays hidden until the eye-tracker rehearsal recording exists.
+time limit, info panel, and what the teammate is told. The *Synchronized Record*
+slide after the eye-tracker demo shows a figure drawn from the rehearsal recording.
 
 ## Contents
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (40 slides: 34 main, one of them the break + closing + 5 appendix; one more hidden)
+├── mosaic-tutorial.qmd   # the deck — edit this (41 slides: 35 main, one of them the break + closing + 5 appendix)
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
 │                         #   screenshots, .band notes, layer bands, you-are-here strip,
 │                         #   .checkpoint callouts, dark-theme panel-tabset)
 ├── SETUP.md              # send this to attendees BEFORE the session
 ├── RUNSHEET.md           # facilitator timings, cut list, expected failures
+├── EYETRACKER_SETUP.md   # presenter only: machine setup for the slide 33 eye-tracker demo
 ├── assets/               # figures used in the deck
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
-    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (appendix slide 39)
+    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (appendix slide 40)
     ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
     │                     #   Slide 30 uses it; its result image is assets/chat-advice.png
     └── tweak.py          # all four injection points in one file
@@ -79,6 +80,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `gameplay.gif` | Captured by `tools/capture_gameplay.py` — the real GUI compositor driven by a scripted breadth-first walk (a real victim with a green flash, a decoy with a red flash, then another real victim; `SEED=9`, paced slower than live play), built from `configs/experiment.yaml` so it matches what `experiment.main` shows |
 | `controls-*.gif`, `chat-advice.png` | Captured by `tools/capture_controls.py` — one clip per control (arrows, Space, Tab, Alt) with a keycap strip that lights on the pressed key; the advice clip and chat still use `ReliableTeammate` from `labs/advisor.py` |
 | `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed. The reward, time, mission-box, and chat crops (`scoring`, `time`, `panel`, `chatpair`) render the GUI at twice its size and crop inside each widget's frame, so they stay sharp at slide size |
+| `results/gaze-record.png` | Drawn by `tools/make_gaze_figure.py` from the rehearsal recording of the slide 33 eye-tracker demo (LabRecorder `.xdf`): fixations on the screen's three areas, and one timeline of rescues and gaze area. Redraw it from the venue recording |
 | `cam-*-walk.gif` | Captured by `tools/capture_camera_gifs.py` — one walk through a door rendered through all three cameras frame by frame, with the ring and room outline recomputed per frame; equal frame timing so the three play in step |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
@@ -106,6 +108,12 @@ python tools/capture_config_results.py   # before/after pairs for the customize 
 The capture scripts share `tools/_capture_common.py` (MOSAIC path, grid codes,
 breadth-first routing, the study env builder, GIF writing). `gif-restart.html`
 is included after the deck body and restarts a slide's clips when it opens.
+`tools/check_eyetracker.py` is not a capture script: it checks the Tobii tracker
+before the slide 33 demo (see `EYETRACKER_SETUP.md`).
+`tools/make_gaze_figure.py <recording.xdf>` draws `results/gaze-record.png` for
+slide 34 from the demo's LabRecorder file, with the notebook's own helpers
+(`notebooks/lsl_tools.py` in the MOSAIC checkout). It is not in the list above
+because it needs a recording; rerun it after the venue rehearsal.
 
 All three need `minigrid` and a checkout of the MOSAIC repository; the capture
 script additionally needs MOSAIC's runtime deps (`pygame-ce`, `pygame_gui`,
@@ -135,7 +143,7 @@ Two things to know before regenerating:
    be merged before the tutorial:** the `dummy` provider default (issue 12), or
    `Alt` shows an error instead of the placeholder reply on slides 19, 29, 30.
 3. Merge this branch so `presentation/labs/` on `main` has `panel.py` and
-   `advisor.py`; slides 30 and 39 send people to the repo for them.
+   `advisor.py`; slides 30 and 40 send people to the repo for them.
 4. Read `RUNSHEET.md`.
 
 ## Repo issues this tutorial exposed

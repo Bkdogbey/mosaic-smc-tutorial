@@ -6,8 +6,8 @@
 <script src="mosaic-tutorial_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="mosaic-tutorial_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="mosaic-tutorial_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="mosaic-tutorial_files/libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="mosaic-tutorial_files/libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha">
   <meta name="dcterms.date" content="2026-10-04">
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -99,7 +102,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-1a74b7f461627409f8151780fd2eeeca.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-cdb47caec72b839647020ce159d2d867.css">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -203,7 +206,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha 
+Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 </div>
@@ -696,22 +699,22 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">macOS / Linux</a></li><li><a href="#tabset-1-2">Windows PowerShell</a></li><li><a href="#tabset-1-3">Conda · Any Platform</a></li></ul>
 <div class="tab-content install-code">
 <div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
-<span id="cb1-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
-<span id="cb1-3"><a href=""></a><span class="ex">python3</span> <span class="at">-m</span> venv mosaic_env</span>
-<span id="cb1-4"><a href=""></a><span class="bu">source</span> mosaic_env/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-label="1"></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
+<span id="cb1-2"><a href="" aria-label="2"></a><span class="bu">cd</span> mosaic</span>
+<span id="cb1-3"><a href="" aria-label="3"></a><span class="ex">python3</span> <span class="at">-m</span> venv mosaic_env</span>
+<span id="cb1-4"><a href="" aria-label="4"></a><span class="bu">source</span> mosaic_env/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href=""></a>git clone https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>iHuman-Lab<span class="op">/</span>mosaic<span class="op">.</span><span class="fu">git</span></span>
-<span id="cb2-2"><a href=""></a><span class="fu">cd</span> mosaic</span>
-<span id="cb2-3"><a href=""></a>python <span class="op">-</span>m venv mosaic_env</span>
-<span id="cb2-4"><a href=""></a><span class="op">.</span>\mosaic_env\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="" aria-label="1"></a>git clone https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>iHuman-Lab<span class="op">/</span>mosaic<span class="op">.</span><span class="fu">git</span></span>
+<span id="cb2-2"><a href="" aria-label="2"></a><span class="fu">cd</span> mosaic</span>
+<span id="cb2-3"><a href="" aria-label="3"></a>python <span class="op">-</span>m venv mosaic_env</span>
+<span id="cb2-4"><a href="" aria-label="4"></a><span class="op">.</span>\mosaic_env\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
-<span id="cb3-2"><a href=""></a><span class="bu">cd</span> mosaic</span>
-<span id="cb3-3"><a href=""></a><span class="ex">conda</span> create <span class="at">-n</span> mosaic_env python=3.11 <span class="at">-y</span></span>
-<span id="cb3-4"><a href=""></a><span class="ex">conda</span> activate mosaic_env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="" aria-label="1"></a><span class="fu">git</span> clone https://github.com/iHuman-Lab/mosaic.git</span>
+<span id="cb3-2"><a href="" aria-label="2"></a><span class="bu">cd</span> mosaic</span>
+<span id="cb3-3"><a href="" aria-label="3"></a><span class="ex">conda</span> create <span class="at">-n</span> mosaic_env python=3.11 <span class="at">-y</span></span>
+<span id="cb3-4"><a href="" aria-label="4"></a><span class="ex">conda</span> activate mosaic_env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -759,11 +762,11 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 <div class="columns install-split">
 <div class="column" style="width:63%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
-<span id="cb4-2"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span>
-<span id="cb4-3"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip uninstall <span class="at">-y</span> pygame</span>
-<span id="cb4-4"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
-<span id="cb4-5"><a href=""></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import mosaic.sar.env, mosaic.gui.main; print('MOSAIC ready')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="" aria-label="1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
+<span id="cb4-2"><a href="" aria-label="2"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span>
+<span id="cb4-3"><a href="" aria-label="3"></a><span class="ex">python</span> <span class="at">-m</span> pip uninstall <span class="at">-y</span> pygame</span>
+<span id="cb4-4"><a href="" aria-label="4"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--force-reinstall</span> <span class="st">"pygame-ce&gt;=2.5.2"</span></span>
+<span id="cb4-5"><a href="" aria-label="5"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import mosaic.sar.env, mosaic.gui.main; print('MOSAIC ready')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="checkpoint">
 <p>The check prints a <code>pygame-ce</code> banner, then <code>MOSAIC ready</code>. If it says <code>cannot import name 'DIRECTION_LTR'</code>, rerun lines 3 and 4.</p>
 </div>
@@ -809,11 +812,11 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">macOS / Linux</a></li><li><a href="#tabset-2-2">Windows PowerShell</a></li></ul>
 <div class="tab-content install-code">
 <div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python</span> <span class="at">-m</span> experiment.main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="" aria-label="1"></a><span class="va">PYTHONPATH</span><span class="op">=</span>src <span class="ex">python</span> <span class="at">-m</span> experiment.main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href=""></a><span class="va">$env</span><span class="op">:</span><span class="va">PYTHONPATH</span> <span class="op">=</span> <span class="st">"src"</span></span>
-<span id="cb6-2"><a href=""></a>python <span class="op">-</span>m experiment<span class="op">.</span><span class="fu">main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="" aria-label="1"></a><span class="va">$env</span><span class="op">:</span><span class="va">PYTHONPATH</span> <span class="op">=</span> <span class="st">"src"</span></span>
+<span id="cb6-2"><a href="" aria-label="2"></a>python <span class="op">-</span>m experiment<span class="op">.</span><span class="fu">main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1278,27 +1281,27 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="src">
 <p><span class="src-cap"><code>src/experiment/main.py</code> · lines 31–51</span></p>
 <div class="compose-code">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-startfrom="31" data-code-line-numbers="|2-14|20-21|17-19|16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 30;"><span id="cb7-31"><a href=""></a>    env <span class="op">=</span> build_sar_env(</span>
-<span id="cb7-32"><a href=""></a>        screen_size<span class="op">=</span><span class="dv">800</span>,</span>
-<span id="cb7-33"><a href=""></a>        num_rows<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb7-34"><a href=""></a>        num_cols<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb7-35"><a href=""></a>        room_size<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb7-36"><a href=""></a>        victim_placer<span class="op">=</span>LavaRiskVictimPlacer(</span>
-<span id="cb7-37"><a href=""></a>            num_real_victims<span class="op">=</span>game_config.get(<span class="st">"num_real_victims"</span>, <span class="dv">6</span>),</span>
-<span id="cb7-38"><a href=""></a>            num_fake_victims<span class="op">=</span>game_config.get(<span class="st">"num_fake_victims"</span>, <span class="dv">12</span>),</span>
-<span id="cb7-39"><a href=""></a>        ),</span>
-<span id="cb7-40"><a href=""></a>        lava_placer<span class="op">=</span>SectorSpreadLavaPlacer(</span>
-<span id="cb7-41"><a href=""></a>            lava_per_room<span class="op">=</span>game_config.get(<span class="st">"lava_per_room"</span>, <span class="dv">8</span>),</span>
-<span id="cb7-42"><a href=""></a>        ),</span>
-<span id="cb7-43"><a href=""></a>        locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
-<span id="cb7-44"><a href=""></a>        camera_strategy<span class="op">=</span>AgentFOVCamera(),</span>
-<span id="cb7-45"><a href=""></a>    )</span>
-<span id="cb7-46"><a href=""></a>    env.reset()</span>
-<span id="cb7-47"><a href=""></a>    llm_client <span class="op">=</span> build_llm_client(</span>
-<span id="cb7-48"><a href=""></a>        provider<span class="op">=</span>config.get(<span class="st">"provider"</span>, <span class="st">"dummy"</span>), model<span class="op">=</span>config.get(<span class="st">"model"</span>)</span>
-<span id="cb7-49"><a href=""></a>    )</span>
-<span id="cb7-50"><a href=""></a>    gui <span class="op">=</span> SAREnvGUI(env, config<span class="op">=</span>config, llm_client<span class="op">=</span>llm_client)</span>
-<span id="cb7-51"><a href=""></a>    gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-startfrom="31" data-code-line-numbers="|2-14|20-21|17-19|16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 30;"><span id="cb7-31"><a href="" aria-label="31"></a>    env <span class="op">=</span> build_sar_env(</span>
+<span id="cb7-32"><a href="" aria-label="32"></a>        screen_size<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb7-33"><a href="" aria-label="33"></a>        num_rows<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb7-34"><a href="" aria-label="34"></a>        num_cols<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb7-35"><a href="" aria-label="35"></a>        room_size<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb7-36"><a href="" aria-label="36"></a>        victim_placer<span class="op">=</span>LavaRiskVictimPlacer(</span>
+<span id="cb7-37"><a href="" aria-label="37"></a>            num_real_victims<span class="op">=</span>game_config.get(<span class="st">"num_real_victims"</span>, <span class="dv">6</span>),</span>
+<span id="cb7-38"><a href="" aria-label="38"></a>            num_fake_victims<span class="op">=</span>game_config.get(<span class="st">"num_fake_victims"</span>, <span class="dv">12</span>),</span>
+<span id="cb7-39"><a href="" aria-label="39"></a>        ),</span>
+<span id="cb7-40"><a href="" aria-label="40"></a>        lava_placer<span class="op">=</span>SectorSpreadLavaPlacer(</span>
+<span id="cb7-41"><a href="" aria-label="41"></a>            lava_per_room<span class="op">=</span>game_config.get(<span class="st">"lava_per_room"</span>, <span class="dv">8</span>),</span>
+<span id="cb7-42"><a href="" aria-label="42"></a>        ),</span>
+<span id="cb7-43"><a href="" aria-label="43"></a>        locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
+<span id="cb7-44"><a href="" aria-label="44"></a>        camera_strategy<span class="op">=</span>AgentFOVCamera(),</span>
+<span id="cb7-45"><a href="" aria-label="45"></a>    )</span>
+<span id="cb7-46"><a href="" aria-label="46"></a>    env.reset()</span>
+<span id="cb7-47"><a href="" aria-label="47"></a>    llm_client <span class="op">=</span> build_llm_client(</span>
+<span id="cb7-48"><a href="" aria-label="48"></a>        provider<span class="op">=</span>config.get(<span class="st">"provider"</span>, <span class="st">"dummy"</span>), model<span class="op">=</span>config.get(<span class="st">"model"</span>)</span>
+<span id="cb7-49"><a href="" aria-label="49"></a>    )</span>
+<span id="cb7-50"><a href="" aria-label="50"></a>    gui <span class="op">=</span> SAREnvGUI(env, config<span class="op">=</span>config, llm_client<span class="op">=</span>llm_client)</span>
+<span id="cb7-51"><a href="" aria-label="51"></a>    gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div><div class="column" style="width:39%;">
@@ -1347,20 +1350,20 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="section-left">
 <div class="code-card section-code">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">lines 31–44</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-startfrom="31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 30;"><span id="cb8-31"><a href=""></a>    env <span class="op">=</span> build_sar_env(</span>
-<span id="cb8-32"><a href=""></a>        screen_size<span class="op">=</span><span class="dv">800</span>,</span>
-<span id="cb8-33"><a href=""></a>        num_rows<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb8-34"><a href=""></a>        num_cols<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb8-35"><a href=""></a>        room_size<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb8-36"><a href=""></a>        victim_placer<span class="op">=</span>LavaRiskVictimPlacer(</span>
-<span id="cb8-37"><a href=""></a>            num_real_victims<span class="op">=</span>game_config.get(<span class="st">"num_real_victims"</span>, <span class="dv">6</span>),</span>
-<span id="cb8-38"><a href=""></a>            num_fake_victims<span class="op">=</span>game_config.get(<span class="st">"num_fake_victims"</span>, <span class="dv">12</span>),</span>
-<span id="cb8-39"><a href=""></a>        ),</span>
-<span id="cb8-40"><a href=""></a>        lava_placer<span class="op">=</span>SectorSpreadLavaPlacer(</span>
-<span id="cb8-41"><a href=""></a>            lava_per_room<span class="op">=</span>game_config.get(<span class="st">"lava_per_room"</span>, <span class="dv">8</span>),</span>
-<span id="cb8-42"><a href=""></a>        ),</span>
-<span id="cb8-43"><a href=""></a>        locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
-<span id="cb8-44"><a href=""></a>        camera_strategy<span class="op">=</span>AgentFOVCamera(),</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-startfrom="31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 30;"><span id="cb8-31"><a href="" aria-label="31"></a>    env <span class="op">=</span> build_sar_env(</span>
+<span id="cb8-32"><a href="" aria-label="32"></a>        screen_size<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb8-33"><a href="" aria-label="33"></a>        num_rows<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb8-34"><a href="" aria-label="34"></a>        num_cols<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb8-35"><a href="" aria-label="35"></a>        room_size<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb8-36"><a href="" aria-label="36"></a>        victim_placer<span class="op">=</span>LavaRiskVictimPlacer(</span>
+<span id="cb8-37"><a href="" aria-label="37"></a>            num_real_victims<span class="op">=</span>game_config.get(<span class="st">"num_real_victims"</span>, <span class="dv">6</span>),</span>
+<span id="cb8-38"><a href="" aria-label="38"></a>            num_fake_victims<span class="op">=</span>game_config.get(<span class="st">"num_fake_victims"</span>, <span class="dv">12</span>),</span>
+<span id="cb8-39"><a href="" aria-label="39"></a>        ),</span>
+<span id="cb8-40"><a href="" aria-label="40"></a>        lava_placer<span class="op">=</span>SectorSpreadLavaPlacer(</span>
+<span id="cb8-41"><a href="" aria-label="41"></a>            lava_per_room<span class="op">=</span>game_config.get(<span class="st">"lava_per_room"</span>, <span class="dv">8</span>),</span>
+<span id="cb8-42"><a href="" aria-label="42"></a>        ),</span>
+<span id="cb8-43"><a href="" aria-label="43"></a>        locked_room_placer<span class="op">=</span>LockedRoomPlacer(locked_room_prob<span class="op">=</span><span class="fl">0.5</span>),</span>
+<span id="cb8-44"><a href="" aria-label="44"></a>        camera_strategy<span class="op">=</span>AgentFOVCamera(),</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="knob-list">
@@ -1501,8 +1504,8 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="section-left">
 <div class="code-card section-code">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">lines 50–51</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-startfrom="50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 49;"><span id="cb10-50"><a href=""></a>    gui <span class="op">=</span> SAREnvGUI(env, config<span class="op">=</span>config, llm_client<span class="op">=</span>llm_client)</span>
-<span id="cb10-51"><a href=""></a>    gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-startfrom="50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 49;"><span id="cb10-50"><a href="" aria-label="50"></a>    gui <span class="op">=</span> SAREnvGUI(env, config<span class="op">=</span>config, llm_client<span class="op">=</span>llm_client)</span>
+<span id="cb10-51"><a href="" aria-label="51"></a>    gui.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="result-img section-shot">
 <p><img data-src="assets/gui-first-frame.png" alt="The MOSAIC window: the game view, the mission panel, and the chat panel."></p>
@@ -1602,9 +1605,9 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="section-left">
 <div class="code-card section-code">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">lines 47–49</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-startfrom="47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 46;"><span id="cb12-47"><a href=""></a>    llm_client <span class="op">=</span> build_llm_client(</span>
-<span id="cb12-48"><a href=""></a>        provider<span class="op">=</span>config.get(<span class="st">"provider"</span>, <span class="st">"dummy"</span>), model<span class="op">=</span>config.get(<span class="st">"model"</span>)</span>
-<span id="cb12-49"><a href=""></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-startfrom="47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 46;"><span id="cb12-47"><a href="" aria-label="47"></a>    llm_client <span class="op">=</span> build_llm_client(</span>
+<span id="cb12-48"><a href="" aria-label="48"></a>        provider<span class="op">=</span>config.get(<span class="st">"provider"</span>, <span class="st">"dummy"</span>), model<span class="op">=</span>config.get(<span class="st">"model"</span>)</span>
+<span id="cb12-49"><a href="" aria-label="49"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="result-img ui-crop section-wide">
 <p><img data-src="assets/results/teammate-before-msg.png" alt="Chat panel: Currently, no commands are available."></p>
@@ -1762,14 +1765,14 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="section-left">
 <div class="code-card section-code">
 <p><span class="code-file"><code>src/experiment/main.py</code></span> <span class="code-where">line 46</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" data-startfrom="46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 45;"><span id="cb17-46"><a href=""></a>    env.reset()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" data-startfrom="46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python" style="counter-reset: source-line 45;"><span id="cb17-46"><a href="" aria-label="46"></a>    env.reset()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="result-terminal section-terminal">
 <pre class="text"><code>obs → agent_x, agent_y, direction, grid,
       saved_victims, remaining_victims,
       victim_health, step_count, …
     + action, reward, llm_response
-    → study runner: one JSON line per step on LSL</code></pre>
+    → study runner: one JSON line per frame on LSL</code></pre>
 </div>
 </div>
 <div class="knob-list">
@@ -1816,15 +1819,15 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="task-split">
 <div class="task-col">
 <div class="code-card">
-<p><span class="code-file"><code>src/experiment/experiment.py</code></span> <span class="code-where">the study runner</span></p>
+<p><span class="code-file"><code>src/experiment/eye_demo.py</code></span> <span class="code-where">the study runner, one mission</span></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment = Experiment(config)</span>
 <span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.register_sensor(</span></span>
 <span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        name="TobiiEyeTracker", sensor_cls=TobiiEyeTracker,</span></span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        sensor_config={"config": {}})</span></span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        sensor_config={})</span></span>
 <span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+    experiment.calibrate_sensor(</span></span>
 <span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        "TobiiEyeTracker", screen=config["display"],</span></span>
 <span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="va">+        fullscreen=config["fullscreen"])</span></span>
-<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment.add_task(name="main_game", task_cls=SARGame, ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a>     experiment.add_task(task_cls=SARGameDemo, ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><span class="predict">What lands next to the game data?</span></p>
 </div>
@@ -1838,13 +1841,13 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <p><span class="watch-num">2</span> <span class="watch-title">Play</span> A short mission</p>
 </div>
 <div class="watch-item fragment">
-<p><span class="watch-num">3</span> <span class="watch-title">Two streams, one clock</span> <code>TobiiEyeTracker</code> (60 Hz) and the game steps, side by side in LabRecorder</p>
+<p><span class="watch-num">3</span> <span class="watch-title">Two streams, one clock</span> <code>TobiiEyeTracker</code> (gaze, 60 Hz) and <code>SARGame</code> (game state, every frame), side by side in LabRecorder</p>
 </div>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>Presenter only: the lab’s <code>ixp</code> package (not on PyPI), <code>tobii_research</code>, PsychoPy, pylsl, ray, and LabRecorder, set up at rehearsal (RUNSHEET.md). The two calls are the ones the full study block uses (experiment.py lines 85–90); the <code>tobii_test</code> block in the same file is the sensor-only version. Calibration is five points (center and four at 0.2 from the edges); SPACE accepts, R redoes. Reveal the third item once LabRecorder is on screen: TobiiEyeTracker is gaze at 60 Hz, 9 channels; the game trial is one JSON line per step. Gaze and game land on one clock, so you can see where the volunteer looked before and after each rescue. No API key is used, so the study’s OpenAI and Gemini trials have no advice: <code>Alt</code> shows an error in the chat and the mission carries on. If the device fails, show the rehearsal screenshot of LabRecorder’s stream list and move on.</p>
+<p>Presenter only: the lab’s <code>ixp</code> package (not on PyPI), <code>tobii_research</code>, PsychoPy, pylsl, ray, and LabRecorder. Machine setup and the rehearsed steps are in EYETRACKER_SETUP.md. Run <code>PYTHONPATH=src python -m experiment.eye_demo</code> from the <code>mosaic</code> folder. The two calls on the slide are the same ones the lab’s full study uses (experiment.py); <code>eye_demo.py</code> adds them to a single two-minute mission with the keyless teammate, so no API key is used and the study files are not edited. Seat the volunteer 60 to 65 cm from the screen. Calibration is five points (center and four at 0.2 from the edges): look at each dot until it disappears; SPACE accepts, R redoes. <code>Esc</code> ends the mission. Reveal the third item once LabRecorder is on screen: TobiiEyeTracker is gaze at 60 Hz, 9 channels; SARGame is one JSON state per frame, about 30 a second. Gaze and game land on one clock, so you can see where the volunteer looked before and after each rescue; notebook Step 9 reads the saved recording. If the device fails, go to the next slide, which shows the rehearsal recording.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1857,7 +1860,50 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
           display:block!important;
       }</style></aside>
 </section>
-
+<section id="the-synchronized-record" class="slide level2">
+<h2>The Synchronized <span class="accent">Record</span></h2>
+<div class="custom-strip">
+<p><span class="stop">Map</span> <span class="stop">4.1 SAR</span> <span class="stop">4.2 GUI</span> <span class="stop">4.3 LLM</span> <span class="stop here">4.4 Sensing</span></p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="task-label">Observe</span> <span class="src-cap">rehearsal recording · 33 s · 3 rescues · one clock</span></p>
+<div class="result-img">
+<p><img data-src="assets/results/gaze-record.png" alt="Fixations drawn on the screen's three areas, almost all on the game view, above a timeline of three rescues and a strip showing the gaze stayed on the game view, with gaps where the tracker lost the eyes."></p>
+</div>
+</div>
+<div class="result-col">
+<p><span class="task-label">What to look for</span></p>
+<div class="feature-list">
+<div class="feature-row">
+<p><span class="feature-name">Where</span> Which area holds the gaze: the game view, the info panel, or the chat?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Rescue</span> Does gaze go to the info panel in the second after a rescue?</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Advice</span> Where does gaze go once a real teammate replies? This keyless run has no advice.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="punchline">
+<p>With one eye tracker in the room, everyone inspects <span class="accent">the same prepared recording</span>.</p>
+</div>
+<aside class="notes">
+<p>The figure is real: tools/make_gaze_figure.py drew it from the rehearsal recording, the LabRecorder file of the slide 33 demo, with the same code as notebook Step 9. Top: each circle is a fixation, bigger for longer, on the screen’s three areas. Bottom: one clock, the victims saved and under it the area the gaze was in; dark gaps are moments the tracker lost the eyes. In this recording the gaze stayed on the game view (99%) and did not go to the info panel after any of the three rescues. The third row is the study’s own question and needs a real LLM teammate; the demo runs keyless, so the recording has no advice. This slide is also the fallback: if the tracker fails, skip the live demo and show this. Rehearsal calibration was rough, so the gaze sits low on the screen; after the venue rehearsal redraw it with <code>python tools/make_gaze_figure.py &lt;recording.xdf&gt;</code> and render again.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="where-to-go-next" class="slide level2">
 <h2>Where to Go <span class="accent">Next</span></h2>
 <div class="hook">

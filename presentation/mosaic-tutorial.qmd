@@ -2017,7 +2017,7 @@ obs → agent_x, agent_y, direction, grid,
       saved_victims, remaining_victims,
       victim_health, step_count, …
     + action, reward, llm_response
-    → study runner: one JSON line per step on LSL
+    → study runner: one JSON line per frame on LSL
 ```
 :::
 :::
@@ -2079,17 +2079,17 @@ which this tutorial does not install.
 
 ::: {.task-col}
 ::: {.code-card}
-[`src/experiment/experiment.py`]{.code-file} [the study runner]{.code-where}
+[`src/experiment/eye_demo.py`]{.code-file} [the study runner, one mission]{.code-where}
 
 ```{.diff code-line-numbers="false"}
      experiment = Experiment(config)
 +    experiment.register_sensor(
 +        name="TobiiEyeTracker", sensor_cls=TobiiEyeTracker,
-+        sensor_config={"config": {}})
++        sensor_config={})
 +    experiment.calibrate_sensor(
 +        "TobiiEyeTracker", screen=config["display"],
 +        fullscreen=config["fullscreen"])
-     experiment.add_task(name="main_game", task_cls=SARGame, ...)
+     experiment.add_task(task_cls=SARGameDemo, ...)
 ```
 :::
 
@@ -2109,7 +2109,7 @@ which this tutorial does not install.
 :::
 
 ::: {.watch-item .fragment}
-[3]{.watch-num} [Two streams, one clock]{.watch-title} `TobiiEyeTracker` (60 Hz) and the game steps, side by side in LabRecorder
+[3]{.watch-num} [Two streams, one clock]{.watch-title} `TobiiEyeTracker` (gaze, 60 Hz) and `SARGame` (game state, every frame), side by side in LabRecorder
 :::
 :::
 :::
@@ -2118,21 +2118,24 @@ which this tutorial does not install.
 
 ::: {.notes}
 Presenter only: the lab's `ixp` package (not on PyPI), `tobii_research`,
-PsychoPy, pylsl, ray, and LabRecorder, set up at rehearsal (RUNSHEET.md). The
-two calls are the ones the full study block uses (experiment.py lines 85–90);
-the `tobii_test` block in the same file is the sensor-only version. Calibration
-is five points (center and four at 0.2 from the edges); SPACE accepts, R redoes.
+PsychoPy, pylsl, ray, and LabRecorder. Machine setup and the rehearsed steps
+are in EYETRACKER_SETUP.md. Run `PYTHONPATH=src python -m experiment.eye_demo`
+from the `mosaic` folder. The two calls on the slide are the same ones the
+lab's full study uses (experiment.py); `eye_demo.py` adds them to a single
+two-minute mission with the keyless teammate, so no API key is used and the
+study files are not edited. Seat the volunteer 60 to 65 cm from the screen.
+Calibration is five points (center and four at 0.2 from the edges): look at
+each dot until it disappears; SPACE accepts, R redoes. `Esc` ends the mission.
 Reveal the third item once LabRecorder is on screen: TobiiEyeTracker is gaze at
-60 Hz, 9 channels; the game trial is one JSON line per step. Gaze and game land
-on one clock, so you can see where the volunteer looked before and after
-each rescue. No API key is used, so the study's OpenAI and Gemini trials have
-no advice: `Alt` shows an error in the chat and the mission carries on. If the device fails, show the rehearsal screenshot of LabRecorder's
-stream list and move on.
+60 Hz, 9 channels; SARGame is one JSON state per frame, about 30 a second. Gaze
+and game land on one clock, so you can see where the volunteer looked before
+and after each rescue; notebook Step 9 reads the saved recording. If the device
+fails, go to the next slide, which shows the rehearsal recording.
 :::
 
 ---
 
-## The Synchronized [Record]{.accent} {visibility="hidden"}
+## The Synchronized [Record]{.accent}
 
 ::: {.custom-strip}
 [Map]{.stop} [4.1 SAR]{.stop} [4.2 GUI]{.stop} [4.3 LLM]{.stop} [4.4 Sensing]{.stop .here}
@@ -2141,11 +2144,10 @@ stream list and move on.
 :::: {.task-split}
 
 ::: {.task-col}
-[Observe]{.task-label} [one recording, one clock]{.src-cap}
+[Observe]{.task-label} [rehearsal recording · 33 s · 3 rescues · one clock]{.src-cap}
 
-::: {.placeholder}
-Timeline from the rehearsal recording goes here: gaze position over time, with
-markers for advice requests, advice replies, actions, and rescues.
+::: {.result-img}
+![](assets/results/gaze-record.png){fig-alt="Fixations drawn on the screen's three areas, almost all on the game view, above a timeline of three rescues and a strip showing the gaze stayed on the game view, with gaps where the tracker lost the eyes."}
 :::
 :::
 
@@ -2154,13 +2156,13 @@ markers for advice requests, advice replies, actions, and rescues.
 
 ::: {.feature-list}
 ::: {.feature-row}
-[After advice]{.feature-name} Where does gaze go in the second after the reply appears?
+[Where]{.feature-name} Which area holds the gaze: the game view, the info panel, or the chat?
 :::
 ::: {.feature-row}
-[Reliance]{.feature-name} Does the next action follow the advice?
+[Rescue]{.feature-name} Does gaze go to the info panel in the second after a rescue?
 :::
 ::: {.feature-row}
-[Mistakes]{.feature-name} What did the participant look at before rescuing a decoy?
+[Advice]{.feature-name} Where does gaze go once a real teammate replies? This keyless run has no advice.
 :::
 :::
 :::
@@ -2172,9 +2174,18 @@ With one eye tracker in the room, everyone inspects [the same prepared recording
 :::
 
 ::: {.notes}
-Hidden until it is real. TODO after rehearsal: record a short session with the Tobii and LabRecorder,
-then generate the aligned timeline from that recording and replace the
-placeholder.
+The figure is real: tools/make_gaze_figure.py drew it from the rehearsal
+recording, the LabRecorder file of the slide 33 demo, with the same code as
+notebook Step 9. Top: each circle is a fixation, bigger for longer, on the
+screen's three areas. Bottom: one clock, the victims saved and under it the
+area the gaze was in; dark gaps are moments the tracker lost the eyes. In this
+recording the gaze stayed on the game view (99%) and did not go to the info
+panel after any of the three rescues. The third row is the study's own
+question and needs a real LLM teammate; the demo runs keyless, so the recording
+has no advice. This slide is also the fallback: if the tracker fails, skip the
+live demo and show this. Rehearsal calibration was rough, so the gaze sits low
+on the screen; after the venue rehearsal redraw it with
+`python tools/make_gaze_figure.py <recording.xdf>` and render again.
 :::
 
 ---
