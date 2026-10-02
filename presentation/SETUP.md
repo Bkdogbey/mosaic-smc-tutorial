@@ -187,15 +187,27 @@ where they go when you reach those slides.
 
 ## 7 · Optional: the notebook
 
-The repository you cloned includes a notebook,
-`notebooks/02_mosaic_human_ai.ipynb`. It builds the task from a small config
-file, shows what each setting changes, and records game state together with
-(synthetic) eye gaze. The session points to it but does not depend on it. It
-draws off-screen, so it needs no window, and it needs five more packages:
+`notebooks/02_mosaic_human_ai.ipynb` is the take-home companion to the
+session. It carries these install commands, shows each change the tutorial
+makes to `main.py` (camera, rewards, feedback flash, AI teammate) in a cell,
+lets you play the mission inside the notebook, and records game state together
+with (synthetic) eye gaze. The session points to it but does not depend on it.
+It draws off-screen, so it needs no window.
+
+Save these two files into the `notebooks` folder, replacing the files of the
+same name:
+[02_mosaic_human_ai.ipynb](https://github.com/Bkdogbey/mosaic/raw/smc2026/notebooks/02_mosaic_human_ai.ipynb)
+and [lsl_tools.py](https://github.com/Bkdogbey/mosaic/raw/smc2026/notebooks/lsl_tools.py).
+Then add five packages and start Jupyter from the `notebooks` folder, because
+the notebook reads `config.yaml` from there:
 
 ```bash
 python -m pip install matplotlib scipy pylsl pyxdf notebook
+cd notebooks
+python -m jupyter notebook 02_mosaic_human_ai.ipynb
 ```
+
+If Jupyter asks for a kernel, choose **Python 3 (ipykernel)**.
 
 ## Troubleshooting
 

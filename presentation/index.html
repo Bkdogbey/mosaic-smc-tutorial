@@ -102,7 +102,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-cdb47caec72b839647020ce159d2d867.css">
+  <link rel="stylesheet" href="mosaic-tutorial_files/libs/revealjs/dist/theme/quarto-1cf964a1591def2c3e170ac96b130a2f.css">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="mosaic-tutorial_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -638,6 +638,10 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="you-are-here">
 <p><span class="stop">Why</span> <span class="stop here">Install</span> <span class="stop">Experience</span> <span class="stop">Configure</span></p>
 </div>
+<div class="qr-card">
+<p><img data-src="assets/qr-notebook.png" alt="QR code that opens the companion notebook on GitHub"></p>
+<p><span class="qr-title">Companion notebook</span> <span class="qr-line">Every setup command on the next slides, ready to copy and paste</span> <span class="qr-url">github.com/Bkdogbey/mosaic/tree/smc2026/notebooks</span></p>
+</div>
 </div>
 </section>
 <section id="before-you-start" class="slide level2">
@@ -686,6 +690,9 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div></div>
 <div class="punchline">
 <p>Nothing to install by hand: the next two slides <span class="accent">set everything up</span>.</p>
+</div>
+<div class="fig-note">
+<p>Prefer to copy and paste? The companion notebook has the same commands: <code>github.com/Bkdogbey/mosaic/tree/smc2026/notebooks</code></p>
 </div>
 </section>
 <section id="clone-mosaic-and-create-the-environment" class="slide level2">
@@ -1174,6 +1181,10 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 <div class="you-are-here">
 <p><span class="stop">Why</span> <span class="stop">Install</span> <span class="stop">Experience</span> <span class="stop here">Configure</span></p>
 </div>
+<div class="qr-card">
+<p><img data-src="assets/qr-notebook.png" alt="QR code that opens the companion notebook on GitHub"></p>
+<p><span class="qr-title">Companion notebook</span> <span class="qr-line">Every change in this part, as the edit and as a cell you can run</span> <span class="qr-url">github.com/Bkdogbey/mosaic/tree/smc2026/notebooks</span></p>
+</div>
 </div>
 </section>
 <section id="runtime-architecture" class="slide level2">
@@ -1386,7 +1397,7 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 </div>
 <aside class="notes">
-<p>Lines 31–44 are the whole SAR task: building size, the placers that fill it, and the camera. Counts are per room (12 real victims across a 3×3 building is 108). The building settings are Step 6 of the notebook, which is in the repository attendees cloned (notebooks/02_mosaic_human_ai.ipynb; it also needs matplotlib, scipy, pylsl, and pyxdf). Its building uses the plain <code>VictimPlacer</code>, so it has no decoys. The camera and rewards get the next two slides. Code lives in src/mosaic/sar/, src/mosaic/core/, and src/experiment/placers.py.</p>
+<p>Lines 31–44 are the whole SAR task: building size, the placers that fill it, and the camera. Counts are per room (12 real victims across a 3×3 building is 108). The building settings are Step 6 of the notebook, which is in the repository attendees cloned (notebooks/02_mosaic_human_ai.ipynb; it also needs matplotlib, scipy, pylsl, and pyxdf). Its own small building has no decoys; its <code>make_mission()</code> mirrors these lines and has them, and the notebook also shows the three cameras (Step 2) and the reward change (Step 6). The camera and rewards get the next two slides. Code lives in src/mosaic/sar/, src/mosaic/core/, and src/experiment/placers.py.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1977,6 +1988,50 @@ Bennett Kwaku Dogbey · Elahe Oveisi · Hemanth Manjunatha
 </div>
 <aside class="notes">
 <p>Have the repository open in an editor beside this slide. <code>mosaic/</code> is the reusable package; <code>experiment/</code> is one study built on it, and it is the folder attendees copy and change for their own work (its <code>sensors/</code> folder is the rest of 4.4). Every file named here exists in the MOSAIC repository. The badges match the four parts of Part Four.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="mosaic-in-a-study" class="slide level2">
+<h2>MOSAIC in a <span class="accent">Study</span></h2>
+<div class="hook">
+<p>The testbed from today, used to ask how expertise changes what people look at.</p>
+</div>
+<div class="task-split">
+<div class="task-col">
+<p><span class="paper-title">LLM-Mediated Human-AI Interaction in Search and Rescue: Impact of Expertise on Attentional Allocation</span> <span class="paper-authors">Elahe Oveisi · Hemanth Manjunatha</span></p>
+<div class="feature-list">
+<div class="feature-row">
+<p><span class="feature-name">Efficiency</span> LLM guidance raised rewards and victims per step, but not the total saved.</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Attention</span> Gaze moved to the chat, and pupil size varied more.</p>
+</div>
+<div class="feature-row">
+<p><span class="feature-name">Expertise</span> Novices relied on the AI. Experts kept checking the scene.</p>
+</div>
+</div>
+</div>
+<div class="result-col">
+<div class="qr-card qr-stack">
+<p><img data-src="assets/qr-paper.png" alt="QR code that opens the paper's entry in the SMC 2026 program"></p>
+<p><span class="qr-title">Monday, October 5 · 14:00–14:15</span> <span class="qr-line">Grand C · Session MoA10</span></p>
+</div>
+</div>
+</div>
+<div class="punchline">
+<p>Come and see it: <span class="accent">Monday at 14:00, Grand C</span>.</p>
+</div>
+<aside class="notes">
+<p>An invitation, and an application of what attendees just configured. Paper MoA10.3 in the regular session Decision Support System I, Monday October 5, 14:00 to 14:15, room Grand C. The study compares two LLM-guided conditions with a no-LLM baseline in the search-and-rescue task, with eye tracking and planning measures: the three trials and the gaze stream from Part Four. The three rows are the abstract’s findings: guidance improved efficiency (higher rewards and victims per step) without raising the total saved; attention moved to the chat, with more pupil-size variability; novices relied passively on the AI while experts kept a “verification loop” of scanning the environment. The code opens the program entry. Check the time and room against the final program on the day.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

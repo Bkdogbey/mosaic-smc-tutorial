@@ -598,6 +598,14 @@ Next, we will install MOSAIC, launch a mission, and change the task ourselves.
 ::: {.you-are-here}
 [Why]{.stop} [Install]{.stop .here} [Experience]{.stop} [Configure]{.stop}
 :::
+
+::: {.qr-card}
+![](assets/qr-notebook.png){fig-alt="QR code that opens the companion notebook on GitHub"}
+
+[Companion notebook]{.qr-title}
+[Every setup command on the next slides, ready to copy and paste]{.qr-line}
+[github.com/Bkdogbey/mosaic/tree/smc2026/notebooks]{.qr-url}
+:::
 :::
 
 ---
@@ -661,6 +669,10 @@ Check four things on your laptop before installing.
 
 ::: {.punchline}
 Nothing to install by hand: the next two slides [set everything up]{.accent}.
+:::
+
+::: {.fig-note}
+Prefer to copy and paste? The companion notebook has the same commands: `github.com/Bkdogbey/mosaic/tree/smc2026/notebooks`
 :::
 
 ---
@@ -1242,6 +1254,14 @@ from, so the game has to be working first.
 ::: {.you-are-here}
 [Why]{.stop} [Install]{.stop} [Experience]{.stop} [Configure]{.stop .here}
 :::
+
+::: {.qr-card}
+![](assets/qr-notebook.png){fig-alt="QR code that opens the companion notebook on GitHub"}
+
+[Companion notebook]{.qr-title}
+[Every change in this part, as the edit and as a cell you can run]{.qr-line}
+[github.com/Bkdogbey/mosaic/tree/smc2026/notebooks]{.qr-url}
+:::
 :::
 
 ---
@@ -1532,8 +1552,10 @@ Lines 31–44 are the whole SAR task: building size, the placers that fill it, a
 the camera. Counts are per room (12 real victims across a 3×3 building is 108).
 The building settings are Step 6 of the notebook, which is in the repository
 attendees cloned (notebooks/02_mosaic_human_ai.ipynb; it also needs matplotlib,
-scipy, pylsl, and pyxdf). Its building uses the plain `VictimPlacer`, so it has no
-decoys. The camera and rewards get the next two slides. Code lives in
+scipy, pylsl, and pyxdf). Its own small building has no decoys; its
+`make_mission()` mirrors these lines and has them, and the notebook also shows
+the three cameras (Step 2) and the reward change (Step 6). The camera and
+rewards get the next two slides. Code lives in
 src/mosaic/sar/, src/mosaic/core/, and src/experiment/placers.py.
 :::
 
@@ -2316,6 +2338,62 @@ reusable package; `experiment/` is one study built on it, and it is the folder
 attendees copy and change for their own work (its `sensors/` folder is the rest
 of 4.4). Every file named here exists in the MOSAIC repository. The badges match
 the four parts of Part Four.
+:::
+
+---
+
+## MOSAIC in a [Study]{.accent}
+
+::: {.hook}
+The testbed from today, used to ask how expertise changes what people look at.
+:::
+
+:::: {.task-split}
+
+::: {.task-col}
+[LLM-Mediated Human-AI Interaction in Search and Rescue: Impact of Expertise on Attentional Allocation]{.paper-title}
+[Elahe Oveisi · Hemanth Manjunatha]{.paper-authors}
+
+::: {.feature-list}
+::: {.feature-row}
+[Efficiency]{.feature-name} LLM guidance raised rewards and victims per step, but not the total saved.
+:::
+::: {.feature-row}
+[Attention]{.feature-name} Gaze moved to the chat, and pupil size varied more.
+:::
+::: {.feature-row}
+[Expertise]{.feature-name} Novices relied on the AI. Experts kept checking the scene.
+:::
+:::
+:::
+
+::: {.result-col}
+::: {.qr-card .qr-stack}
+![](assets/qr-paper.png){fig-alt="QR code that opens the paper's entry in the SMC 2026 program"}
+
+[Monday, October 5 · 14:00–14:15]{.qr-title}
+[Grand C · Session MoA10]{.qr-line}
+:::
+:::
+
+::::
+
+::: {.punchline}
+Come and see it: [Monday at 14:00, Grand C]{.accent}.
+:::
+
+::: {.notes}
+An invitation, and an application of what attendees just configured. Paper
+MoA10.3 in the regular session Decision Support System I, Monday October 5,
+14:00 to 14:15, room Grand C. The study compares two LLM-guided conditions
+with a no-LLM baseline in the search-and-rescue task, with eye tracking and
+planning measures: the three trials and the gaze stream from Part Four. The
+three rows are the abstract's findings: guidance improved efficiency (higher
+rewards and victims per step) without raising the total saved; attention moved
+to the chat, with more pupil-size variability; novices relied passively on the
+AI while experts kept a "verification loop" of scanning the environment. The
+code opens the program entry. Check the time and room against the final
+program on the day.
 :::
 
 ---

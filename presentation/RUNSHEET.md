@@ -1,6 +1,6 @@
 # Facilitator Run Sheet — MOSAIC Tutorial (two hours, plus a 15-minute break)
 
-The rendered deck has 41 slides: 35 in the main tutorial (one of them the break
+The rendered deck has 42 slides: 36 in the main tutorial (one of them the break
 slide after Part Three), a closing slide, and
 5 appendix slides (the divider and four more changes).
 
@@ -22,7 +22,7 @@ parts: **SAR**, **GUI**, **LLM**, and **Sensing**.
 - [ ] `presentation/labs/advisor.py` is on `main` of the tutorial repo. **Slide 30
       (everyone) sends people there**, so test the download and the
       `ReliableTeammate(0.7)` edit on a clean clone. `panel.py` (appendix slide
-      40) is the same.
+      41) is the same.
 - [ ] **No API keys in this session.** Nothing in the tutorial connects to a
       hosted model, on the presenter machine or anyone else's. Slide 31 (the
       real LLM) is walked through as "on your own", not run. The teammate
@@ -54,20 +54,40 @@ parts: **SAR**, **GUI**, **LLM**, and **Sensing**.
       Step 9 reads the same file. After the venue rehearsal, redraw the figure
       from that recording and render again:
       `python tools/make_gaze_figure.py <recording.xdf>`.
-- [ ] **Notebook.** The slides point at a notebook for the building settings
-      (counts, size, locked rooms) and for printing the observation fields
-      (slides 24 and 32). It is `notebooks/02_mosaic_human_ai.ipynb` in the
-      MOSAIC repository attendees clone: Step 6 is the building settings, Step
-      4 the observation fields, Steps 8–9 record and analyse game state with
-      gaze. It draws off-screen, so it runs on the tutorial hub (kernel
-      "Python (smc)") or locally after
-      `python -m pip install matplotlib scipy pylsl pyxdf notebook`
-      (as upstream ships it, Step 1 does not check for `scipy`, and Step 9's
-      heatmap fails without it).
+- [ ] **Notebook (take-home).** `notebooks/02_mosaic_human_ai.ipynb` is the
+      self-paced companion; nobody runs it during the session. Name it at
+      slides 24 and 32 and in the wrap-up. It keeps its nine steps and adds:
+      Step 0, the install commands to copy and paste; Step 2, the mission
+      `main.py` builds and the three cameras; Step 6, the reward change; Step
+      7, the feedback flash, the keyless teammate, and a cell that plays the
+      real window from typed keys (`w a d o p t`). Step 4 is still the
+      observation fields, and Steps 8–9 record and analyse game state with
+      gaze. Each tutorial edit appears as "On your laptop" (the slide's diff)
+      and "Here" (a cell that shows the result).
+      Know two things before pointing people at it: its own small building
+      (from `notebooks/config.yaml`) has no decoys, while its `make_mission()`
+      mirrors the settings of `main.py` lines 31–44 and has them; and it
+      draws off-screen, so it runs on the tutorial hub (kernel "Python (smc)")
+      or locally (its Step 0).
       Confirm the hub address with Hemanth and write it here: ____________.
-      Know two differences from the deck before pointing people at it: its
-      building has no decoys (plain `VictimPlacer`), and it reads its own
-      `notebooks/config.yaml`, not `configs/experiment.yaml`.
+- [ ] **Notebook release.** Which revision goes where; fill in and tick:
+      - Laptop attendees clone `iHuman-Lab/mosaic` `main` (`1018587` when
+        last checked), as the slides say. Nothing else is needed to play or to
+        do Part Four. The notebook in that clone is the older one.
+      - [ ] Hub: `02_mosaic_human_ai.ipynb` and `lsl_tools.py` from
+        `Bkdogbey/mosaic`, tag `smc2026` (commit `ae83f86`). The two files
+        go together: Step 9 imports helpers from `lsl_tools.py`.
+      - [ ] Hub: `advisor.py` from this repository, tag `smc2026` (the file
+        last changed in `cd895f7`), saved as `src/experiment/advisor.py`.
+        Without it the teammate cell prints how to add it and the rest of the
+        notebook still runs.
+      - [x] The tag `smc2026` is pushed in **both** repositories: the notebook
+        links to it for the two notebook files (MOSAIC fork) and for
+        `advisor.py` (this repository), and so does `SETUP.md` step 7.
+      - Shared hub: Step 8 records only its own two LSL streams and closes
+        them afterwards, so attendees on one server do not record each other.
+      - The eye-tracking demo is not distributed: it stays on the presenter
+        laptop (`eye-demo` branch).
 
 ## Timing
 
@@ -82,7 +102,7 @@ parts: **SAR**, **GUI**, **LLM**, and **Sensing**.
 | 1:36–1:43 | 27–28 | 4.2 GUI | The window; the decoy flash, demoed. |
 | 1:43–1:58 | 29–31 | 4.3 LLM | The teammate; everyone swaps in the keyless `ReliableTeammate`; how to connect a real LLM afterwards (shown, not run). |
 | 1:58–2:09 | 32–34 | 4.4 Sensing | What every step records; the live eye tracker; the recording it leaves. |
-| 2:09–2:15 | 35–36 | Wrap-up | Where to go next, then questions; appendix slides as needed. |
+| 2:09–2:15 | 35–37 | Wrap-up | Where to go next, the invitation to the lab's paper, then questions; appendix slides as needed. |
 
 The session runs 2:15 on the clock: two hours of content and the break. The
 2:09–2:15 wrap-up is the only slack, and the notebook does not fit in it:
@@ -125,6 +145,11 @@ finish a little early; keep that for install overruns.
 
 ## Part Two notes (slides 9–14)
 
+- Slide 9 (the divider) carries a QR code to the companion notebook, and slide
+  10 names its address under the punchline. Say what it is for: the setup
+  commands to copy and paste, and a take-home version of Part Four. Nobody
+  needs it to follow the session. The same code is on the Part Four divider
+  (slide 21). To point the codes elsewhere, edit `tools/make_qr.py` and rerun.
 - Ask attendees to use Python 3.10 or 3.11 for a shared troubleshooting baseline.
   MOSAIC's `pyproject.toml` claims 3.8+, but the code needs 3.10. Laptops that
   ship 3.12 or newer are common; slide 14 tells them to recreate `mosaic_env`
@@ -230,7 +255,7 @@ No code in this part. Attendees play the baseline mission and learn to read it.
   later with their own key, then reveal how the reply is produced.
   `build_llm_client` connects on the first `Alt`, so a missing or bad key
   shows as a chat error, not a crash. If asked
-  what the LLM actually sees, appendix slide 41 shows it: every real victim, even out
+  what the LLM actually sees, appendix slide 42 shows it: every real victim, even out
   of view, and **no decoys** (`process_prompts.py` skips them).
 - Slide 32 prints nothing itself: the field list on it is what the study runner
   streams. The full study runner needs the lab's `ixp` package and LSL, which
@@ -262,15 +287,20 @@ No code in this part. Attendees play the baseline mission and learn to read it.
   at twice the window size so they stay sharp on the projector:
   `python tools/capture_config_results.py scoring chatpair time panel`. Re-run
   it if MOSAIC's rendering changes, and re-check the locked-door counts quoted
-  on appendix slide 38.
+  on appendix slide 39.
 - Slide 35 (where to go next) is the code map. Point at `src/experiment/` as
   the folder to copy for a new study.
-- Appendix 38–41 hold the other changes from the part slides, in the same
+- Slide 36 (*MOSAIC in a Study*) invites attendees to the lab's paper, MoA10.3:
+  Monday October 5, 14:00–14:15, Grand C. It is the application of what they
+  just configured: the search-and-rescue task with LLM teammates and eye
+  tracking. The QR code opens its program entry. Check the time and room
+  against the final program on the day.
+- Appendix 39–42 hold the other changes from the part slides, in the same
   layout: locked rooms, the time limit (at 0:00 the timer stops but the mission
   keeps going, which is expected), the info panel, and what the teammate is
   told (the "Prompt" card on slide 29 points there). `prompt_type: sparse` and
   `llm_nudge_interval` no longer have a slide; they are in the slide 29 notes.
-- The closing slide (36) carries only the MOSAIC repository link.
+- The closing slide (37) carries only the MOSAIC repository link.
 
 ## Expected problems
 

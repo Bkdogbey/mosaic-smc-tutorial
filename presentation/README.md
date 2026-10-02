@@ -25,7 +25,9 @@ consequential tasks. The deck is four parts:
    session: the real-LLM slide is shown as "on your own", not run. Building
    settings and the observation-field print are in the lab's notebook,
    `notebooks/02_mosaic_human_ai.ipynb` in the MOSAIC repository (Steps 6 and
-   4), which is take-home unless time is cut for it (see `RUNSHEET.md`)
+   4). The notebook is the take-home companion: it also carries the install
+   commands (Step 0) and shows each Part Four change in a cell (see
+   `RUNSHEET.md` for what it holds and which revision goes where)
 
 The appendix holds the other changes named on the part slides: locked rooms,
 time limit, info panel, and what the teammate is told. The *Synchronized Record*
@@ -35,7 +37,7 @@ slide after the eye-tracker demo shows a figure drawn from the rehearsal recordi
 
 ```
 presentation/
-├── mosaic-tutorial.qmd   # the deck — edit this (41 slides: 35 main, one of them the break + closing + 5 appendix)
+├── mosaic-tutorial.qmd   # the deck — edit this (42 slides: 36 main, one of them the break + closing + 5 appendix)
 ├── theme.scss            # lab theme (template + team, fill-mode cards, horizontal flow,
 │                         #   architecture diagram + .detached variant, annotated
 │                         #   screenshots, .band notes, layer bands, you-are-here strip,
@@ -46,7 +48,7 @@ presentation/
 ├── assets/               # figures used in the deck
 └── labs/                 # optional side examples; the deck itself runs experiment.main
     ├── play.py           # a minimal mission with an EDIT ME block of knobs
-    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (appendix slide 40)
+    ├── panel.py          # NoProgressPanel: the info panel without the "Remaining" count (appendix slide 41)
     ├── advisor.py        # ReliableTeammate: grounded advice with tunable reliability; no API key.
     │                     #   Slide 30 uses it; its result image is assets/chat-advice.png
     └── tweak.py          # all four injection points in one file
@@ -82,6 +84,7 @@ Navigate with arrow keys, `f` for fullscreen, `s` for speaker notes.
 | `results/*.png`, `results/*.txt` | Captured by `tools/capture_config_results.py` — one before/after pair per Part Four setting, each rendered from the same seed with only the edited setting changed. The reward, time, mission-box, and chat crops (`scoring`, `time`, `panel`, `chatpair`) render the GUI at twice its size and crop inside each widget's frame, so they stay sharp at slide size |
 | `results/gaze-record.png` | Drawn by `tools/make_gaze_figure.py` from the rehearsal recording of the slide 33 eye-tracker demo (LabRecorder `.xdf`): fixations on the screen's three areas, and one timeline of rescues and gaze area. Redraw it from the venue recording |
 | `cam-*-walk.gif` | Captured by `tools/capture_camera_gifs.py` — one walk through a door rendered through all three cameras frame by frame, with the ring and room outline recomputed per frame; equal frame timing so the three play in step |
+| `qr-notebook.png`, `qr-paper.png` | Drawn by `tools/make_qr.py` (needs `segno`): the companion notebook, on the Part Two and Part Four dividers, and the SMC 2026 program entry of the lab's paper, on the *MOSAIC in a Study* slide. The addresses are at the top of the script |
 | `logo.png`, `background.jpg` | iHuman Lab template |
 | `team/*.jpg` | iHuman Lab website people page (`ihuman-lab.github.io/lab-website/people/`) |
 
@@ -143,7 +146,7 @@ Two things to know before regenerating:
    be merged before the tutorial:** the `dummy` provider default (issue 12), or
    `Alt` shows an error instead of the placeholder reply on slides 19, 29, 30.
 3. Merge this branch so `presentation/labs/` on `main` has `panel.py` and
-   `advisor.py`; slides 30 and 40 send people to the repo for them.
+   `advisor.py`; slides 30 and 41 send people to the repo for them.
 4. Read `RUNSHEET.md`.
 
 ## Repo issues this tutorial exposed
